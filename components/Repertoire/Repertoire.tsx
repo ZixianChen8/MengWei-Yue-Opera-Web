@@ -70,7 +70,7 @@ export default function Repertoire() {
           <div className={styles.filmstrip}>
             {repertoire.works.map((work, i) => (
               <div
-                key={work.year}
+                key={`${work.year}-${work.zh.join('')}`}
                 className={styles.filmCard}
                 onClick={() => { if (!didDrag.current) setOpenIndex(i) }}
               >
@@ -100,7 +100,7 @@ export default function Repertoire() {
         </div>
       </div>
 
-      <p className={styles.scrollHint}>drag to explore · click to expand</p>
+      <p className={styles.scrollHint}>{repertoire.hint}</p>
 
       {/* Lightbox — always rendered, toggled via .lightboxOpen */}
       <div
@@ -123,7 +123,11 @@ export default function Repertoire() {
             <div className={styles.lbCn}>{openWork.zh.join('')}</div>
             <div className={styles.lbEn}>{openWork.en}</div>
           </div>
-          <button className={styles.lbClose} onClick={() => setOpenIndex(null)}>✕</button>
+          <button className={styles.lbClose} onClick={() => setOpenIndex(null)} aria-label="Close">
+            <svg viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>

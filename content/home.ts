@@ -114,6 +114,7 @@ export const repertoire = {
     { year: '2023', zh: ['五女', '拜寿'], en: "Five Daughters' Birthday", image: '/assets/gallery/five-daughters.jpg' },
     { year: '2024', zh: ['何文', '秀'], en: 'He Wenxiu', image: '/assets/gallery/he-wenxiu.jpg' },
   ],
+  hint: 'drag to explore · click to expand',
 }
 
 export const footer = {

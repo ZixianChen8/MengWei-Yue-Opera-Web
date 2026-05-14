@@ -164,7 +164,7 @@
 .cnTitle {
   font-family: var(--font-chinese-display);
   font-size: 26px;
-  color: #f8f4ee;
+  color: var(--paper);
   letter-spacing: 0.08em;
   line-height: 1.15;
   margin-bottom: 6px;
@@ -173,6 +173,7 @@
 .enTitle {
   font-family: var(--font-latin-display);
   font-size: 10px;
+  /* rgba(248,244,238) = --paper — CSS cannot apply alpha to hex tokens */
   color: rgba(248, 244, 238, 0.65);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -209,7 +210,7 @@
 .expandIcon svg {
   width: 12px;
   height: 12px;
-  stroke: #f8f4ee;
+  stroke: var(--paper);
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -255,7 +256,7 @@
 
 .lightboxOpen {
   opacity: 1;
-  pointer-events: all;
+  pointer-events: auto;
 }
 
 .lbContent {
@@ -308,13 +309,14 @@
   content: '';
   flex: 1;
   height: 1px;
+  /* rgba(248,244,238) = --paper — CSS cannot apply alpha to hex tokens */
   background: rgba(248, 244, 238, 0.15);
 }
 
 .lbCn {
   font-family: var(--font-chinese-display);
   font-size: 52px;
-  color: #f8f4ee;
+  color: var(--paper);
   letter-spacing: 0.1em;
   line-height: 1.1;
   margin-bottom: 14px;
@@ -324,6 +326,7 @@
 .lbEn {
   font-family: var(--font-latin-display);
   font-size: 12px;
+  /* rgba(248,244,238) = --paper — CSS cannot apply alpha to hex tokens */
   color: rgba(248, 244, 238, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -337,14 +340,19 @@
   height: 36px;
   border: 1px solid rgba(248, 244, 238, 0.2);
   border-radius: 50%;
+  /* rgba(26,26,26) = --ink at 80% opacity — no token for alpha values */
   background: rgba(26, 26, 26, 0.8);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  color: #f8f4ee;
   transition: border-color 0.2s, background 0.2s;
+}
+
+.lbClose svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--paper);
 }
 
 .lbClose:hover {

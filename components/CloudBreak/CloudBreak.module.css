@@ -1,0 +1,37 @@
+.cloudBreak {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  background: var(--cloud);
+  z-index: 4;
+}
+
+.layer {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  will-change: transform, opacity;
+}
+
+.img {
+  width: 100%;
+  display: block;
+  height: auto;
+  will-change: transform;
+}
+
+.cb1 {
+  bottom: -20%;
+  mix-blend-mode: lighten;
+  opacity: .95;
+}
+
+.cb2 {
+  top: -30%;
+  mix-blend-mode: multiply;
+  opacity: .45;
+}
+
+.mirrored {
+  transform: scaleX(-1);
+}

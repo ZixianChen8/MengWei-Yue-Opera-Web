@@ -1,0 +1,353 @@
+/* ── Section ── */
+.section {
+  padding: 0 80px 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.head {
+  margin-bottom: 52px;
+}
+
+.title {
+  font-family: var(--font-chinese-display);
+  font-size: 48px;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.titleRed {
+  color: var(--seal);
+}
+
+.titleEn {
+  font-family: var(--font-latin-display);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+/* ── Filmstrip ── */
+/* Outer wrapper: extends past section padding so the right-edge fade
+   can sit flush with the viewport, while the scrollable content still
+   starts at 80px from the left. */
+.filmstripOuter {
+  position: relative;
+  margin: 0 -80px;
+}
+
+/* Right-edge gradient to hint at scrollable content */
+.filmstripOuter::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 120px;
+  background: linear-gradient(to right, transparent, var(--paper));
+  pointer-events: none;
+  z-index: 2;
+}
+
+.filmstripWrap {
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 80px;
+  cursor: grab;
+}
+
+.filmstripWrap:active {
+  cursor: grabbing;
+}
+
+.filmstripWrap::-webkit-scrollbar {
+  display: none;
+}
+
+.filmstrip {
+  display: flex;
+  gap: 10px;
+  height: 520px;
+  min-width: max-content;
+  padding-right: 80px;
+}
+
+/* ── Cards ── */
+.filmCard {
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+  width: 280px;
+  transition: width 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filmCard:hover {
+  width: 370px;
+}
+
+.filmImg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.filmCard:hover .filmImg {
+  transform: scale(1.03);
+}
+
+/* Always-present bottom gradient */
+.filmGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 35%,
+    rgba(15, 10, 8, 0.25) 60%,
+    rgba(15, 10, 8, 0.85) 100%
+  );
+  pointer-events: none;
+}
+
+/* Vermillion hover sheen */
+.filmOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(192, 58, 43, 0.07);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.filmCard:hover .filmOverlay {
+  opacity: 1;
+}
+
+/* ── Caption ── */
+.filmCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 22px 24px;
+  transform: translateY(6px);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.filmCard:hover .filmCaption {
+  transform: translateY(0);
+}
+
+.year {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--seal);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  opacity: 0;
+  transition: opacity 0.2s 0.06s;
+}
+
+.filmCard:hover .year {
+  opacity: 1;
+}
+
+.cnTitle {
+  font-family: var(--font-chinese-display);
+  font-size: 26px;
+  color: #f8f4ee;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.enTitle {
+  font-family: var(--font-latin-display);
+  font-size: 10px;
+  color: rgba(248, 244, 238, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  transition: opacity 0.2s 0.1s;
+}
+
+.filmCard:hover .enTitle {
+  opacity: 1;
+}
+
+/* Expand icon (top-right corner) */
+.expandIcon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(248, 244, 238, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.filmCard:hover .expandIcon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.expandIcon svg {
+  width: 12px;
+  height: 12px;
+  stroke: #f8f4ee;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Scroll hint ── */
+.scrollHint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scrollHint::before,
+.scrollHint::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Lightbox ── */
+/* Always in DOM; toggled via .lightboxOpen class.
+   Transitions handle both entry and exit. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 10, 8, 0.92);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.lightboxOpen {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lbContent {
+  position: relative;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  max-width: 880px;
+  padding: 24px;
+  cursor: default;
+  transform: translateY(16px);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.lightboxOpen .lbContent {
+  transform: translateY(0);
+}
+
+.lbImgWrap {
+  width: 460px;
+  height: 560px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.lbImg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.lbMeta {
+  flex: 1;
+}
+
+.lbYear {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--seal);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Divider line after the year */
+.lbYear::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(248, 244, 238, 0.15);
+}
+
+.lbCn {
+  font-family: var(--font-chinese-display);
+  font-size: 52px;
+  color: #f8f4ee;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+
+.lbEn {
+  font-family: var(--font-latin-display);
+  font-size: 12px;
+  color: rgba(248, 244, 238, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.lbClose {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(248, 244, 238, 0.2);
+  border-radius: 50%;
+  background: rgba(26, 26, 26, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #f8f4ee;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.lbClose:hover {
+  border-color: var(--seal);
+  background: rgba(192, 58, 43, 0.2);
+}

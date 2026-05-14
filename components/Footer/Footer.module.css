@@ -1,0 +1,127 @@
+.footer {
+  position: relative;
+  background: var(--paper-deep);
+  padding: 140px 80px 60px;
+  z-index: 4;
+  border-top: 1px solid oklch(0.85 0.01 70);
+}
+
+.ornament {
+  text-align: center;
+  margin: 0 auto 80px;
+  font-family: var(--font-chinese-display);
+  font-size: 34px;
+  letter-spacing: 18px;
+  color: var(--ink-faint);
+  position: relative;
+  z-index: 5;
+}
+
+.inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.mark {
+  font-family: var(--font-chinese-display);
+  font-size: 34px;
+  letter-spacing: 6px;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.mark small {
+  display: block;
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  letter-spacing: .4em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-top: 14px;
+  font-weight: 500;
+}
+
+.line {
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  line-height: 2;
+  color: var(--ink-soft);
+  font-weight: 300;
+  margin-top: 28px;
+}
+
+.col h4 {
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  letter-spacing: .4em;
+  color: var(--seal);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.col a {
+  display: block;
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: .25s;
+  font-weight: 300;
+}
+
+.col a:hover {
+  color: var(--ink);
+  border-bottom-color: oklch(0.85 0.01 70);
+}
+
+.col a .en {
+  display: block;
+  font-family: var(--font-latin-display);
+  font-size: 10px;
+  letter-spacing: .35em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.bottom {
+  max-width: 1180px;
+  margin: 80px auto 0;
+  padding-top: 32px;
+  border-top: 1px solid oklch(0.82 0.01 70);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  letter-spacing: .32em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.sealMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stamp {
+  width: 30px;
+  height: 30px;
+  background: var(--seal);
+  color: #fff;
+  font-family: var(--font-chinese-display);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px oklch(0.40 0.16 30);
+}

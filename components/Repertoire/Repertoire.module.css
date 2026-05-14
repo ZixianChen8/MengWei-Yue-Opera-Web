@@ -192,6 +192,7 @@
   right: 16px;
   width: 28px;
   height: 28px;
+  /* rgba(248,244,238) = --paper — CSS cannot apply alpha to hex tokens */
   border: 1px solid rgba(248, 244, 238, 0.4);
   border-radius: 50%;
   display: flex;
@@ -338,6 +339,7 @@
   right: -4px;
   width: 36px;
   height: 36px;
+  /* rgba(248,244,238) = --paper — CSS cannot apply alpha to hex tokens */
   border: 1px solid rgba(248, 244, 238, 0.2);
   border-radius: 50%;
   /* rgba(26,26,26) = --ink at 80% opacity — no token for alpha values */

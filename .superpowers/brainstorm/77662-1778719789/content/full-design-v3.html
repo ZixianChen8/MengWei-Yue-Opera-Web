@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repertoire Gallery v3</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #2a2420;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #F8F4EE;
+    padding: 32px 24px;
+  }
+  .page-header {
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #8C847C; margin-bottom: 28px; padding-bottom: 14px;
+    border-bottom: 1px solid #3a3430;
+  }
+  .page-header span { color: #C03A2B; }
+
+  .section {
+    background: #F8F4EE; color: #1A1A1A;
+    padding: 80px 80px 100px;
+    position: relative; overflow: hidden;
+  }
+  .section > * { position: relative; z-index: 1; }
+
+  .eyebrow {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: #8C847C; font-family: 'Courier New', monospace;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::after { content: ''; width: 32px; height: 1px; background: #C9BAA9; }
+  .title-zh {
+    font-family: Georgia, serif; font-size: 48px;
+    letter-spacing: 0.1em; color: #1A1A1A; line-height: 1; margin-bottom: 8px;
+  }
+  .title-zh .char-red { color: #C03A2B; }
+  .title-en {
+    font-size: 12px; letter-spacing: 0.06em;
+    color: #8C847C; text-transform: uppercase; margin-bottom: 52px;
+  }
+
+  /* ── FILMSTRIP ── */
+  .filmstrip-wrap {
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* extend past section padding so cards bleed to edge */
+    margin: 0 -80px;
+    padding: 0 80px;
+    cursor: grab;
+  }
+  .filmstrip-wrap:active { cursor: grabbing; }
+  .filmstrip-wrap::-webkit-scrollbar { display: none; }
+
+  .filmstrip {
+    display: flex;
+    gap: 10px;
+    height: 520px;
+    min-width: max-content;
+    /* trailing space so last card isn't flush against edge */
+    padding-right: 80px;
+  }
+
+  .film-card {
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: pointer;
+    /* uniform base width; expand on hover */
+    width: 280px;
+    transition: width 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .film-card:hover { width: 370px; }
+
+  .film-img-placeholder {
+    position: absolute; inset: 0;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .film-card:hover .film-img-placeholder { transform: scale(1.03); }
+
+  .film-gradient {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 35%,
+      rgba(15,10,8,0.25) 60%,
+      rgba(15,10,8,0.85) 100%
+    );
+    pointer-events: none;
+  }
+
+  .film-overlay {
+    position: absolute; inset: 0;
+    background: rgba(192,58,43,0.07);
+    opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .film-card:hover .film-overlay { opacity: 1; }
+
+  .film-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 20px 22px 24px;
+    transform: translateY(6px);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .film-card:hover .film-caption { transform: translateY(0); }
+
+  .year {
+    font-size: 10px; color: #C03A2B;
+    font-family: 'Courier New', monospace; letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    opacity: 0; transition: opacity 0.2s 0.06s;
+  }
+  .film-card:hover .year { opacity: 1; }
+
+  .cn-title {
+    font-family: Georgia, serif; font-size: 26px;
+    color: #F8F4EE; letter-spacing: 0.08em; line-height: 1.15; margin-bottom: 6px;
+  }
+
+  .en-title {
+    font-size: 10px; color: rgba(248,244,238,0.65);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    opacity: 0; transition: opacity 0.2s 0.1s;
+  }
+  .film-card:hover .en-title { opacity: 1; }
+
+  .expand-icon {
+    position: absolute; top: 16px; right: 16px;
+    width: 28px; height: 28px;
+    border: 1px solid rgba(248,244,238,0.4); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: scale(0.8);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .film-card:hover .expand-icon { opacity: 1; transform: scale(1); }
+  .expand-icon svg { width: 12px; height: 12px; stroke: #F8F4EE; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* fade-out edge to hint at scroll */
+  .filmstrip-fade {
+    position: relative;
+    margin: 0 -80px;
+  }
+  .filmstrip-fade::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 28px; /* stop before scroll hint */
+    width: 120px;
+    background: linear-gradient(to right, transparent, #F8F4EE);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .scroll-hint {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 28px;
+    font-size: 10px; color: #8C847C;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .scroll-hint::before, .scroll-hint::after {
+    content: ''; flex: 1; height: 1px; background: #E2DAD1;
+  }
+
+  /* image bg placeholders */
+  .bg-1 { background: linear-gradient(145deg,#3d2b1f,#7a4a30 40%,#4a2818 80%,#2d1a10); }
+  .bg-2 { background: linear-gradient(145deg,#1f2d3d,#2a4a6a 40%,#1a3042 80%,#0e1d2a); }
+  .bg-3 { background: linear-gradient(145deg,#2d3a1f,#4a6a2a 40%,#3a4a18 80%,#1f2d10); }
+  .bg-4 { background: linear-gradient(145deg,#3a1f2d,#6a2a4a 40%,#4a1838 80%,#2d0e20); }
+  .bg-5 { background: linear-gradient(145deg,#2d2a1f,#6a5a2a 40%,#4a3e18 80%,#2d2510); }
+  .bg-6 { background: linear-gradient(145deg,#1f2a2d,#2a5a5e 40%,#18403a 80%,#0e2520); }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lb-backdrop { position: absolute; inset: 0; background: rgba(15,10,8,0.92); cursor: pointer; }
+  .lb-content {
+    position: relative; z-index: 1;
+    display: flex; gap: 48px; align-items: center;
+    max-width: 880px; padding: 24px;
+    transform: translateY(16px);
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .lightbox.open .lb-content { transform: translateY(0); }
+  .lb-img-wrap { width: 460px; height: 560px; flex-shrink: 0; border-radius: 3px; overflow: hidden; }
+  .lb-img-placeholder { width: 100%; height: 100%; }
+  .lb-meta { flex: 1; }
+  .lb-year {
+    font-size: 11px; color: #C03A2B;
+    font-family: 'Courier New', monospace; letter-spacing: 0.1em; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .lb-year::after { content: ''; flex: 1; height: 1px; background: #3a3430; }
+  .lb-cn { font-family: Georgia, serif; font-size: 52px; color: #F8F4EE; letter-spacing: 0.1em; line-height: 1.1; margin-bottom: 14px; }
+  .lb-en { font-size: 12px; color: #8C847C; text-transform: uppercase; letter-spacing: 0.12em; }
+  .lb-close {
+    position: absolute; top: -4px; right: -4px;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(248,244,238,0.2); border-radius: 50%;
+    background: rgba(26,26,26,0.8); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: #F8F4EE;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .lb-close:hover { border-color: #C03A2B; background: rgba(192,58,43,0.2); }
+
+  .annotation {
+    display: inline-block;
+    background: rgba(192,58,43,0.1); border: 1px dashed #C03A2B;
+    border-radius: 3px; padding: 6px 12px;
+    font-size: 11px; color: #C03A2B;
+    margin-top: 16px; margin-right: 10px; letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  v3 — <span>uniform cards + horizontal scroll</span> · hover to expand (moderate) · click for lightbox
+</div>
+
+<div class="section">
+  <div class="eyebrow">Repertoire · 戏目</div>
+  <div class="title-zh">演过的<span class="char-red">戏</span></div>
+  <div class="title-en">Selected works from the studio archive</div>
+
+  <div class="filmstrip-fade">
+    <div class="filmstrip-wrap">
+      <div class="filmstrip">
+
+        <div class="film-card" onclick="openLightbox('何文秀','He Wenxiu','2024','bg-1')">
+          <div class="film-img-placeholder bg-1"></div>
+          <div class="film-gradient"></div><div class="film-overlay"></div>
+          <div class="expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <div class="film-caption">
+            <div class="year">2024</div>
+            <div class="cn-title">何文秀</div>
+            <div class="en-title">He Wenxiu</div>
+          </div>
+        </div>
+
+        <div class="film-card" onclick="openLightbox('五女拜寿','Five Daughters\' Birthday','2023','bg-2')">
+          <div class="film-img-placeholder bg-2"></div>
+          <div class="film-gradient"></div><div class="film-overlay"></div>
+          <div class="expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <div class="film-caption">
+            <div class="year">2023</div>
+            <div class="cn-title">五女拜寿</div>
+            <div class="en-title">Five Daughters' Birthday</div>
+          </div>
+        </div>
+
+        <div class="film-card" onclick="openLightbox('西厢记','Romance of the West Chamber','2021','bg-3')">
+          <div class="film-img-placeholder bg-3"></div>
+          <div class="film-gradient"></div><div class="film-overlay"></div>
+          <div class="expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <div class="film-caption">
+            <div class="year">2021</div>
+            <div class="cn-title">西厢记</div>
+            <div class="en-title">Romance of the West Chamber</div>
+          </div>
+        </div>
+
+        <div class="film-card" onclick="openLightbox('碧玉簪','The Jade Hairpin','2019','bg-4')">
+          <div class="film-img-placeholder bg-4"></div>
+          <div class="film-gradient"></div><div class="film-overlay"></div>
+          <div class="expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <div class="film-caption">
+            <div class="year">2019</div>
+            <div class="cn-title">碧玉簪</div>
+            <div class="en-title">The Jade Hairpin</div>
+          </div>
+        </div>
+
+        <!-- Extra cards to demonstrate scrollability -->
+        <div class="film-card" onclick="openLightbox('梁祝','Butterfly Lovers','2017','bg-5')">
+          <div class="film-img-placeholder bg-5"></div>
+          <div class="film-gradient"></div><div class="film-overlay"></div>
+          <div class="expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <div class="film-caption">
+            <div class="year">2017</div>
+            <div class="cn-title">梁祝</div>
+            <div class="en-title">Butterfly Lovers</div>
+          </div>
+        </div>
+
+        <div class="film-card" onclick="openLightbox('天仙配','The Fairy Couple','2015','bg-6')">
+          <div class="film-img-placeholder bg-6"></div>
+          <div class="film-gradient"></div><div class="film-overlay"></div>
+          <div class="expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <div class="film-caption">
+            <div class="year">2015</div>
+            <div class="cn-title">天仙配</div>
+            <div class="en-title">The Fairy Couple</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">drag to explore · click to expand</div>
+</div>
+
+<div class="annotation">↑ All cards uniform — hover expands moderately, pushes right</div>
+<div class="annotation">↑ Scroll right to see more cards — right edge fades out</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-backdrop" onclick="closeLightbox()"></div>
+  <div class="lb-content">
+    <div class="lb-img-wrap"><div class="lb-img-placeholder" id="lb-img"></div></div>
+    <div class="lb-meta">
+      <div class="lb-year" id="lb-year"></div>
+      <div class="lb-cn" id="lb-cn"></div>
+      <div class="lb-en" id="lb-en"></div>
+    </div>
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+  </div>
+</div>
+
+<script>
+function openLightbox(zh, en, year, bg) {
+  document.getElementById('lb-cn').textContent = zh;
+  document.getElementById('lb-en').textContent = en;
+  document.getElementById('lb-year').textContent = year;
+  var img = document.getElementById('lb-img');
+  img.className = 'lb-img-placeholder ' + bg;
+  document.getElementById('lightbox').classList.add('open');
+  document.addEventListener('keydown', handleKey);
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.removeEventListener('keydown', handleKey);
+}
+function handleKey(e) { if (e.key === 'Escape') closeLightbox(); }
+
+// drag-to-scroll
+var wrap = document.querySelector('.filmstrip-wrap');
+var isDown = false, startX, scrollLeft;
+wrap.addEventListener('mousedown', function(e) {
+  isDown = true; startX = e.pageX - wrap.offsetLeft; scrollLeft = wrap.scrollLeft;
+});
+wrap.addEventListener('mouseleave', function() { isDown = false; });
+wrap.addEventListener('mouseup', function() { isDown = false; });
+wrap.addEventListener('mousemove', function(e) {
+  if (!isDown) return;
+  e.preventDefault();
+  var x = e.pageX - wrap.offsetLeft;
+  wrap.scrollLeft = scrollLeft - (x - startX);
+});
+</script>
+</body>
+</html>

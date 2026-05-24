@@ -1,0 +1,221 @@
+<style>
+  body { background: #F8F4EE; font-family: 'Georgia', serif; }
+  h2 { font-family: 'Georgia', serif; color: #1A1A1A; font-size: 22px; margin-bottom: 6px; }
+  .subtitle { color: #4D4540; font-size: 14px; margin-bottom: 32px; }
+
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .card {
+    background: #F8F4EE;
+    border: 2px solid #E2DAD1;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { border-color: #C03A2B; }
+  .card.selected { border-color: #C03A2B; box-shadow: 0 0 0 3px rgba(192,58,43,0.15); }
+
+  .card-image {
+    background: #EDE7DC;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* mockup styles */
+  .img-block {
+    background: #D5C9BC;
+    border-radius: 2px;
+  }
+  .img-red { background: rgba(192,58,43,0.15); }
+  .text-block {
+    background: #C9BAA9;
+    border-radius: 2px;
+    height: 10px;
+  }
+  .text-sm { height: 8px; background: #D5C9BC; border-radius: 2px; }
+  .seal { width: 28px; height: 28px; border-radius: 50%; background: #C03A2B; opacity: 0.7; }
+
+  /* Layout A: Editorial Masonry */
+  .layout-a {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 6px;
+    padding: 16px;
+    height: 240px;
+  }
+  .layout-a .feature {
+    grid-row: 1 / 3;
+    background: #D5C9BC;
+    border-radius: 3px;
+    position: relative;
+    display: flex; align-items: flex-end; padding: 10px;
+  }
+  .layout-a .thumb {
+    background: #C9BAA9;
+    border-radius: 3px;
+    display: flex; align-items: flex-end; padding: 8px;
+  }
+  .caption {
+    font-size: 9px;
+    color: #1A1A1A;
+    font-family: serif;
+    font-weight: bold;
+    line-height: 1.3;
+  }
+  .caption-en { font-size: 7px; color: #4D4540; text-transform: uppercase; letter-spacing: 0.04em; }
+  .year-badge {
+    font-size: 7px;
+    color: #C03A2B;
+    font-family: monospace;
+    position: absolute;
+    top: 8px; right: 8px;
+  }
+
+  /* Layout B: Uniform Grid */
+  .layout-b {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 16px;
+    height: 240px;
+  }
+  .layout-b .cell {
+    background: #C9BAA9;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: flex-end;
+  }
+  .overlay {
+    background: linear-gradient(transparent, rgba(26,26,26,0.55));
+    position: absolute; inset: 0;
+    display: flex; align-items: flex-end;
+    padding: 8px;
+  }
+
+  /* Layout C: Horizontal Filmstrip */
+  .layout-c {
+    display: flex;
+    gap: 8px;
+    padding: 16px;
+    height: 240px;
+    align-items: stretch;
+    overflow: hidden;
+  }
+  .layout-c .strip {
+    flex: 0 0 90px;
+    background: #C9BAA9;
+    border-radius: 3px;
+    position: relative;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8px;
+  }
+  .layout-c .strip.wide { flex: 0 0 150px; background: #B8A99A; }
+  .scroll-hint {
+    font-size: 8px; color: #8C847C; text-align: center;
+    padding: 4px 16px 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .card-body { padding: 14px 16px; }
+  .card-body h3 { font-size: 14px; color: #1A1A1A; margin: 0 0 4px; }
+  .card-body p { font-size: 12px; color: #4D4540; margin: 0; line-height: 1.5; }
+  .tag {
+    display: inline-block;
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: #C03A2B; border: 1px solid #C03A2B;
+    padding: 2px 7px; border-radius: 99px;
+    margin-bottom: 8px;
+  }
+</style>
+
+<h2>Which gallery layout feels right for the Repertoire section?</h2>
+<p class="subtitle">All three follow the parchment + vermillion ink-wash aesthetic. Click a card to select.</p>
+
+<div class="cards">
+
+  <!-- Option A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="layout-a">
+        <div class="feature">
+          <div class="year-badge">2024</div>
+          <div>
+            <div class="caption">何文秀<br>五女拜寿</div>
+            <div class="caption-en">He Wenxiu</div>
+          </div>
+        </div>
+        <div class="thumb" style="background:#BFB0A0">
+          <div><div class="caption" style="font-size:8px">碧玉簪</div><div class="caption-en">Jade Hairpin</div></div>
+        </div>
+        <div class="thumb" style="background:#C9BAA9">
+          <div><div class="caption" style="font-size:8px">西厢记</div><div class="caption-en">West Chamber</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="tag">Recommended</div>
+      <h3>A — Editorial Masonry</h3>
+      <p>One featured image dominates; smaller thumbnails fill the right column. Feels like an editorial spread — cinematic and prestigious.</p>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="layout-b">
+        <div class="cell" style="background:#BFB0A0">
+          <div class="overlay">
+            <div><div class="caption" style="color:#F8F4EE">碧玉簪</div><div class="caption-en" style="color:#E2DAD1">2019</div></div>
+          </div>
+        </div>
+        <div class="cell" style="background:#C9BAA9">
+          <div class="overlay">
+            <div><div class="caption" style="color:#F8F4EE">西厢记</div><div class="caption-en" style="color:#E2DAD1">2021</div></div>
+          </div>
+        </div>
+        <div class="cell" style="background:#B8A99A">
+          <div class="overlay">
+            <div><div class="caption" style="color:#F8F4EE">五女拜寿</div><div class="caption-en" style="color:#E2DAD1">2023</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Uniform Grid + Overlay</h3>
+      <p>Equal-sized images in a clean 3-column grid. Titles appear as overlays on the image. Orderly and symmetrical.</p>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="layout-c">
+        <div class="strip wide">
+          <div class="year-badge" style="position:static;color:#C03A2B;font-size:7px;margin-bottom:4px">2024</div>
+          <div class="caption">何文秀</div>
+          <div class="caption-en">He Wenxiu</div>
+        </div>
+        <div class="strip">
+          <div class="caption" style="font-size:8px">西厢记</div>
+          <div class="caption-en">West Chamber</div>
+        </div>
+        <div class="strip" style="background:#BFB0A0">
+          <div class="caption" style="font-size:8px">碧玉簪</div>
+          <div class="caption-en">Jade Hairpin</div>
+        </div>
+        <div class="strip" style="background:#B8A99A; opacity:0.6">
+          <div class="caption" style="font-size:8px">五女</div>
+        </div>
+      </div>
+      <div class="scroll-hint">← scroll →</div>
+    </div>
+    <div class="card-body">
+      <h3>C — Horizontal Filmstrip</h3>
+      <p>Images in a horizontally scrollable row. One image is wider (featured). Feels like a film reel — theatrical and dynamic.</p>
+    </div>
+  </div>
+
+</div>

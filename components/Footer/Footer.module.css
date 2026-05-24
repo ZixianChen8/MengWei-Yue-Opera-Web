@@ -3,7 +3,7 @@
   background: var(--paper-deep);
   padding: 140px 80px 60px;
   z-index: 4;
-  border-top: 1px solid oklch(0.85 0.01 70);
+  border-top: 1px solid var(--border);
 }
 
 .ornament {
@@ -78,7 +78,7 @@
 
 .col a:hover {
   color: var(--ink);
-  border-bottom-color: oklch(0.85 0.01 70);
+  border-bottom-color: var(--border);
 }
 
 .col a .en {
@@ -95,7 +95,7 @@
   max-width: 1180px;
   margin: 80px auto 0;
   padding-top: 32px;
-  border-top: 1px solid oklch(0.82 0.01 70);
+  border-top: 1px solid var(--border-mid);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,10 +118,16 @@
   height: 30px;
   background: var(--seal);
   color: #fff;
-  font-family: var(--font-chinese-display);
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 0 0 1px oklch(0.40 0.16 30);
+  font-family: var(--font-seal);
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  box-shadow: inset 0 0 0 1px var(--seal-dark);
+}
+
+.stampGlyph {
+  display: block;
+  line-height: 1;
+  transform: translate(0.02em, 0.06em);
 }

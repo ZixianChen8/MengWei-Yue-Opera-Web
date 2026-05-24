@@ -1,0 +1,203 @@
+<style>
+  body { background: #F8F4EE; font-family: Georgia, serif; }
+  h2 { color: #1A1A1A; font-size: 22px; margin-bottom: 6px; }
+  .subtitle { color: #4D4540; font-size: 14px; margin-bottom: 32px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .mockup {
+    border: 2px solid #E2DAD1;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #F8F4EE;
+  }
+  .mockup:hover { border-color: #C03A2B; }
+  .mockup.selected { border-color: #C03A2B; box-shadow: 0 0 0 3px rgba(192,58,43,0.15); }
+
+  .mockup-header {
+    background: #EDE7DC;
+    padding: 10px 14px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #4D4540;
+    border-bottom: 1px solid #E2DAD1;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .mockup-header .rec {
+    font-size: 9px; color: #C03A2B; border: 1px solid #C03A2B;
+    padding: 2px 6px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  .mockup-body { padding: 16px; }
+
+  /* Filmstrip row */
+  .filmstrip {
+    display: flex;
+    gap: 8px;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .film-item {
+    flex: 0 0 100px;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .film-item.wide { flex: 0 0 160px; }
+
+  .film-img {
+    width: 100%; height: 100%;
+    background: #C9BAA9;
+    position: absolute; inset: 0;
+  }
+  .film-item.wide .film-img { background: #B8A99A; }
+  .film-item:nth-child(2) .film-img { background: #BFB0A0; }
+  .film-item:nth-child(3) .film-img { background: #C9BAA9; }
+  .film-item:nth-child(4) .film-img { background: #BFAD9E; }
+
+  /* Style A: Overlay (gradient on image) */
+  .overlay-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(26,26,26,0.72));
+    padding: 24px 10px 10px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .cn-overlay { font-family: serif; font-size: 15px; color: #F8F4EE; letter-spacing: 0.06em; line-height: 1.2; }
+  .en-overlay { font-size: 8px; color: rgba(248,244,238,0.75); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+  .yr-overlay { font-size: 8px; color: #C03A2B; font-family: monospace; position: absolute; top: 8px; right: 8px; }
+
+  /* Style B: Below (caption strip beneath image) */
+  .below-item {
+    flex: 0 0 100px;
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .below-item.wide { flex: 0 0 160px; }
+
+  .below-img {
+    flex: 1;
+    background: #C9BAA9;
+    position: relative;
+  }
+  .below-item.wide .below-img { background: #B8A99A; }
+  .below-item:nth-child(2) .below-img { background: #BFB0A0; }
+  .below-item:nth-child(3) .below-img { background: #C9BAA9; }
+  .below-item:nth-child(4) .below-img { background: #BFAD9E; }
+
+  .below-text {
+    background: #F8F4EE;
+    border-top: 1px solid #E2DAD1;
+    padding: 7px 8px 6px;
+    flex: 0 0 auto;
+  }
+  .cn-below { font-family: serif; font-size: 13px; color: #1A1A1A; letter-spacing: 0.05em; line-height: 1.2; }
+  .en-below { font-size: 8px; color: #8C847C; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
+  .yr-below { font-size: 8px; color: #C03A2B; font-family: monospace; float: right; }
+
+  .label-row { font-size: 12px; color: #4D4540; padding: 10px 0 4px; }
+
+  .prose { font-size: 12px; color: #4D4540; line-height: 1.6; padding: 10px 14px 14px; border-top: 1px solid #E2DAD1; }
+</style>
+
+<h2>How should the captions appear on each image?</h2>
+<p class="subtitle">The filmstrip is decided — now pick how the title and year are shown.</p>
+
+<div class="split">
+
+  <!-- Option A: Overlay -->
+  <div class="mockup" data-choice="a" onclick="toggleSelect(this)">
+    <div class="mockup-header">
+      A — Overlay on image
+      <span class="rec">Recommended</span>
+    </div>
+    <div class="mockup-body">
+      <div class="filmstrip">
+        <div class="film-item wide">
+          <div class="film-img"></div>
+          <div class="yr-overlay">2024</div>
+          <div class="overlay-caption">
+            <div class="cn-overlay">何文秀</div>
+            <div class="en-overlay">He Wenxiu</div>
+          </div>
+        </div>
+        <div class="film-item">
+          <div class="film-img"></div>
+          <div class="yr-overlay">2023</div>
+          <div class="overlay-caption">
+            <div class="cn-overlay">五女拜寿</div>
+            <div class="en-overlay">Five Daughters</div>
+          </div>
+        </div>
+        <div class="film-item">
+          <div class="film-img"></div>
+          <div class="yr-overlay">2021</div>
+          <div class="overlay-caption">
+            <div class="cn-overlay">西厢记</div>
+            <div class="en-overlay">West Chamber</div>
+          </div>
+        </div>
+        <div class="film-item">
+          <div class="film-img"></div>
+          <div class="yr-overlay">2019</div>
+          <div class="overlay-caption">
+            <div class="cn-overlay">碧玉簪</div>
+            <div class="en-overlay">Jade Hairpin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="prose">Text floats on a dark gradient at the bottom of each image. Images feel immersive — like a stage photograph with a title card. Text only visible on closer look.</p>
+  </div>
+
+  <!-- Option B: Below -->
+  <div class="mockup" data-choice="b" onclick="toggleSelect(this)">
+    <div class="mockup-header">B — Caption strip below image</div>
+    <div class="mockup-body">
+      <div class="filmstrip" style="height:150px">
+        <div class="below-item wide">
+          <div class="below-img"></div>
+        </div>
+        <div class="below-item">
+          <div class="below-img"></div>
+        </div>
+        <div class="below-item">
+          <div class="below-img"></div>
+        </div>
+        <div class="below-item">
+          <div class="below-img"></div>
+        </div>
+      </div>
+      <div class="filmstrip" style="height:50px; gap:8px; margin-top:0">
+        <div class="below-text" style="flex:0 0 160px; border-top:1px solid #E2DAD1">
+          <span class="yr-below">2024</span>
+          <div class="cn-below">何文秀</div>
+          <div class="en-below">He Wenxiu</div>
+        </div>
+        <div class="below-text" style="flex:0 0 100px">
+          <span class="yr-below">2023</span>
+          <div class="cn-below">五女拜寿</div>
+          <div class="en-below">Five Daughters</div>
+        </div>
+        <div class="below-text" style="flex:0 0 100px">
+          <span class="yr-below">2021</span>
+          <div class="cn-below">西厢记</div>
+          <div class="en-below">West Chamber</div>
+        </div>
+        <div class="below-text" style="flex:0 0 100px">
+          <span class="yr-below">2019</span>
+          <div class="cn-below">碧玉简</div>
+          <div class="en-below">Jade Hairpin</div>
+        </div>
+      </div>
+    </div>
+    <p class="prose">A separate text strip sits below each image. Cleaner and more readable — images stay unobscured. Resembles a museum label or a film contact sheet.</p>
+  </div>
+
+</div>

@@ -2,18 +2,24 @@
    DESIGN TOKENS
    ========================================================= */
 :root {
-  --paper:       oklch(0.975 0.008 80);
-  --paper-deep:  oklch(0.955 0.010 75);
-  --ink:         oklch(0.22 0.012 50);
-  --ink-soft:    oklch(0.42 0.012 50);
-  --ink-faint:   oklch(0.62 0.010 50);
-  --seal:        oklch(0.48 0.16 30);
-  --gold:        oklch(0.68 0.10 75);
-  --cloud:       #ffffff;
+  --paper:       #F8F4EE;   /* parchment/cream — design system --color-bg */
+  --paper-deep:  #F0EAE0;   /* deeper parchment — design system footer bg */
+  --ink:         #1A1A1A;   /* ink black — design system --color-ink */
+  --ink-soft:    #4D4540;   /* secondary text — design system --color-ink-secondary */
+  --ink-faint:   #8C847C;   /* muted text — design system --color-ink-muted */
+  --seal:        #C03A2B;   /* vermillion red — design system --color-vermillion */
+  --gold:        #B8962E;   /* warm gold accent */
+  --cloud:       #FFFFFF;   /* surface white — design system --color-surface */
+  --border:      #E2DAD1;   /* design system --color-border */
+  --border-mid:  #D5C9BC;   /* medium border */
+  --border-deep: #C9BAA9;   /* deeper border */
+  --ink-shadow:  rgba(44, 37, 30, 0.07);   /* subtle warm ink shadow */
+  --seal-dark:   #8B1E12;   /* vermillion dark — design system --color-vermillion-dark */
 
   /* Font family aliases — values injected by next/font/google as CSS variables on <html> */
   --font-chinese-display: var(--font-ma-shan), serif;
   --font-chinese-body:    var(--font-noto-serif-sc), serif;
+  --font-seal:            var(--font-bei-shi-da-shuo-wen-xiao-zhuan), var(--font-chinese-display);
   --font-latin-display:   var(--font-cormorant), serif;
   --font-mono:            var(--font-jetbrains), monospace;
 }
@@ -31,6 +37,7 @@
    BASE
    ========================================================= */
 html, body {
+  scroll-behavior: smooth;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-chinese-body);
@@ -51,8 +58,8 @@ body::before {
   pointer-events: none;
   z-index: 1;
   background-image:
-    radial-gradient(1200px 700px at 50% 12%, oklch(0.99 0.012 80 / .9), transparent 60%),
-    radial-gradient(800px 500px at 80% 90%, oklch(0.96 0.012 60 / .5), transparent 70%);
+    radial-gradient(1200px 700px at 50% 12%, rgba(255, 250, 242, 0.9), transparent 60%),
+    radial-gradient(800px 500px at 80% 90%, rgba(240, 230, 215, 0.5), transparent 70%);
   mix-blend-mode: multiply;
 }
 

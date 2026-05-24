@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repertoire Gallery — Full Design</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #2a2420;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #F8F4EE;
+    padding: 32px 24px;
+  }
+
+  .page-header {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8C847C;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #3a3430;
+  }
+  .page-header span { color: #C03A2B; }
+
+  /* ── SECTION ── */
+  .section {
+    background: #F8F4EE;
+    color: #1A1A1A;
+    padding: 80px 80px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* noise texture simulation */
+  .section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  .section > * { position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 52px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #8C847C;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::after {
+    content: '';
+    display: block; width: 32px; height: 1px;
+    background: #C9BAA9;
+  }
+
+  .title-zh {
+    font-family: Georgia, serif;
+    font-size: 48px;
+    letter-spacing: 0.1em;
+    color: #1A1A1A;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .title-zh .char-red { color: #C03A2B; }
+
+  .title-en {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: #8C847C;
+    text-transform: uppercase;
+  }
+
+  /* ── FILMSTRIP ── */
+  .filmstrip-wrap {
+    overflow-x: auto;
+    overflow-y: visible;
+    /* hide scrollbar but allow scrolling */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    padding-bottom: 4px;
+  }
+  .filmstrip-wrap::-webkit-scrollbar { display: none; }
+
+  .filmstrip {
+    display: flex;
+    gap: 12px;
+    min-width: max-content;
+  }
+
+  /* Each film card */
+  .film-card {
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .film-card:hover .film-overlay { opacity: 1; }
+  .film-card:hover .film-img { transform: scale(1.04); }
+
+  .film-card.featured { width: 400px; height: 520px; }
+  .film-card.regular  { width: 260px; height: 520px; }
+
+  .film-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  /* image placeholder */
+  .film-img-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: rgba(248,244,238,0.3);
+    letter-spacing: 0.06em;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .film-card:hover .film-img-placeholder { transform: scale(1.04); }
+
+  /* gradient overlay always present, text fades in */
+  .film-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      rgba(15,10,8,0.35) 65%,
+      rgba(15,10,8,0.82) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* hover overlay (light sheen) */
+  .film-overlay {
+    position: absolute; inset: 0;
+    background: rgba(192,58,43,0.06);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  /* caption */
+  .film-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px 20px 22px;
+  }
+
+  .year {
+    font-size: 10px;
+    color: #C03A2B;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .cn-title {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    color: #F8F4EE;
+    letter-spacing: 0.08em;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .film-card.featured .cn-title { font-size: 36px; }
+
+  .en-title {
+    font-size: 10px;
+    color: rgba(248,244,238,0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* expand icon */
+  .expand-icon {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 28px; height: 28px;
+    border: 1px solid rgba(248,244,238,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .film-card:hover .expand-icon { opacity: 1; }
+  .expand-icon svg { width: 12px; height: 12px; stroke: #F8F4EE; fill: none; }
+
+  /* scroll hint */
+  .scroll-hint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    font-size: 10px;
+    color: #8C847C;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .scroll-hint::before, .scroll-hint::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: #E2DAD1;
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .lb-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(15,10,8,0.92);
+    cursor: pointer;
+  }
+
+  .lb-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    max-width: 860px;
+    padding: 24px;
+  }
+
+  .lb-img-wrap {
+    width: 480px;
+    height: 580px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #2a2420;
+  }
+  .lb-img-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: rgba(248,244,238,0.25); letter-spacing: 0.06em;
+  }
+
+  .lb-meta { flex: 1; }
+
+  .lb-year {
+    font-size: 11px;
+    color: #C03A2B;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .lb-year::after { content: ''; flex: 1; height: 1px; background: #3a3430; }
+
+  .lb-cn {
+    font-family: Georgia, serif;
+    font-size: 52px;
+    color: #F8F4EE;
+    letter-spacing: 0.1em;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+
+  .lb-en {
+    font-size: 12px;
+    color: #8C847C;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 40px;
+  }
+
+  .lb-close {
+    position: absolute;
+    top: -8px; right: -8px;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(248,244,238,0.2);
+    border-radius: 50%;
+    background: rgba(26,26,26,0.8);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: #F8F4EE;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .lb-close:hover { border-color: #C03A2B; background: rgba(192,58,43,0.2); }
+
+  /* ── IMAGE BACKGROUNDS (simulating real photos) ── */
+  .bg-1 { background: linear-gradient(135deg, #3d2b1f 0%, #6b3d2a 35%, #4a2818 70%, #2d1a10 100%); }
+  .bg-2 { background: linear-gradient(135deg, #1f2d3d 0%, #2a4a5e 35%, #1a3042 70%, #0e1d2a 100%); }
+  .bg-3 { background: linear-gradient(135deg, #2d3a1f 0%, #4a5e2a 35%, #3a4a18 70%, #1f2d10 100%); }
+  .bg-4 { background: linear-gradient(135deg, #3a1f2d 0%, #5e2a4a 35%, #4a1838 70%, #2d0e20 100%); }
+
+  /* annotation labels */
+  .annotation {
+    background: rgba(192,58,43,0.12);
+    border: 1px dashed #C03A2B;
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 10px;
+    color: #C03A2B;
+    margin-top: 16px;
+    letter-spacing: 0.05em;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  Full design mockup — <span>Repertoire Gallery</span> · Horizontal Filmstrip + Overlay Captions + Lightbox
+</div>
+
+<!-- ══════════════════════════════ SECTION ══════════════════════════════ -->
+<div class="section">
+
+  <div class="section-header">
+    <div>
+      <div class="eyebrow">Repertoire · 戏目</div>
+      <div class="title-zh">演过的<span class="char-red">戏</span></div>
+      <div class="title-en">Selected works from the studio archive</div>
+    </div>
+  </div>
+
+  <!-- Filmstrip -->
+  <div class="filmstrip-wrap">
+    <div class="filmstrip">
+
+      <!-- Card 1: Featured (most recent) -->
+      <div class="film-card featured" onclick="openLightbox('何文秀','He Wenxiu','2024','bg-1')">
+        <div class="film-img-placeholder bg-1">unsplash placeholder</div>
+        <div class="film-gradient"></div>
+        <div class="film-overlay"></div>
+        <div class="expand-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+        <div class="film-caption">
+          <div class="year">2024</div>
+          <div class="cn-title">何文秀</div>
+          <div class="en-title">He Wenxiu</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="film-card regular" onclick="openLightbox('五女拜寿','Five Daughters\' Birthday','2023','bg-2')">
+        <div class="film-img-placeholder bg-2">unsplash placeholder</div>
+        <div class="film-gradient"></div>
+        <div class="film-overlay"></div>
+        <div class="expand-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+        <div class="film-caption">
+          <div class="year">2023</div>
+          <div class="cn-title">五女拜寿</div>
+          <div class="en-title">Five Daughters' Birthday</div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="film-card regular" onclick="openLightbox('西厢记','Romance of the West Chamber','2021','bg-3')">
+        <div class="film-img-placeholder bg-3">unsplash placeholder</div>
+        <div class="film-gradient"></div>
+        <div class="film-overlay"></div>
+        <div class="expand-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+        <div class="film-caption">
+          <div class="year">2021</div>
+          <div class="cn-title">西厢记</div>
+          <div class="en-title">Romance of the West Chamber</div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="film-card regular" onclick="openLightbox('碧玉簪','The Jade Hairpin','2019','bg-4')">
+        <div class="film-img-placeholder bg-4">unsplash placeholder</div>
+        <div class="film-gradient"></div>
+        <div class="film-overlay"></div>
+        <div class="expand-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+        <div class="film-caption">
+          <div class="year">2019</div>
+          <div class="cn-title">碧玉簪</div>
+          <div class="en-title">The Jade Hairpin</div>
+        </div>
+      </div>
+
+    </div><!-- /filmstrip -->
+  </div><!-- /filmstrip-wrap -->
+
+  <div class="scroll-hint">drag to scroll</div>
+
+</div><!-- /section -->
+
+<div class="annotation">↑ Click any card above to preview the lightbox</div>
+<div class="annotation" style="margin-left:12px">↑ Hover cards to see the zoom + expand icon</div>
+
+<!-- ══════════════════════════════ LIGHTBOX ══════════════════════════════ -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-backdrop" onclick="closeLightbox()"></div>
+  <div class="lb-content">
+    <div class="lb-img-wrap">
+      <div class="lb-img-placeholder" id="lb-img">—</div>
+    </div>
+    <div class="lb-meta">
+      <div class="lb-year" id="lb-year">—</div>
+      <div class="lb-cn" id="lb-cn">—</div>
+      <div class="lb-en" id="lb-en">—</div>
+    </div>
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+  </div>
+</div>
+
+<script>
+function openLightbox(zh, en, year, bg) {
+  document.getElementById('lb-cn').textContent = zh;
+  document.getElementById('lb-en').textContent = en;
+  document.getElementById('lb-year').textContent = year;
+  var img = document.getElementById('lb-img');
+  img.className = 'lb-img-placeholder ' + bg;
+  img.textContent = 'unsplash placeholder';
+  document.getElementById('lightbox').classList.add('open');
+  document.addEventListener('keydown', handleKey);
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.removeEventListener('keydown', handleKey);
+}
+function handleKey(e) { if (e.key === 'Escape') closeLightbox(); }
+</script>
+</body>
+</html>

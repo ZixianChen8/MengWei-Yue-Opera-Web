@@ -3,6 +3,7 @@
   background: var(--cloud);
   padding: 0 80px 200px;
   z-index: 5;
+  scroll-margin-top: 100px;
 }
 
 .head {
@@ -61,7 +62,7 @@
 }
 
 .event {
-  border-top: 1px solid oklch(0.78 0.01 70);
+  border-top: 1px solid var(--border-mid);
   padding-top: 28px;
   display: flex;
   flex-direction: column;
@@ -98,7 +99,7 @@
   letter-spacing: .4em;
   color: var(--ink-faint);
   text-transform: uppercase;
-  border: 1px solid oklch(0.78 0.01 70);
+  border: 1px solid var(--border-mid);
   padding: 4px 10px;
   border-radius: 99px;
 }
@@ -106,9 +107,9 @@
 .eImg {
   aspect-ratio: 4 / 5;
   background:
-    repeating-linear-gradient(135deg, oklch(0.30 0.015 50 / .06) 0 2px, transparent 2px 14px),
-    linear-gradient(180deg, oklch(0.93 0.012 70 / .35), oklch(0.88 0.014 60 / .25));
-  border: 1px dashed oklch(0.40 0.014 50 / .35);
+    repeating-linear-gradient(135deg, rgba(44, 37, 30, 0.06) 0 2px, transparent 2px 14px),
+    linear-gradient(180deg, rgba(234, 222, 204, 0.35), rgba(218, 204, 180, 0.25));
+  border: 1px dashed rgba(80, 65, 50, 0.35);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -169,7 +170,7 @@
   color: var(--ink-soft);
   text-transform: uppercase;
   padding-top: 14px;
-  border-top: 1px solid oklch(0.86 0.01 70);
+  border-top: 1px solid var(--border);
 }
 
 .dot {

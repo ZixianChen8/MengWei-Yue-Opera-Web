@@ -10,9 +10,11 @@ import Footer from '@/components/Footer/Footer'
 export default function Home() {
   return (
     <>
-      <Nav />
-      <main>
+      <div style={{ position: 'relative' }}>
+        <Nav />
         <Hero />
+      </div>
+      <main>
         <Overture />
         <Season />
         <CloudBreak />

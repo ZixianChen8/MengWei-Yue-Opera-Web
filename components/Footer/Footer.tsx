@@ -37,7 +37,9 @@ export default function Footer() {
         <div>© 2026 Meng Wei Yue Opera Studio · 加拿大孟伟越剧艺术传习所</div>
         <div className={styles.sealMark}>
           <span>Ottawa · Made with care</span>
-          <span className={styles.stamp}>孟</span>
+          <span className={styles.stamp}>
+            <span className={styles.stampGlyph}>越</span>
+          </span>
         </div>
       </div>
     </footer>

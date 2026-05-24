@@ -1,11 +1,24 @@
 .hero {
   position: relative;
   height: 100vh;
-  min-height: 760px;
+  min-height: 700px;
   width: 100%;
   overflow: hidden;
   z-index: 3;
 }
+
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, transparent 50%, var(--paper) 150%);
+  pointer-events: none;
+  z-index: 20;
+}
+
 
 /* Sun glow */
 .sun {
@@ -17,121 +30,32 @@
   height: 620px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(
-    circle,
-    oklch(0.99 0.04 85 / .9) 0%,
-    oklch(0.96 0.06 75 / .35) 35%,
-    transparent 65%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 252, 235, 0.9) 0%,
+      rgba(248, 234, 180, 0.35) 35%,
+      transparent 65%);
   filter: blur(8px);
   z-index: 1;
 }
 
-/* Mountain silhouettes */
-.mountains {
+/* Hero background image */
+.heroBg {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 38%;
-  height: 240px;
+  inset: 0;
   z-index: 2;
-  opacity: .18;
+}
+
+.heroBg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--cloud) 100%);
   pointer-events: none;
 }
 
-.mountains svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* Cranes */
-.crane {
-  position: absolute;
-  color: var(--ink-soft);
-  opacity: .55;
-  z-index: 4;
-  animation: float 11s ease-in-out infinite;
-}
-
-.c1 { top: 30%; left: 18%; width: 64px; animation-delay: -2s; }
-.c2 { top: 46%; left: 9%;  width: 38px; opacity: .35; animation-delay: -6s; }
-.c3 { top: 54%; right: 14%; width: 46px; opacity: .4; animation-delay: -4s; }
-
-/* Opera figure placeholder */
-.figureWrap {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -46%);
-  z-index: 5;
-  width: 440px;
-  height: 620px;
-}
-
-.figure {
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-  background:
-    repeating-linear-gradient(135deg,
-      oklch(0.30 0.015 50 / .07) 0 2px,
-      transparent 2px 14px),
-    linear-gradient(180deg, oklch(0.92 0.010 70 / .35), oklch(0.88 0.012 60 / .25));
-  border: 1px dashed oklch(0.40 0.014 50 / .35);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  color: var(--ink-soft);
-  position: relative;
-  box-shadow: 0 70px 90px -50px oklch(0.30 0.02 50 / .3);
-}
-
-.figure::before {
-  content: "主角 · PRINCIPAL";
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .25em;
-  color: var(--ink-faint);
-}
-
-.figure::after {
-  content: "440 × 620 · transparent png";
-  position: absolute;
-  bottom: 14px;
-  right: 14px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .2em;
-  color: var(--ink-faint);
-}
-
-.phCn {
-  font-family: var(--font-chinese-display);
-  font-size: 48px;
-  letter-spacing: 10px;
-  color: var(--ink-soft);
-}
-
-.phEn {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .22em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-}
-
-.phDims {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .18em;
-  color: var(--ink-faint);
-  opacity: .6;
+.heroBgImg {
+  object-fit: cover;
+  object-position: center center;
 }
 
 /* Title block */
@@ -152,7 +76,7 @@
   letter-spacing: .42em;
   color: var(--ink-faint);
   text-transform: uppercase;
-  border-right: 1px solid oklch(0.62 0.010 50 / .4);
+  border-right: 1px solid rgba(140, 132, 124, 0.4);
   padding-right: 14px;
   height: 300px;
   display: flex;
@@ -201,32 +125,55 @@
 }
 
 .stamp {
-  display: flex;
-  writing-mode: horizontal-tb;
   width: 34px;
   height: 34px;
   background: var(--seal);
   color: #fff;
-  font-family: var(--font-chinese-display);
-  font-size: 14px;
-  align-items: center;
-  justify-content: center;
+  font-family: var(--font-seal);
+  font-size: 18px;
+  display: grid;
+  place-items: center;
+  writing-mode: horizontal-tb;
+  line-height: 1;
   margin-top: 18px;
-  box-shadow: inset 0 0 0 1px oklch(0.40 0.16 30);
+  box-shadow: inset 0 0 0 1px var(--seal-dark);
+}
+
+.stampGlyph {
+  display: block;
+  line-height: 1;
+  transform: translate(0.02em, 0.06em);
 }
 
 /* Cloud wisps */
 .cloudWisp {
   position: absolute;
   height: 60px;
-  background: radial-gradient(ellipse at center, var(--cloud) 0%, oklch(1 0 0 / .8) 40%, transparent 75%);
+  background: radial-gradient(ellipse at center, var(--cloud) 0%, rgba(255, 255, 255, 0.8) 40%, transparent 75%);
   filter: blur(8px);
   border-radius: 100%;
 }
 
-.wispA { top: 18%; left: 6%;  width: 280px; opacity: .7; }
-.wispB { top: 34%; right: 10%; width: 220px; opacity: .55; }
-.wispC { top: 48%; left: 38%; width: 340px; opacity: .4; }
+.wispA {
+  top: 18%;
+  left: 6%;
+  width: 280px;
+  opacity: .7;
+}
+
+.wispB {
+  top: 34%;
+  right: 10%;
+  width: 220px;
+  opacity: .55;
+}
+
+.wispC {
+  top: 48%;
+  left: 38%;
+  width: 340px;
+  opacity: .4;
+}
 
 /* Scroll hint */
 .scrollHint {
@@ -298,9 +245,32 @@
 }
 
 /* Individual cloud layer positions */
-.cloudL1 { bottom: 34%; opacity: .55; }
-.cloudL2 { bottom: 22%; opacity: .7;  }
-.cloudL3 { bottom: 10%; opacity: .9;  }
-.cloudL4 { bottom: -2%; opacity: 1;   }
-.cloudL5 { bottom: -12%; opacity: 1;  }
-.cloudLw { bottom: 18%; opacity: .7;  }
+.cloudL1 {
+  bottom: 34%;
+  opacity: .55;
+}
+
+.cloudL2 {
+  bottom: 22%;
+  opacity: .7;
+}
+
+.cloudL3 {
+  bottom: 10%;
+  opacity: .9;
+}
+
+.cloudL4 {
+  bottom: -2%;
+  opacity: 1;
+}
+
+.cloudL5 {
+  bottom: -12%;
+  opacity: 1;
+}
+
+.cloudLw {
+  bottom: 18%;
+  opacity: .7;
+}

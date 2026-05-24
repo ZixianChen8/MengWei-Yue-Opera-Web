@@ -1,0 +1,285 @@
+/* ── Banner ─────────────────────────────────────────────── */
+
+.banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.bannerImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 18, 10, 0.45) 0%,
+    rgba(26, 18, 10, 0.25) 50%,
+    rgba(26, 18, 10, 0.65) 100%
+  );
+  pointer-events: none;
+}
+
+.bannerText {
+  position: absolute;
+  bottom: 56px;
+  left: 80px;
+  z-index: 2;
+}
+
+.bannerTitle {
+  font-family: var(--font-chinese-display);
+  font-size: 64px;
+  letter-spacing: 10px;
+  line-height: 1.1;
+  color: #fff;
+  margin: 10px 0 0;
+}
+
+.bannerEn {
+  display: block;
+  font-family: var(--font-latin-display);
+  font-size: 12px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 12px;
+  font-weight: 400;
+}
+
+/* ── Body ───────────────────────────────────────────────── */
+
+.body {
+  background: var(--paper);
+  padding: 80px 80px 120px;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-block;
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-decoration: none;
+  margin-bottom: 64px;
+  transition: color 0.3s;
+}
+
+.backLink:hover {
+  color: var(--seal);
+}
+
+/* ── Description ────────────────────────────────────────── */
+
+.description {
+  font-family: var(--font-chinese-body);
+  font-size: 15px;
+  line-height: 2;
+  color: var(--ink-soft);
+  font-weight: 300;
+  max-width: 760px;
+  text-wrap: pretty;
+  margin-bottom: 64px;
+}
+
+/* ── Info rows ──────────────────────────────────────────── */
+
+.infoGrid {
+  margin: 0 0 80px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 32px;
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+}
+
+.infoRow:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.infoTerm {
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  color: var(--ink-faint);
+  font-weight: 300;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.infoTermEn {
+  font-family: var(--font-latin-display);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+
+.infoDesc {
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-weight: 300;
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* ── Sign-up card ───────────────────────────────────────── */
+
+.signupCard {
+  background: var(--cloud);
+  border: 1px solid var(--border-mid);
+  padding: 56px 48px;
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── QR placeholder ─────────────────────────────────────── */
+
+.qrLink {
+  display: block;
+  text-decoration: none;
+}
+
+.qrPlaceholder {
+  width: 200px;
+  height: 200px;
+  border: 2px solid var(--border-deep);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s;
+}
+
+.qrLink:hover .qrPlaceholder {
+  border-color: var(--seal);
+}
+
+/* Corner finder squares — top-left */
+.qrPlaceholder::before,
+.qrPlaceholder::after {
+  content: '';
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--seal);
+}
+
+.qrPlaceholder::before {
+  top: 10px;
+  left: 10px;
+}
+
+.qrPlaceholder::after {
+  bottom: 10px;
+  right: 10px;
+}
+
+.qrCornerTR,
+.qrCornerBL {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--seal);
+}
+
+.qrCornerTR {
+  top: 10px;
+  right: 10px;
+}
+
+.qrCornerBL {
+  bottom: 10px;
+  left: 10px;
+}
+
+.qrInner {
+  width: 80px;
+  height: 80px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--border-mid) 0px,
+    var(--border-mid) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+  opacity: 0.6;
+}
+
+.qrLabel {
+  font-family: var(--font-chinese-body);
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-weight: 300;
+  text-align: center;
+}
+
+.qrDivider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+.formLink {
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--seal);
+  text-decoration: none;
+  transition: text-decoration 0.3s, color 0.3s;
+}
+
+.formLink:hover {
+  text-decoration: underline;
+  color: var(--seal-dark);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .banner {
+    aspect-ratio: 4 / 3;
+    min-height: 320px;
+  }
+
+  .bannerText {
+    bottom: 32px;
+    left: 24px;
+  }
+
+  .bannerTitle {
+    font-size: 40px;
+    letter-spacing: 6px;
+  }
+
+  .body {
+    padding: 48px 24px 80px;
+  }
+
+  .signupCard {
+    padding: 40px 24px;
+  }
+}

@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useScrollParallax, type CloudLayerConfig } from '@/components/hooks/useScrollParallax'
+import { hero } from '@/content/home'
 import styles from './Hero.module.css'
 
 const CLOUD_LAYERS: CloudLayerConfig[] = [
@@ -43,56 +44,40 @@ export default function Hero() {
 
       <div className={styles.sun} />
 
-      <div className={styles.mountains} aria-hidden="true">
-        <svg viewBox="0 0 1600 240" preserveAspectRatio="none">
-          <path
-            d="M0,220 L0,150 C 80,130 140,90 220,110 C 300,130 360,80 460,95 C 540,108 600,70 700,85 C 800,100 880,60 980,80 C 1080,100 1160,70 1260,90 C 1360,110 1460,80 1600,100 L1600,240 L0,240 Z"
-            fill="oklch(0.30 0.012 50)"
-          />
-          <path
-            d="M0,240 L0,180 C 120,160 220,170 340,150 C 460,130 560,170 700,150 C 840,130 940,165 1080,148 C 1220,131 1340,165 1600,150 L1600,240 Z"
-            fill="oklch(0.50 0.012 50)"
-            opacity=".6"
-          />
-        </svg>
-      </div>
-
-      {/* Crane silhouettes */}
-      <svg className={`${styles.crane} ${styles.c1}`} viewBox="0 0 80 30">
-        <path d="M2,18 C 14,8 22,8 30,14 C 36,18 42,10 50,14 C 58,18 68,14 78,8" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      </svg>
-      <svg className={`${styles.crane} ${styles.c2}`} viewBox="0 0 80 30">
-        <path d="M2,16 C 14,10 22,12 32,14 C 42,16 52,12 78,10" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      </svg>
-      <svg className={`${styles.crane} ${styles.c3}`} viewBox="0 0 80 30">
-        <path d="M2,14 C 12,20 22,18 32,14 C 42,10 52,14 62,16 C 70,18 76,14 78,12" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      </svg>
-
-      {/* Principal portrait placeholder */}
-      <div
-        className={styles.figureWrap}
-        ref={figureRef}
-      >
-        <div className={styles.figure}>
-          <div className={styles.phCn}>水袖</div>
-          <div className={styles.phEn}>[ principal · costume portrait ]</div>
-          <div className={styles.phDims}>cut-out png · transparent bg</div>
-        </div>
+      {/* Hero background */}
+      <div className={styles.heroBg}>
+        <Image
+          src="/assets/bg1-exp.webp"
+          alt=""
+          fill
+          className={styles.heroBgImg}
+          sizes="100vw"
+          priority
+        />
       </div>
 
       {/* Title */}
       <div className={styles.titleBlock} ref={titleBlockRef}>
-        <div className={styles.titleMeta}>Ottawa · Yue Opera · Est. 2018</div>
+        <div className={styles.titleMeta}>{hero.meta}</div>
         <div className={styles.titleChars}>
-          水<br />袖<br /><span className={styles.red}>越</span><br />韵
+          {hero.titleChars.map((char, i) => (
+            <span key={i}>
+              {i === hero.titleRedIndex
+                ? <span className={styles.red}>{char}</span>
+                : char}
+              {i < hero.titleChars.length - 1 && <br />}
+            </span>
+          ))}
         </div>
       </div>
 
       {/* Poem */}
       <div className={styles.titlePoem} ref={titlePoemRef}>
-        一 唱 千 年 ， 一 袖 江 南<br />
-        <span className={styles.poemSmall}>Where the sleeve unfolds, a thousand years drift forward.</span>
-        <span className={styles.stamp}>孟</span>
+        {hero.poem.zh}<br />
+        <span className={styles.poemSmall}>{hero.poem.en}</span>
+        <span className={styles.stamp}>
+          <span className={styles.stampGlyph}>{hero.poem.stamp}</span>
+        </span>
       </div>
 
       {/* Cloud wisps */}
@@ -109,11 +94,6 @@ export default function Hero() {
         ref={el => { wispRefs.current[2] = el }}
       />
 
-      {/* Scroll hint */}
-      <div className={styles.scrollHint} ref={scrollHintRef}>
-        <div>Scroll · 入云</div>
-        <div className={styles.scrollLine} />
-      </div>
 
       {/* Cloud layers */}
       <div className={styles.clouds} aria-hidden="true">

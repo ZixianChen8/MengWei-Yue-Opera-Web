@@ -5,6 +5,7 @@ import {
   Cormorant_Garamond,
   JetBrains_Mono,
 } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 
 const maShanZheng = Ma_Shan_Zheng({
@@ -37,6 +38,12 @@ const jetBrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
+const beiShiDaShuoWenXiaoZhuan = localFont({
+  src: '../fonts/BeiShiDaShuoWenXiaoZhuan-1-unicode-yue.ttf',
+  variable: '--font-bei-shi-da-shuo-wen-xiao-zhuan',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: '加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio',
   description:
@@ -62,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-Hant-CA"
-      className={`${maShanZheng.variable} ${notoSerifSC.variable} ${cormorantGaramond.variable} ${jetBrainsMono.variable}`}
+      className={`${maShanZheng.variable} ${notoSerifSC.variable} ${cormorantGaramond.variable} ${jetBrainsMono.variable} ${beiShiDaShuoWenXiaoZhuan.variable}`}
     >
       <body>{children}</body>
     </html>

@@ -1,9 +1,10 @@
 .section {
   position: relative;
   background: var(--cloud);
-  padding: 180px 80px 200px;
+  padding: 80px 80px 200px;
   z-index: 5;
   margin-top: -1px;
+  scroll-margin-top: 100px;
 }
 
 .section::before {
@@ -11,10 +12,11 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: -160px;
-  height: 200px;
-  background: linear-gradient(to bottom, transparent, var(--cloud));
+  top: -320px;
+  height: 400px;
+  background: linear-gradient(to bottom, transparent 0%, var(--cloud) 100%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .inner {
@@ -54,7 +56,7 @@
   font-weight: 300;
 }
 
-.body p + p {
+.body p+p {
   margin-top: 18px;
 }
 
@@ -63,7 +65,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 56px;
-  border-top: 1px solid oklch(0.85 0.01 70);
+  border-top: 1px solid var(--border);
   padding-top: 28px;
 }
 

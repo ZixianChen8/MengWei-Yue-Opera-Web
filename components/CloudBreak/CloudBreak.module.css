@@ -1,6 +1,6 @@
 .cloudBreak {
   position: relative;
-  height: 340px;
+  height: 480px;
   overflow: hidden;
   background: var(--cloud);
   z-index: 4;
@@ -17,21 +17,47 @@
   width: 100%;
   display: block;
   height: auto;
-  will-change: transform;
-}
-
-.cb1 {
-  bottom: -20%;
-  mix-blend-mode: lighten;
-  opacity: .95;
-}
-
-.cb2 {
-  top: -30%;
-  mix-blend-mode: multiply;
-  opacity: .45;
 }
 
 .mirrored {
   transform: scaleX(-1);
+}
+
+/* Back layers — subtle, top half */
+.l1 {
+  top: -5%;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+
+.l2 {
+  top: 8%;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+.l3 {
+  top: 18%;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+}
+
+/* Mid layers */
+.l4 {
+  top: 25%;
+  opacity: 0.65;
+  mix-blend-mode: multiply;
+}
+
+.l5 {
+  bottom: 18%;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+
+/* Front layer — most prominent, sits at bottom */
+.l6 {
+  bottom: -5%;
+  opacity: 0.95;
+  mix-blend-mode: lighten;
 }

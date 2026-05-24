@@ -1,5 +1,6 @@
 import { season } from '@/content/home'
 import Eyebrow from '@/components/Eyebrow/Eyebrow'
+import EventCard from './EventCard'
 import styles from './Season.module.css'
 
 export default function Season() {
@@ -20,27 +21,7 @@ export default function Season() {
 
       <div className={styles.events}>
         {season.events.map((ev) => (
-          <article
-            key={ev.num}
-            className={ev.feature ? `${styles.event} ${styles.feature}` : styles.event}
-          >
-            <div className={styles.eRow}>
-              <span className={styles.eNum}>{ev.num}</span>
-              <span className={styles.eTag}>{ev.tag}</span>
-            </div>
-            <h3 className={styles.eCn}>
-              {ev.titleZh.map((line, i) => (
-                <span key={i}>{line}{i < ev.titleZh.length - 1 && <br />}</span>
-              ))}
-            </h3>
-            <div className={styles.eEn}>{ev.titleEn}</div>
-            <p className={styles.eBlurb}>{ev.blurb}</p>
-            <div className={styles.eWhen}>
-              <span>{ev.date}</span>
-              <span className={styles.dot} />
-              <span>{ev.venue}</span>
-            </div>
-          </article>
+          <EventCard key={ev.id} ev={ev} />
         ))}
       </div>
     </section>

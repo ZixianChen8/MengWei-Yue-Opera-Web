@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 export interface CloudLayerConfig {
   depth: number
@@ -18,6 +18,14 @@ export function useScrollParallax(
   const titleBlockRef = useRef<HTMLDivElement>(null)
   const titlePoemRef  = useRef<HTMLDivElement>(null)
   const scrollHintRef = useRef<HTMLDivElement>(null)
+
+  const setCloudRef = useCallback((index: number, element: HTMLDivElement | null) => {
+    cloudRefs.current[index] = element
+  }, [])
+
+  const setWispRef = useCallback((index: number, element: HTMLDivElement | null) => {
+    wispRefs.current[index] = element
+  }, [])
 
   useEffect(() => {
     let raf: number | null = null
@@ -100,5 +108,14 @@ export function useScrollParallax(
     }
   }, [configs, wispBaseOpacities])
 
-  return { cloudRefs, wispRefs, figureRef, titleBlockRef, titlePoemRef, scrollHintRef }
+  return {
+    cloudRefs,
+    wispRefs,
+    figureRef,
+    titleBlockRef,
+    titlePoemRef,
+    scrollHintRef,
+    setCloudRef,
+    setWispRef,
+  }
 }

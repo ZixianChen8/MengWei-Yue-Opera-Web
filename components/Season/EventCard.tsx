@@ -21,7 +21,6 @@ type SeasonEvent = {
   blurb: string
   date: string
   venue: string
-  feature?: boolean
 }
 
 type Props = { ev: SeasonEvent }
@@ -81,7 +80,6 @@ export default function EventCard({ ev }: Props) {
 
   const cls = [
     styles.event,
-    ev.feature ? styles.feature : '',
     styles.fxPress,
     active ? styles.isActive : '',
     pressing ? styles.pressing : '',
@@ -112,7 +110,6 @@ export default function EventCard({ ev }: Props) {
       <span className={styles.pressEdge} aria-hidden="true" />
 
       <div className={styles.eRow}>
-        <span className={styles.eNum}>{ev.num}</span>
         <span className={styles.eTag}>{ev.tag}</span>
       </div>
       <h3 className={styles.eCn}>

@@ -37,6 +37,7 @@
    BASE
    ========================================================= */
 html, body {
+  font-size: clamp(16px, 1.25vw, 20px);
   scroll-behavior: smooth;
   background: var(--paper);
   color: var(--ink);

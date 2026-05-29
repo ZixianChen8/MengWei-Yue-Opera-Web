@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { season } from '@/content/home'
 import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import EventCard from './EventCard'
@@ -13,17 +14,19 @@ export default function Season() {
             {season.title.zh}<small>{season.title.en}</small>
           </h2>
         </div>
-        <div className={styles.aside}>
-          {season.aside.zh}
-          <span className={styles.en}>{season.aside.en}</span>
-        </div>
+        <Link href="/events" className={styles.viewAll}>
+          查看全部活动
+          <span className={styles.viewAllEn}>· View all events</span>
+          <span className={styles.viewAllArrow}>→</span>
+        </Link>
       </div>
 
       <div className={styles.events}>
-        {season.events.map((ev) => (
+        {season.events.slice(0, 3).map((ev) => (
           <EventCard key={ev.id} ev={ev} />
         ))}
       </div>
+
     </section>
   )
 }

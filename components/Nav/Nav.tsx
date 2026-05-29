@@ -18,14 +18,10 @@ export default function Nav() {
 
       <div className={styles.menu}>
         {nav.links.map((item) => (
-          <a key={item.en} href={item.href} className={styles.menuItem}>
+          <span key={item.en} className={styles.menuItem}>
             {item.zh}<span className={styles.en}>{item.en}</span>
-          </a>
+          </span>
         ))}
-        <button className={styles.contactBtn}>
-          <span>{nav.contact.zh}</span>
-          <span className={styles.en}>{nav.contact.en}</span>
-        </button>
       </div>
     </nav>
   )

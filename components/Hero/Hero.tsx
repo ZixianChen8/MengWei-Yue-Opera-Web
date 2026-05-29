@@ -36,7 +36,7 @@ const CLOUD_LAYER_CLASSES = [
 ]
 
 export default function Hero() {
-  const { cloudRefs, wispRefs, figureRef, titleBlockRef, titlePoemRef, scrollHintRef } =
+  const { titleBlockRef, titlePoemRef, setCloudRef, setWispRef } =
     useScrollParallax(CLOUD_LAYERS, WISP_BASE_OPACITIES)
 
   return (
@@ -83,15 +83,15 @@ export default function Hero() {
       {/* Cloud wisps */}
       <div
         className={`${styles.cloudWisp} ${styles.wispA}`}
-        ref={el => { wispRefs.current[0] = el }}
+        ref={el => { setWispRef(0, el) }}
       />
       <div
         className={`${styles.cloudWisp} ${styles.wispB}`}
-        ref={el => { wispRefs.current[1] = el }}
+        ref={el => { setWispRef(1, el) }}
       />
       <div
         className={`${styles.cloudWisp} ${styles.wispC}`}
-        ref={el => { wispRefs.current[2] = el }}
+        ref={el => { setWispRef(2, el) }}
       />
 
 
@@ -101,7 +101,7 @@ export default function Hero() {
           <div
             key={i}
             className={CLOUD_LAYER_CLASSES[i]}
-            ref={el => { cloudRefs.current[i] = el }}
+            ref={el => { setCloudRef(i, el) }}
           >
             <Image
               src={CLOUD_IMAGES[i][0]}

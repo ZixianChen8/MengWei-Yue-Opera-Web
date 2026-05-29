@@ -1,7 +1,13 @@
 .section {
   position: relative;
-  background: var(--cloud);
-  padding: 0 80px 200px;
+  background: linear-gradient(
+    to bottom,
+    var(--paper) 0,
+    rgba(248, 244, 238, 0.74) 90px,
+    var(--cloud) 220px,
+    var(--cloud) 100%
+  );
+  padding: 120px 80px 200px;
   z-index: 5;
   scroll-margin-top: 100px;
 }
@@ -17,7 +23,7 @@
 
 .title {
   font-family: var(--font-chinese-display);
-  font-size: 72px;
+  font-size: 4.75rem;
   letter-spacing: 10px;
   line-height: 1;
 }
@@ -25,7 +31,7 @@
 .title small {
   display: block;
   font-family: var(--font-latin-display);
-  font-size: 14px;
+  font-size: 0.9375rem;
   letter-spacing: .4em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -35,7 +41,7 @@
 
 .aside {
   font-family: var(--font-chinese-body);
-  font-size: 14px;
+  font-size: 0.9375rem;
   line-height: 2;
   color: var(--ink-soft);
   font-weight: 300;
@@ -45,7 +51,7 @@
 
 .aside .en {
   font-family: var(--font-latin-display);
-  font-size: 11px;
+  font-size: 0.8125rem;
   letter-spacing: .4em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -57,7 +63,7 @@
   max-width: 1180px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 48px;
 }
 
@@ -89,7 +95,7 @@
 
 .eNum {
   font-family: var(--font-latin-display);
-  font-size: 13px;
+  font-size: 0.875rem;
   letter-spacing: .4em;
   color: var(--ink-faint);
   transition: .3s;
@@ -97,7 +103,7 @@
 
 .eTag {
   font-family: var(--font-latin-display);
-  font-size: 10px;
+  font-size: 0.75rem;
   letter-spacing: .4em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -117,7 +123,7 @@
   justify-content: space-between;
   padding: 14px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 0.75rem;
   letter-spacing: .2em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -136,26 +142,17 @@
   opacity: .7;
 }
 
-.feature .eImg {
-  aspect-ratio: 1 / 1.25;
-}
-
 .eCn {
   font-family: var(--font-chinese-display);
-  font-size: 32px;
+  font-size: 2.25rem;
   letter-spacing: 6px;
   line-height: 1.15;
   color: var(--ink);
 }
 
-.feature .eCn {
-  font-size: 42px;
-  letter-spacing: 8px;
-}
-
 .eEn {
   font-family: var(--font-latin-display);
-  font-size: 13px;
+  font-size: 0.9375rem;
   letter-spacing: .35em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -167,7 +164,7 @@
   align-items: center;
   gap: 14px;
   font-family: var(--font-latin-display);
-  font-size: 11px;
+  font-size: 0.8125rem;
   letter-spacing: .35em;
   color: var(--ink-soft);
   text-transform: uppercase;
@@ -185,11 +182,53 @@
 
 .eBlurb {
   font-family: var(--font-chinese-body);
-  font-size: 13.5px;
+  font-size: 0.9375rem;
   line-height: 1.9;
   color: var(--ink-soft);
   font-weight: 300;
   text-wrap: pretty;
+}
+
+.viewAllWrap {
+  max-width: 1180px;
+  margin: 64px auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-chinese-body);
+  font-size: 0.9375rem;
+  color: var(--ink-faint);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 3px;
+  transition: color .3s, border-color .3s;
+}
+
+.viewAll:hover {
+  color: var(--seal);
+  border-bottom-color: var(--seal);
+}
+
+.viewAllEn {
+  font-family: var(--font-latin-display);
+  font-size: 0.8125rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+}
+
+.viewAllArrow {
+  font-family: var(--font-latin-display);
+  display: inline-block;
+  transition: transform .3s cubic-bezier(.2, .8, .3, 1);
+}
+
+.viewAll:hover .viewAllArrow {
+  transform: translateX(5px);
 }
 
 /* ── Press-ink click animation ── */

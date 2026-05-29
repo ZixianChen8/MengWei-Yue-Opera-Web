@@ -6,12 +6,14 @@ import { repertoire } from '@/content/home'
 import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import styles from './Repertoire.module.css'
 
+const SCROLL_STEP = 320
+const EASE = 0.12
+
 export default function Repertoire() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const stripRef = useRef<HTMLDivElement>(null)
-  const isDragging = useRef(false)
-  const didDrag = useRef(false)
-  const dragStart = useRef({ x: 0, scrollLeft: 0 })
+  const scrollTarget = useRef(0)
+  const rafId = useRef<number | null>(null)
 
   useEffect(() => {
     if (openIndex === null) return
@@ -20,33 +22,40 @@ export default function Repertoire() {
     return () => document.removeEventListener('keydown', onKey)
   }, [openIndex])
 
-  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!stripRef.current) return
-    isDragging.current = true
-    didDrag.current = false
-    dragStart.current = {
-      x: e.pageX - stripRef.current.offsetLeft,
-      scrollLeft: stripRef.current.scrollLeft,
+  useEffect(() => {
+    return () => { if (rafId.current !== null) cancelAnimationFrame(rafId.current) }
+  }, [])
+
+  const animateScroll = () => {
+    const strip = stripRef.current
+    if (!strip) { rafId.current = null; return }
+    const diff = scrollTarget.current - strip.scrollLeft
+    if (Math.abs(diff) < 0.5) {
+      strip.scrollLeft = scrollTarget.current
+      rafId.current = null
+      return
     }
+    strip.scrollLeft += diff * EASE
+    rafId.current = requestAnimationFrame(animateScroll)
   }
 
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging.current || !stripRef.current) return
-    e.preventDefault()
-    const x = e.pageX - stripRef.current.offsetLeft
-    const dx = x - dragStart.current.x
-    if (Math.abs(dx) > 5) didDrag.current = true
-    stripRef.current.scrollLeft = dragStart.current.scrollLeft - dx
+  const scrollBy = (dir: -1 | 1) => {
+    const strip = stripRef.current
+    if (!strip) return
+    const maxScroll = strip.scrollWidth - strip.clientWidth
+    const current = rafId.current === null ? strip.scrollLeft : scrollTarget.current
+    scrollTarget.current = Math.max(0, Math.min(maxScroll, current + dir * SCROLL_STEP))
+    if (rafId.current === null) animateScroll()
   }
-
-  const stopDrag = () => { isDragging.current = false }
 
   const titleBody = repertoire.title.zh.slice(0, -1)
   const titleLast = repertoire.title.zh.slice(-1)
 
-  // Safe fallback: while openIndex is null the lightbox is hidden,
-  // but we still need a valid work object to avoid conditional Image renders.
-  const openWork = repertoire.works[openIndex ?? 0]
+  // Keep the last opened work stable during the close transition so the
+  // lightbox doesn't flash index 0 while fading out.
+  const lastOpenWork = useRef(repertoire.works[0])
+  if (openIndex !== null) lastOpenWork.current = repertoire.works[openIndex]
+  const openWork = lastOpenWork.current
 
   return (
     <section id="repertoire" className={styles.section}>
@@ -59,20 +68,13 @@ export default function Repertoire() {
       </div>
 
       <div className={styles.filmstripOuter}>
-        <div
-          ref={stripRef}
-          className={styles.filmstripWrap}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={stopDrag}
-          onMouseLeave={stopDrag}
-        >
+        <div ref={stripRef} className={styles.filmstripWrap}>
           <div className={styles.filmstrip}>
             {repertoire.works.map((work, i) => (
               <div
                 key={`${work.year}-${work.zh.join('')}`}
                 className={styles.filmCard}
-                onClick={() => { if (!didDrag.current) setOpenIndex(i) }}
+                onClick={() => setOpenIndex(i)}
               >
                 <Image
                   src={work.image}
@@ -100,7 +102,29 @@ export default function Repertoire() {
         </div>
       </div>
 
-      <p className={styles.scrollHint}>{repertoire.hint}</p>
+      <div className={styles.controls}>
+        <p className={styles.scrollHint}>{repertoire.hint}</p>
+        <div className={styles.arrowGroup}>
+          <button
+            className={styles.arrowBtn}
+            onClick={() => scrollBy(-1)}
+            aria-label="Scroll gallery left"
+          >
+            <svg viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button
+            className={styles.arrowBtn}
+            onClick={() => scrollBy(1)}
+            aria-label="Scroll gallery right"
+          >
+            <svg viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
 
       {/* Lightbox — always rendered, toggled via .lightboxOpen */}
       <div

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(Test-Path \"c:\\\\Users\\\\bluch\\\\Documents\\\\GitHub\\\\MengWei-Yue-Opera-Web\\\\components\\\\Season\\\\EventCard.tsx\")",
-      "Bash(ls -la \"c:\\\\\\\\Users\\\\\\\\bluch\\\\\\\\Documents\\\\\\\\GitHub\\\\\\\\MengWei-Yue-Opera-Web\\\\\\\\components\\\\\\\\Season\\\\\\\\\")"
+      "Bash(ls -la \"c:\\\\\\\\Users\\\\\\\\bluch\\\\\\\\Documents\\\\\\\\GitHub\\\\\\\\MengWei-Yue-Opera-Web\\\\\\\\components\\\\\\\\Season\\\\\\\\\")",
+      "Bash(npx tsc *)"
     ]
   }
 }

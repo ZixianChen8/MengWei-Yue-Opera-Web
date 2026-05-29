@@ -1,6 +1,12 @@
 .section {
   position: relative;
-  background: var(--cloud);
+  background: linear-gradient(
+    to bottom,
+    var(--cloud) 0,
+    var(--cloud) calc(100% - 260px),
+    rgba(248, 244, 238, 0.58) calc(100% - 120px),
+    var(--paper) 100%
+  );
   padding: 80px 80px 200px;
   z-index: 5;
   margin-top: -1px;
@@ -30,7 +36,7 @@
 
 .title {
   font-family: var(--font-chinese-display);
-  font-size: 68px;
+  font-size: 4.5rem;
   color: var(--ink);
   line-height: 1.1;
   letter-spacing: 8px;
@@ -39,7 +45,7 @@
 .title small {
   display: block;
   font-family: var(--font-latin-display);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   letter-spacing: .4em;
   color: var(--ink-faint);
@@ -49,7 +55,7 @@
 
 .body {
   font-family: var(--font-chinese-body);
-  font-size: 15px;
+  font-size: 1.0625rem;
   line-height: 2;
   color: var(--ink-soft);
   text-wrap: pretty;
@@ -71,14 +77,14 @@
 
 .k {
   font-family: var(--font-chinese-display);
-  font-size: 30px;
+  font-size: 2rem;
   color: var(--ink);
   letter-spacing: 2px;
 }
 
 .v {
   font-family: var(--font-latin-display);
-  font-size: 11px;
+  font-size: 0.8125rem;
   letter-spacing: .32em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -90,7 +96,7 @@
   padding-left: 24px;
   border-left: 1px solid var(--seal);
   font-family: var(--font-chinese-body);
-  font-size: 17px;
+  font-size: 1.125rem;
   line-height: 1.9;
   color: var(--ink);
   font-weight: 300;
@@ -100,7 +106,7 @@
 .attr {
   display: block;
   font-family: var(--font-latin-display);
-  font-size: 11px;
+  font-size: 0.8125rem;
   letter-spacing: .4em;
   color: var(--ink-faint);
   text-transform: uppercase;

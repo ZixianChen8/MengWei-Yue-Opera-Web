@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { studio } from '@/content/home'
 import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import styles from './Studio.module.css'
@@ -34,10 +35,10 @@ export default function Studio() {
             ))}
           </div>
 
-          <button className={styles.cta}>
+          <Link href={studio.cta.href} className={styles.cta}>
             {studio.cta.zh}
             <span className={styles.ctaEn}>{studio.cta.en}</span>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

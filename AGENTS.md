@@ -72,7 +72,7 @@ When adding a new section, export its content from `content/home.ts` and add the
 
 ## Design System
 
-`design-system/MASTER.md` is the canonical reference. The actual CSS tokens in `globals.css` are the source of truth — some names differ from MASTER.md (e.g. `--paper` instead of `--color-bg`, `--seal` instead of `--color-vermillion`).
+`design-system/MASTER.md` is the canonical reference. The mobile design system is [`design-system/mobile-design-system.md`](design-system/mobile-design-system.md). The actual CSS tokens in `globals.css` are the source of truth — some names differ from MASTER.md (e.g. `--paper` instead of `--color-bg`, `--seal` instead of `--color-vermillion`).
 
 **Aesthetic:** Chinese ink-wash (国风). Key constraints from the design system:
 

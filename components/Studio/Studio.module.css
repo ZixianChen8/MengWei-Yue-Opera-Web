@@ -33,7 +33,7 @@
 
 .title {
   font-family: var(--font-chinese-display);
-  font-size: 64px;
+  font-size: 4.25rem;
   letter-spacing: 8px;
   color: var(--ink);
   line-height: 1.1;
@@ -42,7 +42,7 @@
 .title small {
   display: block;
   font-family: var(--font-latin-display);
-  font-size: 16px;
+  font-size: 1.0625rem;
   font-weight: 400;
   letter-spacing: .4em;
   color: var(--ink-faint);
@@ -52,7 +52,7 @@
 
 .body {
   font-family: var(--font-chinese-body);
-  font-size: 15px;
+  font-size: 1.0625rem;
   line-height: 2;
   color: var(--ink-soft);
   font-weight: 300;
@@ -85,14 +85,14 @@
 
 .lvl {
   font-family: var(--font-chinese-display);
-  font-size: 22px;
+  font-size: 1.5rem;
   letter-spacing: 4px;
   color: var(--ink);
 }
 
 .en {
   font-family: var(--font-latin-display);
-  font-size: 11px;
+  font-size: 0.8125rem;
   letter-spacing: .4em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -103,7 +103,7 @@
 
 .when {
   font-family: var(--font-latin-display);
-  font-size: 11px;
+  font-size: 0.8125rem;
   letter-spacing: .32em;
   color: var(--ink-soft);
   text-transform: uppercase;
@@ -118,9 +118,10 @@
   border: 1px solid var(--ink);
   border-radius: 99px;
   font-family: var(--font-chinese-body);
-  font-size: 13px;
+  font-size: 0.9375rem;
   letter-spacing: 5px;
   color: var(--ink);
+  text-decoration: none;
   cursor: pointer;
   transition: .3s;
   background: transparent;
@@ -128,7 +129,7 @@
 
 .ctaEn {
   font-family: var(--font-latin-display);
-  font-size: 10px;
+  font-size: 0.75rem;
   letter-spacing: .4em;
   text-transform: uppercase;
   color: var(--ink-faint);

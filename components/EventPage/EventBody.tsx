@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import { eventPage } from '@/content/home'
 import styles from './EventPage.module.css'
@@ -23,9 +24,9 @@ export default function EventBody({ event }: EventBodyProps) {
   return (
     <div className={styles.body}>
       <div className={styles.container}>
-        <a href="/#season" className={styles.backLink}>
+        <Link href="/#season" className={styles.backLink}>
           ← {eventPage.backLink.zh} · {eventPage.backLink.en}
-        </a>
+        </Link>
 
         <p className={styles.description}>{event.description}</p>
 

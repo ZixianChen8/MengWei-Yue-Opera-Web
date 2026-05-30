@@ -51,7 +51,6 @@
     }
   },
   "overture": {
-    "eyebrow": "Overture · 序",
     "title": {
       "zh": [
         "越音流长",
@@ -83,7 +82,6 @@
     ]
   },
   "season": {
-    "eyebrow": "近期活动 · Upcoming",
     "title": {
       "zh": "下一场",
       "en": "What's next"
@@ -261,7 +259,6 @@
     ]
   },
   "studio": {
-    "eyebrow": "Studio · 传习",
     "title": {
       "zh": "传薪·习韵",
       "en": "Pass the Torch, Learn the Melody"
@@ -294,7 +291,6 @@
     }
   },
   "repertoire": {
-    "eyebrow": "Repertoire · 戏目",
     "title": {
       "zh": "往年活动",
       "en": "Past Events"
@@ -692,7 +688,6 @@
         "red": "海",
         "after": "外"
       },
-      "eyebrow": "工作室介绍",
       "heading": {
         "zh": "一所 · 一艺 · 一桥",
         "en": "One studio, one art, one bridge"
@@ -709,7 +704,6 @@
       ]
     },
     "contact": {
-      "eyebrow": "联络本所",
       "heading": {
         "zh1": "来信",
         "zh2": "问候",
@@ -796,6 +790,14 @@
         "submit": {
           "zh": "寄出",
           "en": "Send Letter"
+        },
+        "sending": {
+          "zh": "寄送中",
+          "en": "Sending"
+        },
+        "error": {
+          "zh": "来信未能寄出，请稍后再试。",
+          "en": "Your letter could not be sent. Please try again."
         },
         "sent": {
           "stamp": "收",

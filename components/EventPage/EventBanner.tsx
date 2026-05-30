@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import styles from './EventPage.module.css'
 import type { season } from '@/content/home'
 
@@ -22,7 +21,6 @@ export default function EventBanner({ event }: EventBannerProps) {
       />
       <div className={styles.bannerOverlay} />
       <div className={styles.bannerText}>
-        <Eyebrow label={event.tag} />
         <h1 className={styles.bannerTitle}>
           {event.titleZh.join('')}
         </h1>

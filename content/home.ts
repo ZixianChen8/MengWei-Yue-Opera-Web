@@ -27,7 +27,6 @@ type Hero = {
 }
 
 type Overture = {
-  eyebrow: string
   title: { zh: string[]; en: string }
   quote: { text: string; attr: string }
   body: string[]
@@ -59,14 +58,12 @@ export type SeasonEvent = {
 }
 
 type Season = {
-  eyebrow: string
   title: { zh: string; en: string }
   aside: { zh: string; en: string }
   events: SeasonEvent[]
 }
 
 type Studio = {
-  eyebrow: string
   title: { zh: string; en: string }
   body: string[]
   program: { level: string; en: string; duration: string }[]
@@ -76,7 +73,6 @@ type Studio = {
 export type RepertoireWork = { year: string; zh: string[]; en: string; image: string }
 
 type Repertoire = {
-  eyebrow: string
   title: { zh: string; en: string }
   works: RepertoireWork[]
   hint: string
@@ -132,12 +128,10 @@ type AboutPage = {
   }
   bio: {
     vertZh: { before: string; red: string; after: string }
-    eyebrow: string
     heading: { zh: string; en: string }
     paragraphs: { zh: string; en: string }[]
   }
   contact: {
-    eyebrow: string
     heading: { zh1: string; zh2: string; en: string }
     lede: { zh: string; en: string }
     channels: { zh: string; val: string; sub: string }[]
@@ -154,6 +148,8 @@ type AboutPage = {
       }
       privacy: string
       submit: { zh: string; en: string }
+      sending: { zh: string; en: string }
+      error: { zh: string; en: string }
       sent: { stamp: string; zh: string; en: string }
     }
   }

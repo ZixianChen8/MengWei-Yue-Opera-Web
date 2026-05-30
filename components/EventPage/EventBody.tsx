@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import { eventPage } from '@/content/home'
 import styles from './EventPage.module.css'
 import type { season } from '@/content/home'
@@ -43,8 +42,6 @@ export default function EventBody({ event }: EventBodyProps) {
         </dl>
 
         <div className={styles.signupCard}>
-          <Eyebrow label={`${eventPage.signup.zh} · ${eventPage.signup.en}`} />
-
           <a
             href={event.formUrl}
             target="_blank"

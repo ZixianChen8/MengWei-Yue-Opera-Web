@@ -1,5 +1,4 @@
 import { overture } from '@/content/home'
-import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import styles from './Overture.module.css'
 
 export default function Overture() {
@@ -7,7 +6,6 @@ export default function Overture() {
     <section id="overture" className={styles.section}>
       <div className={styles.inner}>
         <div>
-          <Eyebrow label={overture.eyebrow} />
           <h2 className={styles.title}>
             {overture.title.zh[0]}<br />{overture.title.zh[1]}
             <small>{overture.title.en}</small>

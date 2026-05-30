@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { studio } from '@/content/home'
-import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import styles from './Studio.module.css'
 
 export default function Studio() {
@@ -17,7 +16,6 @@ export default function Studio() {
       />
       <div className={styles.inner}>
         <div>
-          <Eyebrow label={studio.eyebrow} />
           <h2 className={styles.title}>
             {studio.title.zh}<small>{studio.title.en}</small>
           </h2>

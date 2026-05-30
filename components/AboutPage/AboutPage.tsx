@@ -8,10 +8,45 @@ const { bio, contact } = aboutPage
 
 export default function AboutPage() {
   const [isSent, setIsSent] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState(false)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setIsSent(true)
+    const form = e.currentTarget
+
+    if (!form.reportValidity()) return
+
+    setIsSubmitting(true)
+    setError(false)
+    setIsSent(false)
+
+    const formData = new FormData(form)
+    const payload = {
+      name: String(formData.get('name') ?? ''),
+      email: String(formData.get('email') ?? ''),
+      subject: String(formData.get('subject') ?? ''),
+      phone: String(formData.get('phone') ?? ''),
+      message: String(formData.get('message') ?? ''),
+      company: String(formData.get('company') ?? ''),
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok) throw new Error('Contact form submission failed')
+
+      form.reset()
+      setIsSent(true)
+    } catch {
+      setError(true)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -28,10 +63,6 @@ export default function AboutPage() {
             </div>
           </div>
           <div className={styles.bioCol}>
-            <div className={styles.eyebrow}>
-              <span className={styles.dash} />
-              <span>{bio.eyebrow}</span>
-            </div>
             <h2 className={styles.bioHeading}>
               {bio.heading.zh}
               <small>{bio.heading.en}</small>
@@ -52,10 +83,6 @@ export default function AboutPage() {
       <section className={styles.contact}>
         <div className={styles.contactInner}>
           <div className={styles.contactInfo}>
-            <div className={styles.eyebrow}>
-              <span className={styles.dash} />
-              <span>{contact.eyebrow}</span>
-            </div>
             <h2 className={styles.contactHeading}>
               {contact.heading.zh1}<br />{contact.heading.zh2}
               <small>{contact.heading.en}</small>
@@ -64,23 +91,12 @@ export default function AboutPage() {
               {contact.lede.zh}
               <span className={styles.ledeEn}>{contact.lede.en}</span>
             </p>
-            <div className={styles.channels}>
-              {contact.channels.map((ch, i) => (
-                <div key={i} className={styles.ch}>
-                  <div className={styles.chLbl}>{ch.zh}</div>
-                  <div className={styles.chVal}>
-                    {ch.val}
-                    <span className={styles.chSub}>{ch.sub}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+
           </div>
 
           <form
             className={`${styles.formWrap}${isSent ? ` ${styles.isSent}` : ''}`}
             onSubmit={handleSubmit}
-            noValidate
           >
             <div className={styles.sealOrnament}>{contact.form.sealGlyph}</div>
             <p className={styles.formIntro}>{contact.form.intro}</p>
@@ -138,6 +154,17 @@ export default function AboutPage() {
               </div>
             </div>
 
+            <div className={styles.trap} aria-hidden="true">
+              <label htmlFor="ap-company">Company</label>
+              <input
+                id="ap-company"
+                name="company"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div className={styles.field}>
               <label className={styles.fieldLabel} htmlFor="ap-msg">
                 <span className={styles.fieldCn}>
@@ -157,12 +184,21 @@ export default function AboutPage() {
                 <input type="checkbox" required className={styles.privacyCheck} />
                 <span>{contact.form.privacy}</span>
               </label>
-              <button className={styles.submitBtn} type="submit">
-                <span>{contact.form.submit.zh}</span>
-                <span className={styles.submitEn}>{contact.form.submit.en}</span>
+              <button className={styles.submitBtn} type="submit" disabled={isSubmitting}>
+                <span>{isSubmitting ? contact.form.sending.zh : contact.form.submit.zh}</span>
+                <span className={styles.submitEn}>
+                  {isSubmitting ? contact.form.sending.en : contact.form.submit.en}
+                </span>
                 <span className={styles.submitArrow}>→</span>
               </button>
             </div>
+
+            {error ? (
+              <div className={styles.errorMsg} role="alert">
+                {contact.form.error.zh}
+                <span className={styles.sentEn}>{contact.form.error.en}</span>
+              </div>
+            ) : null}
 
             <div className={styles.sentMsg}>
               <span className={styles.stamp}>{contact.form.sent.stamp}</span>

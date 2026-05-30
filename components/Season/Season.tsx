@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { season } from '@/content/home'
-import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import EventCard from './EventCard'
 import styles from './Season.module.css'
 
@@ -9,7 +8,6 @@ export default function Season() {
     <section id="season" className={styles.section}>
       <div className={styles.head}>
         <div>
-          <Eyebrow label={season.eyebrow} />
           <h2 className={styles.title}>
             {season.title.zh}<small>{season.title.en}</small>
           </h2>

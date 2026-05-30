@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { repertoire } from '@/content/home'
-import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import styles from './Repertoire.module.css'
 
 const SCROLL_STEP = 320
@@ -62,7 +61,6 @@ export default function Repertoire() {
   return (
     <section id="repertoire" className={styles.section}>
       <div className={styles.head}>
-        <Eyebrow label={repertoire.eyebrow} />
         <h2 className={styles.title}>
           {titleBody}<span className={styles.titleRed}>{titleLast}</span>
         </h2>

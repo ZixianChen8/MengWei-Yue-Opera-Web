@@ -1,8 +1,4 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
-import Eyebrow from '@/components/Eyebrow/Eyebrow'
 import { season, eventsListingPage } from '@/content/home'
 import styles from './EventsListing.module.css'
 
@@ -15,8 +11,7 @@ function statusClass(type: SeasonEvent['statusType']) {
 }
 
 export default function EventsListing() {
-  const [activeYear, setActiveYear] = useState(eventsListingPage.currentYear)
-  const { header, years, months, archive } = eventsListingPage
+  const { header, years, months, archive, currentYear } = eventsListingPage
 
   return (
     <>
@@ -41,13 +36,12 @@ export default function EventsListing() {
             <div className={styles.yearBlock}>
               <div className={styles.yearToggle}>
                 {years.map((y) => (
-                  <button
+                  <span
                     key={y}
-                    className={y === activeYear ? styles.yearBtnOn : styles.yearBtn}
-                    onClick={() => setActiveYear(y)}
+                    className={y === currentYear ? styles.yearBtnOn : styles.yearBtn}
                   >
                     {y}
-                  </button>
+                  </span>
                 ))}
               </div>
             </div>
@@ -130,7 +124,6 @@ export default function EventsListing() {
         <div className={styles.pastInner}>
           <div className={styles.pastHead}>
             <div>
-              <Eyebrow label="Archive · 旧迹" />
               <h2 className={styles.pastTitle}>
                 往迹<small>Past performances since 2018</small>
               </h2>

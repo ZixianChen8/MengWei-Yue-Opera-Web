@@ -95,18 +95,12 @@
   background: transparent;
   border: 1px solid var(--border);
   padding: 6px 10px;
-  cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
   color: var(--ink-faint);
 }
 
 .yearBtnOn {
   color: var(--ink);
   border-color: var(--ink);
-}
-
-.yearBtn:hover {
-  color: var(--ink);
 }
 
 .months {
@@ -500,15 +494,10 @@
   align-items: baseline;
   padding: 18px 0;
   border-bottom: 1px solid var(--border-mid);
-  cursor: pointer;
 }
 
 .archRow:last-child {
   border-bottom: none;
-}
-
-.archRow:hover .archCn {
-  color: var(--seal);
 }
 
 .archNo {
@@ -524,7 +513,6 @@
   font-size: 22px;
   letter-spacing: 5px;
   color: var(--ink);
-  transition: color 0.2s;
 }
 
 /* ── Responsive ──────────────────────────────────────────── */

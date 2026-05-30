@@ -286,11 +286,82 @@
   accent-color: var(--seal);
 }
 
+.collapsible {
+  width: 100%;
+}
+
+.collapsibleHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.collapseToggle {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.collapseToggle:hover .collapseTitle {
+  color: var(--seal);
+}
+
+.collapseIcon {
+  width: 1.45rem;
+  height: 1.45rem;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-deep);
+  border-radius: 2px;
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1;
+}
+
+.collapseTitle {
+  display: block;
+  font-family: var(--font-latin-display);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.collapseDetail {
+  display: block;
+  margin-top: 0.18rem;
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.collapsibleBody {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
 .group {
   border: 1px solid var(--border);
   border-left: 3px solid var(--border-deep);
   border-radius: 2px;
-  padding: 1rem 1rem 0.4rem;
+  padding: 0.85rem 1rem;
   margin-bottom: 1.1rem;
   background: rgba(255, 255, 255, 0.4); /* WHY: lift nested groups slightly off the parchment for hierarchy */
 }
@@ -307,7 +378,7 @@
 .arrayItem {
   border: 1px solid var(--border);
   border-radius: 2px;
-  padding: 0.9rem 1rem 0.3rem;
+  padding: 0.85rem 1rem;
   margin-bottom: 0.9rem;
   background: var(--cloud);
 }

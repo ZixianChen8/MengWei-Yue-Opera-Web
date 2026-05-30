@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, type ReactNode } from 'react'
 import ImageUpload from './ImageUpload'
 import styles from './admin.module.css'
 
@@ -32,6 +33,51 @@ function humanize(key: string): string {
     .replace(/^\w/, (c) => c.toUpperCase())
 }
 
+function labelFromValue(value: JsonValue): string | null {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null
+  const record = value as { [key: string]: JsonValue }
+  const keys = ['titleEn', 'title', 'label', 'name', 'date', 'zh', 'en', 'id']
+
+  for (const key of keys) {
+    const candidate = record[key]
+    if (typeof candidate === 'string' && candidate.trim()) return candidate
+  }
+
+  return null
+}
+
+type CollapsibleProps = {
+  title: string
+  detail?: string
+  controls?: ReactNode
+  children: ReactNode
+}
+
+function Collapsible({ title, detail, controls, children }: CollapsibleProps) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className={styles.collapsible}>
+      <div className={styles.collapsibleHead}>
+        <button
+          type="button"
+          className={styles.collapseToggle}
+          aria-expanded={open}
+          onClick={() => setOpen((current) => !current)}
+        >
+          <span className={styles.collapseIcon}>{open ? '-' : '+'}</span>
+          <span>
+            <span className={styles.collapseTitle}>{title}</span>
+            {detail && <span className={styles.collapseDetail}>{detail}</span>}
+          </span>
+        </button>
+        {controls}
+      </div>
+      {open && <div className={styles.collapsibleBody}>{children}</div>}
+    </div>
+  )
+}
+
 // Build an empty value with the same shape as a sample (for "add item").
 function blankLike(sample: JsonValue): JsonValue {
   if (Array.isArray(sample)) return []
@@ -60,12 +106,10 @@ type NodeProps = {
 }
 
 function ValueNode({ value, keyName, onChange }: NodeProps) {
-  // ── Image field ──
   if (typeof value === 'string' && isImageKey(keyName)) {
     return <ImageUpload value={value} onChange={onChange} />
   }
 
-  // ── Enum dropdown ──
   if (typeof value === 'string' && ENUM_OPTIONS[keyName]) {
     const options = ENUM_OPTIONS[keyName]
     const list = options.includes(value) ? options : [value, ...options]
@@ -80,7 +124,6 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
     )
   }
 
-  // ── String ──
   if (typeof value === 'string') {
     const multiline = value.length > 60 || value.includes('\n')
     return multiline ? (
@@ -90,7 +133,6 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
     )
   }
 
-  // ── Number ──
   if (typeof value === 'number') {
     return (
       <input
@@ -102,7 +144,6 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
     )
   }
 
-  // ── Boolean ──
   if (typeof value === 'boolean') {
     return (
       <label className={styles.checkboxRow}>
@@ -112,7 +153,6 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
     )
   }
 
-  // ── Array ──
   if (Array.isArray(value)) {
     const items = value
     const update = (i: number, next: JsonValue) => {
@@ -138,35 +178,45 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
         {items.length === 0 && <div className={styles.arrayEmpty}>No items yet.</div>}
         {items.map((item, i) => {
           const primitive = typeof item !== 'object' || item === null
+          const detail = labelFromValue(item)
+
           return (
             <div key={i} className={styles.arrayItem}>
-              <div className={styles.arrayHead}>
-                <span className={styles.arrayIndex}>
-                  {humanize(keyName)} · {i + 1}
-                </span>
-                <div className={styles.arrayControls}>
-                  <button type="button" className={styles.iconBtn} onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">
-                    ↑
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.iconBtn}
-                    onClick={() => move(i, 1)}
-                    disabled={i === items.length - 1}
-                    aria-label="Move down"
-                  >
-                    ↓
-                  </button>
-                  <button type="button" className={styles.iconBtn} onClick={() => remove(i)} aria-label="Remove">
-                    ✕
-                  </button>
-                </div>
-              </div>
-              {primitive ? (
-                <ValueNode value={item} keyName={keyName} onChange={(next) => update(i, next)} />
-              ) : (
-                <ObjectNode value={item as { [k: string]: JsonValue }} onChange={(next) => update(i, next)} />
-              )}
+              <Collapsible
+                title={`${humanize(keyName)} ${i + 1}`}
+                detail={detail ?? undefined}
+                controls={
+                  <div className={styles.arrayControls}>
+                    <button
+                      type="button"
+                      className={styles.iconBtn}
+                      onClick={() => move(i, -1)}
+                      disabled={i === 0}
+                      aria-label="Move up"
+                    >
+                      ^
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.iconBtn}
+                      onClick={() => move(i, 1)}
+                      disabled={i === items.length - 1}
+                      aria-label="Move down"
+                    >
+                      v
+                    </button>
+                    <button type="button" className={styles.iconBtn} onClick={() => remove(i)} aria-label="Remove">
+                      x
+                    </button>
+                  </div>
+                }
+              >
+                {primitive ? (
+                  <ValueNode value={item} keyName={keyName} onChange={(next) => update(i, next)} />
+                ) : (
+                  <ObjectNode value={item as { [k: string]: JsonValue }} onChange={(next) => update(i, next)} />
+                )}
+              </Collapsible>
             </div>
           )
         })}
@@ -177,12 +227,10 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
     )
   }
 
-  // ── Object ──
   if (value && typeof value === 'object') {
     return <ObjectNode value={value as { [k: string]: JsonValue }} onChange={onChange} />
   }
 
-  // ── null / fallback ──
   return (
     <input
       className={styles.input}
@@ -204,14 +252,17 @@ function ObjectNode({ value, onChange }: ObjectNodeProps) {
       {Object.entries(value).map(([k, v]) => {
         const nested = v !== null && typeof v === 'object'
         const update = (next: JsonValue) => onChange({ ...value, [k]: next })
+
         if (nested) {
           return (
             <div key={k} className={styles.group}>
-              <div className={styles.groupLabel}>{humanize(k)}</div>
-              <ValueNode value={v} keyName={k} onChange={update} />
+              <Collapsible title={humanize(k)} detail={labelFromValue(v) ?? undefined}>
+                <ValueNode value={v} keyName={k} onChange={update} />
+              </Collapsible>
             </div>
           )
         }
+
         return (
           <div key={k} className={styles.field}>
             <label className={styles.fieldLabel}>{humanize(k)}</label>
@@ -233,5 +284,6 @@ export default function SectionForm({ value, onChange }: Props) {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) {
     return <ValueNode value={value} keyName="value" onChange={onChange} />
   }
+
   return <ObjectNode value={value as { [k: string]: JsonValue }} onChange={(next) => onChange(next)} />
 }

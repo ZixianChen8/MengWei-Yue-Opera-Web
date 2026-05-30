@@ -14,7 +14,7 @@ export default function About() {
     <>
       <SmoothScroll />
       <div style={{ position: 'relative' }}>
-        <Nav />
+        <Nav variant="horizontal" />
         <AboutPage />
       </div>
       <Footer />

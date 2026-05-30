@@ -32,7 +32,7 @@ export default async function EventPage(
   return (
     <>
       <div style={{ position: 'relative' }}>
-        <Nav />
+        <Nav variant="horizontal" />
         <EventBanner event={event} />
       </div>
       <main>

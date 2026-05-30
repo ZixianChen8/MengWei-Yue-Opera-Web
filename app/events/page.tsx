@@ -14,7 +14,7 @@ export default function EventsPage() {
     <>
       <SmoothScroll />
       <div style={{ position: 'relative' }}>
-        <Nav />
+        <Nav variant="horizontal" />
         <EventsListing />
       </div>
       <Footer />

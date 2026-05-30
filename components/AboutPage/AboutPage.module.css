@@ -479,38 +479,52 @@
 .submitBtn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
+  padding: 14px 26px;
+  border: 1px solid var(--ink);
+  border-radius: 99px;
   font-family: var(--font-chinese-body);
-  font-size: 0.9375rem;
-  color: var(--ink-faint);
-  background: none;
-  border: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 3px;
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: var(--ink);
   cursor: pointer;
-  transition: color .3s, border-color .3s;
+  transition: background 0.3s, color 0.3s;
+  background: transparent;
+  white-space: nowrap;
 }
 
 .submitEn {
   font-family: var(--font-latin-display);
-  font-size: 0.8125rem;
-  letter-spacing: .4em;
+  font-size: 10px;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
+  color: var(--ink-faint);
+  border-left: 1px solid var(--border);
+  padding-left: 14px;
+  transition: color 0.3s, border-color 0.3s;
 }
 
 .submitArrow {
   font-family: var(--font-latin-display);
-  display: inline-block;
-  transition: transform .3s cubic-bezier(.2, .8, .3, 1);
+  font-size: 14px;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+  transition: transform 0.3s, color 0.3s;
 }
 
 .submitBtn:hover {
-  color: var(--seal);
-  border-bottom-color: var(--seal);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.submitBtn:hover .submitEn {
+  color: var(--paper);
+  border-left-color: rgba(255, 255, 255, 0.3);
 }
 
 .submitBtn:hover .submitArrow {
-  transform: translateX(5px);
+  transform: translateX(4px);
+  color: var(--paper);
 }
 
 /* Sent state */

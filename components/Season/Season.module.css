@@ -199,36 +199,49 @@
 .viewAll {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 18px;
+  padding: 20px 34px;
+  border: 1px solid var(--ink);
+  border-radius: 99px;
   font-family: var(--font-chinese-body);
-  font-size: 0.9375rem;
-  color: var(--ink-faint);
+  font-size: 19px;
+  color: var(--ink);
+  background: transparent;
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 3px;
-  transition: color .3s, border-color .3s;
+  transition: background 0.3s, color 0.3s;
 }
 
 .viewAll:hover {
-  color: var(--seal);
-  border-bottom-color: var(--seal);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .viewAllEn {
   font-family: var(--font-latin-display);
-  font-size: 0.8125rem;
-  letter-spacing: .4em;
+  font-size: 12px;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
+  color: var(--ink-faint);
+  border-left: 1px solid var(--border);
+  padding-left: 16px;
+  transition: color 0.3s;
+}
+
+.viewAll:hover .viewAllEn {
+  color: var(--paper);
+  border-left-color: rgba(255, 255, 255, 0.3);
 }
 
 .viewAllArrow {
   font-family: var(--font-latin-display);
-  display: inline-block;
-  transition: transform .3s cubic-bezier(.2, .8, .3, 1);
+  font-size: 20px;
+  color: var(--ink-soft);
+  transition: transform 0.3s, color 0.3s;
 }
 
 .viewAll:hover .viewAllArrow {
-  transform: translateX(5px);
+  transform: translateX(4px);
+  color: var(--paper);
 }
 
 /* ── Press-ink click animation ── */

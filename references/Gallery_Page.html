@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>剧照 · Gallery — Meng Wei Yue Opera Studio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:       oklch(0.975 0.008 80);
+    --paper-deep:  oklch(0.955 0.010 75);
+    --paper-dim:   oklch(0.935 0.011 70);
+    --ink:         oklch(0.22 0.012 50);
+    --ink-soft:    oklch(0.42 0.012 50);
+    --ink-faint:   oklch(0.62 0.010 50);
+    --seal:        oklch(0.48 0.16 30);
+    --seal-deep:   oklch(0.40 0.16 30);
+    --rule:        oklch(0.82 0.01 70);
+    --rule-soft:   oklch(0.88 0.01 70);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink);font-family:"Noto Serif SC",serif;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+
+  /* === NAV (matches About Page) === */
+  .nav{
+    position:sticky;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:flex-start;justify-content:space-between;
+    padding:26px 56px; background:var(--paper);
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .brand-mark{
+    font-family:"Ma Shan Zheng",serif;font-size:26px;color:var(--ink);
+    line-height:1.05;letter-spacing:3px;
+  }
+  .brand-mark .accent{color:var(--seal)}
+  .brand-sub{font-family:"Cormorant Garamond",serif;font-size:10px;letter-spacing:.34em;color:var(--ink-faint);text-transform:uppercase;margin-top:6px}
+  .menu{display:flex;align-items:flex-start;gap:34px}
+  .menu-item{
+    writing-mode:vertical-rl;text-orientation:upright;
+    font-family:"Noto Serif SC",serif;font-weight:500;font-size:13px;letter-spacing:6px;
+    color:var(--ink);line-height:1;cursor:pointer;transition:color .25s;
+    display:flex;gap:8px;align-items:flex-start;text-decoration:none;
+  }
+  .menu-item:hover{color:var(--seal)}
+  .menu-item.active{color:var(--seal)}
+  .menu-item .en{
+    writing-mode:vertical-rl;text-orientation:mixed;
+    font-family:"Cormorant Garamond",serif;font-size:9.5px;letter-spacing:.3em;
+    color:var(--ink-faint);text-transform:uppercase;font-weight:400;
+  }
+  .contact-btn{
+    width:52px;height:52px;border:1px solid var(--ink);border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    font-family:"Noto Serif SC",serif;font-size:11px;letter-spacing:2px;
+    cursor:pointer;transition:.25s;color:var(--ink);background:transparent;
+  }
+  .contact-btn:hover{background:var(--ink);color:var(--paper)}
+  .contact-btn .en{font-family:"Cormorant Garamond",serif;font-size:7px;letter-spacing:.2em}
+
+  .eyebrow{
+    display:flex;align-items:center;gap:14px;color:var(--seal);
+    font-family:"Cormorant Garamond",serif;font-size:12px;letter-spacing:.42em;text-transform:uppercase;
+  }
+  .eyebrow .dash{width:36px;height:1px;background:var(--seal)}
+
+  /* === PAGE HEADER (matches About Page) === */
+  .page-head{
+    position:relative;padding:120px 80px 90px;background:var(--paper);
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .ph-inner{
+    max-width:1180px;margin:0 auto;display:grid;
+    grid-template-columns:auto 1fr; gap:80px;align-items:end;
+  }
+  .ph-title{display:flex;align-items:flex-start;gap:24px}
+  .ph-chars{
+    writing-mode:vertical-rl;text-orientation:upright;
+    font-family:"Ma Shan Zheng",serif;font-size:84px;line-height:.95;
+    color:var(--ink);letter-spacing:14px;
+  }
+  .ph-chars .red{color:var(--seal)}
+  .ph-meta{
+    writing-mode:vertical-rl;
+    font-family:"Cormorant Garamond",serif;font-size:11px;letter-spacing:.42em;
+    color:var(--ink-faint);text-transform:uppercase;
+    border-right:1px solid var(--rule);padding-right:14px;
+    height:280px;display:flex;align-items:center;
+  }
+  .ph-aside{
+    padding-bottom:18px;display:flex;flex-direction:column;gap:24px;
+    max-width:480px;justify-self:end;
+  }
+  .ph-aside .en-title{
+    font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:400;
+    line-height:1.15;color:var(--ink);font-style:italic;letter-spacing:.02em;
+  }
+  .ph-aside .crumbs{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.32em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .ph-aside .crumbs b{color:var(--ink);font-weight:400}
+
+  /* === FILTER RAIL === */
+  .filters{
+    position:sticky;top:0;z-index:40;background:var(--paper);
+    border-bottom:1px solid var(--rule-soft);
+    padding:0 80px;
+  }
+  .filters-inner{
+    max-width:1180px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:40px;
+    padding:22px 0;
+  }
+  .filters .count{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.3em;
+    color:var(--ink-faint);text-transform:uppercase;white-space:nowrap;
+  }
+  .filters .count b{color:var(--seal);font-weight:400}
+  .filter-set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+  .chip{
+    display:inline-flex;align-items:baseline;gap:8px;
+    padding:8px 16px;border:1px solid var(--rule);border-radius:99px;
+    background:transparent;cursor:pointer;transition:.25s;
+    font-family:"Ma Shan Zheng",serif;font-size:15px;letter-spacing:3px;color:var(--ink-soft);
+  }
+  .chip .en{
+    font-family:"Cormorant Garamond",serif;font-size:9.5px;letter-spacing:.32em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .chip:hover{border-color:var(--ink-faint);color:var(--ink)}
+  .chip.active{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .chip.active .en{color:var(--paper);opacity:.7}
+
+  /* === GALLERY === */
+  .gallery-wrap{padding:64px 80px 40px;background:var(--paper)}
+  .gallery{
+    max-width:1180px;margin:0 auto;
+    column-count:3;column-gap:28px;
+  }
+  @media (max-width:1080px){.gallery{column-count:2}}
+  .photo{
+    break-inside:avoid;margin-bottom:28px;cursor:pointer;
+    position:relative;display:block;
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  .photo.hide{display:none}
+  .photo-frame{
+    position:relative;overflow:hidden;
+    background:
+      repeating-linear-gradient(135deg, oklch(0.30 0.015 50 / .06) 0 2px, transparent 2px 14px),
+      linear-gradient(180deg, oklch(0.92 0.012 70 / .4), oklch(0.86 0.014 60 / .3));
+    border:1px dashed oklch(0.40 0.014 50 / .35);
+  }
+  .photo-frame.r45{aspect-ratio:4/5}
+  .photo-frame.r32{aspect-ratio:3/2}
+  .photo-frame.r11{aspect-ratio:1/1}
+  .photo-frame.r57{aspect-ratio:5/7}
+  /* mono placeholder tags */
+  .photo-frame .ph-tag{
+    position:absolute;top:16px;left:16px;
+    font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.24em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .photo-frame .ph-dim{
+    position:absolute;bottom:16px;right:16px;
+    font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.2em;
+    color:var(--ink-faint);text-transform:uppercase;opacity:.7;
+  }
+  .photo-frame .ph-glyph{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:"Ma Shan Zheng",serif;font-size:60px;letter-spacing:8px;
+    color:oklch(0.40 0.014 50 / .28);
+  }
+  /* seal dot, like event cards */
+  .photo-frame::after{
+    content:"";position:absolute;left:16px;bottom:16px;width:14px;height:14px;border-radius:50%;
+    background:var(--seal);opacity:.55;transition:opacity .3s;
+  }
+  /* caption overlay */
+  .photo-cap{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:46px 18px 16px 18px;
+    background:linear-gradient(to top, oklch(0.20 0.012 50 / .82), transparent);
+    opacity:0;transform:translateY(8px);transition:.32s ease;
+    pointer-events:none;
+  }
+  .photo:hover .photo-cap{opacity:1;transform:translateY(0)}
+  .photo:hover .photo-frame{border-color:var(--seal)}
+  .photo:hover .photo-frame::after{opacity:.9}
+  .photo-cap .pc-cn{
+    font-family:"Ma Shan Zheng",serif;font-size:21px;letter-spacing:4px;color:var(--paper);line-height:1.2;
+  }
+  .photo-cap .pc-en{
+    font-family:"Cormorant Garamond",serif;font-size:11px;letter-spacing:.3em;
+    color:oklch(0.92 0.01 80 / .85);text-transform:uppercase;margin-top:6px;font-style:italic;
+  }
+  /* index number, top-right outside frame feel */
+  .photo .pc-num{
+    position:absolute;top:16px;right:16px;z-index:2;
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.24em;
+    color:var(--ink-faint);text-transform:uppercase;
+    background:var(--paper);padding:3px 7px;
+    opacity:0;transition:.3s;
+  }
+  .photo:hover .pc-num{opacity:1}
+
+  /* === LIGHTBOX === */
+  .lightbox{
+    position:fixed;inset:0;z-index:200;
+    background:oklch(0.20 0.012 50 / .94);
+    display:flex;flex-direction:column;
+    opacity:0;visibility:hidden;transition:opacity .3s ease, visibility .3s;
+    backdrop-filter:blur(2px);
+  }
+  .lightbox.open{opacity:1;visibility:visible}
+  .lb-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 40px;flex-shrink:0;
+  }
+  .lb-bar .lb-id{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.32em;
+    color:oklch(0.85 0.01 80 / .75);text-transform:uppercase;
+  }
+  .lb-bar .lb-id b{color:var(--paper);font-weight:400}
+  .lb-close{
+    width:46px;height:46px;border-radius:50%;border:1px solid oklch(0.85 0.01 80 / .5);
+    background:transparent;color:var(--paper);cursor:pointer;
+    font-family:"Cormorant Garamond",serif;font-size:20px;line-height:1;
+    display:flex;align-items:center;justify-content:center;transition:.25s;
+  }
+  .lb-close:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .lb-stage{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:28px;
+    padding:0 40px 20px;min-height:0;
+  }
+  .lb-nav{
+    width:54px;height:54px;border-radius:50%;flex-shrink:0;
+    border:1px solid oklch(0.85 0.01 80 / .4);background:transparent;color:var(--paper);
+    font-family:"Cormorant Garamond",serif;font-size:22px;cursor:pointer;transition:.25s;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lb-nav:hover{background:oklch(0.85 0.01 80 / .14);border-color:var(--paper)}
+  .lb-figure{
+    flex:1;max-width:760px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  }
+  .lb-img{
+    width:100%;max-height:64vh;aspect-ratio:3/2;
+    background:
+      repeating-linear-gradient(135deg, oklch(0.85 0.01 80 / .06) 0 2px, transparent 2px 14px),
+      linear-gradient(180deg, oklch(0.32 0.012 50), oklch(0.26 0.012 50));
+    border:1px dashed oklch(0.85 0.01 80 / .25);
+    position:relative;display:flex;align-items:center;justify-content:center;
+  }
+  .lb-img .lb-glyph{
+    font-family:"Ma Shan Zheng",serif;font-size:90px;letter-spacing:10px;
+    color:oklch(0.85 0.01 80 / .18);
+  }
+  .lb-img .lb-tag{
+    position:absolute;top:18px;left:18px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.24em;
+    color:oklch(0.85 0.01 80 / .55);text-transform:uppercase;
+  }
+  .lb-img .lb-dim{
+    position:absolute;bottom:18px;right:18px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.2em;
+    color:oklch(0.85 0.01 80 / .45);text-transform:uppercase;
+  }
+  .lb-caption{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:30px;width:100%;
+  }
+  .lb-caption .lb-cn{
+    font-family:"Ma Shan Zheng",serif;font-size:32px;letter-spacing:6px;color:var(--paper);line-height:1.15;
+  }
+  .lb-caption .lb-cn small{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:13px;letter-spacing:.32em;
+    color:oklch(0.85 0.01 80 / .75);text-transform:uppercase;margin-top:10px;font-style:italic;font-weight:400;
+  }
+  .lb-caption .lb-meta{
+    text-align:right;font-family:"Cormorant Garamond",serif;font-size:11px;letter-spacing:.3em;
+    color:oklch(0.85 0.01 80 / .6);text-transform:uppercase;white-space:nowrap;
+  }
+  .lb-caption .lb-meta .stamp{
+    display:inline-flex;width:30px;height:30px;background:var(--seal);color:#fff;
+    font-family:"Ma Shan Zheng",serif;font-size:14px;align-items:center;justify-content:center;
+    box-shadow:inset 0 0 0 1px var(--seal-deep);margin-top:12px;
+  }
+
+  /* === FOOTER ORNAMENT === */
+  .ornament{
+    text-align:center;padding:50px 80px 80px;background:var(--paper);
+    font-family:"Ma Shan Zheng",serif;font-size:30px;letter-spacing:18px;
+    color:var(--ink-faint);
+  }
+
+  @media (max-width:760px){
+    .nav{padding:20px 24px}
+    .page-head{padding:90px 24px 60px}
+    .ph-inner{grid-template-columns:1fr;gap:40px}
+    .ph-aside{justify-self:start}
+    .ph-chars{font-size:64px}
+    .filters{padding:0 24px}
+    .filters-inner{flex-direction:column;align-items:flex-start;gap:18px}
+    .filter-set{justify-content:flex-start}
+    .gallery-wrap{padding:40px 24px}
+    .gallery{column-count:1}
+    .lb-stage{padding:0 14px 14px;gap:10px}
+    .lb-nav{width:42px;height:42px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" data-screen-label="00 Nav">
+  <div class="brand">
+    <div>
+      <div class="brand-mark">越韵<span class="accent">·</span>传习</div>
+      <div class="brand-sub">Meng Wei Yue Opera Studio · Ottawa</div>
+    </div>
+  </div>
+  <div class="menu">
+    <a class="menu-item" href="About Page.html">关于本所<span class="en">About</span></a>
+    <a class="menu-item active" href="#">演出剧目<span class="en">Performances</span></a>
+    <a class="menu-item" href="Classes Page.html">传习课堂<span class="en">Studio</span></a>
+    <a class="menu-item" href="#">名家行迹<span class="en">Director</span></a>
+    <a class="menu-item" href="#">近期消息<span class="en">Journal</span></a>
+    <button class="contact-btn">
+      <span>联络</span>
+      <span class="en">CONTACT</span>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-head" data-screen-label="01 Page Header">
+  <div class="ph-inner">
+    <div class="ph-title">
+      <div class="ph-meta">File N° 005 · Stage Photographs · 2018 — 2026</div>
+      <div class="ph-chars">剧<br/><span class="red">照</span></div>
+    </div>
+    <div class="ph-aside">
+      <div class="crumbs">Home · Performances · <b>Gallery</b></div>
+      <div class="en-title">A sleeve held mid-air; a glance that lasts a hundred years — gathered here, frame by frame.</div>
+      <div class="crumbs">Mainstage · Recital · Studio · Backstage</div>
+    </div>
+  </div>
+</header>
+
+<!-- FILTER RAIL -->
+<div class="filters" data-screen-label="02 Filters">
+  <div class="filters-inner">
+    <div class="count"><b id="shownCount">24</b> / 24 Frames · 影像志</div>
+    <div class="filter-set" id="filterSet">
+      <button class="chip active" data-cat="all">全部<span class="en">All</span></button>
+      <button class="chip" data-cat="mainstage">大戏<span class="en">Mainstage</span></button>
+      <button class="chip" data-cat="recital">折子<span class="en">Recital</span></button>
+      <button class="chip" data-cat="studio">传习<span class="en">Studio</span></button>
+      <button class="chip" data-cat="backstage">后台<span class="en">Backstage</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-wrap" data-screen-label="03 Gallery">
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<!-- ORNAMENT -->
+<div class="ornament">声 · 袖 · 心</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" data-screen-label="04 Lightbox">
+  <div class="lb-bar">
+    <div class="lb-id">Frame <b id="lbCounter">01 / 24</b></div>
+    <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+  </div>
+  <div class="lb-stage">
+    <button class="lb-nav" id="lbPrev" aria-label="Previous">←</button>
+    <div class="lb-figure">
+      <div class="lb-img">
+        <span class="lb-tag" id="lbTag">剧照 · STILL</span>
+        <span class="lb-glyph" id="lbGlyph">越</span>
+        <span class="lb-dim" id="lbDim">1600 × 1067 · jpg</span>
+      </div>
+      <div class="lb-caption">
+        <div class="lb-cn" id="lbCn">梁山伯与祝英台<small id="lbEn">The Butterfly Lovers</small></div>
+        <div class="lb-meta" id="lbMeta">NAC Studio · 2026<span class="stamp">孟</span></div>
+      </div>
+    </div>
+    <button class="lb-nav" id="lbNext" aria-label="Next">→</button>
+  </div>
+</div>
+
+<script>
+  // ---- Photo data ----------------------------------------------------------
+  // cn / en = caption ; cat = filter ; ar = aspect-ratio class ; glyph = brush char ; venue
+  const PHOTOS = [
+    { cn:"楼台会",       en:"The Pavilion Meeting",  cat:"mainstage", ar:"r45", glyph:"梁", venue:"NAC Studio · 2026", play:"梁山伯与祝英台" },
+    { cn:"十八相送",     en:"Eighteen Li of Parting",cat:"mainstage", ar:"r32", glyph:"祝", venue:"NAC Studio · 2026", play:"梁山伯与祝英台" },
+    { cn:"水袖·身段",    en:"Sleeve & Stance",       cat:"studio",    ar:"r57", glyph:"袖", venue:"Studio Hall · 2025", play:"传习课堂" },
+    { cn:"葬花",         en:"Burying the Blossoms",  cat:"recital",   ar:"r45", glyph:"黛", venue:"Studio Hall · 2026", play:"红楼·葬花" },
+    { cn:"后台·上妆",    en:"Backstage, the Painting of a Face", cat:"backstage", ar:"r11", glyph:"妆", venue:"Dressing Room · 2025", play:"后台" },
+    { cn:"西厢·听琴",    en:"Listening to the Qin",  cat:"mainstage", ar:"r32", glyph:"莺", venue:"City Theatre · 2023", play:"西厢记" },
+    { cn:"碧玉簪",       en:"The Jade Hairpin",      cat:"mainstage", ar:"r45", glyph:"玉", venue:"City Theatre · 2019", play:"碧玉簪" },
+    { cn:"化蝶",         en:"Transformed to Butterflies", cat:"mainstage", ar:"r57", glyph:"蝶", venue:"NAC Studio · 2026", play:"梁山伯与祝英台" },
+    { cn:"晨课·开嗓",    en:"Morning Voice Class",   cat:"studio",    ar:"r32", glyph:"声", venue:"Studio Hall · 2025", play:"传习课堂" },
+    { cn:"秋夜·清音",    en:"An Autumn Evening",     cat:"recital",   ar:"r11", glyph:"秋", venue:"Private Salon · 2025", play:"秋夜·清音" },
+    { cn:"五女拜寿",     en:"Five Daughters' Birthday", cat:"mainstage", ar:"r32", glyph:"寿", venue:"City Theatre · 2023", play:"五女拜寿" },
+    { cn:"贴片·勒头",    en:"Headdress & Hair-Setting", cat:"backstage", ar:"r45", glyph:"鬓", venue:"Dressing Room · 2024", play:"后台" },
+    { cn:"何文秀",       en:"He Wenxiu",             cat:"mainstage", ar:"r57", glyph:"秀", venue:"City Theatre · 2024", play:"何文秀" },
+    { cn:"念白·吐字",    en:"Recitation & Diction",  cat:"studio",    ar:"r32", glyph:"念", venue:"Studio Hall · 2024", play:"传习课堂" },
+    { cn:"折子专场",     en:"An Evening of Excerpts",cat:"recital",   ar:"r45", glyph:"折", venue:"Studio Hall · 2026", play:"折子戏" },
+    { cn:"乐队·伴奏",    en:"The Pit Orchestra",     cat:"backstage", ar:"r32", glyph:"丝", venue:"NAC Studio · 2026", play:"后台" },
+    { cn:"西厢·赖婚",    en:"The Broken Promise",    cat:"mainstage", ar:"r11", glyph:"厢", venue:"City Theatre · 2023", play:"西厢记" },
+    { cn:"身段·圆场",    en:"Circling the Stage",    cat:"studio",    ar:"r45", glyph:"步", venue:"Studio Hall · 2025", play:"传习课堂" },
+    { cn:"红楼·共读",    en:"Reading Together",      cat:"recital",   ar:"r57", glyph:"楼", venue:"Studio Hall · 2026", play:"红楼·葬花" },
+    { cn:"候场",         en:"In the Wings",          cat:"backstage", ar:"r32", glyph:"幕", venue:"NAC Studio · 2026", play:"后台" },
+    { cn:"楼台·别离",    en:"Farewell at the Pavilion", cat:"mainstage", ar:"r45", glyph:"别", venue:"NAC Studio · 2026", play:"梁山伯与祝英台" },
+    { cn:"谢幕",         en:"The Curtain Call",      cat:"mainstage", ar:"r32", glyph:"幕", venue:"NAC Studio · 2026", play:"梁山伯与祝英台" },
+    { cn:"扇·身段",      en:"The Fan, the Form",     cat:"studio",    ar:"r11", glyph:"扇", venue:"Studio Hall · 2024", play:"传习课堂" },
+    { cn:"雅集·调弦",    en:"Tuning, at the Salon",  cat:"backstage", ar:"r45", glyph:"弦", venue:"Private Salon · 2025", play:"后台" }
+  ];
+
+  const gallery = document.getElementById('gallery');
+  const total = PHOTOS.length;
+
+  PHOTOS.forEach((p, i) => {
+    const fig = document.createElement('figure');
+    fig.className = 'photo';
+    fig.dataset.cat = p.cat;
+    fig.dataset.index = i;
+    const num = String(i + 1).padStart(2, '0');
+    const dims = p.ar === 'r45' ? '1280 × 1600' : p.ar === 'r57' ? '1200 × 1680' : p.ar === 'r11' ? '1500 × 1500' : '1600 × 1067';
+    fig.innerHTML = `
+      <span class="pc-num">N° ${num}</span>
+      <div class="photo-frame ${p.ar}">
+        <span class="ph-tag">${p.play}</span>
+        <span class="ph-glyph">${p.glyph}</span>
+        <span class="ph-dim">${dims} · jpg</span>
+      </div>
+      <figcaption class="photo-cap">
+        <div class="pc-cn">${p.cn}</div>
+        <div class="pc-en">${p.en}</div>
+      </figcaption>`;
+    fig.addEventListener('click', () => openLightbox(i));
+    gallery.appendChild(fig);
+  });
+
+  // ---- Filtering -----------------------------------------------------------
+  const chips = document.querySelectorAll('.chip');
+  const shownCount = document.getElementById('shownCount');
+  const totalEl = document.querySelector('.count');
+  // set total in count label
+  document.querySelector('.count').innerHTML = `<b id="shownCount">${total}</b> / ${total} Frames · 影像志`;
+
+  let currentCat = 'all';
+  function applyFilter(cat){
+    currentCat = cat;
+    let shown = 0;
+    document.querySelectorAll('.photo').forEach(ph => {
+      const match = (cat === 'all' || ph.dataset.cat === cat);
+      ph.classList.toggle('hide', !match);
+      if (match) shown++;
+    });
+    const sc = document.getElementById('shownCount');
+    if (sc) sc.textContent = String(shown).padStart(2,'0');
+  }
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      applyFilter(chip.dataset.cat);
+    });
+  });
+
+  // ---- Lightbox ------------------------------------------------------------
+  const lb = document.getElementById('lightbox');
+  const lbCn = document.getElementById('lbCn');
+  const lbEn = document.getElementById('lbEn');
+  const lbMeta = document.getElementById('lbMeta');
+  const lbGlyph = document.getElementById('lbGlyph');
+  const lbTag = document.getElementById('lbTag');
+  const lbDim = document.getElementById('lbDim');
+  const lbCounter = document.getElementById('lbCounter');
+  let activeList = [];   // indices currently visible, in order
+  let pos = 0;           // position within activeList
+
+  function visibleIndices(){
+    return PHOTOS.map((p,i)=>i).filter(i => currentCat === 'all' || PHOTOS[i].cat === currentCat);
+  }
+  function renderLb(){
+    const idx = activeList[pos];
+    const p = PHOTOS[idx];
+    lbCn.firstChild.nodeValue = p.cn;
+    lbEn.textContent = p.en;
+    lbMeta.childNodes[0].nodeValue = p.venue + " ";
+    lbGlyph.textContent = p.glyph;
+    lbTag.textContent = p.play + " · STILL";
+    lbDim.textContent = (p.ar === 'r45' ? '1280 × 1600' : p.ar === 'r57' ? '1200 × 1680' : p.ar === 'r11' ? '1500 × 1500' : '1600 × 1067') + ' · jpg';
+    lbCounter.innerHTML = `${String(pos+1).padStart(2,'0')} / ${String(activeList.length).padStart(2,'0')}`;
+    // adapt frame ratio to the photo
+    const img = lb.querySelector('.lb-img');
+    img.style.aspectRatio = p.ar === 'r45' ? '4 / 5' : p.ar === 'r57' ? '5 / 7' : p.ar === 'r11' ? '1 / 1' : '3 / 2';
+  }
+  function openLightbox(idx){
+    activeList = visibleIndices();
+    pos = activeList.indexOf(idx);
+    if (pos < 0) pos = 0;
+    renderLb();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function step(d){
+    pos = (pos + d + activeList.length) % activeList.length;
+    renderLb();
+  }
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+  document.getElementById('lbNext').addEventListener('click', () => step(1));
+  lb.addEventListener('click', (e) => { if (e.target === lb || e.target.classList.contains('lb-stage')) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+/* Login screen — centered card on parchment. */
+.wrap {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--paper);
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--cloud);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--seal);
+  border-radius: 3px;
+  padding: 2.4rem 2rem;
+  box-shadow: 0 16px 40px var(--ink-shadow);
+}
+
+.mark {
+  font-family: var(--font-chinese-display);
+  font-size: 2rem;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.mark b {
+  color: var(--seal);
+  font-weight: inherit;
+}
+
+.sub {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.45rem;
+}
+
+.input {
+  width: 100%;
+  font-family: var(--font-chinese-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--border-mid);
+  border-radius: 2px;
+  padding: 0.7rem 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--seal);
+}
+
+.button {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.8rem;
+  background: var(--seal);
+  color: var(--paper);
+  border: 1px solid var(--seal);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: var(--seal-dark);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--seal-dark);
+  background: rgba(192, 58, 43, 0.08); /* WHY: faint vermillion wash matches editor error style */
+  border: 1px solid var(--seal);
+  border-radius: 2px;
+  padding: 0.6rem 0.7rem;
+  margin-bottom: 1rem;
+}

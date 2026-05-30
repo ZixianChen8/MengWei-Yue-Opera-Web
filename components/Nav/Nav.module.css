@@ -17,6 +17,7 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
+  text-decoration: none;
 }
 
 .logo {
@@ -80,6 +81,8 @@
   display: flex;
   gap: 8px;
   align-items: flex-start;
+  text-decoration: none;
+  transition: color 180ms ease, opacity 180ms ease;
 }
 
 .menuItem .en {
@@ -91,4 +94,20 @@
   color: var(--ink-faint);
   text-transform: uppercase;
   font-weight: 400;
+}
+
+.brand:focus-visible,
+.menuItem:focus-visible {
+  outline: 1px solid var(--seal);
+  outline-offset: 8px;
+}
+
+.menuItem:hover,
+.menuItem:focus-visible {
+  color: var(--seal);
+}
+
+.menuItem:hover .en,
+.menuItem:focus-visible .en {
+  color: var(--seal-dark);
 }

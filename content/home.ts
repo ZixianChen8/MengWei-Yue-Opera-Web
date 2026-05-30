@@ -1,359 +1,188 @@
 // ============================================================
-// Home page content — single source of truth for all text
+// Home page content — typed accessors over the editable data.
+//
+// The actual values live in ./data/home.json so the /admin
+// dashboard can edit them without touching source code. This
+// module only re-exports that JSON with the project's existing
+// TypeScript types, so every importing component and its types
+// are unchanged.
 // ============================================================
 
-export const nav = {
-  brand: {
-    markPre: '孟',
-    markAccent: '伟',
-    markPost: '越剧',
-    seal: '越',
-    sub: 'Meng Wei Yue Opera Studio · Ottawa',
-  },
-  links: [
-    { zh: '首页', en: 'Home' },
-    { zh: '活动', en: 'Events' },
-    { zh: '画廊', en: 'Gallery' },
-    { zh: '学习', en: 'Learn' },
-    { zh: '关于我们', en: 'About Us' },
-  ],
+import homeData from './data/home.json'
+
+// ── Shared value types ──────────────────────────────────────
+type LabeledField = { zh: string; en: string }
+
+// ── Section types (mirror the previous inline literals) ─────
+type Nav = {
+  brand: { markPre: string; markAccent: string; markPost: string; seal: string; sub: string }
+  links: { zh: string; en: string; href: string }[]
 }
 
-export const hero = {
-  meta: 'Ottawa · Yue Opera · Est. 2016',
-  titleChars: ['秀', '灵', '南', '江'],
-  titleRedIndex: 2,
-  poem: {
-    zh: '加拿大孟伟越剧艺术传习所',
-    en: 'Meng Wei Yue Opera Studio Canada',
-    stamp: '越',
-  },
+type Hero = {
+  meta: string
+  titleChars: string[]
+  titleRedIndex: number
+  poem: { zh: string; en: string; stamp: string }
 }
 
-export const overture = {
-  eyebrow: 'Overture · 序',
-  title: { zh: ['越音流长', '戏韵在心'], en: 'The sounds of Yue Opera stretch across time, and its spirit stays with us' },
-  quote: {
-    text: '越剧不仅是表演，更是一种缓慢的注视。一袖，一步，一眼，皆是岁月所托。',
-    attr: 'Yue Opera saying · 越剧艺谚',
-  },
-  body: [
-      '越剧一九〇六年年诞生于浙江嵊州。它曲调优美，情感细腻，是中国第二大剧种，也是国家级非物质文化遗产。水袖、丝绸、二胡、琵琶、笛子。这些元素融在一起，唱爱情，唱离别，也唱重逢。',
-      'Yue Opera came to Canada slowly, the way water finds a new path: one voice, then another, then a small group. Today we are performers and teachers, keeping this art alive in this country.',
-  ],
-  stats: [
-    { value: '1906', label: 'Originated · 诞生' },
-    { value: '第二大', label: 'Largest regional opera · 第二大剧种' },
-    { value: '国家级', label: 'Intangible Cultural Heritage · 非物质文化遗产' },
-  ],
+type Overture = {
+  eyebrow: string
+  title: { zh: string[]; en: string }
+  quote: { text: string; attr: string }
+  body: string[]
+  stats: { value: string; label: string }[]
 }
 
-export const season = {
-  eyebrow: '近期活动 · Upcoming',
-  title: {
-    zh: '下一场',
-    en: "What's next",
-  },
-  aside: {
-    zh: '四时更迭，戏随节令。',
-    en: 'Performances follow the turning seasons.',
-  },
-  events: [
-    {
-      id: 'butterfly-lovers',
-      num: 'N° 01',
-      tag: '大戏 · Mainstage',
-      titleZh: ['梁山伯', '与祝英台'],
-      titleEn: 'The Butterfly Lovers · Full Length',
-      blurb: '东晋年间，祝英台女扮男装求学，途中结识梁山伯，同窗三载情谊渐深。十八里相送后，梁山伯方知其心，却已错过姻缘。最终二人生死相随，化蝶双飞。',
-      description: '祝英台女扮男装求学，与梁山伯同窗三载、情深意重。分别时十八里相送，英台百般暗示，梁山伯却未能明白。待他赶赴祝家求亲，英台已许配他人；梁山伯郁郁而终。英台出嫁途经其墓，哭拜之际墓开，二人化蝶双飞。孟伟老师将全本呈现这部越剧经典，演出约两小时，并附场刊导赏。',
-      date: '2026年3月14日',
-      time: '19:30',
-      duration: '2小时 · 2 Hours',
-      venue: 'NAC Studio，渥太华',
-      venueAddress: '53 Elgin St, Ottawa, ON K1P 5W1',
-      feature: true,
-      statusType: 'open' as const,
-      statusLabel: '票务开放 · Tickets open',
-      listNum: '01 · Mar',
-      venueEn: 'NAC Studio',
-      formUrl: '#',
-      imageUrl: 'https://picsum.photos/seed/butterfly-lovers/1200/600',
-    },
-    {
-      id: 'sound-and-tone',
-      num: 'N° 02',
-      tag: '讲座 · Lecture',
-      titleZh: ['越剧之声韵'],
-      titleEn: 'Sound & Tone in Yue Opera',
-      blurb: '孟伟主讲，从越腔的水调到一袖之间——一席关于声腔的公开讲座，附现场演示。',
-      description: '孟伟主讲，介绍越腔的基本特点：从水调的起源到袖功的运用，从咬字行腔到身段配合。一场对公众开放的讲座，附现场演唱示范。适合对越剧有兴趣的朋友，无需戏曲背景。',
-      date: '2026年4月6日',
-      time: '15:00',
-      duration: '1.5小时 · 90 Minutes',
-      venue: 'Ottawa Public Library，渥太华',
-      venueAddress: '渥太华公共图书馆，具体分馆报名后告知',
-      feature: false,
-      statusType: 'free' as const,
-      statusLabel: '免票入场 · Free',
-      listNum: '02 · Apr',
-      venueEn: 'Ottawa Public Library',
-      formUrl: '#',
-      imageUrl: 'https://picsum.photos/seed/soundtone/1200/600',
-    },
-    {
-      id: 'burying-blossoms',
-      num: 'N° 03',
-      tag: '折子 · Recital',
-      titleZh: ['红楼·葬花'],
-      titleEn: 'Burying the Blossoms',
-      blurb: '学员和主演一起演的折子戏专场，在丁香花开的时候演出。',
-      description: '春末丁香盛开之际，孟伟越剧传习所的学员与主演携手呈现《红楼梦·葬花》折子戏专场。林黛玉以一曲《葬花吟》，将一生的孤苦与不甘化入泥土，让花魂随风而去。演出由传习所高阶学员主演，孟伟老师亲自指导，集体谢幕。这场演出是我们每年最亲密的一场——小场地，近距离，听得见演员的呼吸。',
-      date: '2026年5月16日',
-      time: '15:00',
-      duration: '1.5小时 · 90 Minutes',
-      venue: 'Studio Hall，渥太华',
-      venueAddress: '渥太华市区，具体地址报名后告知',
-      feature: false,
-      statusType: 'soon' as const,
-      statusLabel: '5月1日开票 · On sale 1 May',
-      listNum: '03 · May',
-      venueEn: 'Studio Hall · Bayshore',
-      formUrl: '#',
-      imageUrl: 'https://picsum.photos/seed/burying-blossoms/1200/600',
-    },
-    {
-      id: 'water-sleeve-workshop',
-      num: 'N° 04',
-      tag: '工坊 · Workshop',
-      titleZh: ['水袖一日', '坊'],
-      titleEn: 'A Day with the Water Sleeve',
-      blurb: '为慕名而来的观众而设的一日工坊。三个身段，三个念头，换来一段折子。名额有限。',
-      description: '为入门级学员及慕名而来的观众特别设计的一日浸入式工坊。上午学习基本水袖动作，下午排练一小段折子，傍晚以小型汇报演出收尾。全程由孟伟老师亲自带领，席位严格控制在十二人以内，以保证每位学员能得到充分指导。',
-      date: '2026年6月21日',
-      time: '09:30',
-      duration: '全天 · Full Day',
-      venue: '传习课堂，渥太华',
-      venueAddress: '渥太华市区，具体地址报名后告知',
-      feature: false,
-      statusType: 'waitlist' as const,
-      statusLabel: '候补名单 · Waitlist',
-      listNum: '04 · Jun',
-      venueEn: 'Studio Hall',
-      formUrl: '#',
-      imageUrl: 'https://picsum.photos/seed/watersleeve/1200/600',
-    },
-    {
-      id: 'autumn-evening',
-      num: 'N° 05',
-      tag: '雅集 · Concert',
-      titleZh: ['秋夜·清音'],
-      titleEn: 'An Autumn Evening',
-      blurb: '音乐家和演员合作，唱一晚的独唱和器乐选段，在秋分前夜。',
-      description: '秋分前夜，越剧演员与器乐家同台，共度一个安静而细腻的夜晚。二胡、琵琶、笛子与唱腔交织，折子与器乐独奏轮番上演，没有大幕，没有妆容，只有音乐本身。这是一场私人雅集的形式：小客厅，亲密座位，演出之后有茶与交流。名额有限，优先照顾长期支持者与传习所学员家属。',
-      date: '2026年9月20日',
-      time: '19:30',
-      duration: '2小时（含茶叙） · 2 Hours incl. tea',
-      venue: 'Private Salon，渥太华',
-      venueAddress: '具体地址报名后以私信告知',
-      feature: false,
-      statusType: 'members' as const,
-      statusLabel: '会员优先 · Members',
-      listNum: '05 · Sep',
-      venueEn: 'Private Residence',
-      formUrl: '#',
-      imageUrl: 'https://picsum.photos/seed/autumn-evening/1200/600',
-    },
-    {
-      id: 'he-wenxiu-letter',
-      num: 'N° 06',
-      tag: '折子 · Excerpt',
-      titleZh: ['何文秀', '·信函'],
-      titleEn: 'He Wenxiu · The Returning Letter',
-      blurb: '本所传统保留节目之一，重排一段。一小时演出，余韵悠长。',
-      description: '《何文秀》是越剧传统保留节目之一，讲述才子何文秀蒙冤入狱、辗转昭雪的故事。本次演出择取"信函"一折，集中呈现何文秀与妻子王兰英天各一方、书信传情的情节，由孟伟老师主演，附字幕与场刊。演出时长约一小时。',
-      date: '2026年10月11日',
-      time: '15:00',
-      duration: '1小时 · 60 Minutes',
-      venue: 'Carleton University Theatre，渥太华',
-      venueAddress: '1125 Colonel By Dr, Ottawa, ON K1S 5B6',
-      feature: false,
-      statusType: 'closed' as const,
-      statusLabel: '9月1日公布 · Announcing 1 Sep',
-      listNum: '06 · Oct',
-      venueEn: 'Carleton Univ. Theatre',
-      formUrl: '#',
-      imageUrl: 'https://picsum.photos/seed/hewenxiu2/1200/600',
-    },
-    {
-      id: 'west-chamber-pavilion',
-      num: 'N° 07',
-      tag: '折子 · Excerpt',
-      titleZh: ['西厢记', '·长亭'],
-      titleEn: 'Romance of the West Chamber',
-      blurb: '秋末年轴，重演"长亭送别"一折——本所西厢之精华段，两小时，附弦乐现场伴奏。',
-      description: '《西厢记》是本所最受欢迎的演出剧目之一。本次年末演出将重演"长亭送别"一折：莺莺送张生赴京应试，十里长亭，离情万种。由孟伟老师担纲主演，附弦乐现场伴奏与中英字幕。全场约两小时，设场刊。这是本年度最后一场正式演出，也是我们的年度谢幕。',
-      date: '2026年11月28日',
-      time: '19:30',
-      duration: '2小时 · 2 Hours',
-      venue: 'NAC Theatre，渥太华',
-      venueAddress: '1 Elgin St, Ottawa, ON K1P 5W1',
-      feature: false,
-      statusType: 'closed' as const,
-      statusLabel: '8月15日公布 · Announcing 15 Aug',
-      listNum: '07 · Nov',
-      venueEn: 'NAC Theatre',
-      formUrl: '#',
-      imageUrl: 'https://picsum.photos/seed/westchamber2/1200/600',
-    },
-  ],
+export type EventStatus = 'open' | 'free' | 'soon' | 'waitlist' | 'members' | 'closed'
+
+export type SeasonEvent = {
+  id: string
+  num: string
+  tag: string
+  titleZh: string[]
+  titleEn: string
+  blurb: string
+  description: string
+  date: string
+  time: string
+  duration: string
+  venue: string
+  venueAddress: string
+  feature: boolean
+  statusType: EventStatus
+  statusLabel: string
+  listNum: string
+  venueEn: string
+  formUrl: string
+  imageUrl: string
 }
 
-export const studio = {
-  eyebrow: 'Studio · 传习',
-  title: { zh: '传薪·习韵', en: 'Pass the Torch, Learn the Melody' },
-  body: [
-    '目前在 Barrhaven 和 Kanata 各开设一个班，小班授课，每班不超过十人。每节课两小时：前一小时专攻基本功训练，后一小时学习剧目。',
-    'Classes run in Barrhaven and Kanata — one group per location, capped at ten students. Each two-hour session dedicates the first hour to fundamentals and the second to repertoire. Private instruction is also available one-on-one or in pairs.',
-  ],
-  program: [
-    { level: 'Barrhaven 班', en: 'Group class · Barrhaven', duration: '≤10人 · 2h/节' },
-    { level: 'Kanata 班',    en: 'Group class · Kanata',    duration: '≤10人 · 2h/节' },
-    { level: '私人课',        en: 'Private instruction',     duration: '一对一 · 一对二' },
-  ],
-  cta: { zh: '咨询课程', en: 'Inquire about classes', href: 'mailto:hello@mengweiyue.ca' },
+type Season = {
+  eyebrow: string
+  title: { zh: string; en: string }
+  aside: { zh: string; en: string }
+  events: SeasonEvent[]
 }
 
-export const repertoire = {
-  eyebrow: 'Repertoire · 戏目',
-  title: { zh: '往年活动', en: 'Past Events' },
-  works: [
-    { year: '2018', zh: ['红楼', '梦'], en: 'Dream of the Red Chamber', image: 'https://picsum.photos/seed/redchamber/280/520' },
-    { year: '2019', zh: ['碧玉', '簪'], en: 'The Jade Hairpin', image: '/assets/gallery/jade-hairpin.jpg' },
-    { year: '2020', zh: ['白蛇', '传'], en: 'Legend of the White Snake', image: 'https://picsum.photos/seed/whitesnake/280/520' },
-    { year: '2021', zh: ['西厢', '记'], en: 'Romance of the West Chamber', image: '/assets/gallery/west-chamber.jpg' },
-    { year: '2022', zh: ['孔雀', '东南飞'], en: 'Southeast the Peacock Flies', image: 'https://picsum.photos/seed/peacock/280/520' },
-    { year: '2023', zh: ['五女', '拜寿'], en: "Five Daughters' Birthday", image: '/assets/gallery/five-daughters.jpg' },
-    { year: '2024', zh: ['何文', '秀'], en: 'He Wenxiu', image: '/assets/gallery/he-wenxiu.jpg' },
-    { year: '2025', zh: ['追', '鱼'], en: 'Chasing the Fish', image: 'https://picsum.photos/seed/chasfish/280/520' },
-    { year: '2025', zh: ['三看', '御妹'], en: 'Three Glances at the Princess', image: 'https://picsum.photos/seed/princess/280/520' },
-  ],
-  hint: 'use arrows to browse · click to expand',
+type Studio = {
+  eyebrow: string
+  title: { zh: string; en: string }
+  body: string[]
+  program: { level: string; en: string; duration: string }[]
+  cta: { zh: string; en: string; href: string }
 }
 
-export const about = {
-  verse: ['立足渥太华，', '以越剧为本，', '濯经典之韵，', '远中加之声。'],
-  verseEn: 'Founded 2016 — registered as a Canadian nonprofit in 2021. Based in Ottawa; presenting Yue Opera to the world.',
-  vertMeta: 'Est. 2016 · Ottawa · Yue Opera',
-  vertTitle: { before: '越韵', red: '传', after: '海外' },
-  stamp: '子',
-  mission: ['越剧是中国非物质文化遗产，', '亦是我们与世界对话的语言。', '本所致力于让其美在异乡延续。'],
-  cta: { zh: '了解本所', en: 'Learn more', href: '#about' },
+export type RepertoireWork = { year: string; zh: string[]; en: string; image: string }
+
+type Repertoire = {
+  eyebrow: string
+  title: { zh: string; en: string }
+  works: RepertoireWork[]
+  hint: string
 }
 
-export const footer = {
-  ornament: '声 · 袖 · 心',
-  brand: {
-    zh: '加拿大孟伟越剧艺术传习所',
-    en: 'Meng Wei Yue Opera Studio Canada',
-  },
-  legal: {
-    zh: '渥太华，加拿大联邦注册非营利艺术机构',
-    en: 'A federally incorporated not for profit, headquartered in Ottawa, Ontario.',
-  },
-  columns: [
-    {
-      heading: 'To Visit · 拜访',
-      links: [
-        { zh: '关于我们', en: 'About the Studio', href: '#' },
-        { zh: '演出', en: 'Performances', href: '#' },
-        { zh: '学越剧', en: 'Lessons', href: '#' },
-        { zh: '最新动态', en: 'Journal', href: '#' },
-      ],
-    },
-    {
-      heading: 'To Reach Us · 留书',
-      links: [
-        { zh: 'mengweiyue@studio.ca', en: 'By letter', href: 'mailto:hello@mengweiyue.ca' },
-        { zh: '+1 (613) — · — · —', en: 'By telephone', href: '#' },
-        { zh: '孟伟', en: 'By appointment', href: '#' },
-      ],
-    },
-  ],
-  copyright: '© 2026 Meng Wei Yue Opera Studio · 加拿大孟伟越剧艺术传习所',
-  sealLine: 'Ottawa · Made with care',
-  // stamp: '越',
+type About = {
+  verse: string[]
+  verseEn: string
+  vertMeta: string
+  vertTitle: { before: string; red: string; after: string }
+  stamp: string
+  mission: string[]
+  cta: { zh: string; en: string; href: string }
 }
 
-export const eventsListingPage = {
-  header: {
-    titleZh: '演出',
-    titleEn: 'Season · Performances & Events',
-    quote: {
-      zh: '顺应时令而安排，我们在全年为您呈现多场精彩演出与文化活动。',
-      en: 'Join us throughout the year for a thoughtfully programmed season of performances and cultural events.',
-    },
-  },
-  years: ['2024', '2025', '2026', '2027'],
-  currentYear: '2026',
-  months: [
-    { cn: '一月', en: 'Jan',  hasEvent: false, isCurrent: false, pipMuted: false },
-    { cn: '二月', en: 'Feb',  hasEvent: false, isCurrent: false, pipMuted: false },
-    { cn: '三月', en: 'Mar',  hasEvent: true,  isCurrent: true,  pipMuted: false },
-    { cn: '四月', en: 'Apr',  hasEvent: false, isCurrent: false, pipMuted: false },
-    { cn: '五月', en: 'May',  hasEvent: true,  isCurrent: false, pipMuted: false },
-    { cn: '六月', en: 'Jun',  hasEvent: true,  isCurrent: false, pipMuted: true  },
-    { cn: '七月', en: 'Jul',  hasEvent: false, isCurrent: false, pipMuted: false },
-    { cn: '八月', en: 'Aug',  hasEvent: true,  isCurrent: false, pipMuted: true  },
-    { cn: '九月', en: 'Sep',  hasEvent: true,  isCurrent: false, pipMuted: false },
-    { cn: '十月', en: 'Oct',  hasEvent: true,  isCurrent: false, pipMuted: true  },
-    { cn: '十一', en: 'Nov',  hasEvent: true,  isCurrent: false, pipMuted: false },
-    { cn: '十二', en: 'Dec',  hasEvent: false, isCurrent: false, pipMuted: false },
-  ],
-  archive: [
-    {
-      year: '2025',
-      shows: [
-        { num: '01', cn: '五女拜寿' },
-        { num: '02', cn: '秋门 · 还珠' },
-        { num: '03', cn: '越剧讲台 · 第一讲' },
-        { num: '04', cn: '碧玉簪' },
-      ],
-    },
-    {
-      year: '2024',
-      shows: [
-        { num: '01', cn: '何文秀' },
-        { num: '02', cn: '水袖工坊' },
-        { num: '03', cn: '学员折子 · 春' },
-      ],
-    },
-    {
-      year: '2023',
-      shows: [
-        { num: '01', cn: '西厢记 · 选段' },
-        { num: '02', cn: '跑台稻穗' },
-      ],
-    },
-    {
-      year: '2018 — 22',
-      shows: [
-        { num: '—', cn: '早期演出若干' },
-      ],
-    },
-  ],
+type Footer = {
+  ornament: string
+  brand: { zh: string; en: string }
+  legal: { zh: string; en: string }
+  columns: { heading: string; links: { zh: string; en: string; href: string }[] }[]
+  copyright: string
+  sealLine: string
 }
 
-export const eventPage = {
-  backLink: { zh: '返回演出列表', en: 'Back to Performances' },
-  signup: { zh: '报名参加', en: 'Sign Up' },
-  qrLabel: { zh: '扫描二维码报名', en: 'Scan to register' },
-  formLink: { zh: '或点此在线报名', en: 'Or click to register online' },
+type EventsListingPage = {
+  header: { titleZh: string; titleEn: string; quote: { zh: string; en: string } }
+  years: string[]
+  currentYear: string
+  months: { cn: string; en: string; hasEvent: boolean; isCurrent: boolean; pipMuted: boolean }[]
+  archive: { year: string; shows: { num: string; cn: string }[] }[]
+}
+
+type EventPage = {
+  backLink: LabeledField
+  signup: LabeledField
+  qrLabel: LabeledField
+  formLink: LabeledField
   labels: {
-    date:     { zh: '日期', en: 'Date' },
-    time:     { zh: '时间', en: 'Time' },
-    duration: { zh: '时长', en: 'Duration' },
-    venue:    { zh: '地点', en: 'Venue' },
-    address:  { zh: '地址', en: 'Address' },
-  },
+    date: LabeledField
+    time: LabeledField
+    duration: LabeledField
+    venue: LabeledField
+    address: LabeledField
+  }
 }
+
+type AboutPage = {
+  pageHead: {
+    meta: string
+    charsZh: { before: string; red: string; after: string }
+    subtitle: string
+    crumb: string
+  }
+  bio: {
+    vertZh: { before: string; red: string; after: string }
+    eyebrow: string
+    heading: { zh: string; en: string }
+    paragraphs: { zh: string; en: string }[]
+  }
+  contact: {
+    eyebrow: string
+    heading: { zh1: string; zh2: string; en: string }
+    lede: { zh: string; en: string }
+    channels: { zh: string; val: string; sub: string }[]
+    form: {
+      sealGlyph: string
+      intro: string
+      subjects: { value: string; label: string }[]
+      fields: {
+        name: { zh: string; en: string; ph: string }
+        email: { zh: string; en: string; ph: string }
+        subject: { zh: string; en: string }
+        phone: { zh: string; en: string; ph: string }
+        message: { zh: string; en: string; ph: string }
+      }
+      privacy: string
+      submit: { zh: string; en: string }
+      sent: { stamp: string; zh: string; en: string }
+    }
+  }
+}
+
+type HomeContent = {
+  nav: Nav
+  hero: Hero
+  overture: Overture
+  season: Season
+  studio: Studio
+  repertoire: Repertoire
+  about: About
+  footer: Footer
+  eventsListingPage: EventsListingPage
+  eventPage: EventPage
+  aboutPage: AboutPage
+}
+
+const data = homeData as HomeContent
+
+export const nav = data.nav
+export const hero = data.hero
+export const overture = data.overture
+export const season = data.season
+export const studio = data.studio
+export const repertoire = data.repertoire
+export const about = data.about
+export const footer = data.footer
+export const eventsListingPage = data.eventsListingPage
+export const eventPage = data.eventPage
+export const aboutPage = data.aboutPage

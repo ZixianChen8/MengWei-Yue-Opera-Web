@@ -11,6 +11,7 @@ const EASE = 0.12
 
 export default function Repertoire() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [activeWork, setActiveWork] = useState(repertoire.works[0])
   const stripRef = useRef<HTMLDivElement>(null)
   const scrollTarget = useRef(0)
   const rafId = useRef<number | null>(null)
@@ -51,11 +52,12 @@ export default function Repertoire() {
   const titleBody = repertoire.title.zh.slice(0, -1)
   const titleLast = repertoire.title.zh.slice(-1)
 
-  // Keep the last opened work stable during the close transition so the
-  // lightbox doesn't flash index 0 while fading out.
-  const lastOpenWork = useRef(repertoire.works[0])
-  if (openIndex !== null) lastOpenWork.current = repertoire.works[openIndex]
-  const openWork = lastOpenWork.current
+  const openWork = activeWork
+
+  const openLightbox = (index: number) => {
+    setActiveWork(repertoire.works[index])
+    setOpenIndex(index)
+  }
 
   return (
     <section id="repertoire" className={styles.section}>
@@ -74,7 +76,7 @@ export default function Repertoire() {
               <div
                 key={`${work.year}-${work.zh.join('')}`}
                 className={styles.filmCard}
-                onClick={() => setOpenIndex(i)}
+                onClick={() => openLightbox(i)}
               >
                 <Image
                   src={work.image}

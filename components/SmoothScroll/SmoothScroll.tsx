@@ -23,6 +23,12 @@ export default function SmoothScroll() {
       if (rafId.current === null) tick()
     }
 
+    const onScroll = () => {
+      if (rafId.current === null) {
+        targetY.current = window.scrollY
+      }
+    }
+
     const tick = () => {
       const current = window.scrollY
       const diff = targetY.current - current
@@ -36,8 +42,10 @@ export default function SmoothScroll() {
     }
 
     window.addEventListener('wheel', onWheel, { passive: false })
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('scroll', onScroll)
       if (rafId.current !== null) cancelAnimationFrame(rafId.current)
     }
   }, [])

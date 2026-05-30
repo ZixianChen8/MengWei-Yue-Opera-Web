@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>关于本所 · About — Meng Wei Yue Opera Studio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:       oklch(0.975 0.008 80);
+    --paper-deep:  oklch(0.955 0.010 75);
+    --paper-dim:   oklch(0.935 0.011 70);
+    --ink:         oklch(0.22 0.012 50);
+    --ink-soft:    oklch(0.42 0.012 50);
+    --ink-faint:   oklch(0.62 0.010 50);
+    --seal:        oklch(0.48 0.16 30);
+    --seal-deep:   oklch(0.40 0.16 30);
+    --rule:        oklch(0.82 0.01 70);
+    --rule-soft:   oklch(0.88 0.01 70);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink);font-family:"Noto Serif SC",serif;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+
+  /* === NAV (matches Chinese Hero) === */
+  .nav{
+    position:sticky;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:flex-start;justify-content:space-between;
+    padding:26px 56px; background:var(--paper);
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .brand-mark{
+    font-family:"Ma Shan Zheng",serif;font-size:26px;color:var(--ink);
+    line-height:1.05;letter-spacing:3px;
+  }
+  .brand-mark .accent{color:var(--seal)}
+  .brand-sub{font-family:"Cormorant Garamond",serif;font-size:10px;letter-spacing:.34em;color:var(--ink-faint);text-transform:uppercase;margin-top:6px}
+  .menu{display:flex;align-items:flex-start;gap:34px}
+  .menu-item{
+    writing-mode:vertical-rl;text-orientation:upright;
+    font-family:"Noto Serif SC",serif;font-weight:500;font-size:13px;letter-spacing:6px;
+    color:var(--ink);line-height:1;cursor:pointer;transition:color .25s;
+    display:flex;gap:8px;align-items:flex-start;text-decoration:none;
+  }
+  .menu-item:hover{color:var(--seal)}
+  .menu-item.active{color:var(--seal)}
+  .menu-item .en{
+    writing-mode:vertical-rl;text-orientation:mixed;
+    font-family:"Cormorant Garamond",serif;font-size:9.5px;letter-spacing:.3em;
+    color:var(--ink-faint);text-transform:uppercase;font-weight:400;
+  }
+  .contact-btn{
+    width:52px;height:52px;border:1px solid var(--ink);border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    font-family:"Noto Serif SC",serif;font-size:11px;letter-spacing:2px;
+    cursor:pointer;transition:.25s;color:var(--ink);background:transparent;
+  }
+  .contact-btn:hover{background:var(--ink);color:var(--paper)}
+  .contact-btn .en{font-family:"Cormorant Garamond",serif;font-size:7px;letter-spacing:.2em}
+
+  /* === SHARED PRIMITIVES === */
+  .eyebrow{
+    display:flex;align-items:center;gap:14px;color:var(--seal);
+    font-family:"Cormorant Garamond",serif;font-size:12px;letter-spacing:.42em;text-transform:uppercase;
+  }
+  .eyebrow .dash{width:36px;height:1px;background:var(--seal)}
+
+  .placeholder{
+    background:
+      repeating-linear-gradient(135deg, oklch(0.30 0.015 50 / .06) 0 2px, transparent 2px 14px),
+      linear-gradient(180deg, oklch(0.92 0.012 70 / .4), oklch(0.86 0.014 60 / .3));
+    border:1px dashed oklch(0.40 0.014 50 / .35);
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;
+    padding:22px;position:relative;
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.22em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .placeholder .ph-tag{position:absolute;top:18px;left:18px}
+  .placeholder .ph-dim{position:absolute;bottom:18px;right:18px;opacity:.7}
+  .placeholder .ph-label{
+    align-self:flex-end;font-family:"Ma Shan Zheng",serif;font-size:32px;letter-spacing:6px;
+    color:var(--ink-soft);writing-mode:vertical-rl;text-orientation:upright;
+  }
+
+  /* === PAGE HEADER === */
+  .page-head{
+    position:relative;padding:120px 80px 100px;background:var(--paper);
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .ph-inner{
+    max-width:1180px;margin:0 auto;display:grid;
+    grid-template-columns:auto 1fr; gap:80px;align-items:end;
+  }
+  .ph-title{
+    display:flex;align-items:flex-start;gap:24px;
+  }
+  .ph-chars{
+    writing-mode:vertical-rl;text-orientation:upright;
+    font-family:"Ma Shan Zheng",serif;font-size:84px;line-height:.95;
+    color:var(--ink);letter-spacing:14px;
+  }
+  .ph-chars .red{color:var(--seal)}
+  .ph-meta{
+    writing-mode:vertical-rl;
+    font-family:"Cormorant Garamond",serif;font-size:11px;letter-spacing:.42em;
+    color:var(--ink-faint);text-transform:uppercase;
+    border-right:1px solid var(--rule);padding-right:14px;
+    height:280px;display:flex;align-items:center;
+  }
+  .ph-aside{
+    padding-bottom:18px;display:flex;flex-direction:column;gap:24px;
+    max-width:480px;justify-self:end;
+  }
+  .ph-aside .en-title{
+    font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:400;
+    line-height:1.15;color:var(--ink);font-style:italic;letter-spacing:.02em;
+  }
+  .ph-aside .crumbs{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.32em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .ph-aside .crumbs b{color:var(--ink);font-weight:400}
+
+  /* === BIO SECTION === */
+  .bio{
+    position:relative;padding:140px 80px;background:var(--paper);
+  }
+  .bio-inner{
+    max-width:1180px;margin:0 auto;display:grid;
+    grid-template-columns:auto 1fr;gap:80px;align-items:start;
+  }
+  /* vertical pull-quote rail */
+  .bio-rail{
+    display:flex;align-items:flex-start;gap:22px;
+    padding-top:42px;
+  }
+  .bio-vert{
+    writing-mode:vertical-rl;text-orientation:upright;
+    font-family:"Ma Shan Zheng",serif;font-size:54px;line-height:.95;
+    color:var(--ink);letter-spacing:14px;
+  }
+  .bio-vert .red{color:var(--seal)}
+  .bio-rail .meta{
+    writing-mode:vertical-rl;
+    font-family:"Cormorant Garamond",serif;font-size:10.5px;letter-spacing:.42em;
+    color:var(--ink-faint);text-transform:uppercase;
+    border-right:1px solid var(--rule);padding-right:12px;
+    height:230px;display:flex;align-items:center;
+  }
+
+  .bio-col h2{
+    font-family:"Ma Shan Zheng",serif;font-size:48px;line-height:1.1;
+    letter-spacing:8px;color:var(--ink);margin-top:18px;
+  }
+  .bio-col h2 small{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:15px;
+    font-weight:400;letter-spacing:.4em;color:var(--ink-faint);
+    margin-top:14px;text-transform:uppercase;
+  }
+  .bio-body{
+    font-family:"Noto Serif SC",serif;font-size:15px;line-height:2;
+    color:var(--ink-soft);font-weight:300;text-wrap:pretty;margin-top:36px;
+  }
+  .bio-body p+p{margin-top:18px}
+  .bio-body .en{
+    font-family:"Cormorant Garamond",serif;font-size:14.5px;line-height:1.85;
+    color:var(--ink-soft);font-weight:400;font-style:italic;
+  }
+
+  .bio-facts{
+    padding-top:42px; display:flex; flex-direction:column;
+    border-left:1px solid var(--rule);padding-left:42px;
+  }
+  .bio-facts h4{
+    font-family:"Cormorant Garamond",serif;font-size:11px;letter-spacing:.42em;
+    color:var(--seal);text-transform:uppercase;font-weight:600;margin-bottom:24px;
+  }
+  .bio-facts .row{
+    display:flex;align-items:baseline;justify-content:space-between;gap:24px;
+    padding:18px 0;border-bottom:1px solid var(--rule-soft);
+  }
+  .bio-facts .row:first-of-type{border-top:1px solid var(--rule-soft)}
+  .bio-facts .k{font-family:"Ma Shan Zheng",serif;font-size:24px;color:var(--ink);letter-spacing:3px}
+  .bio-facts .v{
+    font-family:"Cormorant Garamond",serif;font-size:11px;
+    letter-spacing:.32em;color:var(--ink-faint);text-transform:uppercase;
+    text-align:right;
+  }
+  .bio-quote{
+    margin-top:36px;padding:24px 0 24px 24px;border-left:1px solid var(--seal);
+    font-family:"Noto Serif SC",serif;font-size:16px;line-height:1.9;
+    color:var(--ink);font-weight:300;
+  }
+  .bio-quote .attr{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:10.5px;
+    letter-spacing:.4em;color:var(--ink-faint);text-transform:uppercase;margin-top:12px;
+  }
+
+  /* === FOUNDER === */
+  .founder{
+    position:relative;background:var(--paper-deep);
+    padding:140px 80px;border-top:1px solid var(--rule-soft);
+  }
+  .founder-head{
+    max-width:1180px;margin:0 auto 60px;display:flex;
+    align-items:flex-end;justify-content:space-between;gap:60px;
+    padding-bottom:36px;border-bottom:1px solid var(--rule);
+  }
+  .founder-head .left{display:flex;align-items:flex-start;gap:32px}
+  .founder-head .glyph{
+    font-family:"Ma Shan Zheng",serif;font-size:140px;line-height:.9;
+    color:var(--seal);
+  }
+  .founder-head .title{
+    font-family:"Ma Shan Zheng",serif;font-size:54px;line-height:1.05;
+    letter-spacing:8px;color:var(--ink);margin-top:14px;
+  }
+  .founder-head .title small{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:15px;
+    font-weight:400;letter-spacing:.4em;color:var(--ink-faint);
+    margin-top:14px;text-transform:uppercase;
+  }
+  .founder-head .right{text-align:right;min-width:240px}
+  .filenum{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.32em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .filenum b{color:var(--ink);font-weight:400}
+
+  .founder-grid{
+    max-width:1180px;margin:0 auto;display:grid;
+    grid-template-columns:0.85fr 1fr;gap:60px;align-items:start;
+  }
+  .founder-portrait{aspect-ratio:4/5;min-height:520px}
+
+  .founder-bio .name{
+    font-family:"Ma Shan Zheng",serif;font-size:38px;letter-spacing:6px;color:var(--ink);
+  }
+  .founder-bio .name small{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:13px;
+    font-weight:400;letter-spacing:.42em;color:var(--ink-faint);
+    text-transform:uppercase;margin-top:8px;font-style:italic;
+  }
+  .founder-bio .role{
+    display:inline-block;margin-top:16px;
+    font-family:"Cormorant Garamond",serif;font-size:10.5px;
+    letter-spacing:.4em;color:var(--seal);text-transform:uppercase;
+    padding:6px 12px;border:1px solid var(--seal);border-radius:99px;
+  }
+  .founder-bio .body{
+    font-family:"Noto Serif SC",serif;font-size:14.5px;line-height:2;
+    color:var(--ink-soft);font-weight:300;margin-top:30px;text-wrap:pretty;
+  }
+  .founder-bio .body p+p{margin-top:16px}
+  .founder-bio .body .en{
+    font-family:"Cormorant Garamond",serif;font-size:14px;line-height:1.85;
+    color:var(--ink-soft);font-style:italic;
+  }
+  .founder-bio .pull{
+    margin-top:32px;padding:22px 24px;
+    background:var(--paper);border-left:2px solid var(--seal);
+    font-family:"Ma Shan Zheng",serif;font-size:22px;letter-spacing:4px;
+    color:var(--ink);line-height:1.5;
+  }
+  .founder-bio .pull .attr{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:10px;
+    letter-spacing:.4em;color:var(--ink-faint);text-transform:uppercase;
+    margin-top:10px;font-weight:400;
+  }
+
+  /* timeline */
+  .timeline{
+    border-left:1px solid var(--rule);padding-left:28px;
+  }
+  .timeline h4{
+    font-family:"Cormorant Garamond",serif;font-size:11px;letter-spacing:.42em;
+    color:var(--seal);text-transform:uppercase;font-weight:600;margin-bottom:24px;
+  }
+  .tl-item{
+    position:relative;padding:0 0 24px 0;
+  }
+  .tl-item:not(:last-child){border-bottom:1px solid var(--rule-soft);margin-bottom:24px}
+  .tl-item::before{
+    content:"";position:absolute;left:-33px;top:6px;
+    width:8px;height:8px;background:var(--paper-deep);
+    border:1px solid var(--ink-faint);border-radius:50%;
+  }
+  .tl-item.feat::before{background:var(--seal);border-color:var(--seal-deep)}
+  .tl-year{
+    font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.32em;
+    color:var(--seal);text-transform:uppercase;
+  }
+  .tl-cn{
+    font-family:"Ma Shan Zheng",serif;font-size:18px;letter-spacing:3px;
+    color:var(--ink);line-height:1.4;margin-top:6px;
+  }
+  .tl-en{
+    font-family:"Cormorant Garamond",serif;font-size:11.5px;line-height:1.6;
+    letter-spacing:.06em;color:var(--ink-faint);margin-top:4px;
+  }
+
+  /* === CONTACT === */
+  .contact{
+    position:relative;padding:140px 80px 100px;background:var(--paper);
+  }
+  .contact-inner{
+    max-width:1180px;margin:0 auto;display:grid;
+    grid-template-columns:0.9fr 1.4fr;gap:90px;align-items:start;
+  }
+  .contact-info h2{
+    font-family:"Ma Shan Zheng",serif;font-size:54px;line-height:1.05;
+    letter-spacing:8px;color:var(--ink);margin-top:18px;
+  }
+  .contact-info h2 small{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:15px;
+    font-weight:400;letter-spacing:.4em;color:var(--ink-faint);
+    margin-top:14px;text-transform:uppercase;
+  }
+  .contact-info .lede{
+    font-family:"Noto Serif SC",serif;font-size:14.5px;line-height:2;
+    color:var(--ink-soft);font-weight:300;margin-top:30px;text-wrap:pretty;
+  }
+  .contact-info .lede .en{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:14px;
+    line-height:1.85;color:var(--ink-soft);font-style:italic;margin-top:14px;
+  }
+  .contact-info .channels{margin-top:40px;display:flex;flex-direction:column}
+  .contact-info .ch{
+    display:flex;align-items:baseline;justify-content:space-between;gap:24px;
+    padding:18px 0;border-bottom:1px solid var(--rule-soft);
+  }
+  .contact-info .ch:first-of-type{border-top:1px solid var(--rule-soft)}
+  .contact-info .ch .lbl{
+    font-family:"Ma Shan Zheng",serif;font-size:22px;color:var(--ink);letter-spacing:3px;
+  }
+  .contact-info .ch .val{
+    font-family:"Cormorant Garamond",serif;font-size:13px;
+    letter-spacing:.12em;color:var(--ink-soft);text-align:right;
+  }
+  .contact-info .ch .val .en{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:10px;
+    letter-spacing:.4em;color:var(--ink-faint);text-transform:uppercase;
+    margin-top:4px;
+  }
+
+  /* form */
+  .form-wrap{
+    background:var(--paper-deep);padding:56px 56px 48px;
+    border:1px solid var(--rule-soft);position:relative;
+  }
+  .form-wrap::before{
+    content:"留 · LEAVE A LETTER";position:absolute;top:-10px;left:36px;
+    background:var(--paper);padding:0 12px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.32em;
+    color:var(--ink-faint);
+  }
+  .form-wrap .seal-ornament{
+    position:absolute;top:32px;right:32px;
+    width:46px;height:46px;background:var(--seal);color:#fff;
+    font-family:"Ma Shan Zheng",serif;font-size:20px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:inset 0 0 0 1px var(--seal-deep);
+  }
+  .form-wrap .form-intro{
+    font-family:"Noto Serif SC",serif;font-size:14px;line-height:1.9;
+    color:var(--ink-soft);font-weight:300;max-width:420px;margin-bottom:36px;
+  }
+
+  .field{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+  .field .label{
+    display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  }
+  .field .label .cn{
+    font-family:"Ma Shan Zheng",serif;font-size:17px;letter-spacing:3px;color:var(--ink);
+  }
+  .field .label .en{
+    font-family:"Cormorant Garamond",serif;font-size:10.5px;letter-spacing:.4em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .field .label .req{color:var(--seal);margin-left:6px}
+  .field input, .field select, .field textarea{
+    width:100%;background:transparent;border:none;
+    border-bottom:1px solid var(--rule);padding:12px 0 12px;
+    font-family:"Noto Serif SC",serif;font-size:14.5px;color:var(--ink);
+    font-weight:300;letter-spacing:.04em;
+    transition:border-color .25s;
+    outline:none;
+  }
+  .field input::placeholder, .field textarea::placeholder{
+    color:var(--ink-faint);font-style:italic;font-weight:300;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-bottom-color:var(--seal);
+  }
+  .field textarea{resize:vertical;min-height:120px;line-height:1.8}
+  .field select{
+    appearance:none;-webkit-appearance:none;
+    background-image:linear-gradient(45deg, transparent 50%, var(--ink-faint) 50%),linear-gradient(135deg, var(--ink-faint) 50%, transparent 50%);
+    background-position:calc(100% - 14px) 18px, calc(100% - 9px) 18px;
+    background-size:5px 5px, 5px 5px;background-repeat:no-repeat;
+    cursor:pointer;
+  }
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+
+  .form-actions{
+    margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+    padding-top:24px;border-top:1px solid var(--rule-soft);
+  }
+  .privacy{
+    display:flex;align-items:center;gap:10px;
+    font-family:"Cormorant Garamond",serif;font-size:11px;letter-spacing:.32em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .privacy input[type=checkbox]{
+    appearance:none;width:14px;height:14px;border:1px solid var(--ink-faint);
+    background:transparent;cursor:pointer;position:relative;
+    border-radius:0;
+  }
+  .privacy input[type=checkbox]:checked{
+    background:var(--seal);border-color:var(--seal);
+  }
+  .privacy input[type=checkbox]:checked::after{
+    content:"";position:absolute;left:3px;top:0px;
+    width:5px;height:9px;border:solid #fff;border-width:0 1.5px 1.5px 0;
+    transform:rotate(45deg);
+  }
+
+  .submit-btn{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:14px 26px;border:1px solid var(--ink);border-radius:99px;
+    font-family:"Noto Serif SC",serif;font-size:13px;letter-spacing:5px;color:var(--ink);
+    cursor:pointer;transition:.3s;background:transparent;
+  }
+  .submit-btn .en{
+    font-family:"Cormorant Garamond",serif;font-size:10px;letter-spacing:.4em;
+    text-transform:uppercase;color:var(--ink-faint);margin-left:0;
+    border-left:1px solid var(--rule);padding-left:14px;
+  }
+  .submit-btn .arrow{
+    font-family:"Cormorant Garamond",serif;font-size:14px;color:var(--ink-soft);
+    transition:transform .3s, color .3s;
+  }
+  .submit-btn:hover{background:var(--ink);color:var(--paper)}
+  .submit-btn:hover .en{color:var(--paper);border-left-color:rgba(255,255,255,.3)}
+  .submit-btn:hover .arrow{transform:translateX(4px);color:var(--paper)}
+
+  /* sent state */
+  .sent-msg{
+    display:none;padding:24px;border:1px solid var(--seal);
+    background:oklch(0.48 0.16 30 / .04);
+    font-family:"Noto Serif SC",serif;font-size:14px;line-height:1.9;
+    color:var(--ink);font-weight:300;margin-top:24px;
+  }
+  .sent-msg .stamp{
+    display:inline-flex;width:28px;height:28px;background:var(--seal);color:#fff;
+    font-family:"Ma Shan Zheng",serif;font-size:14px;align-items:center;justify-content:center;
+    box-shadow:inset 0 0 0 1px var(--seal-deep);margin-right:10px;vertical-align:-8px;
+  }
+  .sent-msg .en{
+    display:block;font-family:"Cormorant Garamond",serif;font-size:11px;
+    letter-spacing:.4em;color:var(--ink-faint);text-transform:uppercase;
+    margin-top:8px;font-style:italic;
+  }
+  .form-wrap.is-sent .sent-msg{display:block}
+  .form-wrap.is-sent .field, .form-wrap.is-sent .form-actions, .form-wrap.is-sent .form-intro{opacity:.35;pointer-events:none}
+
+  /* === FOOTER ORNAMENT === */
+  .ornament{
+    text-align:center;padding:60px 80px 80px;background:var(--paper);
+    font-family:"Ma Shan Zheng",serif;font-size:30px;letter-spacing:18px;
+    color:var(--ink-faint);
+  }
+
+</style>
+</head>
+<body>
+
+
+
+<!-- PAGE HEADER -->
+<header class="page-head" data-screen-label="01 Page Header">
+  <div class="ph-inner">
+    <div class="ph-title">
+      <div class="ph-meta">EST. 2016 · OTTAWA</div>
+      <div class="ph-chars">所<br/>本<br/><span class="red">于</span><br/>关</div>
+    </div>
+    <div class="ph-aside">
+      <div class="crumbs">ABOUT THE STUDIO</div>
+      <div class="en-title">A Canadian nonprofit, based in Ottawa, dedicated to the art of Yue Opera.</div>
+      <div class="crumbs">
+</div>
+    </div>
+  </div>
+</header>
+
+<!-- BIO -->
+<section class="bio" data-screen-label="02 Bio">
+  <div class="bio-inner">
+    <div class="bio-rail">
+      <div class="meta">
+</div>
+      <div class="bio-vert">越韵<br/>传<span class="red">海</span>外</div>
+    </div>
+
+    <div class="bio-col">
+      <div class="eyebrow"><span class="dash"></span><span>
+</span></div>
+      <h2>一所 · 一艺 · 一桥<small>One studio, one art, one bridge</small></h2>
+
+      <div class="bio-body">
+        <p>Meng Wei Yue Opera Studio 成立于二〇一六年，并于二〇二一年在加拿大正式注册为非营利组织。工作室总部位于渥太华，以推广中国越剧艺术为核心使命，致力于通过这一独特的表演艺术形式，向世界展示中国传统文化的魅力。</p>
+
+        <p class="en" style="font-size: 18px">Founded in 2016 and registered as a Canadian nonprofit in 2021, Meng Wei Yue Opera Studio is based in Ottawa and dedicated to elevating the global appreciation of Chinese cultural heritage through the captivating art of Yue Opera.</p>
+
+        <p>工作室积极推动中加文化交流，在国际舞台上弘扬中国表演艺术，展现越剧这一中国非物质文化遗产的优雅与深厚内涵，同时也为丰富加拿大多元文化社会贡献力量。</p>
+
+        <p class="en" style="font-size: 18px">The Studio serves as a cultural ambassador between China and Canada — showcasing Yue Opera, a cornerstone of Chinese intangible cultural heritage, while contributing to the multicultural mosaic of its adopted home.</p>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact" data-screen-label="04 Contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="eyebrow"><span class="dash"></span><span>
+</span></div>
+      <h2>来信<br/>问候<small>Write us a letter</small></h2>
+
+      <p class="lede">
+        我们欢迎与国际艺术节、文化机构及多元文化活动的合作，也期待与热爱越剧、中国传统文化的朋友结识。
+        <span class="en" style="font-size: 18px">We invite partnerships with international festivals, cultural organisations, and events celebrating multiculturalism — and we welcome anyone curious about Yue Opera and Chinese performing arts.</span>
+      </p>
+
+      <div class="channels">
+        <div class="ch">
+          <div class="lbl">来信</div>
+          <div class="val">Write to the Studio<div class="en">By letter</div></div>
+        </div>
+        <div class="ch">
+          <div class="lbl">拜访</div>
+          <div class="val">By appointment, Ottawa<div class="en">Studio visits</div></div>
+        </div>
+        <div class="ch">
+          <div class="lbl">合作</div>
+          <div class="val">Festivals · Institutions · Communities<div class="en">Partnerships</div></div>
+        </div>
+        <div class="ch">
+          <div class="lbl">地点</div>
+          <div class="val">Ottawa, Canada<div class="en">Headquarters</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <form class="form-wrap" id="contactForm" novalidate>
+      <div class="seal-ornament">
+</div>
+
+      <p class="form-intro">
+        请留下姓名与联络方式，并简述来意——无论是演出邀请、合作提议，或是对越剧的一份兴趣。
+      </p>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="label" for="f-name">
+            <span class="cn">尊姓<span class="req">·</span></span>
+            <span class="en">Your Name</span>
+          </label>
+          <input id="f-name" name="name" type="text" placeholder="姓名 / Name" required />
+        </div>
+        <div class="field">
+          <label class="label" for="f-email">
+            <span class="cn">来邮<span class="req">·</span></span>
+            <span class="en">Email Address</span>
+          </label>
+          <input id="f-email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="label" for="f-subject">
+            <span class="cn">来意</span>
+            <span class="en">Subject</span>
+          </label>
+          <select id="f-subject" name="subject">
+            <option value="festival">艺术节邀演 · Festival Invitation</option>
+            <option value="partner">机构合作 · Institutional Partnership</option>
+            <option value="community">社区活动 · Community Event</option>
+            <option value="press">媒体采访 · Press &amp; Media</option>
+            <option value="other">其他 · Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="f-phone">
+            <span class="cn">致电</span>
+            <span class="en">Phone (optional)</span>
+          </label>
+          <input id="f-phone" name="phone" type="tel" placeholder="+1 (___) ___ — ____" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="f-msg">
+          <span class="cn">书信<span class="req">·</span></span>
+          <span class="en">Your Message</span>
+        </label>
+        <textarea id="f-msg" name="message" rows="5" placeholder="请在此写下您的话 · Write your message here…" required></textarea>
+      </div>
+
+      <div class="form-actions">
+        <label class="privacy">
+          <input type="checkbox" id="f-priv" required />
+          <span>I agree to be contacted · 同意联络</span>
+        </label>
+        <button class="submit-btn" type="submit">
+          <span>寄出</span>
+          <span class="en">Send Letter</span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+
+      <div class="sent-msg">
+        <span class="stamp">收</span>
+        来信已收到，多谢。本所将尽快与您联络。
+        <span class="en">Your letter has been received — thank you. The Studio will be in touch.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ORNAMENT -->
+<div class="ornament">声 · 袖 · 心</div>
+
+<script>
+  // Simple form submit -> swap to "sent" state
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    form.classList.add('is-sent');
+  });
+</script>
+</body>
+</html>

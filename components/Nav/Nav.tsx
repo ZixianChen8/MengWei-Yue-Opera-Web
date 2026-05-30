@@ -1,11 +1,12 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { nav } from '@/content/home'
 import styles from './Nav.module.css'
 
 export default function Nav() {
   return (
     <nav className={styles.nav}>
-      <div className={styles.brand}>
+      <Link href="/" className={styles.brand} aria-label="Meng Wei Yue Opera Studio home">
         <Image
           src="/assets/Logo-horizontal.PNG"
           alt="加拿大孟伟越剧艺术传习所"
@@ -14,13 +15,13 @@ export default function Nav() {
           className={styles.logo}
           priority
         />
-      </div>
+      </Link>
 
       <div className={styles.menu}>
         {nav.links.map((item) => (
-          <span key={item.en} className={styles.menuItem}>
+          <Link key={item.en} href={item.href} className={styles.menuItem}>
             {item.zh}<span className={styles.en}>{item.en}</span>
-          </span>
+          </Link>
         ))}
       </div>
     </nav>

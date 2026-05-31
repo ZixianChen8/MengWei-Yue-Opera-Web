@@ -322,4 +322,33 @@
     height: 28px;
     font-size: 15px;
   }
+
+  .clouds {
+    bottom: -3%;
+    height: 38%;
+  }
+
+  .cloudL1 {
+    bottom: 22%;
+  }
+
+  .cloudLw {
+    bottom: 14%;
+  }
+
+  .cloudL2 {
+    bottom: 11%;
+  }
+
+  .cloudL3 {
+    bottom: 5%;
+  }
+
+  .cloudL4 {
+    bottom: -4%;
+  }
+
+  .cloudL5 {
+    bottom: -12%;
+  }
 }

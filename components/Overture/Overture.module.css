@@ -132,7 +132,11 @@
     gap: 40px;
   }
 
-  .title { font-size: 44px; }
+  .title {
+    font-size: 44px;
+    line-height: 1.48;
+    padding-block: 8px;
+  }
 
   .title small { font-size: 15px; }
 

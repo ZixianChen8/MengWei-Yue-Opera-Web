@@ -274,3 +274,52 @@
   bottom: 18%;
   opacity: .7;
 }
+
+/* =========================================================
+   RESPONSIVE — tablet & mobile (desktop ≥1024px untouched).
+   Clouds/sun are clipped by .hero overflow:hidden, so only the
+   title + poem need scaling/repositioning to avoid clipping.
+   ========================================================= */
+@media (max-width: 1023px) {
+  .titleChars {
+    font-size: 60px;
+    letter-spacing: 10px;
+  }
+
+  .titleMeta { height: 220px; }
+
+  .titlePoem {
+    font-size: 15px;
+    letter-spacing: 5px;
+  }
+}
+
+@media (max-width: 767px) {
+  .titleBlock {
+    top: 18%;
+    left: 7%;
+    gap: 14px;
+  }
+
+  .titleChars {
+    font-size: 44px;
+    letter-spacing: 7px;
+  }
+
+  /* Decorative vertical meta rule — drop it so the title fits cleanly */
+  .titleMeta { display: none; }
+
+  .titlePoem {
+    top: 19%;
+    right: 7%;
+    font-size: 13px;
+    line-height: 2;
+    letter-spacing: 4px;
+  }
+
+  .stamp {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+  }
+}

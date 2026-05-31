@@ -321,3 +321,44 @@
     opacity: 0;
   }
 }
+
+/* =========================================================
+   RESPONSIVE (desktop ≥1024px untouched)
+   ========================================================= */
+@media (max-width: 1023px) {
+  .section { padding: 120px 48px 0; }
+
+  .head { gap: 40px; }
+
+  .events {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .title { font-size: 56px; }
+}
+
+@media (max-width: 767px) {
+  .section { padding: 80px 24px 0; }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .aside {
+    max-width: none;
+    text-align: left;
+  }
+
+  .events {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .title { font-size: 48px; }
+
+  .eCn { font-size: 28px; }
+}

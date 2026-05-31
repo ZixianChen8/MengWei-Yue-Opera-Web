@@ -257,9 +257,15 @@
   color: var(--seal-dark);
 }
 
-/* ── Responsive ─────────────────────────────────────────── */
+/* ── Responsive (desktop ≥1024px untouched) ─────────────── */
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
+  .bannerText { left: 48px; }
+
+  .body { padding: 64px 48px 100px; }
+}
+
+@media (max-width: 767px) {
   .banner {
     aspect-ratio: 4 / 3;
     min-height: 320px;
@@ -277,6 +283,18 @@
 
   .body {
     padding: 48px 24px 80px;
+  }
+
+  /* Stack long values (e.g. addresses) under their label instead of
+     squeezing them right beside it. */
+  .infoRow {
+    flex-wrap: wrap;
+    gap: 4px 32px;
+  }
+
+  .infoDesc {
+    flex: 1 0 100%;
+    text-align: left;
   }
 
   .signupCard {

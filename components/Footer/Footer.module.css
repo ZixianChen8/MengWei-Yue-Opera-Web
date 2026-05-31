@@ -131,3 +131,38 @@
   line-height: 1;
   transform: translate(0.02em, 0.06em);
 }
+
+/* =========================================================
+   RESPONSIVE (desktop ≥1024px untouched)
+   ========================================================= */
+@media (max-width: 1023px) {
+  .footer { padding: 100px 48px 56px; }
+
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .ornament { letter-spacing: 12px; }
+}
+
+@media (max-width: 767px) {
+  .footer { padding: 80px 24px 48px; }
+
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .ornament {
+    font-size: 26px;
+    letter-spacing: 8px;
+    margin-bottom: 56px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

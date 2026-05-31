@@ -400,3 +400,74 @@
   border-color: var(--seal);
   background: rgba(192, 58, 43, 0.2);
 }
+
+/* =========================================================
+   RESPONSIVE (desktop ≥1024px untouched)
+   The filmstrip's negative margin / padding are tied to the
+   section side padding — they MUST move together to avoid
+   horizontal overflow.
+   ========================================================= */
+@media (max-width: 1023px) {
+  .section { padding: 0 48px 100px; }
+
+  .filmstripOuter { margin: 0 -48px; }
+
+  .filmstripOuter::after { width: 80px; }
+
+  .filmstripWrap { padding: 0 48px; }
+
+  .filmstrip { padding-right: 48px; }
+
+  /* Lightbox → stacked column so it fits tablet & phone widths */
+  .lbContent {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    max-width: 92vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(16px);
+  }
+
+  .lightboxOpen .lbContent { transform: translateY(0); }
+
+  .lbImgWrap {
+    width: 100%;
+    height: 50vh;
+    max-height: 460px;
+  }
+
+  .lbClose {
+    top: 8px;
+    right: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section { padding: 0 24px 100px; }
+
+  .filmstripOuter { margin: 0 -24px; }
+
+  .filmstripOuter::after { width: 48px; }
+
+  .filmstripWrap { padding: 0 24px; }
+
+  .filmstrip {
+    height: 440px;
+    padding-right: 24px;
+  }
+
+  .filmCard { width: 240px; }
+
+  /* Bump arrow buttons to a ≥44px tap target on touch screens */
+  .arrowBtn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .lbContent { gap: 16px; }
+
+  .lbImgWrap { height: 42vh; }
+
+  .lbCn { font-size: 34px; }
+}

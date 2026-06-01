@@ -5,22 +5,22 @@ import { useEffect, useRef } from 'react'
 import styles from './CloudBreak.module.css'
 
 const LAYERS = [
-  { src: '/assets/cloud-2.png', width: 2838, height: 364, cls: 'l1', mirrored: true },
-  { src: '/assets/cloud-5.png', width: 2992, height: 262, cls: 'l2', mirrored: false },
-  { src: '/assets/cloud-1.png', width: 2838, height: 364, cls: 'l3', mirrored: false },
-  { src: '/assets/cloud-4.png', width: 2992, height: 364, cls: 'l4', mirrored: true },
-  { src: '/assets/cloud-6.png', width: 2992, height: 286, cls: 'l5', mirrored: true },
-  { src: '/assets/cloud-3.png', width: 2992, height: 344, cls: 'l6', mirrored: false },
+  { src: '/assets/new_clouds/cloud2_tr.png', width: 2838, height: 364, cls: 'l1', mirrored: false },
+  { src: '/assets/new_clouds/cloud3_tr.png', width: 2992, height: 344, cls: 'l2', mirrored: false },
+  { src: '/assets/new_clouds/cloud1_tr.png', width: 2838, height: 364, cls: 'l3', mirrored: false },
+  { src: '/assets/new_clouds/cloud2_tr.png', width: 2838, height: 364, cls: 'l4', mirrored: true, shiftClass: styles.shiftLeft },
+  { src: '/assets/new_clouds/cloud6_tr.png', width: 2992, height: 286, cls: 'l5', mirrored: true },
+  { src: '/assets/new_clouds/cloud3_tr.png', width: 2992, height: 344, cls: 'l6', mirrored: false, shiftClass: styles.shiftRight },
 ] as const
 
-// Per-layer parallax config: [xFactor, yFactor, scaleFactor]
+// Per-layer parallax config: [xFactorPx, yFactorPx, scaleFactor]
 const PARALLAX: Record<string, [number, number, number]> = {
-  l1: [ 18, -12, 0.02],
-  l2: [-22,  -8, 0.015],
-  l3: [ 28, -18, 0.025],
-  l4: [-16, -22, 0.03],
-  l5: [ 12, -10, 0.02],
-  l6: [-32, -28, 0.05],
+  l1: [ 8, -5, 0.008],
+  l2: [-9, -4, 0.006],
+  l3: [12, -7, 0.01],
+  l4: [-8, -8, 0.012],
+  l5: [ 6, -4, 0.008],
+  l6: [-14, -9, 0.015],
 }
 
 export default function CloudBreak() {
@@ -78,7 +78,11 @@ export default function CloudBreak() {
             alt=""
             width={layer.width}
             height={layer.height}
-            className={`${styles.img}${layer.mirrored ? ' ' + styles.mirrored : ''}`}
+            className={[
+              styles.img,
+              layer.mirrored ? styles.mirrored : '',
+              'shiftClass' in layer ? layer.shiftClass : '',
+            ].filter(Boolean).join(' ')}
             sizes="120vw"
           />
         </div>

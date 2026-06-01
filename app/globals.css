@@ -49,6 +49,12 @@ body {
   overflow-x: hidden;
 }
 
+@media (max-width: 767px) {
+  html, body {
+    scroll-behavior: auto;
+  }
+}
+
 /* =========================================================
    PAPER GRADIENT OVERLAY
    ========================================================= */

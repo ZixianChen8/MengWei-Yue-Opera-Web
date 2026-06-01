@@ -1,44 +1,53 @@
+import Link from 'next/link'
+import { footer, nav } from '@/content/home'
 import styles from './Footer.module.css'
 
 export default function Footer() {
+  const contactColumn = footer.columns[1]
+
   return (
     <footer className={styles.footer}>
-      <div className={styles.ornament}>声 · 袖 · 心</div>
+      <div className={styles.ornament}>{footer.ornament}</div>
 
       <div className={styles.inner}>
         <div>
           <div className={styles.mark}>
-            加拿大<br />孟伟越剧艺术传习所
-            <small>Meng Wei Yue Opera Studio — Canada</small>
+            {footer.brand.zh}
+            <small>{footer.brand.en}</small>
           </div>
           <p className={styles.line}>
-            渥太华 · 加拿大联邦注册非营利艺术机构<br />
-            A federally incorporated not-for-profit, headquartered in Ottawa, Ontario.
+            {footer.legal.zh}<br />
+            {footer.legal.en}
           </p>
         </div>
 
         <div className={styles.col}>
-          <h4>To Visit · 拜访</h4>
-          <a href="#">关于本所<span className={styles.en}>About the Studio</span></a>
-          <a href="#">演出剧目<span className={styles.en}>Performances</span></a>
-          <a href="#">传习课堂<span className={styles.en}>Lessons</span></a>
-          <a href="#">近期消息<span className={styles.en}>Journal</span></a>
+          <h4>{footer.columns[0]?.heading}</h4>
+          {nav.links.map((item) => (
+            <Link key={item.en} href={item.href}>
+              {item.zh}<span className={styles.en}>{item.en}</span>
+            </Link>
+          ))}
         </div>
 
-        <div className={styles.col}>
-          <h4>To Reach Us · 留书</h4>
-          <a href="mailto:hello@mengweiyue.ca">mengweiyue@studio.ca<span className={styles.en}>By letter</span></a>
-          <a href="#">+1 (613) — · — · —<span className={styles.en}>By telephone</span></a>
-          <a href="#">Wei Meng, Director<span className={styles.en}>By appointment</span></a>
-        </div>
+        {contactColumn ? (
+          <div className={styles.col}>
+            <h4>{contactColumn.heading}</h4>
+            {contactColumn.links.map((item) => (
+              <a key={`${item.en}-${item.href}`} href={item.href}>
+                {item.zh}<span className={styles.en}>{item.en}</span>
+              </a>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       <div className={styles.bottom}>
-        <div>© 2026 Meng Wei Yue Opera Studio · 加拿大孟伟越剧艺术传习所</div>
+        <div>{footer.copyright}</div>
         <div className={styles.sealMark}>
-          <span>Ottawa · Made with care</span>
+          <span>{footer.sealLine}</span>
           <span className={styles.stamp}>
-            <span className={styles.stampGlyph}>越</span>
+            <span className={styles.stampGlyph}>{nav.brand.seal}</span>
           </span>
         </div>
       </div>

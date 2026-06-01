@@ -6,24 +6,31 @@ import { hero } from '@/content/home'
 import styles from './Hero.module.css'
 
 const CLOUD_LAYERS: CloudLayerConfig[] = [
-  { depth: 0.15, scale: 0.35, fade: 1.0 }, // cloud-1 / cloud-l1
-  { depth: 0.22, scale: 0.50, fade: 0.5 }, // cloud-6 / cloud-lw
-  { depth: 0.30, scale: 0.70, fade: 0.7 }, // cloud-5 / cloud-l2
-  { depth: 0.50, scale: 1.00, fade: 0.5 }, // cloud-3 / cloud-l3
-  { depth: 0.80, scale: 1.50, fade: 0.3 }, // cloud-4 / cloud-l4
-  { depth: 1.10, scale: 2.40, fade: 0.1 }, // cloud-4 mirrored / cloud-l5
+  { depth: 0.15, scale: 0.35, fade: 1.0 },
+  { depth: 0.22, scale: 0.50, fade: 0.5 },
+  { depth: 0.30, scale: 0.70, fade: 0.7 },
+  { depth: 0.50, scale: 1.00, fade: 0.5 },
+  { depth: 0.80, scale: 1.50, fade: 0.3 },
+  { depth: 1.10, scale: 2.40, fade: 0.1 },
 ]
 
 const WISP_BASE_OPACITIES = [0.7, 0.55, 0.4]
 
-// Cloud layer image data: [src, width, height]
-const CLOUD_IMAGES: [string, number, number][] = [
-  ['/assets/cloud-1.png', 2838, 364],
-  ['/assets/cloud-6.png', 2992, 286],
-  ['/assets/cloud-5.png', 2992, 262],
-  ['/assets/cloud-3.png', 2992, 344],
-  ['/assets/cloud-4.png', 2992, 364],
-  ['/assets/cloud-4.png', 2992, 364], // mirrored
+type CloudImage = {
+  src: string
+  width: number
+  height: number
+  mirrored?: boolean
+  shiftClass?: string
+}
+
+const CLOUD_IMAGES: CloudImage[] = [
+  { src: '/assets/new_clouds/cloud1_tr.png', width: 2838, height: 364 },
+  { src: '/assets/new_clouds/cloud6_tr.png', width: 2992, height: 286 },
+  { src: '/assets/new_clouds/cloud2_tr.png', width: 2838, height: 364 },
+  { src: '/assets/new_clouds/cloud3_tr.png', width: 2992, height: 344 },
+  { src: '/assets/new_clouds/cloud2_tr.png', width: 2838, height: 364, shiftClass: styles.cloudShiftLeft },
+  { src: '/assets/new_clouds/cloud3_tr.png', width: 2992, height: 344, mirrored: true, shiftClass: styles.cloudShiftRight },
 ]
 
 const CLOUD_LAYER_CLASSES = [
@@ -104,11 +111,15 @@ export default function Hero() {
             ref={el => { setCloudRef(i, el) }}
           >
             <Image
-              src={CLOUD_IMAGES[i][0]}
+              src={CLOUD_IMAGES[i].src}
               alt=""
-              width={CLOUD_IMAGES[i][1]}
-              height={CLOUD_IMAGES[i][2]}
-              className={i === 5 ? styles.cloudImgMirrored : styles.cloudImg}
+              width={CLOUD_IMAGES[i].width}
+              height={CLOUD_IMAGES[i].height}
+              className={[
+                styles.cloudImg,
+                CLOUD_IMAGES[i].mirrored ? styles.cloudImgMirrored : '',
+                CLOUD_IMAGES[i].shiftClass ?? '',
+              ].filter(Boolean).join(' ')}
               sizes="110vw"
             />
           </div>

@@ -82,8 +82,17 @@ export default function EventsListing() {
               </div>
 
               <div className={styles.evImg}>
-                <span className={styles.evImgTag}>photo</span>
-                <span className={styles.evImgLabel}>{ev.titleZh[0]}</span>
+                {ev.cardImageUrl ? (
+                  // Plain <img>: admin may paste arbitrary remote URLs that
+                  // next/image's remote-domain allowlist would reject.
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img className={styles.evImgPhoto} src={ev.cardImageUrl} alt="" />
+                ) : (
+                  <>
+                    <span className={styles.evImgTag}>photo</span>
+                    <span className={styles.evImgLabel}>{ev.titleZh[0]}</span>
+                  </>
+                )}
               </div>
 
               <h3 className={styles.evCn}>

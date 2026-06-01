@@ -1,6 +1,6 @@
 .cloudBreak {
   position: relative;
-  height: 480px;
+  height: 360px;
   overflow: hidden;
   background: var(--cloud);
   z-index: 4;
@@ -14,13 +14,29 @@
 }
 
 .img {
+  --cloud-shift-x: 0%;
+  --cloud-scale-x: 1;
   width: 100%;
   display: block;
+  filter:
+    sepia(22%)
+    saturate(70%)
+    brightness(.82)
+    contrast(1.02);
   height: auto;
+  transform: translateX(var(--cloud-shift-x)) scaleX(var(--cloud-scale-x));
 }
 
 .mirrored {
-  transform: scaleX(-1);
+  --cloud-scale-x: -1;
+}
+
+.shiftLeft {
+  --cloud-shift-x: -6%;
+}
+
+.shiftRight {
+  --cloud-shift-x: 6%;
 }
 
 /* Back layers — subtle, top half */
@@ -58,6 +74,45 @@
 /* Front layer — most prominent, sits at bottom */
 .l6 {
   bottom: -5%;
-  opacity: 0.95;
-  mix-blend-mode: lighten;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+/* =========================================================
+   RESPONSIVE
+   Decorative band — shrink height to cut dead space on small
+   screens. Layers stay clipped by overflow:hidden (no overflow).
+   ========================================================= */
+@media (max-width: 1023px) {
+  .cloudBreak { height: 360px; }
+}
+
+@media (max-width: 767px) {
+  .cloudBreak {
+    height: 150px;
+  }
+
+  .l1 {
+    top: -6%;
+  }
+
+  .l2 {
+    top: 3%;
+  }
+
+  .l3 {
+    top: 9%;
+  }
+
+  .l4 {
+    top: 14%;
+  }
+
+  .l5 {
+    bottom: 8%;
+  }
+
+  .l6 {
+    bottom: -8%;
+  }
 }

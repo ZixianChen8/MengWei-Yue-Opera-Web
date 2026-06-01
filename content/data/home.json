@@ -108,7 +108,8 @@
         "listNum": "02 · Apr",
         "venueEn": "Ottawa Public Library",
         "formUrl": "https://www.youtube.com/?gl=CA",
-        "imageUrl": "/assets/uploads/backdrop-a1-1780295890584.png"
+        "imageUrl": "/assets/uploads/backdrop-a1-1780295890584.png",
+        "cardImageUrl": ""
       },
       {
         "id": "butterfly-lovers",
@@ -132,7 +133,8 @@
         "listNum": "01 · Mar",
         "venueEn": "NAC Studio",
         "formUrl": "#",
-        "imageUrl": "https://picsum.photos/seed/butterfly-lovers/1200/600"
+        "imageUrl": "https://picsum.photos/seed/butterfly-lovers/1200/600",
+        "cardImageUrl": ""
       },
       {
         "id": "burying-blossoms",
@@ -155,7 +157,8 @@
         "listNum": "03 · May",
         "venueEn": "Studio Hall · Bayshore",
         "formUrl": "#",
-        "imageUrl": "https://picsum.photos/seed/burying-blossoms/1200/600"
+        "imageUrl": "https://picsum.photos/seed/burying-blossoms/1200/600",
+        "cardImageUrl": ""
       },
       {
         "id": "water-sleeve-workshop",
@@ -179,7 +182,8 @@
         "listNum": "04 · Jun",
         "venueEn": "Studio Hall",
         "formUrl": "#",
-        "imageUrl": "https://picsum.photos/seed/watersleeve/1200/600"
+        "imageUrl": "https://picsum.photos/seed/watersleeve/1200/600",
+        "cardImageUrl": ""
       },
       {
         "id": "autumn-evening",
@@ -202,7 +206,8 @@
         "listNum": "05 · Sep",
         "venueEn": "Private Residence",
         "formUrl": "#",
-        "imageUrl": "https://picsum.photos/seed/autumn-evening/1200/600"
+        "imageUrl": "https://picsum.photos/seed/autumn-evening/1200/600",
+        "cardImageUrl": ""
       },
       {
         "id": "he-wenxiu-letter",
@@ -226,7 +231,8 @@
         "listNum": "06 · Oct",
         "venueEn": "Carleton Univ. Theatre",
         "formUrl": "#",
-        "imageUrl": "https://picsum.photos/seed/hewenxiu2/1200/600"
+        "imageUrl": "https://picsum.photos/seed/hewenxiu2/1200/600",
+        "cardImageUrl": ""
       },
       {
         "id": "west-chamber-pavilion",
@@ -250,7 +256,8 @@
         "listNum": "07 · Nov",
         "venueEn": "NAC Theatre",
         "formUrl": "#",
-        "imageUrl": "https://picsum.photos/seed/westchamber2/1200/600"
+        "imageUrl": "https://picsum.photos/seed/westchamber2/1200/600",
+        "cardImageUrl": ""
       }
     ]
   },
@@ -449,11 +456,6 @@
           {
             "zh": "+1 (613) — · — · —",
             "en": "By telephone",
-            "href": "#"
-          },
-          {
-            "zh": "孟伟",
-            "en": "By appointment",
             "href": "#"
           }
         ]

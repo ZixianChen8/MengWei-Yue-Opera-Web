@@ -84,7 +84,7 @@ export default function AboutPage() {
         <div className={styles.contactInner}>
           <div className={styles.contactInfo}>
             <h2 className={styles.contactHeading}>
-              {contact.heading.zh1}<br />{contact.heading.zh2}
+              {contact.heading.zh1}{contact.heading.zh2}
               <small>{contact.heading.en}</small>
             </h2>
             <p className={styles.lede}>

@@ -55,6 +55,7 @@ export type SeasonEvent = {
   venueEn: string
   formUrl: string
   imageUrl: string
+  cardImageUrl: string
 }
 
 type Season = {

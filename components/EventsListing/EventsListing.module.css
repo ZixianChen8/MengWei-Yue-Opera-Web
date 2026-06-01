@@ -242,6 +242,14 @@
   overflow: hidden;
 }
 
+.evImgPhoto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .evImgTag {
   position: absolute;
   top: 12px;

@@ -154,6 +154,10 @@
     margin-top: 40px;
   }
 
+  .meta > div:last-child {
+    display: none;
+  }
+
   .k { font-size: 24px; }
 
   .v {

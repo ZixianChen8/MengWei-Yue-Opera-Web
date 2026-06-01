@@ -339,7 +339,7 @@
 }
 
 @media (max-width: 767px) {
-  .section { padding: 80px 24px 0; }
+  .section { padding: 112px 24px 0; }
 
   .head {
     flex-direction: column;
@@ -361,4 +361,24 @@
   .title { font-size: 48px; }
 
   .eCn { font-size: 28px; }
+
+  .viewAll {
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 44px;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 15px;
+  }
+
+  .viewAllEn {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding-left: 8px;
+  }
+
+  .viewAllArrow {
+    font-size: 16px;
+  }
 }

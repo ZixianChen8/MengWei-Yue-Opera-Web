@@ -459,10 +459,41 @@
 
   .filmCard { width: 240px; }
 
-  /* Bump arrow buttons to a ≥44px tap target on touch screens */
+  .scrollHint {
+    display: none;
+  }
+
+  /* Keep icon-only controls at the mobile tap-target floor. */
   .arrowBtn {
-    width: 44px;
-    height: 44px;
+    position: relative;
+    width: 40px;
+    height: 40px;
+  }
+
+  .arrowBtn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .arrowBtn::before,
+  .lbClose::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+  }
+
+  .lbClose::before {
+    inset: -6px;
+  }
+
+  .lbClose {
+    width: 32px;
+    height: 32px;
+  }
+
+  .lbClose svg {
+    width: 12px;
+    height: 12px;
   }
 
   .lbContent { gap: 16px; }

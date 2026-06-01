@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import QRCode from 'qrcode'
 import { eventPage } from '@/content/home'
 import styles from './EventPage.module.css'
 import type { season } from '@/content/home'
@@ -9,8 +10,19 @@ interface EventBodyProps {
   event: Event
 }
 
-export default function EventBody({ event }: EventBodyProps) {
+export default async function EventBody({ event }: EventBodyProps) {
   const { labels } = eventPage
+
+  // Encode the sign-up link as a real QR. Seed data uses "#" placeholders,
+  // which aren't real destinations — fall back to the CSS placeholder then.
+  const hasFormUrl = /^https?:\/\//i.test(event.formUrl)
+  const qrSvg = hasFormUrl
+    ? await QRCode.toString(event.formUrl, {
+        type: 'svg',
+        margin: 1,
+        color: { dark: '#2C251E', light: '#00000000' },
+      })
+    : null
 
   const infoRows = [
     { term: labels.date,     value: event.date },
@@ -49,11 +61,16 @@ export default function EventBody({ event }: EventBodyProps) {
             className={styles.qrLink}
             aria-label={eventPage.qrLabel.zh}
           >
-            <div className={styles.qrPlaceholder}>
-              <span className={styles.qrCornerTR} />
-              <span className={styles.qrCornerBL} />
-              <div className={styles.qrInner} />
-            </div>
+            {qrSvg ? (
+              // Trusted, self-generated SVG (built from event.formUrl above).
+              <span className={styles.qrCode} dangerouslySetInnerHTML={{ __html: qrSvg }} />
+            ) : (
+              <div className={styles.qrPlaceholder}>
+                <span className={styles.qrCornerTR} />
+                <span className={styles.qrCornerBL} />
+                <div className={styles.qrInner} />
+              </div>
+            )}
           </a>
 
           <p className={styles.qrLabel}>{eventPage.qrLabel.zh}</p>

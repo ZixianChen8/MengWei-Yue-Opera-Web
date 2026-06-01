@@ -219,60 +219,114 @@
   will-change: transform, opacity;
 }
 
-.cloudLayer img,
-.cloudImg,
-.cloudImgMirrored {
-  width: 110%;
+.cloudImg {
+  --cloud-shift-x: 0%;
+  --cloud-scale-x: 1;
+  /* tint knobs — overridden per layer below for atmospheric depth */
+  --tint-sepia: 50%;
+  --tint-saturate: 22%;
+  --tint-hue: -50deg;
+  --tint-brightness: .68;
+  --tint-contrast: 2;
+  width: 100%;
   display: block;
-  filter: drop-shadow(0 -4px 18px rgba(255, 255, 255, .55));
+  filter:
+    sepia(var(--tint-sepia))
+    saturate(var(--tint-saturate))
+    hue-rotate(var(--tint-hue))
+    brightness(var(--tint-brightness))
+    contrast(var(--tint-contrast))
+    drop-shadow(0 -4px 18px rgba(255, 255, 255, .32));
   height: auto;
+  opacity: .96;
+  transform: translateX(var(--cloud-shift-x)) scaleX(var(--cloud-scale-x));
 }
 
-.puff img,
-.puff .cloudImg,
-.puff .cloudImgMirrored {
-  mix-blend-mode: lighten;
+.puff .cloudImg {
+  mix-blend-mode: normal;
 }
 
-.wash img,
 .wash .cloudImg {
   mix-blend-mode: multiply;
-  opacity: .85;
+  opacity: .86;
 }
 
 .cloudImgMirrored {
-  transform: scaleX(-1);
+  --cloud-scale-x: -1;
 }
 
-/* Individual cloud layer positions */
+.cloudShiftLeft {
+  --cloud-shift-x: -7%;
+}
+
+.cloudShiftRight {
+  --cloud-shift-x: 4%;
+}
+
+/* Individual cloud layer positions.
+   Tint variables ramp from cool/pale mist at the back to warm/rich sepia at the
+   front, layering atmospheric depth on top of the opacity/scale gradient. */
+/* All layers converge toward the dominant background cream rgb(240,235,225)
+   (~#F0EBE1 / --paper-deep): low saturation, sepia's natural warm hue (~40deg),
+   highlights dimmed to ~240. Variation is kept subtle around that center. */
 .cloudL1 {
   bottom: 34%;
   opacity: .55;
-}
-
-.cloudL2 {
-  bottom: 22%;
-  opacity: .7;
-}
-
-.cloudL3 {
-  bottom: 10%;
-  opacity: .9;
-}
-
-.cloudL4 {
-  bottom: -2%;
-  opacity: 1;
-}
-
-.cloudL5 {
-  bottom: -12%;
-  opacity: 1;
+  /* back — lightest, closest to the bare background cream */
+  --tint-sepia: 14%;
+  --tint-saturate: 42%;
+  --tint-hue: 0deg;
+  --tint-brightness: .96;
 }
 
 .cloudLw {
   bottom: 18%;
   opacity: .7;
+  /* soft cream ink wash */
+  --tint-sepia: 16%;
+  --tint-saturate: 46%;
+  --tint-hue: 2deg;
+  --tint-brightness: .86;
+}
+
+.cloudL2 {
+  bottom: 22%;
+  opacity: .7;
+  /* cream */
+  --tint-sepia: 19%;
+  --tint-saturate: 50%;
+  --tint-hue: 3deg;
+  --tint-brightness: .92;
+}
+
+.cloudL3 {
+  bottom: 10%;
+  opacity: .9;
+  /* cream pivot — on the background color */
+  --tint-sepia: 22%;
+  --tint-saturate: 54%;
+  --tint-hue: 4deg;
+  --tint-brightness: .90;
+}
+
+.cloudL4 {
+  bottom: -2%;
+  opacity: 1;
+  /* front — slightly deeper warm cream */
+  --tint-sepia: 26%;
+  --tint-saturate: 10%;
+  --tint-hue: 6deg;
+  --tint-brightness: .88;
+}
+
+.cloudL5 {
+  bottom: -12%;
+  opacity: 1;
+  /* nearest — warmest cream, still desaturated (no amber/brown) */
+  --tint-sepia: 30%;
+  --tint-saturate: 64%;
+  --tint-hue: 8deg;
+  --tint-brightness: .86;
 }
 
 /* =========================================================

@@ -11,7 +11,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 **Official name:** 加拿大孟伟越剧艺术传习所 (Meng Wei Yue Opera Studio Canada)
 **Year of establishment:** 2016
 
-Website for Ottawa's only Yue Opera company. **Next.js 16 / React 19 / TypeScript.** No database, no API routes — static marketing site with scroll-driven animations.
+Website for Ottawa's only Yue Opera company. **Next.js 16 / React 19 / TypeScript.** No database. The public site is a statically-rendered marketing site with scroll-driven animations; there is also a password-gated `/admin` content dashboard backed by a small set of API route handlers (admin auth/content/upload plus a contact form) and a GitHub-commit persistence layer. See **Admin dashboard** below.
 
 ## Commands
 
@@ -68,7 +68,7 @@ Static sub-pages (events, gallery, about) share the same shell as the home page:
 
 ## Content
 
-Most page copy lives in `content/home.ts` as named exports. The gallery page is the exception: its copy lives in `content/gallery.ts` (`galleryPage` export). Components import directly from these files — never hardcode strings in components.
+**Data lives in JSON; the `.ts` modules are typed re-exports.** The editable values live in `content/data/home.json` and `content/data/gallery.json`. `content/home.ts` imports `./data/home.json` and re-exports each section (`nav`, `hero`, `season`, …) with the project's TypeScript types; `content/gallery.ts` does the same for `galleryPage`. Components import the named exports from `content/home.ts` / `content/gallery.ts` (never the JSON directly, never hardcoded strings). The `/admin` dashboard edits the JSON files (see **Admin dashboard**), so when adding a field, add it to the JSON **and** widen the matching type in the `.ts` module.
 
 | Export | Used by | Shape notes |
 |---|---|---|
@@ -85,29 +85,32 @@ Most page copy lives in `content/home.ts` as named exports. The gallery page is 
 
 When adding a new section or page copy, export its content from `content/home.ts` and import it into the relevant component. When adding or changing top-level navigation, update `nav.links` and verify the corresponding route or section anchor exists.
 
-**Events:** Upcoming/current events live in `season.events[]`. The same array powers homepage cards, `/events`, and `/events/[id]`. Required fields include `id`, display titles, description/blurb, date/time/venue, `statusType`, `statusLabel`, `formUrl`, and `imageUrl`.
+**Events:** Upcoming/current events live in `season.events[]`. The same array powers homepage cards, `/events`, and `/events/[id]`. Required fields include `id`, display titles, description/blurb, date/time/venue, `statusType`, `statusLabel`, `formUrl`, and two images: `imageUrl` (the `/events/[id]` hero banner, via `EventBanner`) and `cardImageUrl` (the `/events` listing card; falls back to the CSS `evImg` placeholder when empty). Both image keys surface the admin upload widget automatically (their names match `isImageKey` in `SectionForm`). The event-detail **QR code is generated at build time** by `EventBody` (an async server component) from `event.formUrl` using the `qrcode` package — there is no QR image field; editing `formUrl` updates the QR. A placeholder `formUrl` of `#` (or empty) renders the decorative CSS QR placeholder instead.
 
 **Gallery:** The `/gallery` page (`components/Gallery/Gallery.tsx`, a `'use client'` component) renders `galleryPage.photos[]` from `content/gallery.ts` as a CSS masonry grid (`column-count`) with a sticky filter rail (by `cat`) and a keyboard-navigable lightbox. Photos currently use placeholder frames (brush glyph + mono tags), not real images.
 
 **Repertoire:** Past-event/repertoire items live in `repertoire.works[]`. Some images are local (`/assets/gallery/*.jpg`), while others are still external `https://picsum.photos/...` placeholders.
 
-**Admin/auth:** No admin authentication exists. There is no `/admin` route, no login/logout flow, no `middleware.ts`, no API route handlers, no session/cookie/JWT logic, and no auth provider dependency. Content changes are currently made by editing `content/home.ts` directly.
+## Admin dashboard
 
-## Production / Admin Editing Recommendation
+A password-gated content editor is implemented (it replaces hand-editing the data files). It commits edits straight back to GitHub, which is what triggers a redeploy on a Git-backed host.
 
-No production deploy config exists yet. For a client site, prefer a managed static/serverless host such as Vercel or Netlify connected to GitHub instead of a hand-managed VPS.
+**Routes & components:**
 
-If admin editing is added, do **not** assume runtime filesystem writes persist in production. On serverless/static hosts, writable filesystem state is read-only or ephemeral at runtime, so edits should be persisted by writing back to GitHub or to a real external store.
+- `app/admin/login/` — login screen (`LoginForm` posts to `/api/admin/login`).
+- `app/admin/(protected)/page.tsx` — dashboard listing the editable sections.
+- `app/admin/(protected)/edit/[target]/[section]/page.tsx` — the per-section editor (`components/admin/SectionEditor` + `SectionForm` + `ImageUpload`, `LogoutButton`).
+- API route handlers under `app/api/admin/`: `login`, `logout`, `content` (GET/POST a section), `upload` (image upload). Plus `app/api/contact/` for the contact form.
 
-Recommended admin persistence model:
+**Auth:** `proxy.ts` (Next 16's renamed `middleware`) gates `/admin/:path*` and `/api/admin/:path*` — it verifies an HMAC-signed session cookie, redirecting unauthenticated page requests to `/admin/login` and returning 401 for API requests; `/admin/login` and `/api/admin/login` are public. `lib/auth.ts` holds the cookie/session logic (Web Crypto HMAC, no session store, 8h TTL, `verifyPassword` against `ADMIN_PASSWORD`). `lib/admin-guard.ts` exports `isAdmin()` for defense-in-depth re-checks inside route handlers and server components — **always call `isAdmin()` at the top of any new `/api/admin/*` handler.**
 
-- Store structured site content in repo files (`content/*.ts` now; JSON/MD files may be introduced if an editor needs safer serialization).
-- Commit admin edits back to GitHub with a scoped token, triggering a redeploy.
-- For low-volume client image uploads, commit images into `public/assets/...`.
-- For frequent or large image uploads, store images in blob/media storage (Vercel Blob, Cloudflare R2, Cloudinary, etc.) and keep URLs in content.
-- Expect Git-backed edits to appear after redeploy latency, usually around 1-2 minutes, rather than instantly.
+**What is editable:** `lib/content-config.ts` is the registry — `SECTIONS[]` maps each `(target, section)` pair to its data file (`DATA_FILES`) and dashboard label/group. The content API only writes sections found via `findSection`, so **a new editable section must be added to `SECTIONS` before it can be saved.** `SectionForm` auto-renders the section's JSON tree: string keys matching `/image|imageurl|imgurl/i` (`isImageKey`) get the `ImageUpload` widget; keys in `ENUM_OPTIONS` (e.g. `statusType`, `cat`) get a dropdown; everything else is a text/number/checkbox/array editor.
 
-Only choose a persistent Node server/VPS model if the client explicitly accepts server operations and backups. In that model, local JSON/image writes can work, but the project must also define backup, deployment, monitoring, and rollback procedures.
+**Persistence:** `lib/github.ts` is the persistence layer (GitHub Contents API). `getJsonFile`/`putFile` read and commit `content/data/*.json`; `/api/admin/upload` commits images to `public/assets/uploads/` and returns the path. Requires env vars `AUTH_SECRET`, `ADMIN_PASSWORD`, `GITHUB_TOKEN`, `GITHUB_OWNER`, `GITHUB_REPO` (and optional `GITHUB_BRANCH`, default `main`). Because the runtime filesystem on Vercel is read-only/ephemeral, edits are **not** written to disk — they are committed to the repo, and the live site updates only after the resulting redeploy (≈1–2 min). Uploads are capped at ~4 MB (Vercel body limit) and limited to jpeg/png/webp/gif/avif.
+
+## Production / hosting notes
+
+No production deploy config is committed yet. Use a managed Git-connected host (Vercel/Netlify) so the admin's GitHub-commit model triggers redeploys; set the env vars above. For larger/more frequent image uploads than the ~4 MB inline-commit path comfortably handles, move to blob/media storage (Vercel Blob, Cloudflare R2, Cloudinary) and keep URLs in content. A persistent Node server/VPS is only worth it if the client accepts owning backups, monitoring, and rollback.
 
 ## Design System
 

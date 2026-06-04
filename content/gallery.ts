@@ -20,6 +20,10 @@ export type GalleryPhoto = {
   glyph: string
   venue: string
   play: string
+  // Real photo path/URL; empty string keeps the decorative glyph placeholder.
+  image?: string
+  // When true, the photo also appears in the home page Repertoire filmstrip.
+  home?: boolean
 }
 
 export type GalleryPage = {

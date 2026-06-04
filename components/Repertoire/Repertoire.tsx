@@ -3,14 +3,19 @@
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { repertoire } from '@/content/home'
+import { galleryPage } from '@/content/gallery'
 import styles from './Repertoire.module.css'
 
 const SCROLL_STEP = 320
 const EASE = 0.12
 
+// The home filmstrip is a curated view of the shared gallery photos
+// (single source of truth) — those flagged `home: true`.
+const works = galleryPage.photos.filter((p) => p.home)
+
 export default function Repertoire() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const [activeWork, setActiveWork] = useState(repertoire.works[0])
+  const [activeWork, setActiveWork] = useState(works[0])
   const stripRef = useRef<HTMLDivElement>(null)
   const scrollTarget = useRef(0)
   const rafId = useRef<number | null>(null)
@@ -54,7 +59,7 @@ export default function Repertoire() {
   const openWork = activeWork
 
   const openLightbox = (index: number) => {
-    setActiveWork(repertoire.works[index])
+    setActiveWork(works[index])
     setOpenIndex(index)
   }
 
@@ -70,20 +75,24 @@ export default function Repertoire() {
       <div className={styles.filmstripOuter}>
         <div ref={stripRef} className={styles.filmstripWrap}>
           <div className={styles.filmstrip}>
-            {repertoire.works.map((work, i) => (
+            {works.map((work, i) => (
               <div
-                key={`${work.year}-${work.zh.join('')}`}
+                key={`${work.play}-${work.cn}`}
                 className={styles.filmCard}
                 onClick={() => openLightbox(i)}
               >
-                <Image
-                  src={work.image}
-                  alt={`${work.zh.join('')} – ${work.en}`}
-                  width={280}
-                  height={520}
-                  className={styles.filmImg}
-                  sizes="370px"
-                />
+                {work.image ? (
+                  <Image
+                    src={work.image}
+                    alt={`${work.cn} – ${work.en}`}
+                    width={280}
+                    height={520}
+                    className={styles.filmImg}
+                    sizes="370px"
+                  />
+                ) : (
+                  <div className={styles.filmGlyph}>{work.glyph}</div>
+                )}
                 <div className={styles.filmGradient} />
                 <div className={styles.filmOverlay} />
                 <div className={styles.expandIcon}>
@@ -92,8 +101,8 @@ export default function Repertoire() {
                   </svg>
                 </div>
                 <div className={styles.filmCaption}>
-                  <div className={styles.year}>{work.year}</div>
-                  <div className={styles.cnTitle}>{work.zh.join('')}</div>
+                  <div className={styles.year}>{work.play}</div>
+                  <div className={styles.cnTitle}>{work.cn}</div>
                   <div className={styles.enTitle}>{work.en}</div>
                 </div>
               </div>
@@ -133,19 +142,23 @@ export default function Repertoire() {
       >
         <div className={styles.lbContent} onClick={e => e.stopPropagation()}>
           <div className={styles.lbImgWrap}>
-            <Image
-              src={openWork.image}
-              alt={`${openWork.zh.join('')} – ${openWork.en}`}
-              width={460}
-              height={560}
-              className={styles.lbImg}
-              sizes="460px"
-            />
+            {openWork?.image ? (
+              <Image
+                src={openWork.image}
+                alt={`${openWork.cn} – ${openWork.en}`}
+                width={460}
+                height={560}
+                className={styles.lbImg}
+                sizes="460px"
+              />
+            ) : (
+              <div className={styles.filmGlyph}>{openWork?.glyph}</div>
+            )}
           </div>
           <div className={styles.lbMeta}>
-            <div className={styles.lbYear}>{openWork.year}</div>
-            <div className={styles.lbCn}>{openWork.zh.join('')}</div>
-            <div className={styles.lbEn}>{openWork.en}</div>
+            <div className={styles.lbYear}>{openWork?.venue}</div>
+            <div className={styles.lbCn}>{openWork?.cn}</div>
+            <div className={styles.lbEn}>{openWork?.en}</div>
           </div>
           <button className={styles.lbClose} onClick={() => setOpenIndex(null)} aria-label="Close">
             <svg viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">

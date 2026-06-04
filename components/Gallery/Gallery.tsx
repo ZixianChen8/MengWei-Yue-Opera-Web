@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { galleryPage, type GalleryAspect } from '@/content/gallery'
 import styles from './Gallery.module.css'
 
@@ -137,9 +138,21 @@ export default function Gallery() {
             >
               <span className={styles.pcNum}>N° {pad2(i + 1)}</span>
               <div className={`${styles.photoFrame} ${arClass[p.ar]}`}>
-                <span className={styles.phTag}>{p.play}</span>
-                <span className={styles.phGlyph}>{p.glyph}</span>
-                <span className={styles.phDim}>{dimsFor(p.ar)} · jpg</span>
+                {p.image ? (
+                  <Image
+                    src={p.image}
+                    alt={`${p.cn} – ${p.en}`}
+                    fill
+                    className={styles.photoImg}
+                    sizes="(max-width: 700px) 100vw, 33vw"
+                  />
+                ) : (
+                  <>
+                    <span className={styles.phTag}>{p.play}</span>
+                    <span className={styles.phGlyph}>{p.glyph}</span>
+                    <span className={styles.phDim}>{dimsFor(p.ar)} · jpg</span>
+                  </>
+                )}
               </div>
               <figcaption className={styles.photoCap}>
                 <div className={styles.pcCn}>{p.cn}</div>
@@ -182,13 +195,25 @@ export default function Gallery() {
               className={styles.lbImg}
               style={current ? { aspectRatio: ratioFor(current.p.ar) } : undefined}
             >
-              <span className={styles.lbTag}>
-                {current ? `${current.p.play} · ${lightbox.tagSuffix}` : ''}
-              </span>
-              <span className={styles.lbGlyph}>{current?.p.glyph}</span>
-              <span className={styles.lbDim}>
-                {current ? `${dimsFor(current.p.ar)} · jpg` : ''}
-              </span>
+              {current?.p.image ? (
+                <Image
+                  src={current.p.image}
+                  alt={`${current.p.cn} – ${current.p.en}`}
+                  fill
+                  className={styles.photoImg}
+                  sizes="(max-width: 700px) 100vw, 70vw"
+                />
+              ) : (
+                <>
+                  <span className={styles.lbTag}>
+                    {current ? `${current.p.play} · ${lightbox.tagSuffix}` : ''}
+                  </span>
+                  <span className={styles.lbGlyph}>{current?.p.glyph}</span>
+                  <span className={styles.lbDim}>
+                    {current ? `${dimsFor(current.p.ar)} · jpg` : ''}
+                  </span>
+                </>
+              )}
             </div>
             <div className={styles.lbCaption}>
               <div className={styles.lbCn}>

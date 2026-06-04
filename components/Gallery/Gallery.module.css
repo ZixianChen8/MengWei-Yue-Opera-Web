@@ -435,9 +435,15 @@
     linear-gradient(180deg, #3a322b, #2c2620);
   border: 1px dashed rgba(248, 244, 238, 0.25);
   position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* real photo fills its frame (masonry grid + lightbox stage) */
+.photoImg {
+  object-fit: cover;
 }
 
 .lbGlyph {

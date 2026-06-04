@@ -71,11 +71,10 @@ type Studio = {
   cta: { zh: string; en: string; href: string }
 }
 
-export type RepertoireWork = { year: string; zh: string[]; en: string; image: string }
-
+// The home filmstrip now draws its cards from the shared gallery photos
+// (see content/gallery.ts); only the section heading/hint live here.
 type Repertoire = {
   title: { zh: string; en: string }
-  works: RepertoireWork[]
   hint: string
 }
 

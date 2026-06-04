@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
+import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 import EventBanner from '@/components/EventPage/EventBanner'
 import EventBody from '@/components/EventPage/EventBody'
 import { season } from '@/content/home'
@@ -31,6 +32,7 @@ export default async function EventPage(
 
   return (
     <>
+      <SmoothScroll />
       <div style={{ position: 'relative' }}>
         <Nav variant="horizontal" />
         <EventBanner event={event} />

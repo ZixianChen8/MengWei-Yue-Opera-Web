@@ -14,6 +14,28 @@
     "lightbox": {
       "stamp": "孟"
     },
-    "photos": []
+    "photos": [
+      {
+        "image": "/assets/uploads/adsc-5985-1780611498761.jpg",
+        "title": "Test",
+        "description": "Test",
+        "date": "Test",
+        "home": true
+      },
+      {
+        "image": "/assets/uploads/adsc-6003-1780611632162.jpg",
+        "title": "Test",
+        "description": "Test",
+        "date": "Test",
+        "home": true
+      },
+      {
+        "image": "/assets/uploads/adsc-6006-1780611649770.jpg",
+        "title": "Test",
+        "description": "Test",
+        "date": "Test",
+        "home": true
+      }
+    ]
   }
 }

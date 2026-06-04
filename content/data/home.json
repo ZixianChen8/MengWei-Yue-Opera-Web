@@ -88,30 +88,6 @@
     },
     "events": [
       {
-        "id": "sound-and-tone",
-        "num": "N° 02",
-        "tag": "讲座 · Lecture",
-        "titleZh": [
-          "越剧之声韵"
-        ],
-        "titleEn": "Sound & Tone in Yue Opera",
-        "blurb": "孟伟主讲，从越腔的水调到一袖之间，一席关于声腔的公开讲座，附现场演示。",
-        "description": "孟伟主讲，介绍越腔的基本特点：从水调的起源到袖功的运用，从咬字行腔到身段配合。一场对公众开放的讲座，附现场演唱示范。适合对越剧有兴趣的朋友，无需戏曲背景。",
-        "date": "2026年4月6日",
-        "time": "15:00",
-        "duration": "1.5小时 · 90 Minutes",
-        "venue": "Ottawa Public Library，渥太华",
-        "venueAddress": "渥太华公共图书馆，具体分馆报名后告知",
-        "feature": false,
-        "statusType": "free",
-        "statusLabel": "免票入场 · Free",
-        "listNum": "02 · Apr",
-        "venueEn": "Ottawa Public Library",
-        "formUrl": "https://www.youtube.com/?gl=CA",
-        "imageUrl": "/assets/uploads/backdrop-a1-1780295890584.png",
-        "cardImageUrl": "/assets/uploads/download-1780296573018.png"
-      },
-      {
         "id": "butterfly-lovers",
         "num": "N° 01",
         "tag": "大戏 · Mainstage",
@@ -135,6 +111,30 @@
         "formUrl": "#",
         "imageUrl": "https://picsum.photos/seed/butterfly-lovers/1200/600",
         "cardImageUrl": ""
+      },
+      {
+        "id": "sound-and-tone",
+        "num": "N° 02",
+        "tag": "讲座 · Lecture",
+        "titleZh": [
+          "越剧之声韵"
+        ],
+        "titleEn": "Sound & Tone in Yue Opera",
+        "blurb": "孟伟主讲，从越腔的水调到一袖之间，一席关于声腔的公开讲座，附现场演示。",
+        "description": "孟伟主讲，介绍越腔的基本特点：从水调的起源到袖功的运用，从咬字行腔到身段配合。一场对公众开放的讲座，附现场演唱示范。适合对越剧有兴趣的朋友，无需戏曲背景。",
+        "date": "2026年4月6日",
+        "time": "15:00",
+        "duration": "1.5小时 · 90 Minutes",
+        "venue": "Ottawa Public Library，渥太华",
+        "venueAddress": "渥太华公共图书馆，具体分馆报名后告知",
+        "feature": false,
+        "statusType": "free",
+        "statusLabel": "免票入场 · Free",
+        "listNum": "02 · Apr",
+        "venueEn": "Ottawa Public Library",
+        "formUrl": "https://www.youtube.com/?gl=CA",
+        "imageUrl": "/assets/uploads/backdrop-a1-1780295890584.png",
+        "cardImageUrl": "/assets/uploads/download-1780296573018.png"
       },
       {
         "id": "burying-blossoms",

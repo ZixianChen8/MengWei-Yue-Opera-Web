@@ -43,51 +43,6 @@
       "tagSuffix": "STILL",
       "stamp": "孟"
     },
-    "photos": [
-      {
-        "cn": "楼台会",
-        "en": "The Pavilion Meeting",
-        "cat": "mainstage",
-        "ar": "r45",
-        "glyph": "梁",
-        "venue": "NAC Studio · 2026",
-        "play": "梁山伯与祝英台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "十八相送",
-        "en": "Eighteen Li of Parting",
-        "cat": "mainstage",
-        "ar": "r32",
-        "glyph": "祝",
-        "venue": "NAC Studio · 2026",
-        "play": "梁山伯与祝英台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "水袖·身段",
-        "en": "Sleeve & Stance",
-        "cat": "studio",
-        "ar": "r57",
-        "glyph": "袖",
-        "venue": "Studio Hall · 2025",
-        "play": "传习课堂",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "葬花",
-        "en": "Burying the Blossoms",
-        "cat": "recital",
-        "ar": "r45",
-        "glyph": "黛",
-        "venue": "Studio Hall · 2026",
-        "play": "红楼·葬花",
-        "image": "",
-        "home": false
-      }
-    ]
+    "photos": []
   }
 }

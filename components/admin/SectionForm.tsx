@@ -19,6 +19,14 @@ const ENUM_OPTIONS: Record<string, string[]> = {
   statusType: ['open', 'free', 'soon', 'waitlist', 'members', 'closed'],
 }
 
+// Shape used when adding the first item to an otherwise-empty array.
+// Without this, "Add" has no sibling to clone and falls back to a bare
+// string, so e.g. an emptied gallery would offer only a plain textbox
+// instead of the image-upload + caption fields. Keyed by the array's key.
+const NEW_ITEM_TEMPLATES: Record<string, JsonValue> = {
+  photos: { image: '', title: '', description: '', date: '', home: false },
+}
+
 function isImageKey(key: string): boolean {
   return /image|imageurl|imgurl/i.test(key)
 }
@@ -166,7 +174,13 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
       onChange(copy)
     }
     const add = () => {
-      const template = items.length > 0 ? blankLike(items[items.length - 1]) : ''
+      const fallback = NEW_ITEM_TEMPLATES[keyName]
+      const template =
+        items.length > 0
+          ? blankLike(items[items.length - 1])
+          : fallback
+            ? blankLike(fallback)
+            : ''
       onChange([...items, template])
     }
 

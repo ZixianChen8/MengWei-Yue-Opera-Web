@@ -83,89 +83,6 @@
   font-weight: 400;
 }
 
-/* ── Filter Rail ─────────────────────────────────────────── */
-
-.filters {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: var(--paper);
-  border-bottom: 1px solid var(--border);
-  padding: 0 80px;
-}
-
-.filtersInner {
-  max-width: 1180px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 22px 0;
-}
-
-.count {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.count b {
-  color: var(--seal);
-  font-weight: 400;
-}
-
-.filterSet {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-  padding: 8px 16px;
-  border: 1px solid var(--border-mid);
-  border-radius: 99px;
-  background: transparent;
-  cursor: pointer;
-  transition: color 0.25s, border-color 0.25s, background 0.25s;
-  font-family: var(--font-chinese-display);
-  font-size: 15px;
-  letter-spacing: 3px;
-  color: var(--ink-soft);
-}
-
-.chipEn {
-  font-family: var(--font-latin-display);
-  font-size: 9.5px;
-  letter-spacing: 0.32em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-}
-
-.chip:hover {
-  border-color: var(--ink-faint);
-  color: var(--ink);
-}
-
-.chipActive {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
-}
-
-.chipActive .chipEn {
-  color: var(--paper);
-  opacity: 0.7;
-}
-
 /* ── Gallery (masonry columns) ───────────────────────────── */
 
 .galleryWrap {
@@ -192,65 +109,17 @@
 .photoFrame {
   position: relative;
   overflow: hidden;
-  background:
-    repeating-linear-gradient(135deg, rgba(44, 37, 30, 0.06) 0 2px, transparent 2px 14px),
-    linear-gradient(180deg, rgba(234, 222, 204, 0.4), rgba(218, 204, 180, 0.3));
-  border: 1px dashed rgba(80, 65, 50, 0.35);
+  /* neutral fill behind the image during lazy load */
+  background: linear-gradient(180deg, rgba(234, 222, 204, 0.5), rgba(218, 204, 180, 0.4));
+  border: 1px solid var(--border);
+  line-height: 0;
 }
 
-/* aspect-ratio variants */
-.r45 { aspect-ratio: 4 / 5; }
-.r32 { aspect-ratio: 3 / 2; }
-.r11 { aspect-ratio: 1 / 1; }
-.r57 { aspect-ratio: 5 / 7; }
-
-.phTag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.24em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-}
-
-.phDim {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-
-.phGlyph {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-chinese-display);
-  font-size: 60px;
-  letter-spacing: 8px;
-  color: rgba(80, 65, 50, 0.28);
-}
-
-/* seal dot, like the event cards */
-.photoFrame::after {
-  content: '';
-  position: absolute;
-  left: 16px;
-  bottom: 16px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--seal);
-  opacity: 0.55;
-  transition: opacity 0.3s;
+/* real photo, rendered at its natural proportion within the column width */
+.photoImg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* caption overlay */
@@ -274,10 +143,6 @@
 
 .photo:hover .photoFrame {
   border-color: var(--seal);
-}
-
-.photo:hover .photoFrame::after {
-  opacity: 0.9;
 }
 
 .pcCn {
@@ -427,52 +292,21 @@
 }
 
 .lbImg {
-  width: 100%;
-  max-height: 64vh;
-  aspect-ratio: 3 / 2;
-  background:
-    repeating-linear-gradient(135deg, rgba(248, 244, 238, 0.06) 0 2px, transparent 2px 14px),
-    linear-gradient(180deg, #3a322b, #2c2620);
-  border: 1px dashed rgba(248, 244, 238, 0.25);
-  position: relative;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
+  min-height: 0;
 }
 
-/* real photo fills its frame (masonry grid + lightbox stage) */
-.photoImg {
-  object-fit: cover;
-}
-
-.lbGlyph {
-  font-family: var(--font-chinese-display);
-  font-size: 90px;
-  letter-spacing: 10px;
-  color: rgba(248, 244, 238, 0.18);
-}
-
-.lbTag {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.24em;
-  color: rgba(248, 244, 238, 0.55);
-  text-transform: uppercase;
-}
-
-.lbDim {
-  position: absolute;
-  bottom: 18px;
-  right: 18px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: rgba(248, 244, 238, 0.45);
-  text-transform: uppercase;
+/* enlarged photo, natural ratio, constrained to the stage */
+.lbImgEl {
+  display: block;
+  max-width: 100%;
+  max-height: 64vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .lbCaption {
@@ -529,6 +363,13 @@
 
 /* ── Responsive ──────────────────────────────────────────── */
 
+@media (min-width: 1400px) {
+  .gallery {
+    max-width: 1480px;
+    column-count: 4;
+  }
+}
+
 @media (max-width: 1080px) {
   .gallery {
     column-count: 2;
@@ -555,20 +396,6 @@
 
   .phMeta {
     display: none;
-  }
-
-  .filters {
-    padding: 0 24px;
-  }
-
-  .filtersInner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-  }
-
-  .filterSet {
-    justify-content: flex-start;
   }
 
   .galleryWrap {

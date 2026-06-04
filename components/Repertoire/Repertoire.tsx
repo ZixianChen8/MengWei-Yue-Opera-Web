@@ -11,7 +11,7 @@ const EASE = 0.12
 
 // The home filmstrip is a curated view of the shared gallery photos
 // (single source of truth) — those flagged `home: true`.
-const works = galleryPage.photos.filter((p) => p.home)
+const works = galleryPage.photos.filter((p) => p.home && p.image)
 
 export default function Repertoire() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -77,22 +77,18 @@ export default function Repertoire() {
           <div className={styles.filmstrip}>
             {works.map((work, i) => (
               <div
-                key={`${work.play}-${work.cn}`}
+                key={`${work.image}-${i}`}
                 className={styles.filmCard}
                 onClick={() => openLightbox(i)}
               >
-                {work.image ? (
-                  <Image
-                    src={work.image}
-                    alt={`${work.cn} – ${work.en}`}
-                    width={280}
-                    height={520}
-                    className={styles.filmImg}
-                    sizes="370px"
-                  />
-                ) : (
-                  <div className={styles.filmGlyph}>{work.glyph}</div>
-                )}
+                <Image
+                  src={work.image}
+                  alt={work.title || ''}
+                  width={280}
+                  height={520}
+                  className={styles.filmImg}
+                  sizes="370px"
+                />
                 <div className={styles.filmGradient} />
                 <div className={styles.filmOverlay} />
                 <div className={styles.expandIcon}>
@@ -101,9 +97,9 @@ export default function Repertoire() {
                   </svg>
                 </div>
                 <div className={styles.filmCaption}>
-                  <div className={styles.year}>{work.play}</div>
-                  <div className={styles.cnTitle}>{work.cn}</div>
-                  <div className={styles.enTitle}>{work.en}</div>
+                  {work.date && <div className={styles.year}>{work.date}</div>}
+                  {work.title && <div className={styles.cnTitle}>{work.title}</div>}
+                  {work.description && <div className={styles.enTitle}>{work.description}</div>}
                 </div>
               </div>
             ))}
@@ -142,23 +138,21 @@ export default function Repertoire() {
       >
         <div className={styles.lbContent} onClick={e => e.stopPropagation()}>
           <div className={styles.lbImgWrap}>
-            {openWork?.image ? (
+            {openWork?.image && (
               <Image
                 src={openWork.image}
-                alt={`${openWork.cn} – ${openWork.en}`}
+                alt={openWork.title || ''}
                 width={460}
                 height={560}
                 className={styles.lbImg}
                 sizes="460px"
               />
-            ) : (
-              <div className={styles.filmGlyph}>{openWork?.glyph}</div>
             )}
           </div>
           <div className={styles.lbMeta}>
-            <div className={styles.lbYear}>{openWork?.venue}</div>
-            <div className={styles.lbCn}>{openWork?.cn}</div>
-            <div className={styles.lbEn}>{openWork?.en}</div>
+            {openWork?.date && <div className={styles.lbYear}>{openWork.date}</div>}
+            {openWork?.title && <div className={styles.lbCn}>{openWork.title}</div>}
+            {openWork?.description && <div className={styles.lbEn}>{openWork.description}</div>}
           </div>
           <button className={styles.lbClose} onClick={() => setOpenIndex(null)} aria-label="Close">
             <svg viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">

@@ -1,47 +1,20 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { galleryPage, type GalleryAspect } from '@/content/gallery'
+import { galleryPage } from '@/content/gallery'
 import styles from './Gallery.module.css'
-
-// Placeholder pixel dimensions implied by each aspect-ratio class.
-function dimsFor(ar: GalleryAspect): string {
-  if (ar === 'r45') return '1280 × 1600'
-  if (ar === 'r57') return '1200 × 1680'
-  if (ar === 'r11') return '1500 × 1500'
-  return '1600 × 1067'
-}
-
-// CSS aspect-ratio value used by the lightbox stage to mirror the chosen photo.
-function ratioFor(ar: GalleryAspect): string {
-  if (ar === 'r45') return '4 / 5'
-  if (ar === 'r57') return '5 / 7'
-  if (ar === 'r11') return '1 / 1'
-  return '3 / 2'
-}
-
-const arClass: Record<GalleryAspect, string> = {
-  r45: styles.r45,
-  r32: styles.r32,
-  r11: styles.r11,
-  r57: styles.r57,
-}
 
 const pad2 = (n: number) => String(n).padStart(2, '0')
 
 export default function Gallery() {
-  const { header, countSuffix, filters, lightbox, photos } = galleryPage
-  const total = photos.length
+  const { header, lightbox, photos } = galleryPage
 
-  const [cat, setCat] = useState<string>('all')
-  // Position within the currently-visible list; null means the lightbox is closed.
+  // Real images only, rendered in admin-defined array order.
+  const visible = photos.filter((p) => p.image)
+  const total = visible.length
+
+  // Position within the list; null means the lightbox is closed.
   const [pos, setPos] = useState<number | null>(null)
-
-  // Original indices of photos visible under the active filter, in order.
-  const visible = photos
-    .map((p, i) => ({ p, i }))
-    .filter(({ p }) => cat === 'all' || p.cat === cat)
 
   const open = pos !== null
   const current = open ? visible[pos] : null
@@ -53,12 +26,6 @@ export default function Gallery() {
       if (prev === null || visible.length === 0) return prev
       return (prev + delta + visible.length) % visible.length
     })
-  }
-
-  // Changing the filter while the lightbox is open would desync the position.
-  function selectCat(next: string) {
-    setCat(next)
-    setPos(null)
   }
 
   // Keyboard navigation + body scroll lock while the lightbox is open.
@@ -106,64 +73,32 @@ export default function Gallery() {
         </div>
       </header>
 
-      {/* ── Filter rail ─────────────────────────────────── */}
-      <div className={styles.filters}>
-        <div className={styles.filtersInner}>
-          <div className={styles.count}>
-            <b>{pad2(visible.length)}</b> / {pad2(total)} {countSuffix}
-          </div>
-          <div className={styles.filterSet}>
-            {filters.map((f) => (
-              <button
-                key={f.key}
-                className={`${styles.chip} ${cat === f.key ? styles.chipActive : ''}`}
-                onClick={() => selectCat(f.key)}
-              >
-                {f.zh}
-                <span className={styles.chipEn}>{f.en}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Gallery (masonry columns) ───────────────────── */}
+      {/* ── Gallery (masonry columns, natural ratios) ───── */}
       <section className={styles.galleryWrap}>
         <div className={styles.gallery}>
-          {visible.map(({ p, i }, vi) => (
+          {visible.map((p, i) => (
             <figure
-              key={i}
+              key={`${p.image}-${i}`}
               className={styles.photo}
-              onClick={() => setPos(vi)}
+              onClick={() => setPos(i)}
             >
               <span className={styles.pcNum}>N° {pad2(i + 1)}</span>
-              <div className={`${styles.photoFrame} ${arClass[p.ar]}`}>
-                {p.image ? (
-                  <Image
-                    src={p.image}
-                    alt={`${p.cn} – ${p.en}`}
-                    fill
-                    className={styles.photoImg}
-                    sizes="(max-width: 700px) 100vw, 33vw"
-                  />
-                ) : (
-                  <>
-                    <span className={styles.phTag}>{p.play}</span>
-                    <span className={styles.phGlyph}>{p.glyph}</span>
-                    <span className={styles.phDim}>{dimsFor(p.ar)} · jpg</span>
-                  </>
-                )}
+              <div className={styles.photoFrame}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.image} alt={p.title || ''} loading="lazy" className={styles.photoImg} />
               </div>
-              <figcaption className={styles.photoCap}>
-                <div className={styles.pcCn}>{p.cn}</div>
-                <div className={styles.pcEn}>{p.en}</div>
-              </figcaption>
+              {(p.title || p.date) && (
+                <figcaption className={styles.photoCap}>
+                  {p.title && <div className={styles.pcCn}>{p.title}</div>}
+                  {p.date && <div className={styles.pcEn}>{p.date}</div>}
+                </figcaption>
+              )}
             </figure>
           ))}
         </div>
       </section>
 
-      {/* ── Lightbox ────────────────────────────────────── */}
+      {/* ── Lightbox (click a photo to see detail) ──────── */}
       <div
         className={`${styles.lightbox} ${open ? styles.lightboxOpen : ''}`}
         onClick={(e) => {
@@ -174,7 +109,7 @@ export default function Gallery() {
           <div className={styles.lbId}>
             Frame{' '}
             <b>
-              {open ? pad2(pos + 1) : '00'} / {pad2(visible.length)}
+              {open ? pad2(pos + 1) : '00'} / {pad2(total)}
             </b>
           </div>
           <button className={styles.lbClose} onClick={close} aria-label="Close">
@@ -191,40 +126,26 @@ export default function Gallery() {
             ←
           </button>
           <div className={styles.lbFigure}>
-            <div
-              className={styles.lbImg}
-              style={current ? { aspectRatio: ratioFor(current.p.ar) } : undefined}
-            >
-              {current?.p.image ? (
-                <Image
-                  src={current.p.image}
-                  alt={`${current.p.cn} – ${current.p.en}`}
-                  fill
-                  className={styles.photoImg}
-                  sizes="(max-width: 700px) 100vw, 70vw"
-                />
-              ) : (
-                <>
-                  <span className={styles.lbTag}>
-                    {current ? `${current.p.play} · ${lightbox.tagSuffix}` : ''}
-                  </span>
-                  <span className={styles.lbGlyph}>{current?.p.glyph}</span>
-                  <span className={styles.lbDim}>
-                    {current ? `${dimsFor(current.p.ar)} · jpg` : ''}
-                  </span>
-                </>
+            <div className={styles.lbImg}>
+              {current && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={current.image} alt={current.title || ''} className={styles.lbImgEl} />
               )}
             </div>
-            <div className={styles.lbCaption}>
-              <div className={styles.lbCn}>
-                {current?.p.cn}
-                <small>{current?.p.en}</small>
+            {current && (current.title || current.description || current.date) && (
+              <div className={styles.lbCaption}>
+                {(current.title || current.description) && (
+                  <div className={styles.lbCn}>
+                    {current.title}
+                    {current.description && <small>{current.description}</small>}
+                  </div>
+                )}
+                <div className={styles.lbMeta}>
+                  {current.date}
+                  <span className={styles.stamp}>{lightbox.stamp}</span>
+                </div>
               </div>
-              <div className={styles.lbMeta}>
-                {current?.p.venue}
-                <span className={styles.stamp}>{lightbox.stamp}</span>
-              </div>
-            </div>
+            )}
           </div>
           <button className={styles.lbNav} onClick={() => step(1)} aria-label="Next">
             →

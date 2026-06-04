@@ -17,9 +17,6 @@ export type JsonValue =
 // admin can't accidentally break styling that keys off these values.
 const ENUM_OPTIONS: Record<string, string[]> = {
   statusType: ['open', 'free', 'soon', 'waitlist', 'members', 'closed'],
-  ar: ['r45', 'r32', 'r57', 'r11'],
-  cat: ['mainstage', 'recital', 'studio', 'backstage'],
-  key: ['all', 'mainstage', 'recital', 'studio', 'backstage'],
 }
 
 function isImageKey(key: string): boolean {

@@ -9,304 +9,46 @@
         "bold": "Gallery"
       },
       "enTitle": "A sleeve held mid-air; a glance that lasts a hundred years — gathered here, frame by frame.",
-      "crumbsBottom": "Mainstage · Recital · Studio · Backstage"
+      "crumbsBottom": "Stage Photographs · 影像志"
     },
-    "countSuffix": "Frames · 影像志",
-    "filters": [
-      {
-        "key": "all",
-        "zh": "全部",
-        "en": "All"
-      },
-      {
-        "key": "mainstage",
-        "zh": "大戏",
-        "en": "Mainstage"
-      },
-      {
-        "key": "recital",
-        "zh": "折子",
-        "en": "Recital"
-      },
-      {
-        "key": "studio",
-        "zh": "传习",
-        "en": "Studio"
-      },
-      {
-        "key": "backstage",
-        "zh": "后台",
-        "en": "Backstage"
-      }
-    ],
     "lightbox": {
-      "tagSuffix": "STILL",
       "stamp": "孟"
     },
     "photos": [
       {
-        "cn": "楼台会",
-        "en": "The Pavilion Meeting",
-        "cat": "mainstage",
-        "ar": "r45",
-        "glyph": "梁",
-        "venue": "NAC Studio · 2026",
-        "play": "梁山伯与祝英台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "十八相送",
-        "en": "Eighteen Li of Parting",
-        "cat": "mainstage",
-        "ar": "r32",
-        "glyph": "祝",
-        "venue": "NAC Studio · 2026",
-        "play": "梁山伯与祝英台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "水袖·身段",
-        "en": "Sleeve & Stance",
-        "cat": "studio",
-        "ar": "r57",
-        "glyph": "袖",
-        "venue": "Studio Hall · 2025",
-        "play": "传习课堂",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "葬花",
-        "en": "Burying the Blossoms",
-        "cat": "recital",
-        "ar": "r45",
-        "glyph": "黛",
-        "venue": "Studio Hall · 2026",
-        "play": "红楼·葬花",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "后台·上妆",
-        "en": "Backstage, the Painting of a Face",
-        "cat": "backstage",
-        "ar": "r11",
-        "glyph": "妆",
-        "venue": "Dressing Room · 2025",
-        "play": "后台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "西厢·听琴",
-        "en": "Listening to the Qin",
-        "cat": "mainstage",
-        "ar": "r32",
-        "glyph": "莺",
-        "venue": "City Theatre · 2023",
-        "play": "西厢记",
         "image": "/assets/gallery/west-chamber.jpg",
+        "title": "西厢·听琴",
+        "description": "Listening to the Qin — 西厢记",
+        "date": "City Theatre · 2023",
         "home": true
       },
       {
-        "cn": "碧玉簪",
-        "en": "The Jade Hairpin",
-        "cat": "mainstage",
-        "ar": "r45",
-        "glyph": "玉",
-        "venue": "City Theatre · 2019",
-        "play": "碧玉簪",
         "image": "/assets/gallery/jade-hairpin.jpg",
+        "title": "碧玉簪",
+        "description": "The Jade Hairpin",
+        "date": "City Theatre · 2019",
         "home": true
       },
       {
-        "cn": "化蝶",
-        "en": "Transformed to Butterflies",
-        "cat": "mainstage",
-        "ar": "r57",
-        "glyph": "蝶",
-        "venue": "NAC Studio · 2026",
-        "play": "梁山伯与祝英台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "晨课·开嗓",
-        "en": "Morning Voice Class",
-        "cat": "studio",
-        "ar": "r32",
-        "glyph": "声",
-        "venue": "Studio Hall · 2025",
-        "play": "传习课堂",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "秋夜·清音",
-        "en": "An Autumn Evening",
-        "cat": "recital",
-        "ar": "r11",
-        "glyph": "秋",
-        "venue": "Private Salon · 2025",
-        "play": "秋夜·清音",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "五女拜寿",
-        "en": "Five Daughters' Birthday",
-        "cat": "mainstage",
-        "ar": "r32",
-        "glyph": "寿",
-        "venue": "City Theatre · 2023",
-        "play": "五女拜寿",
         "image": "/assets/gallery/five-daughters.jpg",
+        "title": "五女拜寿",
+        "description": "Five Daughters' Birthday",
+        "date": "City Theatre · 2023",
         "home": true
       },
       {
-        "cn": "贴片·勒头",
-        "en": "Headdress & Hair-Setting",
-        "cat": "backstage",
-        "ar": "r45",
-        "glyph": "鬓",
-        "venue": "Dressing Room · 2024",
-        "play": "后台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "何文秀",
-        "en": "He Wenxiu",
-        "cat": "mainstage",
-        "ar": "r57",
-        "glyph": "秀",
-        "venue": "City Theatre · 2024",
-        "play": "何文秀",
         "image": "/assets/gallery/he-wenxiu.jpg",
+        "title": "何文秀",
+        "description": "He Wenxiu",
+        "date": "City Theatre · 2024",
         "home": true
       },
       {
-        "cn": "念白·吐字",
-        "en": "Recitation & Diction",
-        "cat": "studio",
-        "ar": "r32",
-        "glyph": "念",
-        "venue": "Studio Hall · 2024",
-        "play": "传习课堂",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "折子专场",
-        "en": "An Evening of Excerpts",
-        "cat": "recital",
-        "ar": "r45",
-        "glyph": "折",
-        "venue": "Studio Hall · 2026",
-        "play": "折子戏",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "乐队·伴奏",
-        "en": "The Pit Orchestra",
-        "cat": "backstage",
-        "ar": "r32",
-        "glyph": "丝",
-        "venue": "NAC Studio · 2026",
-        "play": "后台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "西厢·赖婚",
-        "en": "The Broken Promise",
-        "cat": "mainstage",
-        "ar": "r11",
-        "glyph": "厢",
-        "venue": "City Theatre · 2023",
-        "play": "西厢记",
         "image": "/assets/gallery/west-chamber.jpg",
+        "title": "西厢·赖婚",
+        "description": "The Broken Promise — 西厢记",
+        "date": "City Theatre · 2023",
         "home": true
-      },
-      {
-        "cn": "身段·圆场",
-        "en": "Circling the Stage",
-        "cat": "studio",
-        "ar": "r45",
-        "glyph": "步",
-        "venue": "Studio Hall · 2025",
-        "play": "传习课堂",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "红楼·共读",
-        "en": "Reading Together",
-        "cat": "recital",
-        "ar": "r57",
-        "glyph": "楼",
-        "venue": "Studio Hall · 2026",
-        "play": "红楼·葬花",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "候场",
-        "en": "In the Wings",
-        "cat": "backstage",
-        "ar": "r32",
-        "glyph": "幕",
-        "venue": "NAC Studio · 2026",
-        "play": "后台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "楼台·别离",
-        "en": "Farewell at the Pavilion",
-        "cat": "mainstage",
-        "ar": "r45",
-        "glyph": "别",
-        "venue": "NAC Studio · 2026",
-        "play": "梁山伯与祝英台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "谢幕",
-        "en": "The Curtain Call",
-        "cat": "mainstage",
-        "ar": "r32",
-        "glyph": "幕",
-        "venue": "NAC Studio · 2026",
-        "play": "梁山伯与祝英台",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "扇·身段",
-        "en": "The Fan, the Form",
-        "cat": "studio",
-        "ar": "r11",
-        "glyph": "扇",
-        "venue": "Studio Hall · 2024",
-        "play": "传习课堂",
-        "image": "",
-        "home": false
-      },
-      {
-        "cn": "雅集·调弦",
-        "en": "Tuning, at the Salon",
-        "cat": "backstage",
-        "ar": "r45",
-        "glyph": "弦",
-        "venue": "Private Salon · 2025",
-        "play": "后台",
-        "image": "",
-        "home": false
       }
     ]
   }

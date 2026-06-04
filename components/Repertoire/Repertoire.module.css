@@ -100,21 +100,6 @@
   transform: scale(1.03);
 }
 
-/* Fallback when a home-featured photo has no image yet: the glyph placeholder. */
-.filmGlyph {
-  width: 100%;
-  aspect-ratio: 280 / 520;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-chinese-display);
-  font-size: 5rem;
-  color: rgba(248, 244, 238, 0.18);
-  background:
-    repeating-linear-gradient(135deg, rgba(248, 244, 238, 0.06) 0 2px, transparent 2px 14px),
-    linear-gradient(180deg, #3a322b, #2c2620);
-}
-
 /* Always-present bottom gradient */
 .filmGradient {
   position: absolute;

@@ -26,7 +26,7 @@ export type SectionDef = {
 export const SECTIONS: SectionDef[] = [
   { target: 'home', section: 'season', label: 'Events', blurb: 'Upcoming performances, dates, venues, and banner images.', group: 'Programme' },
   { target: 'home', section: 'repertoire', label: 'Repertoire', blurb: 'Heading and scroll hint for the home filmstrip (its photos come from Gallery).', group: 'Programme' },
-  { target: 'gallery', section: 'galleryPage', label: 'Gallery', blurb: 'Stage photos, images, captions, categories — tick "home" to also show a photo on the home filmstrip.', group: 'Programme' },
+  { target: 'gallery', section: 'galleryPage', label: 'Gallery', blurb: 'Upload photos (any number); each takes an optional title, description, and date. Drag order with the ▲▼ arrows; tick "home" to also feature it on the home filmstrip.', group: 'Programme' },
 
   { target: 'home', section: 'hero', label: 'Hero', blurb: 'Landing title characters and the studio subtitle.', group: 'Site text' },
   { target: 'home', section: 'overture', label: 'Overture', blurb: 'Intro section copy, quote, and the three statistics.', group: 'Site text' },

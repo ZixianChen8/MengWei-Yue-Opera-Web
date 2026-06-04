@@ -14,42 +14,6 @@
     "lightbox": {
       "stamp": "孟"
     },
-    "photos": [
-      {
-        "image": "/assets/gallery/west-chamber.jpg",
-        "title": "西厢·听琴",
-        "description": "Listening to the Qin — 西厢记",
-        "date": "City Theatre · 2023",
-        "home": true
-      },
-      {
-        "image": "/assets/gallery/jade-hairpin.jpg",
-        "title": "碧玉簪",
-        "description": "The Jade Hairpin",
-        "date": "City Theatre · 2019",
-        "home": true
-      },
-      {
-        "image": "/assets/gallery/five-daughters.jpg",
-        "title": "五女拜寿",
-        "description": "Five Daughters' Birthday",
-        "date": "City Theatre · 2023",
-        "home": true
-      },
-      {
-        "image": "/assets/gallery/he-wenxiu.jpg",
-        "title": "何文秀",
-        "description": "He Wenxiu",
-        "date": "City Theatre · 2024",
-        "home": true
-      },
-      {
-        "image": "/assets/gallery/west-chamber.jpg",
-        "title": "西厢·赖婚",
-        "description": "The Broken Promise — 西厢记",
-        "date": "City Theatre · 2023",
-        "home": true
-      }
-    ]
+    "photos": []
   }
 }

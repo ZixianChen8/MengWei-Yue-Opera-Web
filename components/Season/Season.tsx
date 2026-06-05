@@ -1,7 +1,19 @@
 import Link from 'next/link'
-import { season } from '@/content/home'
+import { season, type SeasonEvent } from '@/content/home'
 import EventCard from './EventCard'
 import styles from './Season.module.css'
+
+const MAX_HOME_EVENTS = 3
+
+// Pick the events shown in the home Season section: those flagged `home`
+// come first (in list order), then the earliest unflagged events fill the
+// remaining slots up to MAX_HOME_EVENTS. Fewer than the cap simply shows all.
+function selectHomeEvents(events: SeasonEvent[], max = MAX_HOME_EVENTS): SeasonEvent[] {
+  const checked = events.filter((e) => e.home).slice(0, max)
+  if (checked.length >= max) return checked
+  const fill = events.filter((e) => !e.home)
+  return [...checked, ...fill].slice(0, max)
+}
 
 export default function Season() {
   return (
@@ -20,7 +32,7 @@ export default function Season() {
       </div>
 
       <div className={styles.events}>
-        {season.events.slice(0, 3).map((ev) => (
+        {selectHomeEvents(season.events).map((ev) => (
           <EventCard key={ev.id} ev={ev} />
         ))}
       </div>

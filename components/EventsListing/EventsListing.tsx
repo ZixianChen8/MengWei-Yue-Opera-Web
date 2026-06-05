@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { season, eventsListingPage } from '@/content/home'
+import { formatEventDateZh } from '@/lib/event-date'
+import MonthRibbon from './MonthRibbon'
 import styles from './EventsListing.module.css'
 
 type SeasonEvent = (typeof season.events)[number]
@@ -11,7 +13,7 @@ function statusClass(type: SeasonEvent['statusType']) {
 }
 
 export default function EventsListing() {
-  const { header, years, months, archive, currentYear } = eventsListingPage
+  const { header, years, months, archive } = eventsListingPage
 
   return (
     <>
@@ -31,39 +33,9 @@ export default function EventsListing() {
             </div>
           </div>
 
-          {/* Year + months ribbon */}
-          <div className={styles.ribbon}>
-            <div className={styles.yearBlock}>
-              <div className={styles.yearToggle}>
-                {years.map((y) => (
-                  <span
-                    key={y}
-                    className={y === currentYear ? styles.yearBtnOn : styles.yearBtn}
-                  >
-                    {y}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className={styles.months}>
-              {months.map((m) => {
-                const cls = [
-                  styles.month,
-                  m.hasEvent ? styles.monthHas : '',
-                  m.isCurrent ? styles.monthNow : '',
-                ].filter(Boolean).join(' ')
-                return (
-                  <div key={m.en} className={cls}>
-                    {m.hasEvent && (
-                      <span className={m.pipMuted ? styles.pipMuted : styles.pip} />
-                    )}
-                    <div className={styles.mCn}>{m.cn}</div>
-                    <div className={styles.mEn}>{m.en}</div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
+          {/* Year + months ribbon — highlight tracks the live date,
+              pips are generated from season.events (see MonthRibbon). */}
+          <MonthRibbon years={years} months={months} events={season.events} />
         </div>
       </section>
 
@@ -108,7 +80,7 @@ export default function EventsListing() {
 
               <div className={styles.evWhen}>
                 <div className={styles.evDate}>
-                  <span>{ev.date.replace('2026年', '')}</span>
+                  <span>{formatEventDateZh(ev.date, { withYear: false })}</span>
                   <span className={styles.evTime}>{ev.time}</span>
                 </div>
                 <div className={styles.evVenue}>

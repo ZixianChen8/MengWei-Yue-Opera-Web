@@ -43,12 +43,12 @@ export type SeasonEvent = {
   titleEn: string
   blurb: string
   description: string
-  date: string
+  date: string // ISO YYYY-MM-DD; display strings are derived via formatEventDateZh
   time: string
   duration: string
   venue: string
   venueAddress: string
-  feature: boolean
+  home: boolean
   statusType: EventStatus
   statusLabel: string
   listNum: string
@@ -100,8 +100,7 @@ type Footer = {
 type EventsListingPage = {
   header: { titleZh: string; titleEn: string; quote: { zh: string; en: string } }
   years: string[]
-  currentYear: string
-  months: { cn: string; en: string; hasEvent: boolean; isCurrent: boolean; pipMuted: boolean }[]
+  months: { cn: string; en: string }[]
   archive: { year: string; shows: { num: string; cn: string }[] }[]
 }
 

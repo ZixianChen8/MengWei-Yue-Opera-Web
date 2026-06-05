@@ -75,7 +75,7 @@ Static sub-pages (events, gallery, about) share the same shell as the home page:
 | `nav` | Nav | `links[]` has `{ zh, en, href }`; Nav renders `next/link` anchors |
 | `hero` | Hero | `titleChars[]` + `titleRedIndex` drive the vermillion character |
 | `overture` | Overture | `stats[]` rendered as three figures |
-| `season` | Season | `events[]` — set `feature: true` on the mainstage card |
+| `season` | Season | `events[]` — set `home: true` to pin an event to the home page section (max 3) |
 | `studio` | Studio | `program[]` lists the three course levels |
 | `repertoire` | Repertoire | `works[]` archive list |
 | `footer` | Footer | `columns[]` for the two link columns |
@@ -86,6 +86,8 @@ Static sub-pages (events, gallery, about) share the same shell as the home page:
 When adding a new section or page copy, export its content from `content/home.ts` and import it into the relevant component. When adding or changing top-level navigation, update `nav.links` and verify the corresponding route or section anchor exists.
 
 **Events:** Upcoming/current events live in `season.events[]`. The same array powers homepage cards, `/events`, and `/events/[id]`. Required fields include `id`, display titles, description/blurb, date/time/venue, `statusType`, `statusLabel`, `formUrl`, and two images: `imageUrl` (the `/events/[id]` hero banner, via `EventBanner`) and `cardImageUrl` (the `/events` listing card; falls back to the CSS `evImg` placeholder when empty). Both image keys surface the admin upload widget automatically (their names match `isImageKey` in `SectionForm`). The event-detail **QR code is generated at build time** by `EventBody` (an async server component) from `event.formUrl` using the `qrcode` package — there is no QR image field; editing `formUrl` updates the QR. A placeholder `formUrl` of `#` (or empty) renders the decorative CSS QR placeholder instead.
+
+The home page **Season** section shows exactly 3 events via `selectHomeEvents` in `components/Season/Season.tsx`: events flagged `home: true` come first (in list order, capped at 3), then the earliest unflagged events fill the remaining slots up to 3. With 0 flagged it shows the first 3; with fewer than 3 events total it shows all. The admin "Events" editor caps `home` ticks at 3 (enforced by `ARRAY_LIMITS` in `SectionForm`).
 
 **Gallery:** The `/gallery` page (`components/Gallery/Gallery.tsx`, a `'use client'` component) renders `galleryPage.photos[]` from `content/gallery.ts` as a CSS masonry grid (`column-count`) with a sticky filter rail (by `cat`) and a keyboard-navigable lightbox. Photos currently use placeholder frames (brush glyph + mono tags), not real images.
 

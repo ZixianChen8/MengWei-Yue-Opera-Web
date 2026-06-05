@@ -10,6 +10,7 @@ import {
 } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { formatEventDateZh } from '@/lib/event-date'
 import styles from './Season.module.css'
 
 type SeasonEvent = {
@@ -123,7 +124,7 @@ export default function EventCard({ ev }: Props) {
       <div className={styles.eEn}>{ev.titleEn}</div>
       <p className={styles.eBlurb}>{ev.blurb}</p>
       <div className={styles.eWhen}>
-        <span>{ev.date}</span>
+        <span>{formatEventDateZh(ev.date)}</span>
         <span className={styles.dot} />
         <span>{ev.venue}</span>
       </div>

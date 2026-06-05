@@ -19,6 +19,18 @@ const ENUM_OPTIONS: Record<string, string[]> = {
   statusType: ['open', 'free', 'soon', 'waitlist', 'members', 'closed'],
 }
 
+// Cross-item caps: at most `max` items in this array may have `key` truthy.
+// Keyed by the array's key. Enforced in the array update path below, the only
+// place with visibility over sibling items.
+const ARRAY_LIMITS: Record<string, { key: string; max: number; hint: string; message: string }> = {
+  events: {
+    key: 'home',
+    max: 3,
+    hint: 'Tick "Home" on up to 3 events to choose which appear in the home page section.',
+    message: 'At most 3 events can be shown on the home page. Untick another first.',
+  },
+}
+
 // Shape used when adding the first item to an otherwise-empty array.
 // Without this, "Add" has no sibling to clone and falls back to a bare
 // string, so e.g. an emptied gallery would offer only a plain textbox
@@ -29,6 +41,15 @@ const NEW_ITEM_TEMPLATES: Record<string, JsonValue> = {
 
 function isImageKey(key: string): boolean {
   return /image|imageurl|imgurl/i.test(key)
+}
+
+// The event `date` is a machine-readable ISO field (YYYY-MM-DD), so it gets a
+// native date picker that forces the format. Scoped by both key name and an
+// ISO/empty value check so loosely-typed `date` fields elsewhere (gallery /
+// repertoire use free text like "2024") keep their plain text box.
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
+function isIsoDateKey(key: string, value: string): boolean {
+  return key === 'date' && (value === '' || ISO_DATE.test(value))
 }
 
 function humanize(key: string): string {
@@ -104,6 +125,113 @@ function blankLike(sample: JsonValue): JsonValue {
   }
 }
 
+function isPlainObject(value: JsonValue): value is { [key: string]: JsonValue } {
+  return !!value && typeof value === 'object' && !Array.isArray(value)
+}
+
+type ArrayNodeProps = {
+  items: JsonValue[]
+  keyName: string
+  onChange: (next: JsonValue) => void
+}
+
+function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
+  const [warn, setWarn] = useState<string | null>(null)
+  const limit = ARRAY_LIMITS[keyName]
+
+  const update = (i: number, next: JsonValue) => {
+    // Enforce a cross-item cap (e.g. at most 3 events flagged for the home page).
+    if (limit && isPlainObject(next) && isPlainObject(items[i])) {
+      const wasOn = !!items[i][limit.key]
+      const nowOn = !!next[limit.key]
+      if (!wasOn && nowOn) {
+        const count = items.filter((it) => isPlainObject(it) && !!it[limit.key]).length
+        if (count >= limit.max) {
+          setWarn(limit.message)
+          return
+        }
+      }
+    }
+    setWarn(null)
+    const copy = items.slice()
+    copy[i] = next
+    onChange(copy)
+  }
+  const remove = (i: number) => onChange(items.filter((_, idx) => idx !== i))
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir
+    if (j < 0 || j >= items.length) return
+    const copy = items.slice()
+    ;[copy[i], copy[j]] = [copy[j], copy[i]]
+    onChange(copy)
+  }
+  const add = () => {
+    const fallback = NEW_ITEM_TEMPLATES[keyName]
+    const template =
+      items.length > 0
+        ? blankLike(items[items.length - 1])
+        : fallback
+          ? blankLike(fallback)
+          : ''
+    onChange([...items, template])
+  }
+
+  return (
+    <div>
+      {limit && <div className={styles.arrayEmpty}>{limit.hint}</div>}
+      {warn && <div className={`${styles.status} ${styles.statusErr}`}>{warn}</div>}
+      {items.length === 0 && <div className={styles.arrayEmpty}>No items yet.</div>}
+      {items.map((item, i) => {
+        const primitive = typeof item !== 'object' || item === null
+        const detail = labelFromValue(item)
+
+        return (
+          <div key={i} className={styles.arrayItem}>
+            <Collapsible
+              title={`${humanize(keyName)} ${i + 1}`}
+              detail={detail ?? undefined}
+              controls={
+                <div className={styles.arrayControls}>
+                  <button
+                    type="button"
+                    className={styles.iconBtn}
+                    onClick={() => move(i, -1)}
+                    disabled={i === 0}
+                    aria-label="Move up"
+                  >
+                    ^
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.iconBtn}
+                    onClick={() => move(i, 1)}
+                    disabled={i === items.length - 1}
+                    aria-label="Move down"
+                  >
+                    v
+                  </button>
+                  <button type="button" className={styles.iconBtn} onClick={() => remove(i)} aria-label="Remove">
+                    x
+                  </button>
+                </div>
+              }
+            >
+              {primitive ? (
+                <ValueNode value={item} keyName={keyName} onChange={(next) => update(i, next)} />
+              ) : (
+                <ObjectNode value={item as { [k: string]: JsonValue }} onChange={(next) => update(i, next)} />
+              )}
+            </Collapsible>
+          </div>
+        )
+      })}
+      <button type="button" className={styles.addBtn} onClick={add}>
+        + Add {humanize(keyName).toLowerCase()}
+      </button>
+    </div>
+  )
+}
+
 type NodeProps = {
   value: JsonValue
   keyName: string
@@ -113,6 +241,17 @@ type NodeProps = {
 function ValueNode({ value, keyName, onChange }: NodeProps) {
   if (typeof value === 'string' && isImageKey(keyName)) {
     return <ImageUpload value={value} onChange={onChange} />
+  }
+
+  if (typeof value === 'string' && isIsoDateKey(keyName, value)) {
+    return (
+      <input
+        className={styles.input}
+        type="date"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    )
   }
 
   if (typeof value === 'string' && ENUM_OPTIONS[keyName]) {
@@ -159,83 +298,7 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
   }
 
   if (Array.isArray(value)) {
-    const items = value
-    const update = (i: number, next: JsonValue) => {
-      const copy = items.slice()
-      copy[i] = next
-      onChange(copy)
-    }
-    const remove = (i: number) => onChange(items.filter((_, idx) => idx !== i))
-    const move = (i: number, dir: -1 | 1) => {
-      const j = i + dir
-      if (j < 0 || j >= items.length) return
-      const copy = items.slice()
-      ;[copy[i], copy[j]] = [copy[j], copy[i]]
-      onChange(copy)
-    }
-    const add = () => {
-      const fallback = NEW_ITEM_TEMPLATES[keyName]
-      const template =
-        items.length > 0
-          ? blankLike(items[items.length - 1])
-          : fallback
-            ? blankLike(fallback)
-            : ''
-      onChange([...items, template])
-    }
-
-    return (
-      <div>
-        {items.length === 0 && <div className={styles.arrayEmpty}>No items yet.</div>}
-        {items.map((item, i) => {
-          const primitive = typeof item !== 'object' || item === null
-          const detail = labelFromValue(item)
-
-          return (
-            <div key={i} className={styles.arrayItem}>
-              <Collapsible
-                title={`${humanize(keyName)} ${i + 1}`}
-                detail={detail ?? undefined}
-                controls={
-                  <div className={styles.arrayControls}>
-                    <button
-                      type="button"
-                      className={styles.iconBtn}
-                      onClick={() => move(i, -1)}
-                      disabled={i === 0}
-                      aria-label="Move up"
-                    >
-                      ^
-                    </button>
-                    <button
-                      type="button"
-                      className={styles.iconBtn}
-                      onClick={() => move(i, 1)}
-                      disabled={i === items.length - 1}
-                      aria-label="Move down"
-                    >
-                      v
-                    </button>
-                    <button type="button" className={styles.iconBtn} onClick={() => remove(i)} aria-label="Remove">
-                      x
-                    </button>
-                  </div>
-                }
-              >
-                {primitive ? (
-                  <ValueNode value={item} keyName={keyName} onChange={(next) => update(i, next)} />
-                ) : (
-                  <ObjectNode value={item as { [k: string]: JsonValue }} onChange={(next) => update(i, next)} />
-                )}
-              </Collapsible>
-            </div>
-          )
-        })}
-        <button type="button" className={styles.addBtn} onClick={add}>
-          + Add {humanize(keyName).toLowerCase()}
-        </button>
-      </div>
-    )
+    return <ArrayNode items={value} keyName={keyName} onChange={onChange} />
   }
 
   if (value && typeof value === 'object') {

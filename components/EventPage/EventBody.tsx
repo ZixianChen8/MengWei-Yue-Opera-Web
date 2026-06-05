@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import QRCode from 'qrcode'
 import { eventPage } from '@/content/home'
+import { formatEventDateZh } from '@/lib/event-date'
 import styles from './EventPage.module.css'
 import type { season } from '@/content/home'
 
@@ -25,7 +26,7 @@ export default async function EventBody({ event }: EventBodyProps) {
     : null
 
   const infoRows = [
-    { term: labels.date,     value: event.date },
+    { term: labels.date,     value: formatEventDateZh(event.date) },
     { term: labels.time,     value: event.time },
     { term: labels.duration, value: event.duration },
     { term: labels.venue,    value: event.venue },

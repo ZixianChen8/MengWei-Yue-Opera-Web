@@ -366,7 +366,7 @@
         "heading": "To Reach Us · 留书",
         "links": [
           {
-            "zh": "mengweiyue@studio.ca",
+            "zh": "mwyueos@gmail.com",
             "en": "By letter",
             "href": "mailto:hello@mengweiyue.ca"
           },
@@ -397,18 +397,54 @@
       "2027"
     ],
     "months": [
-      { "cn": "一月", "en": "Jan" },
-      { "cn": "二月", "en": "Feb" },
-      { "cn": "三月", "en": "Mar" },
-      { "cn": "四月", "en": "Apr" },
-      { "cn": "五月", "en": "May" },
-      { "cn": "六月", "en": "Jun" },
-      { "cn": "七月", "en": "Jul" },
-      { "cn": "八月", "en": "Aug" },
-      { "cn": "九月", "en": "Sep" },
-      { "cn": "十月", "en": "Oct" },
-      { "cn": "十一", "en": "Nov" },
-      { "cn": "十二", "en": "Dec" }
+      {
+        "cn": "一月",
+        "en": "Jan"
+      },
+      {
+        "cn": "二月",
+        "en": "Feb"
+      },
+      {
+        "cn": "三月",
+        "en": "Mar"
+      },
+      {
+        "cn": "四月",
+        "en": "Apr"
+      },
+      {
+        "cn": "五月",
+        "en": "May"
+      },
+      {
+        "cn": "六月",
+        "en": "Jun"
+      },
+      {
+        "cn": "七月",
+        "en": "Jul"
+      },
+      {
+        "cn": "八月",
+        "en": "Aug"
+      },
+      {
+        "cn": "九月",
+        "en": "Sep"
+      },
+      {
+        "cn": "十月",
+        "en": "Oct"
+      },
+      {
+        "cn": "十一",
+        "en": "Nov"
+      },
+      {
+        "cn": "十二",
+        "en": "Dec"
+      }
     ],
     "archive": [
       {

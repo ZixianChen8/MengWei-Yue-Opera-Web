@@ -3,7 +3,7 @@
   background: var(--paper-deep);
   padding: 140px 80px 60px;
   z-index: 4;
-  border-top: 1px solid var(--border);
+  /* No top border: gallery and footer share --paper-deep, seamless. */
 }
 
 .ornament {

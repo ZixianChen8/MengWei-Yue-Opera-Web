@@ -1,19 +1,18 @@
 import Link from 'next/link'
-import { SECTIONS, type SectionDef } from '@/lib/content-config'
+import { SECTIONS, GROUP_LABELS, type SectionGroup } from '@/lib/content-config'
 import styles from '@/components/admin/admin.module.css'
 
 export const dynamic = 'force-dynamic'
 
-const GROUP_ORDER: SectionDef['group'][] = ['Programme', 'Site text', 'Pages']
+const GROUP_ORDER: SectionGroup[] = ['Programme', 'Site text', 'Pages']
 
 export default function AdminDashboard() {
   return (
     <div>
       <div className={styles.intro}>
-        <h1 className={styles.introTitle}>内容管理 · Content</h1>
+        <h1 className={styles.introTitle}>内容管理</h1>
         <p className={styles.introBlurb}>
-          Edit the studio website here. Changes are saved to the site&rsquo;s content and go live after a
-          short automatic redeploy (about 1–2 minutes).
+          在此编辑工作室网站的内容。保存后会自动重新部署，约 1–2 分钟后在网站上生效。
         </p>
       </div>
 
@@ -22,7 +21,7 @@ export default function AdminDashboard() {
         if (items.length === 0) return null
         return (
           <section key={group} className={styles.dashGroup}>
-            <h2 className={styles.groupTitle}>{group}</h2>
+            <h2 className={styles.groupTitle}>{GROUP_LABELS[group]}</h2>
             <div className={styles.cards}>
               {items.map((s) => (
                 <Link key={`${s.target}/${s.section}`} href={`/admin/edit/${s.target}/${s.section}`} className={styles.card}>

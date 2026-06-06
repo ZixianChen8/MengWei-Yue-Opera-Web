@@ -17,11 +17,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <header className={styles.topbar}>
         <Link href="/admin" className={styles.brand}>
           孟<b>伟</b>越剧
-          <span className={styles.brandSub}>Admin</span>
+          <span className={styles.brandSub}>管理后台</span>
         </Link>
         <div className={styles.spacer} />
         <Link href="/" className={styles.btn} target="_blank" rel="noopener noreferrer">
-          View site
+          查看网站
         </Link>
         <LogoutButton />
       </header>

@@ -87,7 +87,7 @@ export default function Repertoire() {
                   width={280}
                   height={520}
                   className={styles.filmImg}
-                  sizes="370px"
+                  sizes="(max-width: 767px) 480px, 900px"
                 />
                 <div className={styles.filmGradient} />
                 <div className={styles.filmOverlay} />
@@ -142,10 +142,10 @@ export default function Repertoire() {
               <Image
                 src={openWork.image}
                 alt={openWork.title || ''}
-                width={460}
-                height={560}
+                width={1200}
+                height={1200}
                 className={styles.lbImg}
-                sizes="460px"
+                sizes="(max-width: 1023px) 90vw, 980px"
               />
             )}
           </div>

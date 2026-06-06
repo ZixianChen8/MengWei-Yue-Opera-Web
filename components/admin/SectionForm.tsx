@@ -19,6 +19,152 @@ const ENUM_OPTIONS: Record<string, string[]> = {
   statusType: ['open', 'free', 'soon', 'waitlist', 'members', 'closed'],
 }
 
+// Chinese display text for enum values. The stored value stays the English
+// identifier (styling keys off it); only the dropdown label is translated.
+const ENUM_LABELS: Record<string, Record<string, string>> = {
+  statusType: {
+    open: '票务开放',
+    free: '免费入场',
+    soon: '即将开票',
+    waitlist: '候补名单',
+    members: '会员优先',
+    closed: '已截止 / 未公布',
+  },
+}
+
+// Chinese labels for JSON field keys. Keys not listed fall back to humanize().
+// Translating these keeps the data keys (and the JSON on disk) untouched while
+// giving the Chinese operator readable field names.
+const FIELD_LABELS: Record<string, string> = {
+  // Shared bilingual-pair keys
+  zh: '中文',
+  en: '英文',
+  cn: '中文',
+  href: '链接',
+  // Brand / nav
+  brand: '品牌标识',
+  markPre: '标识·前',
+  markAccent: '标识·重点字',
+  markPost: '标识·后',
+  seal: '印章字',
+  sub: '副标题',
+  links: '菜单链接',
+  // Hero
+  meta: '小标题',
+  titleChars: '标题文字',
+  titleRedIndex: '红色字位置',
+  poem: '诗句',
+  stamp: '印章',
+  // Overture
+  title: '标题',
+  quote: '引言',
+  text: '正文',
+  attr: '出处',
+  body: '正文',
+  stats: '数据',
+  value: '数值',
+  label: '标签',
+  // Season / events
+  eyebrow: '眉标',
+  aside: '旁注',
+  events: '活动',
+  id: '编号 (ID)',
+  num: '序号',
+  tag: '类别标签',
+  titleZh: '中文标题',
+  titleEn: '英文标题',
+  blurb: '简介',
+  description: '详细介绍',
+  date: '日期',
+  time: '时间',
+  duration: '时长',
+  venue: '地点',
+  venueAddress: '详细地址',
+  venueEn: '地点（英文）',
+  home: '首页展示',
+  statusType: '状态类型',
+  statusLabel: '状态文字',
+  listNum: '列表序号',
+  formUrl: '报名链接',
+  imageUrl: '横幅图片',
+  cardImageUrl: '卡片图片',
+  // Studio
+  level: '班级',
+  program: '课程',
+  cta: '行动按钮',
+  // Repertoire
+  hint: '提示文字',
+  // About (home block)
+  verse: '诗句',
+  verseEn: '诗句（英文）',
+  vertMeta: '竖排小标',
+  vertTitle: '竖排标题',
+  before: '前段',
+  red: '红色字',
+  after: '后段',
+  mission: '宗旨',
+  // Footer
+  ornament: '装饰文字',
+  legal: '版权说明',
+  columns: '栏目',
+  heading: '栏目标题',
+  copyright: '版权',
+  sealLine: '落款',
+  // Events listing page
+  header: '页头',
+  years: '年份',
+  months: '月份',
+  archive: '往年存档',
+  year: '年份',
+  shows: '剧目',
+  // Event detail page
+  backLink: '返回链接',
+  signup: '报名',
+  qrLabel: '二维码说明',
+  formLink: '表单链接',
+  labels: '字段标签',
+  address: '地址',
+  // Gallery page
+  charsTop: '大字',
+  charsRed: '大字（红）',
+  crumbsTop: '面包屑（上）',
+  plain: '普通文字',
+  bold: '加粗文字',
+  enTitle: '英文标题',
+  crumbsBottom: '面包屑（下）',
+  lightbox: '灯箱',
+  photos: '照片',
+  image: '图片',
+  // About page + contact form
+  pageHead: '页头',
+  charsZh: '中文大字',
+  subtitle: '副标题',
+  crumb: '面包屑',
+  bio: '简介',
+  vertZh: '竖排中文',
+  paragraphs: '段落',
+  contact: '联络',
+  lede: '导语',
+  channels: '联络方式',
+  val: '内容',
+  form: '表单',
+  sealGlyph: '印章字',
+  intro: '引导语',
+  subjects: '主题选项',
+  fields: '表单字段',
+  name: '姓名',
+  email: '邮箱',
+  subject: '主题',
+  phone: '电话',
+  message: '留言',
+  ph: '占位提示',
+  privacy: '隐私声明',
+  submit: '提交按钮',
+  sending: '提交中文字',
+  error: '错误提示',
+  sent: '提交成功提示',
+}
+
 // Cross-item caps: at most `max` items in this array may have `key` truthy.
 // Keyed by the array's key. Enforced in the array update path below, the only
 // place with visibility over sibling items.
@@ -26,8 +172,8 @@ const ARRAY_LIMITS: Record<string, { key: string; max: number; hint: string; mes
   events: {
     key: 'home',
     max: 3,
-    hint: 'Tick "Home" on up to 3 events to choose which appear in the home page section.',
-    message: 'At most 3 events can be shown on the home page. Untick another first.',
+    hint: '最多可在 3 个活动上勾选"首页展示"，决定哪些显示在首页板块。',
+    message: '首页最多显示 3 个活动，请先取消勾选其他活动。',
   },
 }
 
@@ -57,6 +203,12 @@ function humanize(key: string): string {
     .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
     .replace(/[_-]+/g, ' ')
     .replace(/^\w/, (c) => c.toUpperCase())
+}
+
+// Chinese field label, falling back to a humanized English key for anything
+// not yet translated in FIELD_LABELS.
+function fieldLabel(key: string): string {
+  return FIELD_LABELS[key] ?? humanize(key)
 }
 
 function labelFromValue(value: JsonValue): string | null {
@@ -180,7 +332,7 @@ function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
     <div>
       {limit && <div className={styles.arrayEmpty}>{limit.hint}</div>}
       {warn && <div className={`${styles.status} ${styles.statusErr}`}>{warn}</div>}
-      {items.length === 0 && <div className={styles.arrayEmpty}>No items yet.</div>}
+      {items.length === 0 && <div className={styles.arrayEmpty}>暂无条目。</div>}
       {items.map((item, i) => {
         const primitive = typeof item !== 'object' || item === null
         const detail = labelFromValue(item)
@@ -188,7 +340,7 @@ function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
         return (
           <div key={i} className={styles.arrayItem}>
             <Collapsible
-              title={`${humanize(keyName)} ${i + 1}`}
+              title={`${fieldLabel(keyName)} ${i + 1}`}
               detail={detail ?? undefined}
               controls={
                 <div className={styles.arrayControls}>
@@ -197,7 +349,7 @@ function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
                     className={styles.iconBtn}
                     onClick={() => move(i, -1)}
                     disabled={i === 0}
-                    aria-label="Move up"
+                    aria-label="上移"
                   >
                     ^
                   </button>
@@ -206,11 +358,11 @@ function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
                     className={styles.iconBtn}
                     onClick={() => move(i, 1)}
                     disabled={i === items.length - 1}
-                    aria-label="Move down"
+                    aria-label="下移"
                   >
                     v
                   </button>
-                  <button type="button" className={styles.iconBtn} onClick={() => remove(i)} aria-label="Remove">
+                  <button type="button" className={styles.iconBtn} onClick={() => remove(i)} aria-label="删除">
                     x
                   </button>
                 </div>
@@ -226,7 +378,7 @@ function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
         )
       })}
       <button type="button" className={styles.addBtn} onClick={add}>
-        + Add {humanize(keyName).toLowerCase()}
+        + 添加{fieldLabel(keyName)}
       </button>
     </div>
   )
@@ -257,11 +409,12 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
   if (typeof value === 'string' && ENUM_OPTIONS[keyName]) {
     const options = ENUM_OPTIONS[keyName]
     const list = options.includes(value) ? options : [value, ...options]
+    const labels = ENUM_LABELS[keyName]
     return (
       <select className={styles.select} value={value} onChange={(e) => onChange(e.target.value)}>
         {list.map((opt) => (
           <option key={opt} value={opt}>
-            {opt}
+            {labels?.[opt] ?? opt}
           </option>
         ))}
       </select>
@@ -292,7 +445,7 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
     return (
       <label className={styles.checkboxRow}>
         <input type="checkbox" checked={value} onChange={(e) => onChange(e.target.checked)} />
-        <span>{value ? 'Yes' : 'No'}</span>
+        <span>{value ? '是' : '否'}</span>
       </label>
     )
   }
@@ -330,7 +483,7 @@ function ObjectNode({ value, onChange }: ObjectNodeProps) {
         if (nested) {
           return (
             <div key={k} className={styles.group}>
-              <Collapsible title={humanize(k)} detail={labelFromValue(v) ?? undefined}>
+              <Collapsible title={fieldLabel(k)} detail={labelFromValue(v) ?? undefined}>
                 <ValueNode value={v} keyName={k} onChange={update} />
               </Collapsible>
             </div>
@@ -339,7 +492,7 @@ function ObjectNode({ value, onChange }: ObjectNodeProps) {
 
         return (
           <div key={k} className={styles.field}>
-            <label className={styles.fieldLabel}>{humanize(k)}</label>
+            <label className={styles.fieldLabel}>{fieldLabel(k)}</label>
             <ValueNode value={v} keyName={k} onChange={update} />
           </div>
         )

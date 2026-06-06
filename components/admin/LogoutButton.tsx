@@ -21,7 +21,7 @@ export default function LogoutButton() {
 
   return (
     <button type="button" className={styles.btn} onClick={logout} disabled={busy}>
-      {busy ? 'Signing out…' : 'Sign out'}
+      {busy ? '退出中…' : '退出登录'}
     </button>
   )
 }

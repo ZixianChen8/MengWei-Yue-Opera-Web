@@ -14,30 +14,40 @@ export const DATA_FILES: Record<ContentTarget, string> = {
   gallery: 'content/data/gallery.json',
 }
 
+export type SectionGroup = 'Programme' | 'Site text' | 'Pages'
+
+// Chinese display labels for the dashboard group headings. Keys stay as stable
+// English identifiers (used for ordering/filtering); the operator sees Chinese.
+export const GROUP_LABELS: Record<SectionGroup, string> = {
+  Programme: '节目内容',
+  'Site text': '网站文字',
+  Pages: '页面',
+}
+
 export type SectionDef = {
   target: ContentTarget
   section: string
   label: string
   blurb: string
-  group: 'Programme' | 'Site text' | 'Pages'
+  group: SectionGroup
 }
 
 // Order here is the order shown on the dashboard.
 export const SECTIONS: SectionDef[] = [
-  { target: 'home', section: 'season', label: 'Events', blurb: 'Upcoming performances, dates, venues, and banner images. Tick "Home" on up to 3 events to choose which appear in the home page section.', group: 'Programme' },
-  { target: 'home', section: 'repertoire', label: 'Repertoire', blurb: 'Heading and scroll hint for the home filmstrip (its photos come from Gallery).', group: 'Programme' },
-  { target: 'gallery', section: 'galleryPage', label: 'Gallery', blurb: 'Upload photos (any number); each takes an optional title, description, and date. Drag order with the ▲▼ arrows; tick "home" to also feature it on the home filmstrip.', group: 'Programme' },
+  { target: 'home', section: 'season', label: '活动', blurb: '近期演出、日期、地点与横幅图片。最多可在 3 个活动上勾选"首页展示"，决定哪些显示在首页板块。', group: 'Programme' },
+  { target: 'home', section: 'repertoire', label: '往年活动', blurb: '首页影像条的标题与滚动提示（其照片来自"画廊"）。', group: 'Programme' },
+  { target: 'gallery', section: 'galleryPage', label: '画廊', blurb: '上传照片（数量不限），每张可填写标题、说明与日期。用 ▲▼ 箭头调整顺序；勾选"首页展示"可同时显示在首页影像条。', group: 'Programme' },
 
-  { target: 'home', section: 'hero', label: 'Hero', blurb: 'Landing title characters and the studio subtitle.', group: 'Site text' },
-  { target: 'home', section: 'overture', label: 'Overture', blurb: 'Intro section copy, quote, and the three statistics.', group: 'Site text' },
-  { target: 'home', section: 'studio', label: 'Studio / Learn', blurb: 'Class descriptions and the programme list.', group: 'Site text' },
-  { target: 'home', section: 'about', label: 'About (home block)', blurb: 'Vertical verse and mission shown on the home page.', group: 'Site text' },
-  { target: 'home', section: 'nav', label: 'Navigation', blurb: 'Menu labels and links, plus the brand mark.', group: 'Site text' },
-  { target: 'home', section: 'footer', label: 'Footer', blurb: 'Footer columns, contact lines, and legal text.', group: 'Site text' },
+  { target: 'home', section: 'hero', label: '首屏', blurb: '首屏标题文字与工作室副标题。', group: 'Site text' },
+  { target: 'home', section: 'overture', label: '序章', blurb: '开篇板块文案、引言以及三项数据。', group: 'Site text' },
+  { target: 'home', section: 'studio', label: '教学 / 课程', blurb: '课程介绍与班级列表。', group: 'Site text' },
+  { target: 'home', section: 'about', label: '关于（首页板块）', blurb: '首页上显示的竖排诗句与宗旨。', group: 'Site text' },
+  { target: 'home', section: 'nav', label: '导航菜单', blurb: '菜单文字与链接，以及品牌标识。', group: 'Site text' },
+  { target: 'home', section: 'footer', label: '页脚', blurb: '页脚栏目、联系方式与版权文字。', group: 'Site text' },
 
-  { target: 'home', section: 'aboutPage', label: 'About page', blurb: 'Full /about page: bio, contact, and form labels.', group: 'Pages' },
-  { target: 'home', section: 'eventsListingPage', label: 'Events page', blurb: '/events listing header, month ribbon, and archive.', group: 'Pages' },
-  { target: 'home', section: 'eventPage', label: 'Event detail labels', blurb: 'Labels shown on each /events/[id] detail page.', group: 'Pages' },
+  { target: 'home', section: 'aboutPage', label: '关于页面', blurb: '完整的 /about 页面：简介、联系方式与表单标签。', group: 'Pages' },
+  { target: 'home', section: 'eventsListingPage', label: '活动页面', blurb: '/events 列表页头、月份条与往年存档。', group: 'Pages' },
+  { target: 'home', section: 'eventPage', label: '活动详情标签', blurb: '每个 /events/[id] 详情页上显示的标签文字。', group: 'Pages' },
 ]
 
 export function findSection(target: string, section: string): SectionDef | undefined {

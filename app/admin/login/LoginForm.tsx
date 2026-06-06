@@ -22,12 +22,12 @@ export default function LoginForm() {
         body: JSON.stringify({ password }),
       })
       const json = await res.json()
-      if (!res.ok) throw new Error(json.error || 'Login failed')
+      if (!res.ok) throw new Error(json.error || '登录失败')
       const from = params.get('from')
       router.replace(from && from.startsWith('/admin') ? from : '/admin')
       router.refresh()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed')
+      setError(err instanceof Error ? err.message : '登录失败')
       setBusy(false)
     }
   }
@@ -37,12 +37,12 @@ export default function LoginForm() {
       <div className={styles.mark}>
         孟<b>伟</b>越剧
       </div>
-      <div className={styles.sub}>Studio Admin</div>
+      <div className={styles.sub}>管理后台</div>
 
       {error && <div className={styles.error}>{error}</div>}
 
       <label className={styles.label} htmlFor="admin-password">
-        Password
+        密码
       </label>
       <input
         id="admin-password"
@@ -54,7 +54,7 @@ export default function LoginForm() {
         autoFocus
       />
       <button type="submit" className={styles.button} disabled={busy || password.length === 0}>
-        {busy ? 'Signing in…' : 'Sign in'}
+        {busy ? '登录中…' : '登录'}
       </button>
     </form>
   )

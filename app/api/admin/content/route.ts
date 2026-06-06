@@ -17,12 +17,12 @@ export async function GET(request: Request) {
   const section = searchParams.get('section') ?? ''
   const def = findSection(target, section)
   if (!def) {
-    return NextResponse.json({ error: 'Unknown section' }, { status: 400 })
+    return NextResponse.json({ error: '未知的内容板块' }, { status: 400 })
   }
   try {
     const file = await getJsonFile<DataFile>(DATA_FILES[target as ContentTarget])
     if (!file) {
-      return NextResponse.json({ error: 'Data file not found' }, { status: 404 })
+      return NextResponse.json({ error: '未找到数据文件' }, { status: 404 })
     }
     return NextResponse.json({ data: file.data[section] })
   } catch (err) {
@@ -40,24 +40,24 @@ export async function POST(request: Request) {
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+    return NextResponse.json({ error: 'JSON 格式无效' }, { status: 400 })
   }
 
   const target = String(body.target ?? '')
   const section = String(body.section ?? '')
   const def = findSection(target, section)
   if (!def) {
-    return NextResponse.json({ error: 'Unknown section' }, { status: 400 })
+    return NextResponse.json({ error: '未知的内容板块' }, { status: 400 })
   }
   if (body.data === null || typeof body.data !== 'object') {
-    return NextResponse.json({ error: 'Invalid data payload' }, { status: 400 })
+    return NextResponse.json({ error: '提交的数据无效' }, { status: 400 })
   }
 
   const path = DATA_FILES[target as ContentTarget]
   try {
     const file = await getJsonFile<DataFile>(path)
     if (!file) {
-      return NextResponse.json({ error: 'Data file not found' }, { status: 404 })
+      return NextResponse.json({ error: '未找到数据文件' }, { status: 404 })
     }
     const next = { ...file.data, [section]: body.data }
     const content = JSON.stringify(next, null, 2) + '\n'
@@ -74,5 +74,5 @@ export async function POST(request: Request) {
 }
 
 function errorMessage(err: unknown): string {
-  return err instanceof Error ? err.message : 'Unexpected error'
+  return err instanceof Error ? err.message : '发生未知错误'
 }

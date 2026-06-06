@@ -37,6 +37,18 @@
   z-index: 1;
 }
 
+/* Clip the scaled background image to the section so it can't bleed into
+   adjacent sections (notably the Repertoire gallery below at wide widths).
+   We can't put overflow:hidden on .section because ::before deliberately
+   extends upward into the preceding section. */
+.bgClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .bg {
   object-fit: contain;
   object-position: right center;

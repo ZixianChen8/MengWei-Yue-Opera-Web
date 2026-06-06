@@ -29,7 +29,7 @@ export default function ImageUpload({ value, onChange }: Props) {
     // that would otherwise surface as a JSON parse error.
     if (file.size > MAX_BYTES) {
       const mb = (file.size / 1024 / 1024).toFixed(1)
-      setError(`Image is ${mb} MB — max ${MAX_MB} MB. Please resize or compress it first.`)
+      setError(`图片大小为 ${mb} MB — 上限 ${MAX_MB} MB。请先压缩或缩小后再上传。`)
       if (inputRef.current) inputRef.current.value = ''
       return
     }
@@ -53,14 +53,14 @@ export default function ImageUpload({ value, onChange }: Props) {
 
       if (!res.ok) {
         if (res.status === 413) {
-          throw new Error(`Image too large — max ${MAX_MB} MB. Please resize or compress it first.`)
+          throw new Error(`图片过大 — 上限 ${MAX_MB} MB。请先压缩或缩小后再上传。`)
         }
-        throw new Error(json.error || `Upload failed (${res.status})`)
+        throw new Error(json.error || `上传失败（${res.status}）`)
       }
-      if (!json.url) throw new Error('Upload failed — no URL returned.')
+      if (!json.url) throw new Error('上传失败 — 未返回图片地址。')
       onChange(json.url)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Upload failed')
+      setError(err instanceof Error ? err.message : '上传失败')
     } finally {
       setUploading(false)
       if (inputRef.current) inputRef.current.value = ''
@@ -77,7 +77,7 @@ export default function ImageUpload({ value, onChange }: Props) {
         // eslint-disable-next-line @next/next/no-img-element
         <img src={value} alt="" className={styles.imagePreview} />
       ) : (
-        <div className={styles.imagePreviewEmpty}>no image</div>
+        <div className={styles.imagePreviewEmpty}>暂无图片</div>
       )}
 
       <div className={styles.imageCol}>
@@ -98,20 +98,20 @@ export default function ImageUpload({ value, onChange }: Props) {
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
           >
-            {uploading ? 'Uploading…' : 'Upload image'}
+            {uploading ? '上传中…' : '上传图片'}
           </button>
         </div>
         <input
           type="text"
           className={styles.input}
           value={value}
-          placeholder="/assets/... or https://..."
+          placeholder="/assets/... 或 https://..."
           onChange={(e) => onChange(e.target.value)}
         />
         <span className={styles.uploadHint}>
           {isLocal
-            ? 'Uploaded image — appears on the site after the redeploy (~1–2 min).'
-            : 'Or paste an image URL.'}
+            ? '已上传的图片 — 重新部署后（约 1–2 分钟）显示在网站上。'
+            : '或粘贴图片地址。'}
         </span>
         {error && <span className={styles.statusErr}>{error}</span>}
       </div>

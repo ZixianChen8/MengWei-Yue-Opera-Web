@@ -7,7 +7,7 @@ import styles from './Gallery.module.css'
 const pad2 = (n: number) => String(n).padStart(2, '0')
 
 export default function Gallery() {
-  const { header, lightbox, photos } = galleryPage
+  const { header, photos } = galleryPage
 
   // Real images only, rendered in admin-defined array order.
   const visible = photos.filter((p) => p.image)
@@ -142,7 +142,6 @@ export default function Gallery() {
                 )}
                 <div className={styles.lbMeta}>
                   {current.date}
-                  <span className={styles.stamp}>{lightbox.stamp}</span>
                 </div>
               </div>
             )}

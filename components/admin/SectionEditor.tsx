@@ -26,7 +26,7 @@ export default function SectionEditor({ target, section, label }: Props) {
       { cache: 'no-store', signal },
     )
     const json = await res.json()
-    if (!res.ok) throw new Error(json.error || 'Failed to load content')
+    if (!res.ok) throw new Error(json.error || '加载内容失败')
     return json.data as JsonValue
   }, [target, section])
 
@@ -38,7 +38,7 @@ export default function SectionEditor({ target, section, label }: Props) {
       setData(await fetchContent())
       setLoadState('ready')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load content')
+      setError(err instanceof Error ? err.message : '加载内容失败')
       setLoadState('error')
     }
   }, [fetchContent])
@@ -55,7 +55,7 @@ export default function SectionEditor({ target, section, label }: Props) {
       })
       .catch(err => {
         if (cancelled || controller.signal.aborted) return
-        setError(err instanceof Error ? err.message : 'Failed to load content')
+        setError(err instanceof Error ? err.message : '加载内容失败')
         setLoadState('error')
       })
 
@@ -76,10 +76,10 @@ export default function SectionEditor({ target, section, label }: Props) {
         body: JSON.stringify({ target, section, data }),
       })
       const json = await res.json()
-      if (!res.ok) throw new Error(json.error || 'Failed to save')
-      setSavedMsg('Saved and committed. The public site will update after the redeploy finishes (~1–2 minutes).')
+      if (!res.ok) throw new Error(json.error || '保存失败')
+      setSavedMsg('已保存并提交。网站将在重新部署完成后更新（约 1–2 分钟）。')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save')
+      setError(err instanceof Error ? err.message : '保存失败')
     } finally {
       setSaving(false)
     }
@@ -90,16 +90,16 @@ export default function SectionEditor({ target, section, label }: Props) {
       <div className={styles.editorHead}>
         <div>
           <Link href="/admin" className={styles.backLink}>
-            ← Dashboard
+            ← 返回面板
           </Link>
           <h1 className={styles.editorTitle}>{label}</h1>
         </div>
         <div className={styles.toolbar}>
           <button type="button" className={styles.btn} onClick={load} disabled={saving || loadState === 'loading'}>
-            Reload
+            重新加载
           </button>
           <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={save} disabled={saving || loadState !== 'ready'}>
-            {saving ? 'Saving…' : 'Save & publish'}
+            {saving ? '保存中…' : '保存并发布'}
           </button>
         </div>
       </div>
@@ -107,7 +107,7 @@ export default function SectionEditor({ target, section, label }: Props) {
       {savedMsg && <div className={`${styles.status} ${styles.statusOk}`}>{savedMsg}</div>}
       {error && <div className={`${styles.status} ${styles.statusErr}`}>{error}</div>}
 
-      {loadState === 'loading' && <div className={styles.loading}>Loading current content…</div>}
+      {loadState === 'loading' && <div className={styles.loading}>正在加载内容…</div>}
 
       {loadState === 'ready' && <SectionForm value={data} onChange={setData} />}
     </div>

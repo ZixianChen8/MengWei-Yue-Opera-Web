@@ -24,22 +24,22 @@ export async function POST(request: Request) {
   try {
     form = await request.formData()
   } catch {
-    return NextResponse.json({ error: 'Expected multipart form data' }, { status: 400 })
+    return NextResponse.json({ error: '需要 multipart 表单数据' }, { status: 400 })
   }
 
   const file = form.get('file')
   if (!(file instanceof File)) {
-    return NextResponse.json({ error: 'No file provided' }, { status: 400 })
+    return NextResponse.json({ error: '未提供文件' }, { status: 400 })
   }
   if (file.size > MAX_BYTES) {
     return NextResponse.json(
-      { error: `Image too large (max ${Math.round(MAX_BYTES / 1024 / 1024)} MB). Please optimise it first.` },
+      { error: `图片过大（上限 ${Math.round(MAX_BYTES / 1024 / 1024)} MB），请先压缩后再上传。` },
       { status: 413 },
     )
   }
   const ext = EXT_BY_TYPE[file.type]
   if (!ext) {
-    return NextResponse.json({ error: `Unsupported image type: ${file.type || 'unknown'}` }, { status: 415 })
+    return NextResponse.json({ error: `不支持的图片格式：${file.type || '未知'}` }, { status: 415 })
   }
 
   const base =
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     })
     return NextResponse.json({ ok: true, url: `/assets/uploads/${name}` })
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Upload failed'
+    const message = err instanceof Error ? err.message : '上传失败'
     return NextResponse.json({ error: message }, { status: 502 })
   }
 }

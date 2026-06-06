@@ -6,14 +6,15 @@ import styles from './Studio.module.css'
 export default function Studio() {
   return (
     <section id="studio" className={styles.section}>
-      <Image
-        src="/assets/bg2.webp"
-        alt=""
-        fill
-        className={styles.bg}
-        sizes="100vw"
-        aria-hidden="true"
-      />
+      <div className={styles.bgClip} aria-hidden="true">
+        <Image
+          src="/assets/bg2.webp"
+          alt=""
+          fill
+          className={styles.bg}
+          sizes="100vw"
+        />
+      </div>
       <div className={styles.inner}>
         <div>
           <h2 className={styles.title}>

@@ -2,7 +2,12 @@
 .section {
   padding: 0 80px 100px;
   position: relative;
+  /* z-index: 5 (not 4) — Gallery creates a stacking context that contains the
+     fixed-position lightbox. Footer is z-index: 4 and later in DOM order, so
+     Gallery must be higher than 4 to keep the open lightbox above the footer. */
+  z-index: 5;
   overflow: hidden;
+  background: rgb(248, 245, 239);
 }
 
 .head {
@@ -224,6 +229,7 @@
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
   margin: 0;
   font-family: var(--font-mono);
@@ -231,13 +237,6 @@
   color: var(--ink-faint);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.scrollHint::before {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
 }
 
 /* ── Arrow buttons ── */
@@ -302,9 +301,10 @@
 .lbContent {
   position: relative;
   display: flex;
-  gap: 48px;
+  gap: 56px;
   align-items: center;
-  max-width: 880px;
+  max-width: 1360px;
+  width: 100%;
   padding: 24px;
   cursor: default;
   transform: translateY(16px);
@@ -316,17 +316,22 @@
 }
 
 .lbImgWrap {
-  width: 460px;
-  height: 560px;
-  flex-shrink: 0;
+  flex-shrink: 1;
   border-radius: 3px;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: min(980px, 64vw);
+  max-height: 82vh;
 }
 
 .lbImg {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  display: block;
 }
 
 .lbMeta {
@@ -433,8 +438,12 @@
 
   .lbImgWrap {
     width: 100%;
-    height: 50vh;
-    max-height: 460px;
+    max-width: 100%;
+    max-height: 50vh;
+  }
+
+  .lbImg {
+    max-height: 50vh;
   }
 
   .lbClose {
@@ -498,7 +507,9 @@
 
   .lbContent { gap: 16px; }
 
-  .lbImgWrap { height: 42vh; }
+  .lbImgWrap { max-height: 42vh; }
+
+  .lbImg { max-height: 42vh; }
 
   .lbCn { font-size: 34px; }
 }

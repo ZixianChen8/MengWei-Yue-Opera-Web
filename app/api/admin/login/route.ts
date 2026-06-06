@@ -11,10 +11,10 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   if (!process.env.AUTH_SECRET) {
-    return NextResponse.json({ error: 'Server is missing AUTH_SECRET' }, { status: 500 })
+    return NextResponse.json({ error: '服务器缺少配置：AUTH_SECRET' }, { status: 500 })
   }
   if (!process.env.ADMIN_PASSWORD) {
-    return NextResponse.json({ error: 'Server is missing ADMIN_PASSWORD' }, { status: 500 })
+    return NextResponse.json({ error: '服务器缺少配置：ADMIN_PASSWORD' }, { status: 500 })
   }
 
   let password = ''
@@ -22,11 +22,11 @@ export async function POST(request: Request) {
     const body = await request.json()
     password = String(body?.password ?? '')
   } catch {
-    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
+    return NextResponse.json({ error: '请求内容无效' }, { status: 400 })
   }
 
   if (!verifyPassword(password)) {
-    return NextResponse.json({ error: 'Incorrect password' }, { status: 401 })
+    return NextResponse.json({ error: '密码错误' }, { status: 401 })
   }
 
   const token = await createSessionToken(process.env.AUTH_SECRET)

@@ -124,6 +124,7 @@ No production deploy config is committed yet. Use a managed Git-connected host (
 - Accent is vermillion (`--seal: #C03A2B`), never bright or neon colors
 - All decoration is organic/botanical — no geometric shapes, no glassmorphism
 - No emoji as icons; use SVG or CJK glyphs
+- For every visual modification, verify the mobile version looks polished and coherent, with no broken layout, cramped spacing, clipped text, or overlapping elements.
 - Noise texture and radial gradient overlays are applied globally via `body::before` / `body::after` in `globals.css`
 
 **Global keyframes** (`float`, `drop`) must stay in `globals.css` — CSS Modules mangles animation names, so any keyframe referenced across components belongs there.

@@ -1,0 +1,240 @@
+{
+  "anniversary": {
+    "pageHead": {
+      "meta": "Est. 2016 · Ottawa",
+      "titleZh": "十周年专场",
+      "titleEn": "10th Anniversary Special",
+      "tagline": "Yuespiration · 10 Years in the Making"
+    },
+    "menu": [
+      {
+        "zh": "场刊",
+        "en": "Program Booklet",
+        "href": "/anniversary/booklet",
+        "ready": true
+      },
+      {
+        "zh": "中文节目单",
+        "en": "Programme (中文)",
+        "href": "#",
+        "ready": false
+      },
+      {
+        "zh": "导赏",
+        "en": "Guided Appreciation",
+        "href": "#",
+        "ready": false
+      }
+    ]
+  },
+  "booklet": {
+    "pageHead": {
+      "meta": "Yuespiration · 2016 – 2026",
+      "titleZh": "场刊",
+      "titleEn": "Program Book",
+      "crumb": "10th Anniversary Gala"
+    },
+    "cover": {
+      "posterImage": "",
+      "presents": "Meng Wei Yue Opera Studio presents",
+      "wordmark": "Yuespiration",
+      "scriptEn": "10 Years in the Making",
+      "tagline": "情系越韵 · 十载芳华",
+      "organizer": "加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio",
+      "venue": "Ottawa, Canada",
+      "date": "July 11, 2026"
+    },
+    "preface": {
+      "titleEn": "Preface",
+      "paragraphs": [
+        "Welcome to Yuespiration: 10 Years in the Making.",
+        "Tonight's performance marks an important milestone for Meng Wei Yue Opera Studio as we celebrate ten years of preserving, practicing, and sharing the art of Yue Opera in Canada.",
+        "What began as a small group united by a love of traditional Chinese opera has grown into a vibrant artistic community. Over the past decade, our members, volunteers, supporters, and audiences have helped transform a shared passion into a lasting cultural presence within Canada's diverse multicultural landscape. Together, we have sought not only to preserve a treasured art form, but also to build bridges of understanding through the universal language of the performing arts.",
+        "Known for its lyrical melodies, poetic storytelling, graceful movement, and refined aesthetics, Yue Opera occupies a special place in Chinese cultural heritage. Distinguished by its celebrated tradition of all-female casts — including women portraying both male and female characters — Yue Opera offers a theatrical experience unlike any other. Through elegant performance, expressive music, and richly layered storytelling, it brings timeless human emotions to life in a way that transcends language and cultural boundaries.",
+        "This anniversary gala is both a celebration of the past and a vision for the future. Through a selection of beloved classics, artistic collaborations, and performances by dedicated artists, we honor the journey that has brought us here while reaffirming our commitment to sharing Yue Opera with new audiences for years to come.",
+        "We extend our heartfelt gratitude to our sponsors, partners, volunteers, families, and friends whose encouragement and support have made this evening possible. Most importantly, we thank you, our audience, for joining us in this celebration.",
+        "Whether you are a lifelong admirer of Yue Opera or experiencing it for the very first time, we hope tonight's performance inspires, moves, and connects you.",
+        "Thank you for being part of our story."
+      ],
+      "signoff": {
+        "org": "Meng Wei Yue Opera Studio",
+        "date": "July 11, 2026"
+      }
+    },
+    "letters": {
+      "titleEn": "Greetings",
+      "intro": "We are deeply honoured to receive the following messages of congratulations.",
+      "items": [
+        {
+          "name": "The Prime Minister of Canada",
+          "role": "Office of the Prime Minister",
+          "image": ""
+        },
+        {
+          "name": "The Honourable Yuen Pau Woo",
+          "role": "Senator, British Columbia",
+          "image": "/assets/booklet/letters/yuen-pau-woo.jpg"
+        },
+        {
+          "name": "The Honourable Victor Oh",
+          "role": "Senator",
+          "image": ""
+        },
+        {
+          "name": "Embassy of the People's Republic of China",
+          "role": "中国驻加拿大大使馆",
+          "image": ""
+        },
+        {
+          "name": "Michael Ma, M.P.",
+          "role": "Markham — Unionville",
+          "image": "/assets/booklet/letters/michael-ma.jpg"
+        },
+        {
+          "name": "Mayor of Ottawa",
+          "role": "City of Ottawa",
+          "image": ""
+        }
+      ]
+    },
+    "team": {
+      "titleEn": "Producer & Director",
+      "members": [
+        {
+          "name": "Ms. Wei Meng",
+          "role": "Producer",
+          "image": "",
+          "bio": [
+            "Wei is dedicated to promoting Chinese cultural heritage in Canada by founding the Meng Wei Yue Opera Studio in Ottawa in 2016. As organizer of the Palette of Cultures Showcase, she passionately fosters Canada-China cultural exchange, engaging diverse audiences through events like Asian Heritage Month and the Tulip Festival. Committed to advancing cultural diversity, Wei earned the 2023 Queen Elizabeth II Platinum Jubilee Medallion and 2024 Legacy Award for her meaningful contributions to the communities."
+          ],
+          "credits": []
+        },
+        {
+          "name": "Mr. Xuefeng Gu",
+          "role": "Director",
+          "image": "",
+          "bio": ["Renowned Planner & Stage Director"],
+          "credits": [
+            "Chairman, Fengyi Cultural Communication / Leshang Cultural Media",
+            "Artistic Director, Gu Xuefeng Culture and Art Studio",
+            "President, Zhejiang Yin School Yue Opera Association",
+            "Vice President, Hangzhou Yue Opera Research Association",
+            "Vice Chairman, Suzhou Wujiang District Dramatists Association",
+            "Artistic Advisor, Beijing Yue Opera Research Association",
+            "Artistic Director, Mengwei Yue Opera Studio"
+          ]
+        }
+      ]
+    },
+    "programme": {
+      "titleEn": "Programme",
+      "emcee": "Yi Jiang",
+      "emceeLabel": "Emcee",
+      "acts": [
+        {
+          "titleEn": "A Scenic Yue Opera Song — “Ten Years of Grace”",
+          "titleZh": "情景越歌《十载芳馨》",
+          "duration": "6:40",
+          "performers": "Wei Meng, Dongmei Shi, Chunhui Qian, Yan Chen, Qizhi Hu, Hua Zhu, Wen Wang, Lihong Zhang, Xiaolin Niu, Yuyi Shen, Yuchuan Xu, Zhongliang Liu, Yuqian Lu",
+          "note": ""
+        },
+        {
+          "titleEn": "Farewell Before Expedition — Excerpt from Mao Sui Recommends Himself",
+          "titleZh": "折子戏《毛遂自荐·送征》",
+          "duration": "6:00",
+          "performers": "Hua Zhu, Yan Chen",
+          "note": ""
+        },
+        {
+          "titleEn": "Delivering the Letter — Excerpt from Love Beyond Distance",
+          "titleZh": "折子戏《山河恋·送信》",
+          "duration": "8:10",
+          "performers": "Qizhi Hu, Yuchuan Xu",
+          "note": ""
+        },
+        {
+          "titleEn": "The Eighteen Farewells — Excerpt from The Butterfly Lovers",
+          "titleZh": "折子戏《梁山伯与祝英台·十八相送》",
+          "duration": "7:00",
+          "performers": "Lihong Zhang, Yan Chen",
+          "note": ""
+        },
+        {
+          "titleEn": "Liang Shanbo's Descent from the Mountain — Excerpt from The Butterfly Lovers",
+          "titleZh": "折子戏《梁山伯与祝英台·思祝下山》",
+          "duration": "7:20",
+          "performers": "Wei Meng",
+          "note": "Accompanying Dancers: Xiaolin Niu, Chunhui Qian, Yuchuan Xu, Hua Zhu, Ling Zhou, Qizhi Hu, Yuyi Shen, Zhongliang Liu"
+        },
+        {
+          "titleEn": "Guest Performer",
+          "titleZh": "",
+          "duration": "",
+          "performers": "Xuefeng Gu",
+          "note": "TBD"
+        },
+        {
+          "titleEn": "Yue Opera Dance — Grace of the Fan and Rhythms of the Sleeves",
+          "titleZh": "",
+          "duration": "3:50",
+          "performers": "Hua Zhu, Xiaolin Niu, Qizhi Hu, Yuqian Lu, Chunhui Qian, Yuchuan Xu, Ling Zhou, Yuyi Shen",
+          "note": ""
+        },
+        {
+          "titleEn": "Delivering the Letter — Excerpt from Romance of the Western Chamber",
+          "titleZh": "折子戏《西厢记·传简》",
+          "duration": "8:00",
+          "performers": "Wei Meng, Dongmei Shi",
+          "note": ""
+        },
+        {
+          "titleEn": "A Secret Lovers' Tryst — Excerpt from The Peony Pavilion",
+          "titleZh": "折子戏《牡丹亭·幽媾》",
+          "duration": "13:00",
+          "performers": "Xiaolin Niu, Chunhui Qian",
+          "note": ""
+        },
+        {
+          "titleEn": "The Phoenix Coronet Presented — Excerpt from The Jade Hairpin",
+          "titleZh": "折子戏《碧玉簪·送凤冠》",
+          "duration": "30:00",
+          "performers": "Wei Meng, Dongmei Shi, Xiangyan Huang, Yuqian Lu, Yan Lv, Lihong Zhang, Yuyi Shen",
+          "note": ""
+        }
+      ]
+    },
+    "committee": {
+      "titleEn": "Organizing Committee",
+      "groups": [
+        { "role": "Producer", "names": "Wei Meng" },
+        { "role": "Planning Director", "names": "Xuefeng Gu, Dongmei Shi, Wei Meng" },
+        { "role": "General Coordinator", "names": "Chunhui Qian, Xiaolin Niu, Yuqian Lu" },
+        { "role": "Executive Committee", "names": "Ruolong Tang, Ping Lin, Zheng Xing, Xiangdong Xi" }
+      ]
+    },
+    "crew": {
+      "titleEn": "Production Crew",
+      "groups": [
+        { "role": "Chief Director", "names": "Xuefeng Gu" },
+        { "role": "Assistant Director", "names": "Max Ma" },
+        { "role": "Stage Manager", "names": "Jian Guan" },
+        { "role": "Assistant Stage Manager", "names": "Ruby Han" },
+        { "role": "Videographer", "names": "Weimin Mao, Jian Chen, Song Wang" },
+        { "role": "Photographer", "names": "Yang Bai, Jing Zhang, Ming Cheng" },
+        { "role": "Media Promotion", "names": "Zixian Chen" }
+      ]
+    },
+    "closing": {
+      "organizerTitleEn": "Organizer",
+      "organizer": "Mengwei Yue Opera Studio",
+      "supportingTitleEn": "Supporting Organizations",
+      "supporting": [
+        "Gu Xuefeng Culture and Art Studio",
+        "Jingju Quebec Art Centre",
+        "OneFrame",
+        "Shanghai One Fine Dining",
+        "北京协会（待定）"
+      ]
+    }
+  }
+}

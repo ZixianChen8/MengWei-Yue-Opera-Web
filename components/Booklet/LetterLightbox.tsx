@@ -69,12 +69,6 @@ export default function LetterLightbox({ letters }: { letters: BookletLetter[] }
         <div className={styles.lbBar}>
           <span className={styles.lbId}>
             {current?.name}
-            {total > 1 && open && (
-              <b>
-                {' '}
-                {pos + 1} / {total}
-              </b>
-            )}
           </span>
           <button className={styles.lbClose} onClick={close} aria-label="Close" type="button">
             ×

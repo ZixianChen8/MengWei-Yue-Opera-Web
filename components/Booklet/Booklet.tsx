@@ -1,12 +1,13 @@
 import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import { booklet } from '@/content/booklet'
+import Reveal from '@/components/Reveal/Reveal'
 import LetterLightbox from './LetterLightbox'
 import styles from './Booklet.module.css'
 
-// The printed gala program book, rendered as a single long page: a crimson
-// curtain cover followed by ivory "interior pages" carrying the ink-wash
-// watermark and (when supplied) a faint blurred poster behind the content.
+// The printed gala program book, rendered as a single long page: the poster
+// hero followed by ivory "interior pages" carrying the ink-wash watermark and a
+// faint blurred echo of the poster behind the content.
 export default function Booklet() {
   const { cover, preface, letters, team, programme, committee, crew, closing } = booklet
 
@@ -14,37 +15,33 @@ export default function Booklet() {
   // remaining slots stay in the data for later uploads (mirrors Gallery).
   const visibleLetters = letters.items.filter((l) => l.image)
 
-  // Drive the cover background and the interior blurred-poster layer from one
-  // CSS variable; when empty, CSS falls back to the crimson/ivory placeholders.
+  // Drive the interior blurred-poster echo from one CSS variable; when empty,
+  // CSS falls back to the ivory placeholder.
   const posterVars = cover.posterImage
     ? ({ ['--bk-poster' as string]: `url("${cover.posterImage}")` } as CSSProperties)
     : undefined
 
   return (
     <article className={styles.booklet} style={posterVars}>
-      {/* ── Cover ─────────────────────────────────────────── */}
-      <section
-        className={`${styles.cover}${cover.posterImage ? ` ${styles.coverPoster}` : ''}`}
-      >
-        <div className={styles.coverInner}>
-          <p className={styles.presents}>{cover.presents}</p>
-          <h1 className={styles.wordmark}>{cover.wordmark}</h1>
-          <p className={styles.script}>{cover.scriptEn}</p>
-          <span className={styles.coverRule} aria-hidden="true" />
-          <p className={styles.coverTagline}>{cover.tagline}</p>
-          <div className={styles.coverFoot}>
-            <p className={styles.coverOrg}>{cover.organizer}</p>
-            <p className={styles.coverMeta}>
-              {cover.venue}
-              <span className={styles.dot} aria-hidden="true">·</span>
-              {cover.date}
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* ── Hero (poster — the title art is baked into the image) ── */}
+      <Reveal as="section" className={styles.hero}>
+        {cover.posterImage ? (
+          <Image
+            src={cover.posterImage}
+            alt="Yuespiration · 10 Years in the Making"
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroImg}
+          />
+        ) : (
+          <div className={styles.heroFallback} aria-hidden="true" />
+        )}
+        <div className={styles.heroScrim} aria-hidden="true" />
+      </Reveal>
 
       {/* ── Preface ───────────────────────────────────────── */}
-      <section className={styles.page}>
+      <Reveal as="section" className={styles.page}>
         <div className={styles.pageInner}>
           <h2 className={styles.sectionTitle}>{preface.titleEn}</h2>
           <div className={styles.prose}>
@@ -57,19 +54,19 @@ export default function Booklet() {
             <span className={styles.signoffDate}>{preface.signoff.date}</span>
           </p>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Greetings (scanned dignitary letters) ─────────── */}
-      <section className={styles.page}>
+      <Reveal as="section" className={styles.page}>
         <div className={styles.pageInner}>
           <h2 className={styles.sectionTitle}>{letters.titleEn}</h2>
           {letters.intro && <p className={styles.sectionIntro}>{letters.intro}</p>}
           <LetterLightbox letters={visibleLetters} />
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Producer & Director ───────────────────────────── */}
-      <section className={styles.page}>
+      <Reveal as="section" className={styles.page}>
         <div className={styles.pageInner}>
           <h2 className={styles.sectionTitle}>{team.titleEn}</h2>
           <div className={styles.bios}>
@@ -104,10 +101,10 @@ export default function Booklet() {
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Programme (run of show) ───────────────────────── */}
-      <section className={styles.page}>
+      <Reveal as="section" className={styles.page}>
         <div className={styles.pageInner}>
           <h2 className={styles.sectionTitle}>{programme.titleEn}</h2>
           <p className={styles.emcee}>
@@ -128,26 +125,26 @@ export default function Booklet() {
             ))}
           </ol>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Organizing Committee ──────────────────────────── */}
-      <section className={styles.page}>
+      <Reveal as="section" className={styles.page}>
         <div className={styles.pageInner}>
           <h2 className={styles.sectionTitle}>{committee.titleEn}</h2>
           <RoleList groups={committee.groups} />
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Production Crew ───────────────────────────────── */}
-      <section className={styles.page}>
+      <Reveal as="section" className={styles.page}>
         <div className={styles.pageInner}>
           <h2 className={styles.sectionTitle}>{crew.titleEn}</h2>
           <RoleList groups={crew.groups} />
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Organizer & Supporting Organizations ──────────── */}
-      <section className={styles.page}>
+      <Reveal as="section" className={styles.page}>
         <div className={styles.pageInner}>
           <h2 className={styles.sectionTitle}>{closing.organizerTitleEn}</h2>
           <p className={styles.organizer}>{closing.organizer}</p>
@@ -160,7 +157,7 @@ export default function Booklet() {
             ))}
           </ul>
         </div>
-      </section>
+      </Reveal>
     </article>
   )
 }

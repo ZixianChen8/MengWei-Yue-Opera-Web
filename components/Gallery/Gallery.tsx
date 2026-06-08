@@ -4,15 +4,11 @@ import { useEffect, useState } from 'react'
 import { galleryPage } from '@/content/gallery'
 import styles from './Gallery.module.css'
 
-const pad2 = (n: number) => String(n).padStart(2, '0')
-
 export default function Gallery() {
   const { header, photos } = galleryPage
 
   // Real images only, rendered in admin-defined array order.
   const visible = photos.filter((p) => p.image)
-  const total = visible.length
-
   // Position within the list; null means the lightbox is closed.
   const [pos, setPos] = useState<number | null>(null)
 
@@ -82,7 +78,6 @@ export default function Gallery() {
               className={styles.photo}
               onClick={() => setPos(i)}
             >
-              <span className={styles.pcNum}>N° {pad2(i + 1)}</span>
               <div className={styles.photoFrame}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={p.image} alt={p.title || ''} loading="lazy" className={styles.photoImg} />
@@ -106,12 +101,6 @@ export default function Gallery() {
         }}
       >
         <div className={styles.lbBar}>
-          <div className={styles.lbId}>
-            Frame{' '}
-            <b>
-              {open ? pad2(pos + 1) : '00'} / {pad2(total)}
-            </b>
-          </div>
           <button className={styles.lbClose} onClick={close} aria-label="Close">
             ×
           </button>

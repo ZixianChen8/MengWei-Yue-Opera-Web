@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { anniversary } from '@/content/booklet'
+import Reveal from '@/components/Reveal/Reveal'
 import styles from './Anniversary.module.css'
 
 // The 10th Anniversary Special hub: a masthead for Yuespiration plus a small
@@ -11,20 +12,18 @@ export default function Anniversary() {
     <main className={styles.hub}>
       <div className={styles.curtain} aria-hidden="true" />
       <div className={styles.inner}>
-        <header className={styles.head}>
+        <Reveal as="header" className={styles.head}>
           <p className={styles.meta}>{pageHead.meta}</p>
           <h1 className={styles.title}>{pageHead.titleZh}</h1>
           <p className={styles.titleEn}>{pageHead.titleEn}</p>
           <span className={styles.rule} aria-hidden="true" />
           <p className={styles.tagline}>{pageHead.tagline}</p>
-        </header>
+        </Reveal>
 
         <ul className={styles.menu}>
           {menu.map((item, i) => {
-            const num = String(i + 1).padStart(2, '0')
             const inner = (
               <>
-                <span className={styles.tileNum} aria-hidden="true">N° {num}</span>
                 <span className={styles.tileZh}>{item.zh}</span>
                 <span className={styles.tileEn}>{item.en}</span>
                 <span className={styles.tileCue}>
@@ -33,7 +32,7 @@ export default function Anniversary() {
               </>
             )
             return (
-              <li key={item.en} className={styles.tileWrap}>
+              <Reveal as="li" key={item.en} className={styles.tileWrap} delay={0.12 + i * 0.1}>
                 {item.ready ? (
                   <Link href={item.href} className={styles.tile}>
                     {inner}
@@ -43,7 +42,7 @@ export default function Anniversary() {
                     {inner}
                   </div>
                 )}
-              </li>
+              </Reveal>
             )
           })}
         </ul>

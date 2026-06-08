@@ -129,13 +129,6 @@
   transform: translateY(-4px);
 }
 
-.tileNum {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: #f8d078;
-}
-
 .tileZh {
   margin-top: auto;
   font-family: var(--font-chinese-display);

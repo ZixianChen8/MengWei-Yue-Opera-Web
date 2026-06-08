@@ -98,10 +98,6 @@ export default function Nav({ variant = 'overlay' }: NavProps) {
                   className={`${styles.olItem}${i === 0 ? ` ${styles.olItemAccent}` : ''}`}
                   onClick={close}
                 >
-                  <span className={styles.olNum} aria-hidden="true">
-                    <span className={styles.olNumSym}>N°</span>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                   <span className={styles.olZh}>{item.zh}</span>
                   <span className={styles.olEn}>{item.en}</span>
                 </Link>

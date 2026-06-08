@@ -1,0 +1,55 @@
+ Typography System
+Primary typeface (section titles): Arial Black Italic, rendered as an outlined/hollow style (white fill + thin ~1px black stroke), used for every interior section heading ("Preface", "Programme", "Organizing Committee", "Supporting Embassies", etc.). Classification: sans-serif display, heavy weight, italic.
+Secondary typeface (body): Minion Pro Regular (serif) is the house body face for editorially-set pages (preface, bios, MC/director blurbs). Scanned official letters use Times New Roman (regular + bold). The Programme listing uses Arial / Arial Bold (sans-serif). CJK text uses STSongti-SC and DengXian for Chinese passages.
+Heading sizes (9×12" page scale):
+H1 / cover wordmark: ~60–72 pt engraved display serif (raster art), all-caps "PALETTE OF CULTURES"
+H2 / interior section title: 27 pt Arial Black Italic outlined (e.g., "Preface")
+H3 / sub-label / person name: 13.5–14 pt bold (Arial Black Italic for bio names; Arial Bold for program act names)
+Body text size: 11–14 pt (Minion Pro bios ~11 pt; preface 14 pt; scanned letters ~12 pt Times). Program listing 10–13 pt Arial.
+Line spacing: Normal-to-loose (~1.3–1.45×). Letters and centered lists are loosely leaded for an airy, formal feel.
+Text alignment patterns:
+Section titles: always centered.
+Editorial body (preface, bios): left-aligned / justified flush blocks.
+Lists (committee, embassies, supporting orgs, programme): centered, one item per line.
+Official letters: left-aligned, signature block left or right.
+Special text treatments: Heavy italic outlined caps for titles; bold for act/role labels followed by regular for names; Western performance titles in italics; small-caps/spaced caps in scanned official letterheads. No decorative letter-spaced rules in running text.
+2. Color Palette
+Primary color: Deep oxblood / crimson curtain #5A0A0A–#7A1010 (darkest folds to #100000; brightest curtain highlight ~#8B1A1A). Dominant on cover and back cover.
+Secondary color: Warm metallic gold #F8D078 (range #C8A050–#F0C878) — the ribbon swoosh and accent lines.
+Accent color: Multicultural flag spectrum (full-saturation reds, greens, blues, yellows from world flags) used only inside the cover silhouette and the rainbow "palette" petal logo. Maple-leaf orange-red #C0392B.
+Background color (interior): Ivory / warm off-white #EFEFE6 overlaid with a faint grey-green Chinese ink-wash (shan shui) mountain landscape #B0B0A0–#C8C8B8, denser toward the lower third.
+Text color(s): Near-black #000000 for all body and titles; white #FFFFFF for text set over the dark cover.
+Color usage rules: Crimson = covers/wraps and "stage" framing. Gold = ribbons, dividers, premium accents only. Ivory + ink-wash mountains = every interior content page. Black = all reading text. Flag colors are reserved exclusively for imagery/logo, never for type or backgrounds.
+3. Layout & Grid
+Page size: Custom large-format 9 in × 12 in (648 × 864 pt) — larger than US Letter, portrait. (Note: source file is 24 pages.)
+Orientation: Portrait throughout.
+Margin size: Medium. Editorial pages ~90 pt (≈1.25 in) left/right, ~60–75 pt top. Centered list pages use wider symmetric margins (~155–160 pt) to narrow the column.
+Column structure: Predominantly single column. Bio pages use a photo + text arrangement (image left/top-left, text wrapping right). Ad/gallery pages use ad-hoc 2-up / 2×2 / 3-up image grids.
+Alignment anchor: Center is the dominant organizing axis (titles, lists, cover). Body prose blocks left-align within the centered frame.
+Section dividers: Each major section is its own full page with a centered outlined title at top; whitespace and the recurring ink-wash background separate content. No printed rule lines between list items — spacing only.
+4. Visual Elements & Decorative Language
+Border style: No printed page borders on interior pages. Scanned official letters appear as white "paper cards" with a soft drop shadow floating on the ink-wash background, which reads as an implied frame.
+Ornamental elements: Gold ribbon "swoosh" wrapping the cover wordmark; scattered red/orange maple leaves (cover corners + a single leaf anchored bottom-right on interior pages); a circular rainbow petal "palette" flower logo (overlapping colored petals) representing the event mark.
+Image treatment: Mixed — full-bleed dark cover; boxed rectangular photos with thin white margins for bios and the photo-collage gallery pages (2-up, 2×2, 3-up grids); advertisers' artwork placed full-bleed or as boxed panels.
+Icon or symbol use: Yes — national flags (inside the cover silhouette), official crests/seals on letterheads (Parliament of Canada, PRC emblem), sponsor logos (ICBC, Desjardins, etc.).
+Texture or pattern: Yes — a faint monochrome Chinese ink-wash mountain (shan shui) watermark underlies all interior content pages; the cover uses a red theatre-curtain texture with vertical drape folds and a spotlight glow.
+5. Cultural & Contextual Aesthetic
+Design tradition: Hybrid — classical Chinese (Yue Opera) ink-wash aesthetic fused with a Western gala concert program and Canadian multicultural framing.
+Visual tone: Grand and formal, yet celebratory and inclusive — stage-curtain drama on the cover, serene and dignified interiors.
+Cultural motifs: Chinese shan shui mountains; multicultural flags as a unifying silhouette; the Canadian maple leaf; gold ribbon (festivity/honor); the "palette" rainbow flower symbolizing many cultures as one artwork. The tagline motif "celebrating diversity, one stroke at a time" reinforces the painting/palette metaphor.
+6. Page-by-Page Structure Template
+Cover: Dark crimson stage-curtain field; ICBC sponsor logo + "Presents" at top center; large engraved-serif wordmark "PALETTE OF CULTURES" with script "Showcase"; gold ribbon swoosh; central human profile silhouette filled with world flags; maple leaves in corners; white italic tagline mid-page; organizer/venue/date block bottom-right in serif.
+Table of contents: [not present] — there is no TOC; the Programme page (act running order) serves the navigational role.
+Welcome/foreword page: "Preface" — centered outlined title, single justified serif column, ink-wash background, palette-flower logo and maple leaf as footer ornaments.
+Official message / letter pages: Scanned dignitary letters (PM, Senators, Mayor, Ambassadors) presented as white shadowed cards on the ink-wash background; Times New Roman, crest letterhead, signature blocks; some bilingual (EN/FR) or Chinese.
+Program listing page: "Programme" centered outlined title; centered single-column run-of-show; each act in Bold act/genre name + title, with performing group in lighter type beneath; "Intermission" centered as a break marker.
+Performer / committee bio pages: Boxed headshot with name/title in bold beside it, biography in serif body; committee/crew pages are centered role→name lists grouped under bold subheadings.
+Advertisement / sponsor pages: Full-color advertiser artwork, single or multi-up per page (e.g., Frobisher, Mennie, Desjardins, JZZ Law, JMJ Home Design, Rayon LED), interleaved between content sections.
+Acknowledgement pages: "Supporting Embassies" and "Supporting Organization" — centered outlined title with long centered single-column lists on the ink-wash background.
+Back cover: Full-page ICBC (Industrial and Commercial Bank of China, Canada) advertisement on a crimson/photographic field — mirrors the sponsor branding from the front cover.
+7. Agent Reproduction Rules
+Two-world color rule: Wrap the booklet in deep crimson #5A0A0A–#7A1010 with gold #F8D078 accents (front cover, back cover); set every interior content page on ivory #EFEFE6 with the faint grey-green ink-wash mountain watermark. Never put body text on crimson except the cover, and never use flag colors for anything but imagery/logos.
+Every section gets its own page with a centered title in heavy italic outlined sans (Arial Black Italic, white fill + thin black outline, ~27 pt). Do not invent rule-line dividers; separate sections by page breaks and whitespace only.
+Lock the format to 9×12 in portrait with ~90 pt editorial side margins (≈155 pt for centered lists), centered as the dominant alignment axis; body prose in a serif (Minion Pro/Times), program listings in Arial with bold act labels.
+Carry the recurring ornaments on every interior page: the ink-wash mountain background plus a single red maple leaf anchored bottom-right; reserve the gold ribbon swoosh and rainbow "palette" petal logo for the cover and foreword. Keep these consistent and subtle, never competing with text.
+Honor the cultural fusion and hierarchy: Chinese ink-wash serenity + Western gala program structure + Canadian multicultural symbolism; present official letters as white drop-shadowed cards preserving their crests, and place sponsor/advertiser pages as full-color interludes between content — with the lead financial sponsor (ICBC) owning the back cover.

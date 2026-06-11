@@ -34,7 +34,6 @@ export default function Booklet() {
           <span className={styles.coverRule} aria-hidden="true" />
           <p className={styles.coverTagline}>{cover.tagline}</p>
           <div className={styles.coverFoot}>
-            <p className={styles.coverOrg}>{cover.organizer}</p>
             <p className={styles.coverMeta}>
               {cover.venue}
               <span className={styles.dot} aria-hidden="true">·</span>

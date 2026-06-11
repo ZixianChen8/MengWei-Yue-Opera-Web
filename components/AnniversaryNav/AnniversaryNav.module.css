@@ -1,6 +1,13 @@
 /* Floating bottom pill nav — phones + tablets only (≤1023px). */
 
+/* Spring-ish easing (≈ stiffness 300 / damping ~24): rises, overshoots ~6%,
+   settles. Native CSS, no JS spring needed. */
 .pill {
+  --pill-spring: linear(
+    0, 0.018, 0.069, 0.148, 0.25, 0.37, 0.502, 0.642, 0.783, 0.92,
+    1.045 78%, 1.06, 1.062, 1.05, 1.03, 1.01, 1
+  );
+  --pill-spring-dur: 0.52s;
   display: none;
 }
 
@@ -23,10 +30,33 @@
 
     background: var(--ink);
     border-radius: 99px;
+    overflow: hidden; /* clip the morphing token to the pill shape */
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45);
   }
 
+  /* The gold active token: slides + morphs width between tabs. */
+  .indicator {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+    z-index: 0;
+    width: 0;
+    border-radius: 99px;
+    background: var(--gold);
+    transition:
+      transform var(--pill-spring-dur) var(--pill-spring),
+      width var(--pill-spring-dur) var(--pill-spring);
+  }
+
+  /* Before the first measurement — keep it invisible (no 0,0 flash). */
+  .inactive {
+    opacity: 0;
+  }
+
   .item {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +71,7 @@
     letter-spacing: 2px;
     white-space: nowrap;
     color: var(--paper);
-    transition: color 0.25s ease;
+    transition: color 0.35s ease;
   }
 
   .en {
@@ -51,18 +81,22 @@
     text-transform: uppercase;
     color: var(--paper);
     opacity: 0.55;
-    transition: opacity 0.25s ease;
+    transition: color 0.35s ease, opacity 0.35s ease;
   }
 
+  /* Active label sits on the gold token → dark ink for contrast. */
   .active .cn {
-    color: var(--gold);
+    color: var(--ink);
   }
 
   .active .en {
+    color: var(--ink);
     opacity: 0.85;
   }
 
   .dot {
+    position: relative;
+    z-index: 1;
     flex-shrink: 0;
     width: 3px;
     height: 3px;
@@ -75,5 +109,12 @@
   .spacer {
     display: block;
     height: 84px;
+  }
+}
+
+/* Reduced motion: token repositions instantly; only the color cross-fade stays. */
+@media (prefers-reduced-motion: reduce) {
+  .indicator {
+    transition: none;
   }
 }

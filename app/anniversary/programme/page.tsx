@@ -3,7 +3,6 @@ import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 import Programme from '@/components/Programme/Programme'
-import AnniversaryNav from '@/components/AnniversaryNav/AnniversaryNav'
 
 export const metadata: Metadata = {
   title: '节目单 · Programme — 孟伟越剧',
@@ -20,7 +19,6 @@ export default function ProgrammePage() {
         <Programme />
       </div>
       <Footer />
-      <AnniversaryNav />
     </>
   )
 }

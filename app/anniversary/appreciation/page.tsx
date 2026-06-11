@@ -3,7 +3,6 @@ import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 import Appreciation from '@/components/Appreciation/Appreciation'
-import AnniversaryNav from '@/components/AnniversaryNav/AnniversaryNav'
 
 export const metadata: Metadata = {
   title: '导赏 · Guided Appreciation — 孟伟越剧',
@@ -20,7 +19,6 @@ export default function AppreciationPage() {
         <Appreciation />
       </div>
       <Footer />
-      <AnniversaryNav />
     </>
   )
 }

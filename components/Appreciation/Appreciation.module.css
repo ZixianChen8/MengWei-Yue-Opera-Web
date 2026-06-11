@@ -10,6 +10,7 @@
   --bk-crimson-deep: #2c0606;
   --bk-gold: #f8d078;
   --bk-gold-soft: #e2bc66;
+  --bk-poster-x: 96%;
 
   background: var(--paper);
   color: var(--ink);
@@ -20,11 +21,13 @@
 .cover {
   position: relative;
   overflow: hidden;
-  min-height: min(54vh, 520px);
+  /* Match the booklet cover: nav + hero together fill the first viewport. */
+  min-height: calc(100vh - 5.75rem);
+  min-height: calc(100dvh - 5.75rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 80px);
+  padding: clamp(48px, 9vw, 110px) clamp(24px, 6vw, 80px);
   text-align: center;
   color: #fff5e6;
   background:
@@ -49,21 +52,18 @@
   pointer-events: none;
 }
 
-/* Real poster becomes the field, darkened for legibility. */
+/* Real poster becomes the field, matching the booklet cover background. */
 .coverPoster::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: var(--bk-poster);
-  background-size: cover;
-  background-position: 72% center;
-  opacity: 0.25;
-  /* Soft blur so the poster's printed characters dissolve into texture
-     instead of reading through behind the masthead text. The scale keeps
-     blur from feathering a blank edge inside the masthead. */
-  filter: blur(3px);
-  transform: scale(1.06);
+  background-image:
+    linear-gradient(180deg, rgba(20, 4, 4, 0.42) 0%, rgba(20, 4, 4, 0.66) 100%),
+    var(--bk-poster);
+  background-size: cover, cover;
+  background-position: center, var(--bk-poster-x) center;
+  opacity: 0.4;
   mix-blend-mode: luminosity;
   pointer-events: none;
 }

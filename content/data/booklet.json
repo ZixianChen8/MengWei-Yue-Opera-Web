@@ -36,13 +36,13 @@
     },
     "cover": {
       "posterImage": "/assets/booklet/mw-backdrop-upscaled.webp",
-      "presents": "Meng Wei Yue Opera Studio presents",
-      "wordmark": "Yuespiration",
-      "scriptEn": "10 Years in the Making",
+      "presents": "加拿大孟伟越剧艺术传习所 呈献",
+      "wordmark": "场刊",
+      "scriptEn": "Program Booklet · Yuespiration",
       "tagline": "情系越韵 · 十载芳华",
       "organizer": "加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio",
       "venue": "Ottawa, Canada",
-      "date": "July 11, 2026"
+      "date": "2026年7月11日"
     },
     "preface": {
       "titleEn": "Preface",
@@ -247,7 +247,7 @@
     "posterImage": "/assets/booklet/mw-backdrop-upscaled.webp",
     "presents": "加拿大孟伟越剧艺术传习所 呈献",
     "wordmark": "节目单",
-    "scriptEn": "Yuespiration · 10 Years in the Making",
+    "scriptEn": "Programme · Yuespiration",
     "tagline": "情系越韵 · 十载芳华",
     "venue": "Ottawa, Canada",
     "date": "2026年7月11日",

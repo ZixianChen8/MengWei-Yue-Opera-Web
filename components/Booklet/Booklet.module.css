@@ -69,11 +69,16 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: var(--bk-poster);
-  background-size: cover;
+  /* A dark scrim is layered OVER the poster (first layer) to hold contrast for
+     the gold/cream cover text; the poster sits beneath it (second layer). The
+     scrim keeps the poster's --bk-poster-x focus point untouched. */
+  background-image:
+    linear-gradient(180deg, rgba(20, 4, 4, 0.42) 0%, rgba(20, 4, 4, 0.66) 100%),
+    var(--bk-poster);
+  background-size: cover, cover;
   /* Horizontal focus tweaked via --bk-poster-x on .booklet above. */
-  background-position: var(--bk-poster-x) center;
-  opacity: 0.5;
+  background-position: center, var(--bk-poster-x) center;
+  opacity: 0.4;
   mix-blend-mode: luminosity;
   pointer-events: none;
 }
@@ -85,26 +90,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  /* Soft dark halo keeps the cream/gold copy readable over the poster. */
+  text-shadow: 0 1px 10px rgba(20, 4, 4, 0.55);
 }
 
 .presents {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  letter-spacing: 0.14em;
   color: var(--bk-gold);
 }
 
 .wordmark {
-  margin: 6px 0 0;
-  font-family: var(--font-latin-display);
-  font-weight: 600;
-  font-style: italic;
-  font-size: clamp(56px, 13vw, 124px);
-  line-height: 0.92;
-  letter-spacing: 0.01em;
+  margin: 4px 0 0;
+  font-family: var(--font-chinese-display);
+  font-weight: 400;
+  font-size: clamp(54px, 12vw, 104px);
+  line-height: 0.96;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
   color: var(--bk-gold);
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
 }
@@ -113,7 +119,7 @@
   margin: 0;
   font-family: var(--font-latin-display);
   font-style: italic;
-  font-size: clamp(18px, 3.4vw, 28px);
+  font-size: clamp(15px, 2.6vw, 22px);
   letter-spacing: 0.04em;
   color: #f3e7d0;
 }
@@ -122,23 +128,20 @@
   display: block;
   width: 120px;
   height: 1px;
-  margin: 22px 0 4px;
+  margin: 18px 0 2px;
   background: linear-gradient(90deg, transparent, var(--bk-gold), transparent);
 }
 
 .coverTagline {
   margin: 0;
   font-family: var(--font-chinese-display);
-  font-size: clamp(22px, 4.4vw, 34px);
+  font-size: clamp(20px, 4vw, 30px);
   letter-spacing: 0.14em;
   color: #fbeed4;
 }
 
 .coverFoot {
-  margin-top: clamp(28px, 6vw, 56px);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  margin-top: clamp(20px, 4vw, 36px);
 }
 
 .coverOrg {

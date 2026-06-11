@@ -3,7 +3,6 @@ import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 import Booklet from '@/components/Booklet/Booklet'
-import AnniversaryNav from '@/components/AnniversaryNav/AnniversaryNav'
 
 export const metadata: Metadata = {
   title: '场刊 · Program Book — 孟伟越剧',
@@ -20,7 +19,6 @@ export default function BookletPage() {
         <Booklet />
       </div>
       <Footer />
-      <AnniversaryNav />
     </>
   )
 }

@@ -83,22 +83,10 @@
   border-top-color: var(--seal);
 }
 
-.event:hover .eNum {
-  color: var(--seal);
-}
-
 .eRow {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-}
-
-.eNum {
-  font-family: var(--font-latin-display);
-  font-size: 0.875rem;
-  letter-spacing: .4em;
-  color: var(--ink-faint);
-  transition: .3s;
 }
 
 .eTag {
@@ -293,7 +281,6 @@
 }
 
 .fxPress.isActive            { border-top-color: var(--seal); }
-.fxPress.isActive .eNum      { color: var(--seal); }
 .fxPress.isActive .pressInk  { animation: pressInk .9s cubic-bezier(.16, .84, .44, 1) forwards; }
 .fxPress.isActive .pressEdge { animation: pressEdge .9s ease-out forwards; }
 

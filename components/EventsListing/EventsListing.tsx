@@ -124,7 +124,6 @@ export default function EventsListing() {
                 <div className={styles.archRows}>
                   {block.shows.map((show, i) => (
                     <div key={i} className={styles.archRow}>
-                      <div className={styles.archNo}>{show.num}</div>
                       <div className={styles.archCn}>{show.cn}</div>
                     </div>
                   ))}

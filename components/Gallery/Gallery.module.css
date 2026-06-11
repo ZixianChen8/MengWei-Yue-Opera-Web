@@ -163,27 +163,6 @@
   font-style: italic;
 }
 
-/* index number — appears top-right on hover */
-.pcNum {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 2;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.24em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-  background: var(--paper);
-  padding: 3px 7px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.photo:hover .pcNum {
-  opacity: 1;
-}
-
 /* ── Lightbox ────────────────────────────────────────────── */
 
 .lightbox {
@@ -207,22 +186,9 @@
 .lbBar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 22px 40px;
   flex-shrink: 0;
-}
-
-.lbId {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.32em;
-  color: rgba(248, 244, 238, 0.75);
-  text-transform: uppercase;
-}
-
-.lbId b {
-  color: var(--paper);
-  font-weight: 400;
 }
 
 .lbClose {

@@ -196,10 +196,6 @@
   background: var(--paper-deep);
 }
 
-.ev:hover .evNum {
-  color: var(--seal);
-}
-
 .ev:hover .evArrow {
   color: var(--seal);
   transform: translateX(3px);
@@ -210,15 +206,6 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 14px;
-}
-
-.evNum {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.32em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-  transition: color 0.3s;
 }
 
 .evTag {
@@ -496,9 +483,7 @@
 }
 
 .archRow {
-  display: grid;
-  grid-template-columns: 60px 1fr;
-  gap: 20px;
+  display: block;
   align-items: baseline;
   padding: 18px 0;
   border-bottom: 1px solid var(--border-mid);
@@ -506,14 +491,6 @@
 
 .archRow:last-child {
   border-bottom: none;
-}
-
-.archNo {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.28em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
 }
 
 .archCn {

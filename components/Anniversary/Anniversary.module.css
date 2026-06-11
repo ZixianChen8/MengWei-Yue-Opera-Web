@@ -7,7 +7,7 @@
   position: relative;
   overflow: hidden;
   min-height: calc(100vh - 5.75rem);
-  padding: clamp(56px, 9vw, 110px) clamp(24px, 6vw, 80px) clamp(72px, 10vw, 130px);
+  padding: clamp(48px, 8vw, 92px) clamp(24px, 6vw, 80px) clamp(56px, 8vw, 96px);
   background:
     radial-gradient(130% 70% at 50% 0%, rgba(190, 52, 38, 0.5), transparent 56%),
     linear-gradient(180deg, #6a0e0e 0%, #2c0606 100%);
@@ -45,7 +45,7 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-bottom: clamp(48px, 8vw, 84px);
+  margin-bottom: clamp(32px, 6vw, 60px);
 }
 
 .meta {
@@ -115,7 +115,7 @@
   flex-direction: column;
   gap: 8px;
   padding: clamp(28px, 4vw, 44px) clamp(24px, 3vw, 32px);
-  min-height: 220px;
+  min-height: 200px;
   text-decoration: none;
   color: inherit;
   background: rgba(248, 230, 200, 0.06);
@@ -162,4 +162,53 @@
   background: rgba(248, 230, 200, 0.06);
   border-color: rgba(248, 208, 120, 0.32);
   transform: none;
+}
+
+@media (max-width: 720px) {
+  .hub {
+    min-height: 100svh;
+    padding: 42px clamp(18px, 6vw, 28px) 48px;
+  }
+
+  .head {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .title {
+    font-size: clamp(42px, 13vw, 64px);
+  }
+
+  .rule {
+    margin: 14px 0 4px;
+  }
+
+  .tagline {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  .menu {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .tile {
+    gap: 4px;
+    min-height: 0;
+    padding: 18px 20px;
+  }
+
+  .tileZh {
+    margin-top: 0;
+    font-size: 30px;
+  }
+
+  .tileEn {
+    font-size: 16px;
+  }
+
+  .tileCue {
+    margin-top: 8px;
+  }
 }

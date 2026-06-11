@@ -9,7 +9,9 @@
       "Bash(node -e \"const fs=require\\('fs'\\);const c=fs.readFileSync\\('./components/EventsListing/EventsListing.module.css','utf8'\\);const re=/\\(\\\\.yearToggle|\\\\.yearBtn|\\\\.months|\\\\.month|\\\\.monthHas|\\\\.monthNow|\\\\.pip|\\\\.pipMuted|\\\\.mCn|\\\\.mEn\\)\\\\b[^{]*\\\\{[^}]*\\\\}/g;let m;while\\(m=re.exec\\(c\\)\\){console.log\\(m[0]+'\\\\n'\\)}\")",
       "Bash(node -e \"const fs=require\\('fs'\\);const c=fs.readFileSync\\('./components/EventsListing/EventsListing.module.css','utf8'\\);const re=/\\\\.yearBtnOn\\\\b[^,{][^{]*\\\\{[^}]*\\\\}/g;let m;while\\(m=re.exec\\(c\\)\\){console.log\\(m[0]+'\\\\n'\\)} console.log\\('--- archive years ---'\\); \")",
       "Bash(node -e \"const d=require\\('./content/data/home.json'\\); console.log\\('archive:',JSON.stringify\\(d.eventsListingPage.archive.map\\(b=>b.year\\)\\)\\);\")",
-      "Bash(node -e \"const d=require\\('./content/data/home.json'\\); const m={};d.season.events.forEach\\(e=>{const mm=e.date.match\\(/\\(\\\\d+\\)年\\(\\\\d+\\)月/\\);if\\(mm\\)m[mm[2]]=\\(m[mm[2]]||0\\)+1}\\);console.log\\('events per month\\(2026\\):',JSON.stringify\\(m\\)\\)\")"
+      "Bash(node -e \"const d=require\\('./content/data/home.json'\\); const m={};d.season.events.forEach\\(e=>{const mm=e.date.match\\(/\\(\\\\d+\\)年\\(\\\\d+\\)月/\\);if\\(mm\\)m[mm[2]]=\\(m[mm[2]]||0\\)+1}\\);console.log\\('events per month\\(2026\\):',JSON.stringify\\(m\\)\\)\")",
+      "Bash(cd \"C:\\\\Users\\\\bluch\\\\Documents\\\\GitHub\\\\MengWei-Yue-Opera-Web\" && echo \"---public/assets/booklet---\" && ls public/assets/booklet/ 2>/dev/null; echo \"---Reveal component---\" && cat components/Reveal/Reveal.tsx 2>/dev/null | head -40; echo \"---rm temp---\"; rm -f _notes_dump.txt && echo \"removed temp dump\")",
+      "Bash(echo \"EXIT: $?\")"
     ]
   }
 }

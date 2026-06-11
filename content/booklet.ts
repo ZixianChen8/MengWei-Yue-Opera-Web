@@ -44,6 +44,63 @@ export type BookletAct = {
 
 export type BookletRoleGroup = { role: string; names: string }
 
+// ── Chinese programme (中文节目单) ───────────────────────────
+export type ProgrammeAct = {
+  no: string
+  category: string
+  titleZh: string
+  titleEn: string
+  duration: string
+  performers: string
+  note: string
+}
+
+export type ProgrammePage = {
+  pageHead: { meta: string; titleZh: string; titleEn: string; crumb: string }
+  posterImage: string
+  presents: string
+  wordmark: string
+  scriptEn: string
+  tagline: string
+  venue: string
+  date: string
+  emceeLabel: string
+  emcee: string
+  acts: ProgrammeAct[]
+}
+
+// ── Guided appreciation (导赏) ───────────────────────────────
+export type AppreciationSection = { heading: string; body: string[] }
+
+export type AppreciationLyricLine = { role?: string; zh: string; en: string }
+
+export type AppreciationEntry = {
+  no: string
+  category: string
+  titleZh: string
+  titleEn: string
+  performers: string
+  keywords?: string
+  lead?: string
+  sections: AppreciationSection[]
+  lyrics?: { title?: string; lines: AppreciationLyricLine[] }
+}
+
+export type AppreciationPage = {
+  pageHead: { meta: string; titleZh: string; titleEn: string; crumb: string }
+  posterImage: string
+  presents: string
+  wordmark: string
+  scriptEn: string
+  tagline: string
+  venue: string
+  date: string
+  intro: string
+  keywordsLabel: string
+  lyricsLabel: string
+  entries: AppreciationEntry[]
+}
+
 export type Booklet = {
   pageHead: { meta: string; titleZh: string; titleEn: string; crumb: string }
   cover: {
@@ -82,9 +139,13 @@ export type Booklet = {
 type BookletData = {
   anniversary: Anniversary
   booklet: Booklet
+  programmePage: ProgrammePage
+  appreciationPage: AppreciationPage
 }
 
 const data = bookletData as BookletData
 
 export const anniversary = data.anniversary
 export const booklet = data.booklet
+export const programmePage = data.programmePage
+export const appreciationPage = data.appreciationPage

@@ -2,22 +2,22 @@ import type { Metadata } from 'next'
 import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
-import Booklet from '@/components/Booklet/Booklet'
+import Programme from '@/components/Programme/Programme'
 import AnniversaryNav from '@/components/AnniversaryNav/AnniversaryNav'
 
 export const metadata: Metadata = {
-  title: '场刊 · Program Book — 孟伟越剧',
+  title: '节目单 · Programme — 孟伟越剧',
   description:
-    'Yuespiration: 10 Years in the Making — 孟伟越剧十周年专场场刊：序言、贺信、节目单与演职人员。',
+    'Yuespiration：孟伟越剧十周年专场中文节目单 — 演出曲目、时长与演职人员。',
 }
 
-export default function BookletPage() {
+export default function ProgrammePage() {
   return (
     <>
       <SmoothScroll />
       <div style={{ position: 'relative' }}>
         <Nav variant="horizontal" />
-        <Booklet />
+        <Programme />
       </div>
       <Footer />
       <AnniversaryNav />

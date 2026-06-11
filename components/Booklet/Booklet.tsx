@@ -15,30 +15,34 @@ export default function Booklet() {
   // remaining slots stay in the data for later uploads (mirrors Gallery).
   const visibleLetters = letters.items.filter((l) => l.image)
 
-  // Drive the interior blurred-poster echo from one CSS variable; when empty,
-  // CSS falls back to the ivory placeholder.
+  // Drive the cover background and the interior blurred-poster layer from one
+  // CSS variable; when empty, CSS falls back to the crimson/ivory placeholders.
   const posterVars = cover.posterImage
     ? ({ ['--bk-poster' as string]: `url("${cover.posterImage}")` } as CSSProperties)
     : undefined
 
   return (
     <article className={styles.booklet} style={posterVars}>
-      {/* ── Hero (poster — the title art is baked into the image) ── */}
-      <Reveal as="section" className={styles.hero}>
-        {cover.posterImage ? (
-          <Image
-            src={cover.posterImage}
-            alt="Yuespiration · 10 Years in the Making"
-            fill
-            priority
-            sizes="100vw"
-            className={styles.heroImg}
-          />
-        ) : (
-          <div className={styles.heroFallback} aria-hidden="true" />
-        )}
-        <div className={styles.heroScrim} aria-hidden="true" />
-      </Reveal>
+      {/* ── Cover ─────────────────────────────────────────── */}
+      <section
+        className={`${styles.cover}${cover.posterImage ? ` ${styles.coverPoster}` : ''}`}
+      >
+        <div className={styles.coverInner}>
+          <p className={styles.presents}>{cover.presents}</p>
+          <h1 className={styles.wordmark}>{cover.wordmark}</h1>
+          <p className={styles.script}>{cover.scriptEn}</p>
+          <span className={styles.coverRule} aria-hidden="true" />
+          <p className={styles.coverTagline}>{cover.tagline}</p>
+          <div className={styles.coverFoot}>
+            <p className={styles.coverOrg}>{cover.organizer}</p>
+            <p className={styles.coverMeta}>
+              {cover.venue}
+              <span className={styles.dot} aria-hidden="true">·</span>
+              {cover.date}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* ── Preface ───────────────────────────────────────── */}
       <Reveal as="section" className={styles.page}>

@@ -1,0 +1,484 @@
+/* ============================================================
+   导赏 (Guided Appreciation) — a compact crimson masthead + ivory
+   ink-wash sheet that walks the audience through each act, with a
+   synopsis and a "what to watch for" note. Shares the visual
+   language of components/Programme (booklet_design_system).
+   ============================================================ */
+
+.appreciation {
+  --bk-crimson: #6a0e0e;
+  --bk-crimson-deep: #2c0606;
+  --bk-gold: #f8d078;
+  --bk-gold-soft: #e2bc66;
+
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* ── Masthead ───────────────────────────────────────────── */
+
+.cover {
+  position: relative;
+  overflow: hidden;
+  min-height: min(54vh, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 80px);
+  text-align: center;
+  color: #fff5e6;
+  background:
+    radial-gradient(130% 70% at 50% 8%, rgba(190, 52, 38, 0.55), transparent 58%),
+    linear-gradient(180deg, var(--bk-crimson) 0%, var(--bk-crimson-deep) 100%);
+}
+
+/* Vertical curtain drape folds. */
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.16) 0,
+    rgba(0, 0, 0, 0) 2.2%,
+    rgba(255, 220, 170, 0.05) 4.2%,
+    rgba(0, 0, 0, 0.16) 6.4%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Real poster becomes the field, darkened for legibility. */
+.coverPoster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--bk-poster);
+  background-size: cover;
+  background-position: 72% center;
+  opacity: 0.25;
+  /* Soft blur so the poster's printed characters dissolve into texture
+     instead of reading through behind the masthead text. The scale keeps
+     blur from feathering a blank edge inside the masthead. */
+  filter: blur(3px);
+  transform: scale(1.06);
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+
+.coverInner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.presents {
+  margin: 0;
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  color: var(--bk-gold);
+}
+
+.wordmark {
+  margin: 4px 0 0;
+  font-family: var(--font-chinese-display);
+  font-weight: 400;
+  font-size: clamp(54px, 12vw, 104px);
+  line-height: 0.96;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  color: var(--bk-gold);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+.script {
+  margin: 0;
+  font-family: var(--font-latin-display);
+  font-style: italic;
+  font-size: clamp(15px, 2.6vw, 22px);
+  letter-spacing: 0.04em;
+  color: #f3e7d0;
+}
+
+.coverRule {
+  display: block;
+  width: 120px;
+  height: 1px;
+  margin: 18px 0 2px;
+  background: linear-gradient(90deg, transparent, var(--bk-gold), transparent);
+}
+
+.coverTagline {
+  margin: 0;
+  font-family: var(--font-chinese-display);
+  font-size: clamp(20px, 4vw, 30px);
+  letter-spacing: 0.14em;
+  color: #fbeed4;
+}
+
+.coverFoot {
+  margin-top: clamp(20px, 4vw, 36px);
+}
+
+.coverMeta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(248, 230, 200, 0.78);
+}
+
+.coverMeta .dot {
+  margin: 0 0.6em;
+  color: var(--bk-gold-soft);
+}
+
+/* ── Sheet ──────────────────────────────────────────────── */
+
+.sheet {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(56px, 8vw, 104px) clamp(24px, 6vw, 80px);
+  background: var(--paper);
+  border-top: 1px solid var(--border);
+}
+
+/* Faint grey-green ink-wash, denser toward the lower third. */
+.sheet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(140% 60% at 50% 120%, rgba(120, 132, 112, 0.16), transparent 62%),
+    radial-gradient(90% 50% at 12% 108%, rgba(120, 132, 112, 0.12), transparent 60%),
+    radial-gradient(90% 50% at 88% 104%, rgba(120, 132, 112, 0.1), transparent 58%);
+}
+
+/* Blurred poster echo behind the listing. */
+.sheet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--bk-poster, none);
+  background-size: cover;
+  background-position: center 18%;
+  filter: blur(34px) saturate(0.7);
+  opacity: 0.07;
+}
+
+.sheetInner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Maple-leaf ornament, bottom-right. */
+.sheetInner::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  bottom: -28px;
+  width: 64px;
+  height: 64px;
+  opacity: 0.1;
+  background: var(--seal);
+  -webkit-mask: url("/assets/booklet/maple-leaf.png") center / contain no-repeat;
+  mask: url("/assets/booklet/maple-leaf.png") center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* ── Section title (heavy italic outlined) ──────────────── */
+
+.sectionTitle {
+  margin: 0 0 22px;
+  text-align: center;
+  font-family: 'Arial Black', 'Arial Narrow Bold', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(26px, 5vw, 40px);
+  letter-spacing: 0.005em;
+  color: var(--paper);
+  -webkit-text-stroke: 1.1px var(--ink);
+  text-shadow: 0 1px 1px rgba(26, 26, 26, 0.12);
+}
+
+.intro {
+  margin: 0 auto 44px;
+  max-width: 600px;
+  text-align: center;
+  font-family: var(--font-chinese-body);
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+/* ── Entries ────────────────────────────────────────────── */
+
+.entries {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.entryWrap {
+  margin: 0;
+}
+
+/* Each act is a native <details> card; the header is the <summary>. */
+.entry {
+  position: relative;
+  background: color-mix(in srgb, var(--paper) 60%, #fff 40%);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--bk-gold-soft);
+  box-shadow: 0 8px 26px rgba(44, 30, 18, 0.05);
+}
+
+.entryHead {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  column-gap: clamp(14px, 3vw, 22px);
+  padding: clamp(20px, 4vw, 30px) clamp(20px, 4vw, 34px);
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Strip the default disclosure triangle (WebKit + standards). */
+.entryHead::-webkit-details-marker { display: none; }
+.entryHead::marker { content: ''; }
+
+.entryHead:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 3px;
+}
+
+.entryNo {
+  font-family: var(--font-mono);
+  font-size: clamp(16px, 2.4vw, 20px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--bk-gold-soft);
+  line-height: 1.5;
+}
+
+.entryId {
+  min-width: 0;
+}
+
+.entryCat {
+  margin: 0 0 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--seal);
+}
+
+.entryTitle {
+  margin: 0;
+  font-family: var(--font-chinese-display);
+  font-weight: 400;
+  font-size: clamp(22px, 4vw, 30px);
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.entryTitleEn {
+  margin: 6px 0 0;
+  font-family: var(--font-latin-display);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.entryKeywords {
+  margin: 8px 0 0;
+  font-family: var(--font-chinese-body);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--seal);
+}
+
+.entryCast {
+  margin: 10px 0 0;
+  font-family: var(--font-chinese-body);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+/* Chevron in the third column; rotates when the card is open. */
+.entryChevron {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  margin-top: 6px;
+  border-right: 2px solid var(--bk-gold-soft);
+  border-bottom: 2px solid var(--bk-gold-soft);
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+.entry[open] .entryChevron {
+  transform: rotate(-135deg);
+}
+
+/* ── Entry body (the unfolded note) ─────────────────────── */
+
+.entryBody {
+  padding: 4px clamp(20px, 4vw, 34px) clamp(24px, 4vw, 34px);
+}
+
+.lead {
+  margin: 0 0 22px;
+  font-family: var(--font-chinese-body);
+  font-size: clamp(16px, 1.9vw, 17px);
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  color: var(--seal-dark);
+}
+
+.note {
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.note + .note {
+  margin-top: 20px;
+}
+
+.noteHeading {
+  margin: 0 0 10px;
+  font-family: var(--font-chinese-display);
+  font-weight: 400;
+  font-size: clamp(17px, 2.2vw, 20px);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.notePara {
+  margin: 0 0 0.9em;
+  font-family: var(--font-chinese-body);
+  font-size: 15.5px;
+  line-height: 1.78;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-align: justify;
+}
+
+.notePara:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Bilingual libretto ─────────────────────────────────── */
+
+.lyrics {
+  margin-top: 24px;
+  padding: clamp(18px, 3vw, 24px);
+  background: color-mix(in srgb, var(--bk-crimson-deep) 5%, transparent);
+  border: 1px solid var(--border);
+}
+
+.lyricsTitle {
+  margin: 0 0 16px;
+  font-family: var(--font-chinese-display);
+  font-weight: 400;
+  font-size: clamp(17px, 2.2vw, 20px);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.lyricsLabel {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--seal);
+}
+
+.lyricLines {
+  margin: 0;
+}
+
+.lyricLine {
+  margin: 0;
+  padding: 14px 0;
+}
+
+.lyricLine + .lyricLine {
+  border-top: 1px dashed var(--border);
+}
+
+.lyricRole {
+  margin: 0 0 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bk-gold-soft);
+}
+
+.lyricText {
+  margin: 0;
+}
+
+.lyricZh {
+  display: block;
+  font-family: var(--font-chinese-body);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.lyricEn {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-latin-display);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .sheetInner::after {
+    width: 44px;
+    height: 44px;
+    bottom: -16px;
+  }
+  .notePara {
+    font-size: 15px;
+    text-align: left;
+  }
+  .entryChevron {
+    width: 10px;
+    height: 10px;
+  }
+}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import type { BookletLetter } from '@/content/booklet'
 import styles from './Booklet.module.css'
@@ -10,6 +11,9 @@ import styles from './Booklet.module.css'
 // Reuses the keyboard-nav + body-scroll-lock pattern from Gallery.
 export default function LetterLightbox({ letters }: { letters: BookletLetter[] }) {
   const [pos, setPos] = useState<number | null>(null)
+  // Portal target only exists after mount (document is undefined during SSR).
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const open = pos !== null
   const current = open ? letters[pos] : null
   const total = letters.length
@@ -57,15 +61,19 @@ export default function LetterLightbox({ letters }: { letters: BookletLetter[] }
         ))}
       </div>
 
-      <div
-        className={`${styles.lightbox}${open ? ` ${styles.lightboxOpen}` : ''}`}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) close()
-        }}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Greeting letter"
-      >
+      {/* Portaled to <body> so it escapes the Reveal section's transform
+          containing block and dims the full viewport (not just the section). */}
+      {mounted &&
+        createPortal(
+          <div
+            className={`${styles.lightbox}${open ? ` ${styles.lightboxOpen}` : ''}`}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) close()
+            }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Greeting letter"
+          >
         <div className={styles.lbBar}>
           <span className={styles.lbId}>
             {current?.name}
@@ -113,7 +121,9 @@ export default function LetterLightbox({ letters }: { letters: BookletLetter[] }
             </button>
           )}
         </div>
-      </div>
+          </div>,
+          document.body,
+        )}
     </>
   )
 }

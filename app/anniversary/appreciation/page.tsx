@@ -2,22 +2,22 @@ import type { Metadata } from 'next'
 import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
-import Booklet from '@/components/Booklet/Booklet'
+import Appreciation from '@/components/Appreciation/Appreciation'
 import AnniversaryNav from '@/components/AnniversaryNav/AnniversaryNav'
 
 export const metadata: Metadata = {
-  title: '场刊 · Program Book — 孟伟越剧',
+  title: '导赏 · Guided Appreciation — 孟伟越剧',
   description:
-    'Yuespiration: 10 Years in the Making — 孟伟越剧十周年专场场刊：序言、贺信、节目单与演职人员。',
+    'Yuespiration：孟伟越剧十周年专场导赏 — 每一折的剧情梗概与观赏看点。',
 }
 
-export default function BookletPage() {
+export default function AppreciationPage() {
   return (
     <>
       <SmoothScroll />
       <div style={{ position: 'relative' }}>
         <Nav variant="horizontal" />
-        <Booklet />
+        <Appreciation />
       </div>
       <Footer />
       <AnniversaryNav />

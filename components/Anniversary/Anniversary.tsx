@@ -21,7 +21,7 @@ export default function Anniversary() {
         </Reveal>
 
         <ul className={styles.menu}>
-          {menu.map((item, i) => {
+          {menu.map((item) => {
             const inner = (
               <>
                 <span className={styles.tileZh}>{item.zh}</span>
@@ -32,7 +32,7 @@ export default function Anniversary() {
               </>
             )
             return (
-              <Reveal as="li" key={item.en} className={styles.tileWrap} delay={0.12 + i * 0.1}>
+              <li key={item.en} className={styles.tileWrap}>
                 {item.ready ? (
                   <Link href={item.href} className={styles.tile}>
                     {inner}
@@ -42,7 +42,7 @@ export default function Anniversary() {
                     {inner}
                   </div>
                 )}
-              </Reveal>
+              </li>
             )
           })}
         </ul>

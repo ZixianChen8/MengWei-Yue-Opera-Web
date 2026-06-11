@@ -12,35 +12,45 @@
   --bk-gold: #f8d078;
   --bk-gold-soft: #e2bc66;
 
+  /* ►►► Cover backdrop horizontal focus point ◄◄◄
+     Controls which part of mw-backdrop-upscaled.webp stays centered behind the
+     title when the image is cropped (esp. on narrow/mobile widths). The opera
+     figures live on the right side of the poster, so the value is biased right.
+     0% = show the far left (title art) · 50% = middle · 100% = far right.
+     Tweak this single number to slide the figures into view. */
+  --bk-poster-x: 96%;
+
   background: var(--paper);
   color: var(--ink);
 }
 
-/* ── Hero (poster) ──────────────────────────────────────── */
+/* ── Cover ──────────────────────────────────────────────── */
 
-/* Full-bleed poster. The image is 16:9 with all title art baked in, so the
-   section holds that exact ratio — nothing is cropped. Crimson sits behind it
-   as the load fallback / letterbox colour. */
-.hero {
+.cover {
   position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: calc(100vh - 5.75rem);
   overflow: hidden;
+  /* Nav bar (.horizontal) is in-flow and 5.75rem tall, so subtracting it makes
+     the nav + cover together fill the screen. dvh keeps it exact on mobile
+     where the browser chrome shrinks the viewport. */
+  min-height: calc(100vh - 5.75rem);
+  min-height: calc(100dvh - 5.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(48px, 9vw, 110px) clamp(24px, 6vw, 80px);
+  text-align: center;
+  color: #fff5e6;
   background:
     radial-gradient(130% 70% at 50% 8%, rgba(190, 52, 38, 0.55), transparent 58%),
     linear-gradient(180deg, var(--bk-crimson) 0%, var(--bk-crimson-deep) 100%);
 }
 
-.heroImg {
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Crimson curtain shown only if no poster is set. */
-.heroFallback {
+/* Vertical curtain drape folds. */
+.cover::before {
+  content: '';
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: repeating-linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.16) 0,
@@ -49,16 +59,108 @@
     rgba(0, 0, 0, 0.16) 6.4%
   );
   opacity: 0.5;
+  pointer-events: none;
 }
 
-/* Soft grounding gradient along the bottom edge so the hero settles into the
-   ivory page below it. */
-.heroScrim {
+/* When a real poster is supplied it becomes the cover field, darkened
+   for legibility. Driven by the --bk-poster variable set inline. */
+.coverPoster::after {
+  content: '';
   position: absolute;
-  inset: auto 0 0 0;
-  height: 22%;
-  background: linear-gradient(180deg, transparent, rgba(44, 6, 6, 0.55));
+  inset: 0;
+  z-index: 0;
+  background-image: var(--bk-poster);
+  background-size: cover;
+  /* Horizontal focus tweaked via --bk-poster-x on .booklet above. */
+  background-position: var(--bk-poster-x) center;
+  opacity: 0.5;
+  mix-blend-mode: luminosity;
   pointer-events: none;
+}
+
+.coverInner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.presents {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--bk-gold);
+}
+
+.wordmark {
+  margin: 6px 0 0;
+  font-family: var(--font-latin-display);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(56px, 13vw, 124px);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  color: var(--bk-gold);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+.script {
+  margin: 0;
+  font-family: var(--font-latin-display);
+  font-style: italic;
+  font-size: clamp(18px, 3.4vw, 28px);
+  letter-spacing: 0.04em;
+  color: #f3e7d0;
+}
+
+.coverRule {
+  display: block;
+  width: 120px;
+  height: 1px;
+  margin: 22px 0 4px;
+  background: linear-gradient(90deg, transparent, var(--bk-gold), transparent);
+}
+
+.coverTagline {
+  margin: 0;
+  font-family: var(--font-chinese-display);
+  font-size: clamp(22px, 4.4vw, 34px);
+  letter-spacing: 0.14em;
+  color: #fbeed4;
+}
+
+.coverFoot {
+  margin-top: clamp(28px, 6vw, 56px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.coverOrg {
+  margin: 0;
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #f0dcc0;
+}
+
+.coverMeta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(248, 230, 200, 0.78);
+}
+
+.coverMeta .dot {
+  margin: 0 0.6em;
+  color: var(--bk-gold-soft);
 }
 
 /* ── Interior pages ─────────────────────────────────────── */
@@ -592,7 +694,6 @@
     bottom: -16px;
   }
   .lbNav {
-    width: 40px;
-    height: 40px;
+    display: none;
   }
 }

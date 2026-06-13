@@ -119,7 +119,6 @@ export default function Booklet() {
               <li key={i} className={styles.act}>
                 <div className={styles.actHead}>
                   <h3 className={styles.actTitle}>{act.titleEn}</h3>
-                  {act.duration && <span className={styles.actTime}>{act.duration}</span>}
                 </div>
                 {act.titleZh && <p className={styles.actTitleZh}>{act.titleZh}</p>}
                 {act.performers && <p className={styles.actCast}>{act.performers}</p>}
@@ -146,7 +145,7 @@ export default function Booklet() {
         </div>
       </Reveal>
 
-      {/* ── Organizer & Supporting Organizations ──────────── */}
+      {/* ── Organizer & partners ───────────────────────────── */}
       <Reveal as="section" className={styles.page}>
         <div className={styles.pageInner}>
           <h2 className={styles.sectionTitle}>{closing.organizerTitleEn}</h2>

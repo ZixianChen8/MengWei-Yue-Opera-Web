@@ -1,13 +1,28 @@
-import { appreciationPage } from '@/content/booklet'
+import { appreciationPage, type AppreciationSection } from '@/content/booklet'
 import Reveal from '@/components/Reveal/Reveal'
 import type { CSSProperties } from 'react'
 import styles from './Appreciation.module.css'
 
+// One program note (源流 · 背景 · 特色 · 行当 · 精髓 · 看点 …). The heading is
+// optional — some source notes are plain narrative paragraphs with no sub-title.
+function NoteSection({ s }: { s: AppreciationSection }) {
+  return (
+    <section className={styles.note}>
+      {s.heading && <h4 className={styles.noteHeading}>{s.heading}</h4>}
+      {s.body.map((p, pi) => (
+        <p key={pi} className={styles.notePara}>{p}</p>
+      ))}
+    </section>
+  )
+}
+
 // 导赏 — Guided Appreciation. A compact crimson masthead (echoing the program
 // book cover) over an ivory ink-wash sheet. Each act is an expandable card
 // (native <details>): the header — number, category, title, cast — is always
-// visible; the full program note (源流 · 背景 · 特色 · 行当 · 精髓 · 看点 · 唱词)
-// unfolds on tap. The first act opens by default.
+// visible; the program note unfolds on tap. All cards start collapsed so the
+// page opens as a tidy index; inside a long note the first section previews and
+// the rest tucks behind an inner "展开全文" toggle (a second native <details>),
+// keeping any single entry from running on.
 export default function Appreciation() {
   const {
     pageHead,
@@ -19,7 +34,6 @@ export default function Appreciation() {
     venue,
     date,
     intro,
-    lyricsLabel,
     entries,
   } = appreciationPage
 
@@ -56,56 +70,53 @@ export default function Appreciation() {
           {intro && <p className={styles.intro}>{intro}</p>}
 
           <ol className={styles.entries}>
-            {entries.map((e, i) => (
-              <Reveal as="li" key={e.no} className={styles.entryWrap} delay={0.04 * i}>
-                <details className={styles.entry} open={i === 0}>
-                  <summary className={styles.entryHead}>
-                    <span className={styles.entryNo} aria-hidden="true">{e.no}</span>
-                    <div className={styles.entryId}>
-                      {e.category && <p className={styles.entryCat}>{e.category}</p>}
-                      <h3 className={styles.entryTitle}>{e.titleZh}</h3>
-                      {e.titleEn && <p className={styles.entryTitleEn}>{e.titleEn}</p>}
-                      {e.keywords && <p className={styles.entryKeywords}>{e.keywords}</p>}
-                      {e.performers && <p className={styles.entryCast}>{e.performers}</p>}
+            {entries.map((e, i) => {
+              // Long notes (>2 sections) preview the first section inline and
+              // fold the remainder behind the "展开全文" toggle.
+              const hasMore = e.sections.length > 2
+              const preview = hasMore ? e.sections.slice(0, 1) : e.sections
+              const more = hasMore ? e.sections.slice(1) : []
+
+              return (
+                <Reveal as="li" key={e.no} className={styles.entryWrap} delay={0.04 * i}>
+                  <details className={styles.entry}>
+                    <summary className={styles.entryHead}>
+                      <span className={styles.entryNo} aria-hidden="true">{e.no}</span>
+                      <div className={styles.entryId}>
+                        {e.category && <p className={styles.entryCat}>{e.category}</p>}
+                        <h3 className={styles.entryTitle}>{e.titleZh}</h3>
+                        {e.titleEn && <p className={styles.entryTitleEn}>{e.titleEn}</p>}
+                        {e.keywords && <p className={styles.entryKeywords}>{e.keywords}</p>}
+                        {e.performers && <p className={styles.entryCast}>{e.performers}</p>}
+                      </div>
+                      <span className={styles.entryChevron} aria-hidden="true" />
+                    </summary>
+
+                    <div className={styles.entryBody}>
+                      {e.lead && <p className={styles.lead}>{e.lead}</p>}
+
+                      {preview.map((s, si) => (
+                        <NoteSection key={si} s={s} />
+                      ))}
+
+                      {more.length > 0 && (
+                        <details className={styles.more}>
+                          <summary className={styles.moreSummary}>
+                            <span className={styles.moreLabel}>展开全文 · Continue reading</span>
+                            <span className={styles.moreChevron} aria-hidden="true" />
+                          </summary>
+                          <div className={styles.moreInner}>
+                            {more.map((s, si) => (
+                              <NoteSection key={si} s={s} />
+                            ))}
+                          </div>
+                        </details>
+                      )}
                     </div>
-                    <span className={styles.entryChevron} aria-hidden="true" />
-                  </summary>
-
-                  <div className={styles.entryBody}>
-                    {e.lead && <p className={styles.lead}>{e.lead}</p>}
-
-                    {e.sections.map((s, si) => (
-                      <section key={si} className={styles.note}>
-                        <h4 className={styles.noteHeading}>{s.heading}</h4>
-                        {s.body.map((p, pi) => (
-                          <p key={pi} className={styles.notePara}>{p}</p>
-                        ))}
-                      </section>
-                    ))}
-
-                    {e.lyrics && (
-                      <section className={styles.lyrics}>
-                        <h4 className={styles.lyricsTitle}>
-                          <span className={styles.lyricsLabel}>{lyricsLabel}</span>
-                          {e.lyrics.title}
-                        </h4>
-                        <dl className={styles.lyricLines}>
-                          {e.lyrics.lines.map((l, li) => (
-                            <div key={li} className={styles.lyricLine}>
-                              {l.role && <dt className={styles.lyricRole}>{l.role}</dt>}
-                              <dd className={styles.lyricText}>
-                                <span className={styles.lyricZh}>{l.zh}</span>
-                                <span className={styles.lyricEn}>{l.en}</span>
-                              </dd>
-                            </div>
-                          ))}
-                        </dl>
-                      </section>
-                    )}
-                  </div>
-                </details>
-              </Reveal>
-            ))}
+                  </details>
+                </Reveal>
+              )
+            })}
           </ol>
         </div>
       </Reveal>

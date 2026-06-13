@@ -20,9 +20,9 @@
 .cover {
   position: relative;
   overflow: hidden;
-  /* Match the booklet cover: nav + hero together fill the first viewport. */
+  /* Match the booklet cover: nav + hero together fill the first stable mobile viewport. */
   min-height: calc(100vh - 5.75rem);
-  min-height: calc(100dvh - 5.75rem);
+  min-height: calc(100svh - 5.75rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -299,6 +299,16 @@
   line-height: 1.6;
   letter-spacing: 0.02em;
   color: var(--ink-soft);
+  white-space: pre-line;
+}
+
+.actCastEn {
+  margin: 5px 0 0;
+  font-family: var(--font-latin-display);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  white-space: pre-line;
 }
 
 .actNote {
@@ -307,6 +317,16 @@
   font-size: 14px;
   line-height: 1.55;
   color: var(--ink-faint);
+  white-space: pre-line;
+}
+
+.actNoteEn {
+  margin: 4px 0 0;
+  font-family: var(--font-latin-display);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+  white-space: pre-line;
 }
 
 .actTime {

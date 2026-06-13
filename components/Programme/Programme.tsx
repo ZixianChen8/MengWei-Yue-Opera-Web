@@ -66,9 +66,10 @@ export default function Programme() {
                   <h3 className={styles.actTitle}>{act.titleZh}</h3>
                   {act.titleEn && <p className={styles.actTitleEn}>{act.titleEn}</p>}
                   {act.performers && <p className={styles.actCast}>{act.performers}</p>}
+                  {act.performersEn && <p className={styles.actCastEn}>{act.performersEn}</p>}
                   {act.note && <p className={styles.actNote}>{act.note}</p>}
+                  {act.noteEn && <p className={styles.actNoteEn}>{act.noteEn}</p>}
                 </div>
-                {act.duration && <span className={styles.actTime}>{act.duration}</span>}
               </Reveal>
             ))}
           </ol>

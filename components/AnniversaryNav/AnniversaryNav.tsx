@@ -30,15 +30,15 @@ export default function AnniversaryNav() {
 
   const navRef = useRef<HTMLElement>(null)
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([])
-  const firstRef = useRef(true)
   const [box, setBox] = useState<Box>({ left: 0, width: 0, ready: false })
+  const [transitionReady, setTransitionReady] = useState(false)
 
   const activeIndex = ITEMS.findIndex((it) => it.href === pathname)
 
   // Position the gold token over the active tab. `left`/`width` are read from
   // the active link relative to the (fixed) nav, then padded a touch so the
   // token wraps the label. The first measurement is applied without a transition
-  // (firstRef) so the token settles in place instead of sliding from the edge.
+  // so the token settles in place instead of sliding from the edge.
   const measure = useCallback(() => {
     const el = itemRefs.current[activeIndex]
     if (!el) return
@@ -79,11 +79,11 @@ export default function AnniversaryNav() {
   // After the very first measurement, re-enable transitions so subsequent route
   // changes animate.
   useEffect(() => {
-    if (box.ready && firstRef.current) {
-      const id = requestAnimationFrame(() => { firstRef.current = false })
+    if (box.ready && !transitionReady) {
+      const id = requestAnimationFrame(() => { setTransitionReady(true) })
       return () => cancelAnimationFrame(id)
     }
-  }, [box.ready])
+  }, [box.ready, transitionReady])
 
   // The shared layout renders this on every /anniversary route; keep it off the
   // hub itself (which *is* the menu), matching the original per-page behaviour.
@@ -92,7 +92,7 @@ export default function AnniversaryNav() {
   const indicatorStyle: React.CSSProperties = {
     transform: `translateX(${box.left}px)`,
     width: box.width,
-    ...(firstRef.current ? { transition: 'none' } : null),
+    ...(!transitionReady ? { transition: 'none' } : null),
   }
 
   return (

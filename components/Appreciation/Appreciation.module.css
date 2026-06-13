@@ -21,9 +21,9 @@
 .cover {
   position: relative;
   overflow: hidden;
-  /* Match the booklet cover: nav + hero together fill the first viewport. */
+  /* Match the booklet cover: nav + hero together fill the first stable mobile viewport. */
   min-height: calc(100vh - 5.75rem);
-  min-height: calc(100dvh - 5.75rem);
+  min-height: calc(100svh - 5.75rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -390,6 +390,55 @@
 
 .notePara:last-child {
   margin-bottom: 0;
+}
+
+/* ── Inner "展开全文" toggle (folds a long note's tail) ──── */
+
+.more {
+  margin: 22px 0 0;
+}
+
+.moreSummary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 0;
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.moreSummary::-webkit-details-marker { display: none; }
+.moreSummary::marker { content: ''; }
+
+.moreSummary:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 3px;
+}
+
+.moreLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--seal);
+}
+
+.moreChevron {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--bk-gold-soft);
+  border-bottom: 2px solid var(--bk-gold-soft);
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+.more[open] .moreChevron {
+  transform: rotate(-135deg);
+}
+
+.moreInner {
+  margin-top: 4px;
 }
 
 /* ── Bilingual libretto ─────────────────────────────────── */

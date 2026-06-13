@@ -37,7 +37,6 @@ export type BookletMember = {
 export type BookletAct = {
   titleEn: string
   titleZh: string
-  duration: string
   performers: string
   note: string
 }
@@ -50,9 +49,10 @@ export type ProgrammeAct = {
   category: string
   titleZh: string
   titleEn: string
-  duration: string
   performers: string
+  performersEn?: string
   note: string
+  noteEn?: string
 }
 
 export type ProgrammePage = {

@@ -48,7 +48,7 @@ export const SECTIONS: SectionDef[] = [
 
   { target: 'booklet', section: 'anniversary', label: '十周年专场（入口）', blurb: '/anniversary 页面的标题、副标题与子菜单卡片。', group: 'Pages' },
   { target: 'booklet', section: 'booklet', label: '场刊', blurb: '十周年专场场刊：封面、序言、贺信、演职人员、节目单、委员会与支持单位。', group: 'Pages' },
-  { target: 'booklet', section: 'programmePage', label: '中文节目单', blurb: '/anniversary/programme 页面：抬头、主持人，以及演出曲目（类别、中英文剧名、时长、演职人员）。', group: 'Pages' },
+  { target: 'booklet', section: 'programmePage', label: '中文节目单', blurb: '/anniversary/programme 页面：抬头、主持人，以及演出曲目（类别、中英文剧名、演职人员）。', group: 'Pages' },
   { target: 'booklet', section: 'appreciationPage', label: '导赏', blurb: '/anniversary/appreciation 页面：抬头、引言，以及每一折的剧情梗概与观赏看点。', group: 'Pages' },
 
   { target: 'home', section: 'aboutPage', label: '关于页面', blurb: '完整的 /about 页面：简介、联系方式与表单标签。', group: 'Pages' },

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { repertoire } from '@/content/home'
 import { galleryPage } from '@/content/gallery'
+import Reveal from '@/components/Reveal/Reveal'
 import styles from './Repertoire.module.css'
 
 const SCROLL_STEP = 320
@@ -65,12 +66,12 @@ export default function Repertoire() {
 
   return (
     <section id="repertoire" className={styles.section}>
-      <div className={styles.head}>
+      <Reveal className={styles.head}>
         <h2 className={styles.title}>
           {titleBody}<span className={styles.titleRed}>{titleLast}</span>
         </h2>
         <p className={styles.titleEn}>{repertoire.title.en}</p>
-      </div>
+      </Reveal>
 
       <div className={styles.filmstripOuter}>
         <div ref={stripRef} className={styles.filmstripWrap}>

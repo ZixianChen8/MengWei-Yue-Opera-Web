@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { season, type SeasonEvent } from '@/content/home'
+import Reveal from '@/components/Reveal/Reveal'
 import EventCard from './EventCard'
 import styles from './Season.module.css'
 
@@ -18,7 +19,7 @@ function selectHomeEvents(events: SeasonEvent[], max = MAX_HOME_EVENTS): SeasonE
 export default function Season() {
   return (
     <section id="season" className={styles.section}>
-      <div className={styles.head}>
+      <Reveal className={styles.head}>
         <div>
           <h2 className={styles.title}>
             {season.title.zh}<small>{season.title.en}</small>
@@ -29,11 +30,13 @@ export default function Season() {
           <span className={styles.viewAllEn}>· View all events</span>
           <span className={styles.viewAllArrow}>→</span>
         </Link>
-      </div>
+      </Reveal>
 
       <div className={styles.events}>
-        {selectHomeEvents(season.events).map((ev) => (
-          <EventCard key={ev.id} ev={ev} />
+        {selectHomeEvents(season.events).map((ev, i) => (
+          <Reveal key={ev.id} delay={0.08 * i}>
+            <EventCard ev={ev} />
+          </Reveal>
         ))}
       </div>
 

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { footer, nav } from '@/content/home'
+import Reveal from '@/components/Reveal/Reveal'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -10,35 +11,38 @@ export default function Footer() {
       <div className={styles.ornament}>{footer.ornament}</div>
 
       <div className={styles.inner}>
-        <div>
+        <Reveal className={styles.brandBlock}>
           <div className={styles.mark}>
             {footer.brand.zh}
             <small>{footer.brand.en}</small>
           </div>
+        </Reveal>
+
+        <Reveal className={styles.legalBlock}>
           <p className={styles.line}>
             {footer.legal.zh}<br />
             {footer.legal.en}
           </p>
-        </div>
+        </Reveal>
 
-        <div className={styles.col}>
+        <Reveal className={styles.col} delay={0.1}>
           <h4>{footer.columns[0]?.heading}</h4>
           {nav.links.map((item) => (
             <Link key={item.en} href={item.href}>
               {item.zh}<span className={styles.en}>{item.en}</span>
             </Link>
           ))}
-        </div>
+        </Reveal>
 
         {contactColumn ? (
-          <div className={styles.col}>
+          <Reveal className={styles.col} delay={0.2}>
             <h4>{contactColumn.heading}</h4>
             {contactColumn.links.map((item) => (
               <a key={`${item.en}-${item.href}`} href={item.href}>
                 {item.zh}<span className={styles.en}>{item.en}</span>
               </a>
             ))}
-          </div>
+          </Reveal>
         ) : null}
       </div>
 

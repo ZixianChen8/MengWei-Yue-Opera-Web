@@ -94,7 +94,7 @@
 }
 
 .red {
-  color: var(--seal);
+  color: inherit;
 }
 
 /* Poem */

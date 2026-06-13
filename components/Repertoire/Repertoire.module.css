@@ -25,7 +25,7 @@
 }
 
 .titleRed {
-  color: var(--seal);
+  color: inherit;
 }
 
 .titleEn {

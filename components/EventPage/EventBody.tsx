@@ -2,6 +2,7 @@ import Link from 'next/link'
 import QRCode from 'qrcode'
 import { eventPage } from '@/content/home'
 import { formatEventDateZh } from '@/lib/event-date'
+import Reveal from '@/components/Reveal/Reveal'
 import styles from './EventPage.module.css'
 import type { season } from '@/content/home'
 
@@ -40,9 +41,9 @@ export default async function EventBody({ event }: EventBodyProps) {
           ← {eventPage.backLink.zh} · {eventPage.backLink.en}
         </Link>
 
-        <p className={styles.description}>{event.description}</p>
+        <Reveal as="p" className={styles.description}>{event.description}</Reveal>
 
-        <dl className={styles.infoGrid}>
+        <Reveal as="dl" className={styles.infoGrid} delay={0.08}>
           {infoRows.map(({ term, value }) => (
             <div key={term.en} className={styles.infoRow}>
               <dt className={styles.infoTerm}>
@@ -52,9 +53,9 @@ export default async function EventBody({ event }: EventBodyProps) {
               <dd className={styles.infoDesc}>{value}</dd>
             </div>
           ))}
-        </dl>
+        </Reveal>
 
-        <div className={styles.signupCard}>
+        <Reveal className={styles.signupCard} delay={0.16}>
           <a
             href={event.formUrl}
             target="_blank"
@@ -86,7 +87,7 @@ export default async function EventBody({ event }: EventBodyProps) {
           >
             {eventPage.formLink.zh} · {eventPage.formLink.en} →
           </a>
-        </div>
+        </Reveal>
       </div>
     </div>
   )

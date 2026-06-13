@@ -11,13 +11,18 @@ type RevealProps = {
   className?: string
   /** Stagger delay in seconds (→ transition-delay). */
   delay?: number
+  /**
+   * Any other props (href, id, aria-*, …) are forwarded to the rendered
+   * element, so Reveal can stand in for a real <section id>, <Link href>, etc.
+   */
+  [prop: string]: unknown
 }
 
 // Lightweight scroll-reveal wrapper: fades/rises its children in the first time
 // they enter the viewport (reveal-once), then stops observing. Honors
 // prefers-reduced-motion via CSS. Works under SmoothScroll because the
 // IntersectionObserver re-evaluates as the scroll position changes.
-export default function Reveal({ children, as, className, delay }: RevealProps) {
+export default function Reveal({ children, as, className, delay, ...rest }: RevealProps) {
   const Tag = (as ?? 'div') as ElementType
   const ref = useRef<HTMLElement>(null)
   const [shown, setShown] = useState(false)
@@ -87,6 +92,7 @@ export default function Reveal({ children, as, className, delay }: RevealProps) 
       ref={ref}
       className={`${styles.reveal}${shown ? ` ${styles.in}` : ''}${className ? ` ${className}` : ''}`}
       style={style}
+      {...rest}
     >
       {children}
     </Tag>

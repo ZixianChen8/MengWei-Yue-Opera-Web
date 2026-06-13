@@ -107,7 +107,7 @@
   line-height: 1;
   display: flex;
   gap: 8px;
-  align-items: flex-start;
+  align-items: center;
   text-decoration: none;
   transition: color 180ms ease, opacity 180ms ease;
 }
@@ -131,7 +131,7 @@
   font-family: var(--font-latin-display);
   font-size: 0.75rem;
   letter-spacing: .3em;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
   text-transform: uppercase;
   font-weight: 400;
 }

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { season, eventsListingPage } from '@/content/home'
 import { formatEventDateZh } from '@/lib/event-date'
+import Reveal from '@/components/Reveal/Reveal'
 import MonthRibbon from './MonthRibbon'
 import styles from './EventsListing.module.css'
 
@@ -41,7 +42,7 @@ export default function EventsListing() {
 
       {/* ── Events grid ─────────────────────────────────── */}
       <section className={styles.eventsWrap}>
-        <div className={styles.events}>
+        <Reveal className={styles.events}>
           {season.events.map((ev) => (
             <Link
               key={ev.id}
@@ -97,7 +98,7 @@ export default function EventsListing() {
               </div>
             </Link>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ── Past archive ────────────────────────────────── */}
@@ -118,8 +119,8 @@ export default function EventsListing() {
           </div>
 
           <div className={styles.archive}>
-            {archive.map((block) => (
-              <div key={block.year} className={styles.archYear}>
+            {archive.map((block, bi) => (
+              <Reveal key={block.year} className={styles.archYear} delay={0.06 * bi}>
                 <div className={styles.archYr}>{block.year}</div>
                 <div className={styles.archRows}>
                   {block.shows.map((show, i) => (
@@ -128,7 +129,7 @@ export default function EventsListing() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

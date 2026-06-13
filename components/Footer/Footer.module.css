@@ -22,26 +22,39 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 80px;
+  column-gap: 80px;
+  row-gap: 28px;
   align-items: start;
 }
 
+.brandBlock {
+  grid-column: 1 / -1;
+}
+
+.legalBlock {
+  grid-column: 1;
+}
+
 .mark {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: nowrap;
   font-family: var(--font-chinese-display);
   font-size: 34px;
   letter-spacing: 6px;
   color: var(--ink);
   line-height: 1.15;
+  white-space: nowrap;
 }
 
 .mark small {
-  display: block;
+  display: inline-block;
   font-family: var(--font-latin-display);
   font-size: 11px;
   letter-spacing: .4em;
   color: var(--ink-faint);
   text-transform: uppercase;
-  margin-top: 14px;
   font-weight: 500;
 }
 
@@ -51,7 +64,7 @@
   line-height: 2;
   color: var(--ink-soft);
   font-weight: 300;
-  margin-top: 28px;
+  margin: 0;
 }
 
 .col h4 {
@@ -140,10 +153,21 @@
 
   .inner {
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    column-gap: 48px;
+    row-gap: 28px;
   }
 
   .ornament { letter-spacing: 12px; }
+
+  .mark {
+    gap: 16px;
+    font-size: 30px;
+    letter-spacing: 5px;
+  }
+
+  .mark small {
+    letter-spacing: .3em;
+  }
 }
 
 @media (max-width: 767px) {
@@ -151,13 +175,30 @@
 
   .inner {
     grid-template-columns: 1fr;
-    gap: 48px;
+    row-gap: 36px;
+  }
+
+  .brandBlock,
+  .legalBlock {
+    grid-column: 1;
   }
 
   .ornament {
     font-size: 26px;
     letter-spacing: 8px;
     margin-bottom: 56px;
+  }
+
+  .mark {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    font-size: 28px;
+    white-space: normal;
+  }
+
+  .mark small {
+    font-size: 10px;
+    letter-spacing: .22em;
   }
 
   .bottom {

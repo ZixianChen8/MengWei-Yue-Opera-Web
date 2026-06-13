@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { aboutPage } from '@/content/home'
+import Reveal from '@/components/Reveal/Reveal'
 import styles from './AboutPage.module.css'
 
 const { bio, contact } = aboutPage
@@ -54,15 +55,15 @@ export default function AboutPage() {
       {/* BIO */}
       <section className={styles.bio}>
         <div className={styles.bioInner}>
-          <div className={styles.bioRail}>
+          <Reveal className={styles.bioRail}>
             <div className={styles.railMeta} aria-hidden="true" />
             <div className={styles.bioVert}>
               {bio.vertZh.before}
               <span className={styles.red}>{bio.vertZh.red}</span>
               {bio.vertZh.after}
             </div>
-          </div>
-          <div className={styles.bioCol}>
+          </Reveal>
+          <Reveal className={styles.bioCol} delay={0.1}>
             <h2 className={styles.bioHeading}>
               {bio.heading.zh}
               <small>{bio.heading.en}</small>
@@ -75,14 +76,14 @@ export default function AboutPage() {
                 </p>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* CONTACT */}
       <section className={styles.contact}>
         <div className={styles.contactInner}>
-          <div className={styles.contactInfo}>
+          <Reveal className={styles.contactInfo}>
             <h2 className={styles.contactHeading}>
               {contact.heading.zh1}{contact.heading.zh2}
               <small>{contact.heading.en}</small>
@@ -92,9 +93,11 @@ export default function AboutPage() {
               <span className={styles.ledeEn}>{contact.lede.en}</span>
             </p>
 
-          </div>
+          </Reveal>
 
-          <form
+          <Reveal
+            as="form"
+            delay={0.1}
             className={`${styles.formWrap}${isSent ? ` ${styles.isSent}` : ''}`}
             onSubmit={handleSubmit}
           >
@@ -205,7 +208,7 @@ export default function AboutPage() {
               {contact.form.sent.zh}
               <span className={styles.sentEn}>{contact.form.sent.en}</span>
             </div>
-          </form>
+          </Reveal>
         </div>
       </section>
     </>

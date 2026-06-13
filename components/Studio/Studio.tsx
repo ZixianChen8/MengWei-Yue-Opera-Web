@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { studio } from '@/content/home'
+import Reveal from '@/components/Reveal/Reveal'
 import styles from './Studio.module.css'
 
 export default function Studio() {
@@ -16,7 +17,7 @@ export default function Studio() {
         />
       </div>
       <div className={styles.inner}>
-        <div>
+        <Reveal>
           <h2 className={styles.title}>
             {studio.title.zh}<small>{studio.title.en}</small>
           </h2>
@@ -25,12 +26,12 @@ export default function Studio() {
           </div>
 
           <div className={styles.program}>
-            {studio.program.map((row) => (
-              <div key={row.level} className={styles.row}>
+            {studio.program.map((row, i) => (
+              <Reveal key={row.level} className={styles.row} delay={0.06 * i}>
                 <div className={styles.lvl}>{row.level}</div>
                 <div className={styles.en}>{row.en}</div>
                 <div className={styles.when}>{row.duration}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
 
@@ -38,7 +39,7 @@ export default function Studio() {
             {studio.cta.zh}
             <span className={styles.ctaEn}>{studio.cta.en}</span>
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

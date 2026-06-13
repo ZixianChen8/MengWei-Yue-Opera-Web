@@ -34,7 +34,7 @@
 }
 
 .phChars .red {
-  color: var(--seal);
+  color: inherit;
 }
 
 .phMeta {

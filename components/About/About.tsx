@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { about } from '@/content/home'
+import Reveal from '@/components/Reveal/Reveal'
 import styles from './About.module.css'
 
 export default function About() {
@@ -15,25 +16,25 @@ export default function About() {
       />
 <div className={styles.frame}>
 
-        <div className={styles.colL}>
+        <Reveal className={styles.colL}>
           <p className={styles.lede}>
             {about.verse.map((line, i) => (
               <span key={i}>{line}<br /></span>
             ))}
           </p>
           <p className={styles.ledeEn}>{about.verseEn}</p>
-        </div>
+        </Reveal>
 
-        <div className={styles.center}>
+        <Reveal className={styles.center} delay={0.1}>
           <div className={styles.vertMeta}>{about.vertMeta}</div>
           <div className={styles.vertTitle}>
             {about.vertTitle.before}
             <span className={styles.red}>{about.vertTitle.red}</span>
             {about.vertTitle.after}
           </div>
-        </div>
+        </Reveal>
 
-        <div className={styles.colR}>
+        <Reveal className={styles.colR} delay={0.2}>
           <p className={styles.lede}>
             {about.mission.map((line, i) => (
               <span key={i}>{line}<br /></span>
@@ -44,7 +45,7 @@ export default function About() {
             <span className={styles.ctaEn}>{about.cta.en}</span>
             <span className={styles.ctaArrow}>→</span>
           </a>
-        </div>
+        </Reveal>
 
       </div>
     </section>

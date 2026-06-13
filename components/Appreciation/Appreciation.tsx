@@ -1,5 +1,6 @@
 import { appreciationPage, type AppreciationSection } from '@/content/booklet'
 import Reveal from '@/components/Reveal/Reveal'
+import MoreNote from './MoreNote'
 import type { CSSProperties } from 'react'
 import styles from './Appreciation.module.css'
 
@@ -100,17 +101,11 @@ export default function Appreciation() {
                       ))}
 
                       {more.length > 0 && (
-                        <details className={styles.more}>
-                          <summary className={styles.moreSummary}>
-                            <span className={styles.moreLabel}>展开全文 · Continue reading</span>
-                            <span className={styles.moreChevron} aria-hidden="true" />
-                          </summary>
-                          <div className={styles.moreInner}>
-                            {more.map((s, si) => (
-                              <NoteSection key={si} s={s} />
-                            ))}
-                          </div>
-                        </details>
+                        <MoreNote>
+                          {more.map((s, si) => (
+                            <NoteSection key={si} s={s} />
+                          ))}
+                        </MoreNote>
                       )}
                     </div>
                   </details>

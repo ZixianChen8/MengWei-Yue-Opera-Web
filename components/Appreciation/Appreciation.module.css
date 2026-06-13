@@ -396,16 +396,42 @@
 
 .more {
   margin: 22px 0 0;
+  /* Lay the toggle out as a flex column so its <summary> can be ordered
+     below the unfolded text — when open, the collapse control sits at the
+     bottom where the reader finishes, not back up top. */
+  display: flex;
+  flex-direction: column;
 }
 
 .moreSummary {
+  /* order:1 keeps the closed "展开全文" cue in place; when open the inner
+     content (order:0) rises above and the control drops to the bottom. */
+  order: 1;
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   gap: 9px;
   padding: 6px 0;
   cursor: pointer;
   list-style: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.more[open] .moreSummary {
+  margin-top: 22px;
+}
+
+/* Swap the label: "展开全文" when closed, "收起" when open. */
+.moreLabelOpen {
+  display: none;
+}
+
+.more[open] .moreLabelClosed {
+  display: none;
+}
+
+.more[open] .moreLabelOpen {
+  display: inline;
 }
 
 .moreSummary::-webkit-details-marker { display: none; }
@@ -438,6 +464,7 @@
 }
 
 .moreInner {
+  order: 0;
   margin-top: 4px;
 }
 

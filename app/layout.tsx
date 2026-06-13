@@ -48,6 +48,11 @@ export const metadata: Metadata = {
   title: '加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio',
   description:
     "Ottawa's only Yue Opera studio — performances, education, and a living tradition. Founded 2018.",
+  icons: {
+    icon: [{ url: '/assets/Logo-1.PNG', type: 'image/png' }],
+    shortcut: '/assets/Logo-1.PNG',
+    apple: '/assets/Logo-1.PNG',
+  },
   openGraph: {
     title: '加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio',
     description:

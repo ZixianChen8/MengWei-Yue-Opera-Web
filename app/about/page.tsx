@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
-import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 import AboutPage from '@/components/AboutPage/AboutPage'
 
 export const metadata: Metadata = {
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <>
-      <SmoothScroll />
       <div style={{ position: 'relative' }}>
         <Nav variant="horizontal" />
         <AboutPage />

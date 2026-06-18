@@ -96,6 +96,7 @@ export default function Gallery() {
       {/* ── Lightbox (click a photo to see detail) ──────── */}
       <div
         className={`${styles.lightbox} ${open ? styles.lightboxOpen : ''}`}
+        data-lenis-prevent
         onClick={(e) => {
           if (e.target === e.currentTarget) close()
         }}

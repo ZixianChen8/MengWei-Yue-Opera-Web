@@ -7,12 +7,10 @@ import CloudBreak from '@/components/CloudBreak/CloudBreak'
 import Studio from '@/components/Studio/Studio'
 import Repertoire from '@/components/Repertoire/Repertoire'
 import Footer from '@/components/Footer/Footer'
-import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 
 export default function Home() {
   return (
     <>
-      <SmoothScroll />
       <div style={{ position: 'relative' }}>
         <Nav />
         <Hero />

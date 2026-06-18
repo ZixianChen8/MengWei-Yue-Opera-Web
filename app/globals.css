@@ -38,7 +38,9 @@
    ========================================================= */
 html, body {
   font-size: clamp(16px, 1.25vw, 20px);
-  scroll-behavior: smooth;
+  /* Scrolling is handled by Lenis (see components/SmoothScroll); no native
+     scroll-behavior here, or it would double-ease against Lenis. Lenis stays
+     off on mobile / reduced-motion, where native scroll is already fine. */
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-chinese-body);
@@ -47,12 +49,6 @@ html, body {
 
 body {
   overflow-x: hidden;
-}
-
-@media (max-width: 767px) {
-  html, body {
-    scroll-behavior: auto;
-  }
 }
 
 /* =========================================================

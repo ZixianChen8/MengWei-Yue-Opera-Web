@@ -1,59 +1,69 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { ReactLenis, useLenis } from 'lenis/react'
+import type { LenisOptions } from 'lenis'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState, type ReactNode } from 'react'
 
-const EASE = 0.1
-const MOBILE_SCROLL_QUERY = '(max-width: 767px)'
+const MOBILE_QUERY = '(max-width: 767px)'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 const ARROW_STEP = 90
 
-export default function SmoothScroll() {
-  const targetY = useRef(0)
-  const rafId = useRef<number | null>(null)
+// Lenis config. `lerp: 0.1` matches the old hand-rolled easing; `anchors`
+// smooths same-page #hash link clicks. Touch is left native (syncTouch off).
+const LENIS_OPTIONS: LenisOptions = {
+  lerp: 0.1,
+  smoothWheel: true,
+  anchors: true,
+}
+
+// Root smooth-scroll provider, mounted once in app/layout.tsx around {children}.
+// Lenis only runs on desktop pointer devices: it stays OFF below 768px, under
+// prefers-reduced-motion, and on /admin — in those cases we render children
+// untouched so the browser's native scrolling takes over (matching the prior
+// behavior of the hand-rolled component).
+export default function SmoothScroll({ children }: { children: ReactNode }) {
+  const pathname = usePathname()
+  // Starts false so the server render and first client render both emit plain
+  // children (no Lenis), avoiding a hydration mismatch from the media queries.
+  const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
-    const mobileScrollQuery = window.matchMedia(MOBILE_SCROLL_QUERY)
-    const reducedMotionQuery = window.matchMedia(REDUCED_MOTION_QUERY)
-    let isActive = false
-
-    const maxScroll = () =>
-      document.documentElement.scrollHeight - window.innerHeight
-
-    const clamp = (y: number) => Math.max(0, Math.min(maxScroll(), y))
-
-    const tick = () => {
-      const current = window.scrollY
-      const diff = targetY.current - current
-      if (Math.abs(diff) < 0.5) {
-        window.scrollTo({ top: targetY.current, behavior: 'instant' })
-        rafId.current = null
-        return
-      }
-      window.scrollTo({ top: current + diff * EASE, behavior: 'instant' })
-      rafId.current = requestAnimationFrame(tick)
+    const mobile = window.matchMedia(MOBILE_QUERY)
+    const reduced = window.matchMedia(REDUCED_MOTION_QUERY)
+    const sync = () => setEnabled(!mobile.matches && !reduced.matches)
+    sync()
+    mobile.addEventListener('change', sync)
+    reduced.addEventListener('change', sync)
+    return () => {
+      mobile.removeEventListener('change', sync)
+      reduced.removeEventListener('change', sync)
     }
+  }, [])
 
-    // Nudge the eased target by `delta` (px) and (re)start the animation loop.
-    // Used by both the wheel and keyboard handlers so every input shares one
-    // smoothing pass.
-    const scrollByEased = (delta: number) => {
-      targetY.current = clamp(targetY.current + delta)
-      if (rafId.current === null) tick()
-    }
+  const isAdmin = pathname?.startsWith('/admin') ?? false
 
-    const scrollToEased = (y: number) => {
-      targetY.current = clamp(y)
-      if (rafId.current === null) tick()
-    }
+  if (!enabled || isAdmin) return <>{children}</>
 
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault()
-      scrollByEased(e.deltaY)
-    }
+  return (
+    <ReactLenis root options={LENIS_OPTIONS}>
+      {children}
+      <LenisExtras />
+    </ReactLenis>
+  )
+}
 
-    // Route the common keyboard-scroll keys through the same easing. We skip
-    // when focus sits in a form field / contenteditable so typing and caret
-    // movement behave normally, and bail on modifier combos (browser shortcuts).
+// Behaviors Lenis doesn't cover natively, driven off the active instance.
+function LenisExtras() {
+  const lenis = useLenis()
+
+  // Route the common keyboard-scroll keys through Lenis so they ease like the
+  // wheel. Relative keys accumulate against `targetScroll` (Lenis clamps to
+  // limit). Skips form fields / contenteditable and modifier combos; Space on a
+  // focused button/link is left to activate the control.
+  useEffect(() => {
+    if (!lenis) return
+
     const isTypingTarget = (el: EventTarget | null) => {
       if (!(el instanceof HTMLElement)) return false
       if (el.isContentEditable) return true
@@ -66,126 +76,43 @@ export default function SmoothScroll() {
       if (isTypingTarget(e.target)) return
 
       const page = window.innerHeight * 0.9
+      let delta: number | null = null
+      let absolute: number | null = null
 
       switch (e.key) {
-        case 'ArrowDown':
-          scrollByEased(ARROW_STEP)
-          break
-        case 'ArrowUp':
-          scrollByEased(-ARROW_STEP)
-          break
-        case 'PageDown':
-          scrollByEased(page)
-          break
-        case 'PageUp':
-          scrollByEased(-page)
-          break
-        case ' ': // Space / Shift+Space — only when not on a focusable control
+        case 'ArrowDown': delta = ARROW_STEP; break
+        case 'ArrowUp': delta = -ARROW_STEP; break
+        case 'PageDown': delta = page; break
+        case 'PageUp': delta = -page; break
+        case ' ':
           if (e.target instanceof HTMLElement &&
               (e.target.tagName === 'BUTTON' || e.target.tagName === 'A')) return
-          scrollByEased(e.shiftKey ? -page : page)
+          delta = e.shiftKey ? -page : page
           break
-        case 'Home':
-          scrollToEased(0)
-          break
-        case 'End':
-          scrollToEased(maxScroll())
-          break
-        default:
-          return
+        case 'Home': absolute = 0; break
+        case 'End': absolute = lenis.limit; break
+        default: return
       }
-      e.preventDefault()
-    }
-
-    // Ease to an in-page anchor instead of letting the browser (or Next's
-    // <Link>) jump or native-smooth to it, so hash navigation shares the same
-    // feel as wheel/keyboard scrolling. Runs in the capture phase to beat the
-    // router's own click handler for same-page hashes.
-    const onClick = (e: MouseEvent) => {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
-      const anchor = (e.target instanceof Element ? e.target.closest('a[href]') : null) as HTMLAnchorElement | null
-      if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download')) return
-
-      let url: URL
-      try {
-        url = new URL(anchor.href, window.location.href)
-      } catch {
-        return
-      }
-      // Only handle hashes that point at an element on the current page.
-      if (url.pathname !== window.location.pathname || url.search !== window.location.search) return
-      if (url.hash.length < 2) return
-
-      const el = document.getElementById(decodeURIComponent(url.hash.slice(1)))
-      if (!el) return
 
       e.preventDefault()
-      scrollToEased(el.getBoundingClientRect().top + window.scrollY)
-      if (url.hash !== window.location.hash) {
-        window.history.pushState(null, '', url.hash)
-      }
+      if (absolute !== null) lenis.scrollTo(absolute)
+      else if (delta !== null) lenis.scrollTo(lenis.targetScroll + delta)
     }
 
-    const onScroll = () => {
-      if (rafId.current === null) {
-        targetY.current = window.scrollY
-      }
-    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [lenis])
 
-    const start = () => {
-      if (isActive || mobileScrollQuery.matches || reducedMotionQuery.matches) return
-      targetY.current = window.scrollY
-      window.addEventListener('wheel', onWheel, { passive: false })
-      window.addEventListener('keydown', onKeyDown)
-      window.addEventListener('click', onClick, { capture: true })
-      window.addEventListener('scroll', onScroll, { passive: true })
-      isActive = true
-    }
-
-    const stop = () => {
-      if (!isActive) return
-      window.removeEventListener('wheel', onWheel)
-      window.removeEventListener('keydown', onKeyDown)
-      window.removeEventListener('click', onClick, { capture: true })
-      window.removeEventListener('scroll', onScroll)
-      if (rafId.current !== null) cancelAnimationFrame(rafId.current)
-      rafId.current = null
-      targetY.current = window.scrollY
-      isActive = false
-    }
-
-    const syncScrollMode = () => {
-      if (mobileScrollQuery.matches || reducedMotionQuery.matches) {
-        stop()
-      } else {
-        start()
-      }
-    }
-
-    // When the page loads with a hash (e.g. the "/#season" back-link from an
-    // event page), glide down to the target from the top instead of the
-    // browser's hard jump. One-shot, only while the eased scroller is active.
-    const easeInitialHash = () => {
-      if (!isActive || window.location.hash.length < 2) return
-      const el = document.getElementById(decodeURIComponent(window.location.hash.slice(1)))
-      if (!el) return
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, behavior: 'instant' })
-        scrollToEased(el.getBoundingClientRect().top + window.scrollY)
-      })
-    }
-
-    syncScrollMode()
-    easeInitialHash()
-    mobileScrollQuery.addEventListener('change', syncScrollMode)
-    reducedMotionQuery.addEventListener('change', syncScrollMode)
-
-    return () => {
-      mobileScrollQuery.removeEventListener('change', syncScrollMode)
-      reducedMotionQuery.removeEventListener('change', syncScrollMode)
-      stop()
-    }
-  }, [])
+  // Ease to an on-load hash target (e.g. the "/#season" back-link arriving from
+  // an event page). `anchors` only handles click events, not a hash already
+  // present at mount. Idempotent, so a double-fire with `anchors` is harmless.
+  useEffect(() => {
+    if (!lenis || window.location.hash.length < 2) return
+    const el = document.getElementById(decodeURIComponent(window.location.hash.slice(1)))
+    if (!el) return
+    const raf = requestAnimationFrame(() => lenis.scrollTo(el))
+    return () => cancelAnimationFrame(raf)
+  }, [lenis])
 
   return null
 }

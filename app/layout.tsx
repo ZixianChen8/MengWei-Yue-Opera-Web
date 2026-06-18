@@ -6,7 +6,9 @@ import {
   JetBrains_Mono,
 } from 'next/font/google'
 import localFont from 'next/font/local'
+import 'lenis/dist/lenis.css'
 import './globals.css'
+import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 
 const maShanZheng = Ma_Shan_Zheng({
   weight: '400',
@@ -76,7 +78,9 @@ export default function RootLayout({
       lang="zh-Hant-CA"
       className={`${maShanZheng.variable} ${notoSerifSC.variable} ${cormorantGaramond.variable} ${jetBrainsMono.variable} ${beiShiDaShuoWenXiaoZhuan.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   )
 }

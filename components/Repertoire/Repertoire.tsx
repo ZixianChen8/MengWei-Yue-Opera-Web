@@ -74,7 +74,7 @@ export default function Repertoire() {
       </Reveal>
 
       <div className={styles.filmstripOuter}>
-        <div ref={stripRef} className={styles.filmstripWrap}>
+        <div ref={stripRef} className={styles.filmstripWrap} data-lenis-prevent>
           <div className={styles.filmstrip}>
             {works.map((work, i) => (
               <div
@@ -135,6 +135,7 @@ export default function Repertoire() {
       {/* Lightbox — always rendered, toggled via .lightboxOpen */}
       <div
         className={`${styles.lightbox}${openIndex !== null ? ` ${styles.lightboxOpen}` : ''}`}
+        data-lenis-prevent
         onClick={() => setOpenIndex(null)}
       >
         <div className={styles.lbContent} onClick={e => e.stopPropagation()}>

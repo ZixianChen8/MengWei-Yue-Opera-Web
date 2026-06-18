@@ -20,8 +20,16 @@
   --font-chinese-display: var(--font-ma-shan), serif;
   --font-chinese-body:    var(--font-noto-serif-sc), serif;
   --font-seal:            var(--font-bei-shi-da-shuo-wen-xiao-zhuan), var(--font-chinese-display);
+  --font-anniversary-title: var(--font-san-ji-xing-kai-jian-ti-cu), var(--font-chinese-display);
   --font-latin-display:   var(--font-cormorant), serif;
+  --font-editorial:       var(--font-playfair), 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-mono:            var(--font-jetbrains), monospace;
+
+  /* 10th-anniversary reading-body type system (ui-ux-pro-max typography pass):
+     a ≥16px floor prevents iOS auto-zoom on body copy, and one shared leading
+     token gives the program notes a consistent vertical rhythm. */
+  --ann-fs-body: clamp(16px, 1.7vw, 17px);
+  --ann-lh-body: 1.78;
 }
 
 /* =========================================================

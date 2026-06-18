@@ -18,7 +18,7 @@
      figures live on the right side of the poster, so the value is biased right.
      0% = show the far left (title art) · 50% = middle · 100% = far right.
      Tweak this single number to slide the figures into view. */
-  --bk-poster-x: 96%;
+  --bk-poster-x: 90%;
 
   background: var(--paper);
   color: var(--ink);
@@ -46,21 +46,17 @@
     linear-gradient(180deg, var(--bk-crimson) 0%, var(--bk-crimson-deep) 100%);
 }
 
-/* Vertical curtain drape folds. */
-.cover::before {
-  content: '';
+/* Animated flowing-silk backdrop (replaces the former CSS curtain drape). */
+.silkBg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.16) 0,
-    rgba(0, 0, 0, 0) 2.2%,
-    rgba(255, 220, 170, 0.05) 4.2%,
-    rgba(0, 0, 0, 0.16) 6.4%
-  );
-  opacity: 0.5;
   pointer-events: none;
+  overflow: hidden;
+}
+
+.silkBg canvas {
+  display: block;
 }
 
 /* When a real poster is supplied it becomes the cover field, darkened
@@ -106,7 +102,7 @@
 
 .wordmark {
   margin: 4px 0 0;
-  font-family: var(--font-chinese-display);
+  font-family: var(--font-anniversary-title);
   font-weight: 400;
   font-size: clamp(54px, 12vw, 104px);
   line-height: 0.96;
@@ -135,7 +131,7 @@
 
 .coverTagline {
   margin: 0;
-  font-family: var(--font-chinese-display);
+  font-family: var(--font-anniversary-title);
   font-size: clamp(20px, 4vw, 30px);
   letter-spacing: 0.14em;
   color: #fbeed4;
@@ -159,6 +155,7 @@
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
   color: rgba(248, 230, 200, 0.78);
 }
 
@@ -231,14 +228,13 @@
 .sectionTitle {
   margin: 0 0 34px;
   text-align: center;
-  font-family: 'Arial Black', 'Arial Narrow Bold', 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 900;
+  font-family: var(--font-editorial);
+  font-weight: 600;
   font-style: italic;
-  font-size: clamp(26px, 5vw, 40px);
-  letter-spacing: 0.005em;
-  color: var(--paper);
-  -webkit-text-stroke: 1.1px var(--ink);
-  text-shadow: 0 1px 1px rgba(26, 26, 26, 0.12);
+  font-size: clamp(32px, 5.6vw, 50px);
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+  color: var(--ink);
 }
 
 .sectionTitleSecond {
@@ -297,6 +293,7 @@
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
   color: var(--ink-faint);
 }
 
@@ -491,10 +488,10 @@
 
 .actTitle {
   margin: 0;
-  font-family: 'Arial', 'Helvetica Neue', sans-serif;
-  font-weight: 700;
-  font-size: clamp(17px, 1.9vw, 21px);
-  letter-spacing: 0.005em;
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  font-size: clamp(19px, 2vw, 24px);
+  letter-spacing: -0.005em;
   color: var(--ink);
 }
 
@@ -502,13 +499,14 @@
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
   color: var(--seal);
   white-space: nowrap;
 }
 
 .actTitleZh {
   margin: 6px 0 0;
-  font-family: var(--font-chinese-body);
+  font-family: var(--font-anniversary-title);
   font-size: 16px;
   letter-spacing: 0.06em;
   color: var(--ink-soft);

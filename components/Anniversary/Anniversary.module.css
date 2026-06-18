@@ -14,20 +14,17 @@
   color: #fbeed4;
 }
 
-/* Vertical curtain drape folds. */
-.curtain {
+/* Animated flowing-silk backdrop (replaces the former CSS curtain drape). */
+.silkBg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.16) 0,
-    rgba(0, 0, 0, 0) 2.2%,
-    rgba(255, 220, 170, 0.05) 4.2%,
-    rgba(0, 0, 0, 0.16) 6.4%
-  );
-  opacity: 0.5;
+  overflow: hidden;
+}
+
+.silkBg canvas {
+  display: block;
 }
 
 .inner {
@@ -59,12 +56,17 @@
 
 .title {
   margin: 6px 0 0;
-  font-family: var(--font-chinese-display);
+  font-family: var(--font-anniversary-title);
+  font-weight: 400;
   font-size: clamp(48px, 10vw, 92px);
   letter-spacing: 0.1em;
   line-height: 1;
   color: #f8d078;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+.titleLine {
+  display: inline;
 }
 
 .titleEn {
@@ -131,7 +133,7 @@
 
 .tileZh {
   margin-top: auto;
-  font-family: var(--font-chinese-display);
+  font-family: var(--font-anniversary-title);
   font-size: clamp(30px, 5vw, 40px);
   letter-spacing: 0.08em;
   color: #fbeed4;
@@ -177,6 +179,14 @@
 
   .title {
     font-size: clamp(42px, 13vw, 64px);
+  }
+
+  .titleLine {
+    display: block;
+  }
+
+  .titleLine + .titleLine {
+    margin-top: 0.08em;
   }
 
   .rule {

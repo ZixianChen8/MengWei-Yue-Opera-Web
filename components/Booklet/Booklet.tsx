@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import { booklet } from '@/content/booklet'
 import Reveal from '@/components/Reveal/Reveal'
+import Silk from '@/components/Silk/Silk'
 import LetterLightbox from './LetterLightbox'
 import styles from './Booklet.module.css'
 
@@ -27,6 +28,9 @@ export default function Booklet() {
       <section
         className={`${styles.cover}${cover.posterImage ? ` ${styles.coverPoster}` : ''}`}
       >
+        <div className={styles.silkBg} aria-hidden="true">
+          <Silk speed={5} scale={1.1} color="#711816" noiseIntensity={0.8} rotation={2.2} />
+        </div>
         <div className={styles.coverInner}>
           <p className={styles.presents}>{cover.presents}</p>
           <h1 className={styles.wordmark}>{cover.wordmark}</h1>

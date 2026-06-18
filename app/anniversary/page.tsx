@@ -3,7 +3,7 @@ import Nav from '@/components/Nav/Nav'
 import Anniversary from '@/components/Anniversary/Anniversary'
 
 export const metadata: Metadata = {
-  title: '十载芳馨 · 越动枫华 · 10th Anniversary — 孟伟越剧',
+  title: '十载芳馨 越动枫华 · 10th Anniversary — 孟伟越剧',
   description: 'Yuespiration：孟伟越剧十周年专场。中文节目单、导赏与场刊。',
 }
 

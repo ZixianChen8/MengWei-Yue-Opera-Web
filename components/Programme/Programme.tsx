@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 import { programmePage } from '@/content/booklet'
 import Reveal from '@/components/Reveal/Reveal'
+import Silk from '@/components/Silk/Silk'
 import styles from './Programme.module.css'
 
 // 中文节目单 — the Chinese-language run-of-show for the 10th-anniversary gala.
@@ -31,6 +32,9 @@ export default function Programme() {
     <article className={styles.programme} style={posterVars}>
       {/* ── Masthead ──────────────────────────────────────── */}
       <section className={`${styles.cover}${posterImage ? ` ${styles.coverPoster}` : ''}`}>
+        <div className={styles.silkBg} aria-hidden="true">
+          <Silk speed={5} scale={1.1} color="#711816" noiseIntensity={0.8} rotation={2.2} />
+        </div>
         <div className={styles.coverInner}>
           <p className={styles.presents}>{presents}</p>
           <h1 className={styles.wordmark}>{wordmark}</h1>

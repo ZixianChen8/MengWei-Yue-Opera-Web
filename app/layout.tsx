@@ -4,6 +4,7 @@ import {
   Noto_Serif_SC,
   Cormorant_Garamond,
   JetBrains_Mono,
+  Playfair_Display,
 } from 'next/font/google'
 import localFont from 'next/font/local'
 import 'lenis/dist/lenis.css'
@@ -40,9 +41,26 @@ const jetBrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
+// High-contrast Didone display serif — the editorial/ceremonial Latin voice for
+// the 10th-anniversary pages (mastheads, section titles). Variable wght axis +
+// true italic; weight is set per-use in CSS. Latin display only — never CJK.
+const playfairDisplay = Playfair_Display({
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+  preload: false,
+})
+
 const beiShiDaShuoWenXiaoZhuan = localFont({
   src: '../fonts/BeiShiDaShuoWenXiaoZhuan-1-unicode-yue.ttf',
   variable: '--font-bei-shi-da-shuo-wen-xiao-zhuan',
+  display: 'swap',
+})
+
+const sanJiXingKaiJianTiCu = localFont({
+  src: '../fonts/SanJiXingKaiJianTi-Cu-2.ttf',
+  variable: '--font-san-ji-xing-kai-jian-ti-cu',
   display: 'swap',
 })
 
@@ -76,7 +94,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-Hant-CA"
-      className={`${maShanZheng.variable} ${notoSerifSC.variable} ${cormorantGaramond.variable} ${jetBrainsMono.variable} ${beiShiDaShuoWenXiaoZhuan.variable}`}
+      className={`${maShanZheng.variable} ${notoSerifSC.variable} ${cormorantGaramond.variable} ${jetBrainsMono.variable} ${playfairDisplay.variable} ${beiShiDaShuoWenXiaoZhuan.variable} ${sanJiXingKaiJianTiCu.variable}`}
     >
       <body>
         <SmoothScroll>{children}</SmoothScroll>

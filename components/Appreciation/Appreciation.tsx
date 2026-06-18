@@ -1,5 +1,6 @@
 import { appreciationPage, type AppreciationSection } from '@/content/booklet'
 import Reveal from '@/components/Reveal/Reveal'
+import Silk from '@/components/Silk/Silk'
 import MoreNote from './MoreNote'
 import type { CSSProperties } from 'react'
 import styles from './Appreciation.module.css'
@@ -48,6 +49,9 @@ export default function Appreciation() {
     <article className={styles.appreciation} style={posterVars}>
       {/* ── Masthead ──────────────────────────────────────── */}
       <section className={`${styles.cover}${posterImage ? ` ${styles.coverPoster}` : ''}`}>
+        <div className={styles.silkBg} aria-hidden="true">
+          <Silk speed={5} scale={1.1} color="#711816" noiseIntensity={0.8} rotation={2.2} />
+        </div>
         <div className={styles.coverInner}>
           <p className={styles.presents}>{presents}</p>
           <h1 className={styles.wordmark}>{wordmark}</h1>

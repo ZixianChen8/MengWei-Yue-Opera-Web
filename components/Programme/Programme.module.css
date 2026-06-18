@@ -235,12 +235,15 @@
   list-style: none;
 }
 
+/* Each act is anchored by an oversized editorial numeral; the zh title is the
+   hero and everything else reads as quiet secondary copy. A single hairline
+   between acts keeps the run-of-show rhythm without boxing every row. */
 .act {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: baseline;
-  column-gap: clamp(16px, 3vw, 28px);
-  padding: 24px 0;
+  grid-template-columns: minmax(44px, auto) 1fr;
+  align-items: start;
+  column-gap: clamp(18px, 4vw, 40px);
+  padding: clamp(26px, 4vw, 38px) 0;
 }
 
 .act + .act {
@@ -248,25 +251,26 @@
 }
 
 .actNo {
-  font-family: var(--font-mono);
-  font-size: clamp(15px, 2vw, 18px);
-  letter-spacing: 0.04em;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(34px, 7vw, 58px);
+  letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
-  color: var(--bk-gold-soft);
-  font-weight: 600;
-  line-height: 1.4;
+  color: color-mix(in srgb, var(--seal) 42%, transparent);
+  line-height: 0.9;
 }
 
 .actMain {
   min-width: 0;
+  padding-top: clamp(2px, 1vw, 8px);
 }
 
 .actCat {
-  margin: 0 0 6px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
+  margin: 0 0 8px;
+  font-family: var(--font-chinese-body);
+  font-size: 13px;
+  letter-spacing: 0.16em;
   color: var(--seal);
 }
 
@@ -274,9 +278,9 @@
   margin: 0;
   font-family: var(--font-anniversary-title);
   font-weight: 400;
-  font-size: clamp(22px, 3vw, 30px);
+  font-size: clamp(25px, 5.4vw, 32px);
   letter-spacing: 0.06em;
-  line-height: 1.25;
+  line-height: 1.22;
   color: var(--ink);
 }
 
@@ -326,32 +330,29 @@
   white-space: pre-line;
 }
 
-.actTime {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  font-variant-numeric: tabular-nums;
-  color: var(--seal);
-  white-space: nowrap;
-  text-align: right;
-}
-
 /* ── Responsive ─────────────────────────────────────────── */
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .act {
-    grid-template-columns: auto 1fr;
-    column-gap: 16px;
-    row-gap: 4px;
+    column-gap: clamp(14px, 4vw, 20px);
   }
-  .actTime {
-    grid-column: 2;
-    text-align: left;
-    margin-top: 10px;
+  .actNo {
+    font-size: clamp(30px, 9vw, 40px);
   }
   .sheetInner::after {
     width: 44px;
     height: 44px;
     bottom: -16px;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Drop the numeral to its own line so the title keeps full width. */
+  .act {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+  }
+  .actMain {
+    padding-top: 0;
   }
 }

@@ -228,30 +228,43 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  border-top: 1px solid var(--border);
 }
 
 .entryWrap {
   margin: 0;
+  border-bottom: 1px solid var(--border);
 }
 
-/* Each act is a native <details> card; the header is the <summary>. */
+/* Each act is a native <details> entry — no card chrome, just an editorial
+   row anchored by a big numeral and a gold rule that lights when open. */
 .entry {
   position: relative;
-  background: color-mix(in srgb, var(--paper) 60%, #fff 40%);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--bk-gold-soft);
-  box-shadow: 0 8px 26px rgba(44, 30, 18, 0.05);
+}
+
+.entry::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--bk-gold-soft);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.entry[open]::before {
+  transform: scaleY(1);
 }
 
 .entryHead {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: minmax(38px, auto) 1fr auto;
   align-items: start;
-  column-gap: clamp(14px, 3vw, 22px);
-  padding: clamp(20px, 4vw, 30px) clamp(20px, 4vw, 34px);
+  column-gap: clamp(16px, 4vw, 28px);
+  padding: clamp(22px, 4vw, 32px) 2px clamp(22px, 4vw, 32px) clamp(14px, 3vw, 24px);
   cursor: pointer;
   list-style: none;
   -webkit-tap-highlight-color: transparent;
@@ -267,24 +280,26 @@
 }
 
 .entryNo {
-  font-family: var(--font-mono);
-  font-size: clamp(16px, 2.4vw, 20px);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--bk-gold-soft);
-  line-height: 1.5;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(30px, 6vw, 48px);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--seal) 42%, transparent);
+  line-height: 0.9;
 }
 
 .entryId {
   min-width: 0;
+  padding-top: clamp(2px, 1vw, 7px);
 }
 
 .entryCat {
-  margin: 0 0 6px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
+  margin: 0 0 8px;
+  font-family: var(--font-chinese-body);
+  font-size: 13px;
+  letter-spacing: 0.16em;
   color: var(--seal);
 }
 
@@ -292,9 +307,9 @@
   margin: 0;
   font-family: var(--font-anniversary-title);
   font-weight: 400;
-  font-size: clamp(22px, 4vw, 30px);
+  font-size: clamp(24px, 5vw, 31px);
   letter-spacing: 0.06em;
-  line-height: 1.25;
+  line-height: 1.22;
   color: var(--ink);
 }
 
@@ -342,12 +357,15 @@
 
 /* ── Entry body (the unfolded note) ─────────────────────── */
 
+/* Indented to sit under the title column on desktop; near-flush on phones so
+   the reading copy keeps its width. */
 .entryBody {
-  padding: 4px clamp(20px, 4vw, 34px) clamp(24px, 4vw, 34px);
+  padding: 4px clamp(16px, 4vw, 28px) clamp(28px, 4vw, 36px) clamp(58px, 11vw, 82px);
 }
 
 .lead {
   margin: 0 0 22px;
+  max-width: 40em;
   font-family: var(--font-chinese-body);
   font-size: var(--ann-fs-body);
   line-height: 1.85;
@@ -376,12 +394,12 @@
 
 .notePara {
   margin: 0 0 0.9em;
+  max-width: 40em;
   font-family: var(--font-chinese-body);
   font-size: var(--ann-fs-body);
   line-height: var(--ann-lh-body);
   letter-spacing: 0.01em;
   color: var(--ink);
-  text-align: justify;
 }
 
 .notePara:last-child {
@@ -539,18 +557,50 @@
 
 /* ── Responsive ─────────────────────────────────────────── */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .entryBody {
+    padding-left: clamp(16px, 6vw, 40px);
+  }
+}
+
+@media (max-width: 480px) {
   .sheetInner::after {
     width: 44px;
     height: 44px;
     bottom: -16px;
   }
-  .notePara {
-    font-size: 15px;
-    text-align: left;
+  .entryBody {
+    padding-left: 16px;
   }
   .entryChevron {
     width: 10px;
     height: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Numeral drops above the title so the title keeps full width. */
+  .entryHead {
+    grid-template-columns: 1fr auto;
+    column-gap: 14px;
+  }
+  .entryNo {
+    grid-column: 1;
+    font-size: 26px;
+    margin-bottom: 2px;
+  }
+  .entryId {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
+  .entryChevron {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry::before {
+    transition: none;
   }
 }

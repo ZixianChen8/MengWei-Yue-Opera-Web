@@ -232,9 +232,20 @@
   font-weight: 600;
   font-style: italic;
   font-size: clamp(32px, 5.6vw, 50px);
-  line-height: 1.04;
+  line-height: 1.1;
   letter-spacing: -0.012em;
   color: var(--ink);
+  padding-bottom: 0.18em;
+}
+
+/* Quiet structural rule under each section opener (replaces eyebrow labels). */
+.sectionTitle::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin: 18px auto 0;
+  background: linear-gradient(90deg, transparent, var(--bk-gold-soft), transparent);
 }
 
 .sectionTitleSecond {
@@ -253,12 +264,13 @@
 /* ── Preface prose ──────────────────────────────────────── */
 
 .prose {
+  max-width: 62ch;
+  margin-inline: auto;
   font-family: var(--font-latin-display);
   font-size: clamp(17px, 1.5vw, 19px);
-  line-height: 1.62;
+  line-height: 1.66;
   color: var(--ink);
-  text-align: justify;
-  hyphens: auto;
+  text-align: left;
 }
 
 .prose p {
@@ -532,12 +544,15 @@
 
 /* ── Role lists (committee, crew) ───────────────────────── */
 
+/* Credits read as a two-column grid (a real program-book page) rather than one
+   long centered stack. */
 .roleList {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  text-align: center;
+  margin: 0 auto;
+  max-width: 660px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 34px) clamp(32px, 6vw, 72px);
+  text-align: left;
 }
 
 .roleGroup {
@@ -676,11 +691,19 @@
 
 /* ── Responsive ─────────────────────────────────────────── */
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
+  /* Tighten the interior pages so seven stacked sections aren't an endless
+     scroll on a phone. */
+  .page {
+    padding: clamp(52px, 12vw, 76px) clamp(22px, 6vw, 40px);
+  }
+  .sectionTitle {
+    margin-bottom: 26px;
+  }
   .bioHead {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: 16px;
   }
   .bioBody {
@@ -695,7 +718,23 @@
     height: 44px;
     bottom: -16px;
   }
+  /* Arrows are intentionally hidden on small screens; let the scan fill it. */
   .lbNav {
     display: none;
+  }
+  .lbImg {
+    max-width: 94vw;
+    max-height: calc(100svh - 128px);
+  }
+}
+
+@media (max-width: 480px) {
+  .roleList {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    gap: 22px;
+  }
+  .sectionTitle {
+    margin-bottom: 22px;
   }
 }

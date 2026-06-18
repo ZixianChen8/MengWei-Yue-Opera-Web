@@ -31,29 +31,38 @@ export default function Anniversary() {
           <p className={styles.tagline}>{pageHead.tagline}</p>
         </Reveal>
 
-        <ul className={styles.menu}>
-          {menu.map((item) => {
+        <ol className={styles.index}>
+          {menu.map((item, i) => {
+            const num = String(i + 1).padStart(2, '0')
             const inner = (
               <>
-                <span className={styles.tileZh}>{item.zh}</span>
-                <span className={styles.tileEn}>{item.en}</span>
+                <span className={styles.rowNum} aria-hidden="true">{num}</span>
+                <span className={styles.rowMain}>
+                  <span className={styles.rowZh}>{item.zh}</span>
+                  <span className={styles.rowEn}>{item.en}</span>
+                </span>
+                {item.ready ? (
+                  <span className={styles.rowArrow} aria-hidden="true" />
+                ) : (
+                  <span className={styles.rowCue}>即将上线 · Coming soon</span>
+                )}
               </>
             )
             return (
-              <li key={item.en} className={styles.tileWrap}>
+              <Reveal as="li" key={item.en} className={styles.row} delay={0.06 * i}>
                 {item.ready ? (
-                  <Link href={item.href} className={styles.tile}>
+                  <Link href={item.href} className={styles.rowLink}>
                     {inner}
                   </Link>
                 ) : (
-                  <div className={`${styles.tile} ${styles.tileDisabled}`} aria-disabled="true">
+                  <div className={`${styles.rowLink} ${styles.rowDisabled}`} aria-disabled="true">
                     {inner}
                   </div>
                 )}
-              </li>
+              </Reveal>
             )
           })}
-        </ul>
+        </ol>
       </div>
     </main>
   )

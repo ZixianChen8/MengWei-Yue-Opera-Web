@@ -4,6 +4,7 @@
    ============================================================ */
 
 .hub {
+  --bk-gold: #f8d078;
   position: relative;
   overflow: hidden;
   min-height: calc(100vh - 5.75rem);
@@ -95,75 +96,135 @@
   color: rgba(248, 230, 200, 0.8);
 }
 
-/* ── Submenu tiles ──────────────────────────────────────── */
+/* ── Submenu index (program-book contents page) ─────────── */
 
-.menu {
+.index {
   list-style: none;
-  margin: 0;
+  margin: clamp(8px, 2vw, 20px) 0 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: clamp(18px, 3vw, 28px);
+  border-top: 1px solid rgba(248, 208, 120, 0.28);
 }
 
-.tileWrap {
-  display: flex;
+.row {
+  border-bottom: 1px solid rgba(248, 208, 120, 0.28);
 }
 
-.tile {
+/* Number · title/en · trailing cue, laid as an editorial table-of-contents row.
+   The gold wash sweeps in from the left on hover (directional), under the text. */
+.rowLink {
   position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: clamp(28px, 4vw, 44px) clamp(24px, 3vw, 32px);
-  min-height: 200px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: clamp(18px, 4vw, 40px);
+  padding: clamp(22px, 4vw, 34px) clamp(6px, 2vw, 20px);
   text-decoration: none;
   color: inherit;
-  background: rgba(248, 230, 200, 0.06);
-  border: 1px solid rgba(248, 208, 120, 0.32);
-  transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  isolation: isolate;
 }
 
-.tile:hover {
-  background: rgba(248, 230, 200, 0.12);
-  border-color: rgba(248, 208, 120, 0.6);
-  transform: translateY(-4px);
+.rowLink::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(248, 208, 120, 0.1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tileZh {
-  margin-top: auto;
+.rowLink:hover::before,
+.rowLink:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.rowLink:focus-visible {
+  outline: 2px solid var(--bk-gold);
+  outline-offset: -2px;
+}
+
+.rowNum {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 2.4vw, 16px);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  color: rgba(248, 208, 120, 0.85);
+  line-height: 1;
+}
+
+.rowMain {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rowLink:hover .rowMain,
+.rowLink:focus-visible .rowMain {
+  transform: translateX(8px);
+}
+
+.rowZh {
   font-family: var(--font-anniversary-title);
-  font-size: clamp(30px, 5vw, 40px);
-  letter-spacing: 0.08em;
+  font-size: clamp(30px, 8vw, 52px);
+  line-height: 1.04;
+  letter-spacing: 0.06em;
   color: #fbeed4;
 }
 
-.tileEn {
+.rowEn {
   font-family: var(--font-latin-display);
   font-style: italic;
-  font-size: 17px;
-  color: #f0dcc0;
+  font-size: clamp(15px, 2.4vw, 19px);
+  letter-spacing: 0.02em;
+  color: rgba(243, 231, 208, 0.72);
 }
 
-.tileCue {
-  margin-top: 14px;
+/* Trailing chevron marks a navigable row. */
+.rowArrow {
+  width: 11px;
+  height: 11px;
+  border-top: 1.5px solid var(--bk-gold);
+  border-right: 1.5px solid var(--bk-gold);
+  transform: rotate(45deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rowLink:hover .rowArrow,
+.rowLink:focus-visible .rowArrow {
+  transform: rotate(45deg) translate(3px, -3px);
+}
+
+.rowCue {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(248, 230, 200, 0.66);
+  color: rgba(248, 230, 200, 0.6);
+  text-align: right;
 }
 
-.tileDisabled {
+.rowDisabled {
   cursor: default;
-  opacity: 0.5;
 }
 
-.tileDisabled:hover {
-  background: rgba(248, 230, 200, 0.06);
-  border-color: rgba(248, 208, 120, 0.32);
-  transform: none;
+.rowDisabled .rowZh {
+  color: rgba(251, 238, 212, 0.5);
+}
+
+.rowDisabled .rowEn {
+  color: rgba(243, 231, 208, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rowLink::before,
+  .rowMain,
+  .rowArrow {
+    transition: none;
+  }
 }
 
 @media (max-width: 720px) {
@@ -198,27 +259,37 @@
     letter-spacing: 0.16em;
   }
 
-  .menu {
-    grid-template-columns: 1fr;
-    gap: 12px;
+  .index {
+    margin-top: 4px;
   }
 
-  .tile {
+  .rowLink {
+    column-gap: 16px;
+    padding: 22px 4px;
+  }
+
+  .rowNum {
+    align-self: start;
+    margin-top: 6px;
+  }
+
+  .rowMain {
     gap: 4px;
-    min-height: 0;
-    padding: 18px 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .rowLink {
+    column-gap: 12px;
   }
 
-  .tileZh {
-    margin-top: 0;
-    font-size: 30px;
+  .rowZh {
+    letter-spacing: 0.04em;
   }
 
-  .tileEn {
-    font-size: 16px;
-  }
-
-  .tileCue {
-    margin-top: 8px;
+  /* Reclaim width on the narrowest phones: the chevron is decorative, the whole
+     row is the tap target. */
+  .rowArrow {
+    display: none;
   }
 }

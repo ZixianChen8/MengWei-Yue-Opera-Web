@@ -1,0 +1,220 @@
+/* ============================================================
+   Bubble mobile navigation (≤1023px) — adapted from React Bits
+   BubbleMenu to the studio's ink-on-paper palette. A floating
+   logo bubble + hamburger toggle expand a full-screen menu of
+   ink lozenge links. Desktop (≥1024px) uses the horizontal Nav.
+   ============================================================ */
+
+/* Mobile-only: the desktop Nav owns ≥1024px. */
+.root {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .root {
+    display: block;
+  }
+}
+
+/* ── Floating bar (logo + toggle) ───────────────────────── */
+.bar {
+  position: fixed;
+  top: max(env(safe-area-inset-top, 0px), 14px);
+  left: 0;
+  right: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 clamp(16px, 5vw, 28px);
+  /* Let taps fall through the bar gutter; only the bubbles catch them. */
+  pointer-events: none;
+}
+
+.bubble {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  box-shadow: 0 12px 30px -10px rgba(26, 18, 10, 0.5);
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+}
+
+/* The logo is bare (no bubble) — just the mark itself, no disc/border/shadow. */
+.logoBubble {
+  height: 52px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logoBubble:active {
+  transform: scale(0.96);
+}
+
+.logoImg {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.toggleBubble {
+  width: 52px;
+  height: 52px;
+  flex-direction: column;
+  gap: 5px;
+  border: none;
+  background: var(--ink);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toggleBubble:active {
+  transform: scale(0.94);
+}
+
+.menuLine {
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--paper);
+  transition: transform 0.3s ease;
+}
+
+.toggleOpen .menuLine:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.toggleOpen .menuLine:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+.logoBubble:focus-visible,
+.toggleBubble:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 3px;
+}
+
+/* ── Expanding full-screen menu ─────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 110; /* below the bar so the toggle stays tappable to close */
+  display: none; /* flipped to flex by GSAP on open */
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: clamp(92px, 16vh, 150px) clamp(22px, 7vw, 48px) clamp(40px, 10vh, 80px);
+  background: var(--paper);
+}
+
+/* Faint ink-wash echo so the menu screen isn't a flat fill. */
+.overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(192, 58, 43, 0.08), transparent 60%),
+    radial-gradient(90% 50% at 50% 115%, rgba(120, 132, 112, 0.1), transparent 62%);
+}
+
+.list {
+  position: relative;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.col {
+  display: flex;
+}
+
+/* Dead-square, outlined-on-paper cells: hairline ink frame, paper interior,
+   ink text — left-aligned editorial. The frame fills (ink on hover, seal on the
+   current page) so the menu reads as a tidy stacked index. */
+.link {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 78px;
+  padding: 16px 22px;
+  border-radius: 0;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  text-align: left;
+  overflow: hidden;
+  will-change: transform;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.link:active {
+  transform: scale(0.99);
+}
+
+.linkActive {
+  background: var(--seal);
+  border-color: var(--seal);
+  color: var(--paper);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 3px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  width: 100%;
+  will-change: transform, opacity;
+}
+
+.zh {
+  font-family: var(--font-chinese-display);
+  font-size: clamp(26px, 7vw, 34px);
+  letter-spacing: 0.08em;
+  line-height: 1.04;
+  white-space: nowrap;
+}
+
+.en {
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.66;
+}
+
+/* Long anniversary label gets a touch less size so it stays on one line. */
+@media (max-width: 400px) {
+  .zh {
+    font-size: clamp(23px, 6.6vw, 30px);
+    letter-spacing: 0.06em;
+  }
+}

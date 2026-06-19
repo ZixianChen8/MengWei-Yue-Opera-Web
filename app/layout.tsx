@@ -10,6 +10,7 @@ import localFont from 'next/font/local'
 import 'lenis/dist/lenis.css'
 import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
+import BubbleMenu from '@/components/BubbleMenu/BubbleMenu'
 
 const maShanZheng = Ma_Shan_Zheng({
   weight: '400',
@@ -98,6 +99,9 @@ export default function RootLayout({
     >
       <body>
         <SmoothScroll>{children}</SmoothScroll>
+        {/* Floating bubble nav for ≤1023px (the desktop horizontal Nav takes
+            over from 1024px up). Renders site-wide; hides itself on /admin. */}
+        <BubbleMenu />
       </body>
     </html>
   )

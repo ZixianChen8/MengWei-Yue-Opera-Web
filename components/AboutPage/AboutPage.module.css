@@ -614,7 +614,8 @@
 
   .enTitle { font-size: 22px; }
 
-  .bio { padding: 80px 24px; }
+  /* Extra top room clears the floating BubbleMenu bar (no in-flow nav here). */
+  .bio { padding: 104px 24px 80px; }
 
   .bioInner {
     grid-template-columns: 1fr;

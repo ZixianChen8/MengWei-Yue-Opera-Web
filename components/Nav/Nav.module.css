@@ -307,7 +307,17 @@
   flex-shrink: 0;
 }
 
-/* ── Tablet & below (≤1023px): reveal overlay, hide BOTH inline menus ── */
+/* ── Tablet & below (≤1023px): the floating BubbleMenu takes over ──
+   The whole horizontal/overlay Nav is hidden below 1024px; mobile navigation
+   is provided site-wide by components/BubbleMenu. Desktop (≥1024px) keeps the
+   inline Nav untouched. The legacy overlay rules below are retained but inert
+   (the Nav no longer renders at this width). */
+@media (max-width: 1023px) {
+  .nav {
+    display: none;
+  }
+}
+
 @media (max-width: 1023px) {
   .nav {
     justify-content: flex-end;

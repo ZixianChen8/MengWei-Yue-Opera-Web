@@ -29,10 +29,8 @@
 .cover {
   position: relative;
   overflow: hidden;
-  /* Nav bar (.horizontal) is in-flow and 5.75rem tall, so subtracting it makes
-     the nav + cover together fill the screen. svh stays stable on mobile while
-     browser search/address bars collapse, preventing the poster crop from
-     resizing during scroll. */
+  /* Default layout subtracts the in-flow horizontal nav; mobile overrides below
+     let the cover itself fill the stable viewport. */
   min-height: calc(100vh - 5.75rem);
   min-height: calc(100svh - 5.75rem);
   display: flex;
@@ -692,6 +690,12 @@
 /* ── Responsive ─────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+  .cover {
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-block: clamp(56px, 10svh, 86px);
+  }
+
   /* Tighten the interior pages so seven stacked sections aren't an endless
      scroll on a phone. */
   .page {

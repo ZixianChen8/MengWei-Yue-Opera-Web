@@ -46,6 +46,11 @@
   height: 3.75rem;
 }
 
+.anniversaryLogo {
+  width: auto;
+  max-width: min(15rem, 48vw);
+}
+
 .brandMark {
   font-family: var(--font-chinese-display);
   font-size: 1.75rem;

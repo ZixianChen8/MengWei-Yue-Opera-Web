@@ -4,7 +4,7 @@
       "meta": "Est. 2016 · Ottawa",
       "titleZh": "十载芳馨 越动枫华",
       "titleEn": "10th Anniversary Special",
-      "tagline": "Yuespiration · 10 Years in the Making"
+      "tagline": "10 Years in the Making"
     },
     "menu": [
       {
@@ -29,7 +29,7 @@
   },
   "booklet": {
     "pageHead": {
-      "meta": "Yuespiration · 2016 – 2026",
+      "meta": "2016 – 2026",
       "titleZh": "场刊",
       "titleEn": "Program Book",
       "crumb": "10th Anniversary Gala"
@@ -38,7 +38,7 @@
       "posterImage": "/assets/booklet/mw-backdrop-upscaled.webp",
       "presents": "加拿大孟伟越剧艺术传习所 呈献",
       "wordmark": "场刊",
-      "scriptEn": "Program Booklet · Yuespiration",
+      "scriptEn": "Program Booklet",
       "tagline": "十载芳馨 越动枫华",
       "organizer": "加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio",
       "venue": "Ottawa, Canada",
@@ -47,7 +47,7 @@
     "preface": {
       "titleEn": "Preface",
       "paragraphs": [
-        "Welcome to Yuespiration: 10 Years in the Making.",
+        "Welcome to 10 Years in the Making.",
         "Tonight's performance marks an important milestone for Meng Wei Yue Opera Studio as we celebrate ten years of preserving, practicing, and sharing the art of Yue Opera in Canada.",
         "What began as a small group united by a love of traditional Chinese opera has grown into a vibrant artistic community. Over the past decade, our members, volunteers, supporters, and audiences have helped transform a shared passion into a lasting cultural presence within Canada's diverse multicultural landscape. Together, we have sought not only to preserve a treasured art form, but also to build bridges of understanding through the universal language of the performing arts.",
         "Known for its lyrical melodies, poetic storytelling, graceful movement, and refined aesthetics, Yue Opera occupies a special place in Chinese cultural heritage. Distinguished by its celebrated tradition of all-female casts — including women portraying both male and female characters — Yue Opera offers a theatrical experience unlike any other. Through elegant performance, expressive music, and richly layered storytelling, it brings timeless human emotions to life in a way that transcends language and cultural boundaries.",
@@ -262,7 +262,7 @@
   },
   "programmePage": {
     "pageHead": {
-      "meta": "Yuespiration · 2016 – 2026",
+      "meta": "2016 – 2026",
       "titleZh": "节目单",
       "titleEn": "Programme",
       "crumb": "十载芳馨 越动枫华"
@@ -270,7 +270,7 @@
     "posterImage": "/assets/booklet/mw-backdrop-upscaled.webp",
     "presents": "加拿大孟伟越剧艺术传习所 呈献",
     "wordmark": "节目单",
-    "scriptEn": "Programme · Yuespiration",
+    "scriptEn": "Programme",
     "tagline": "十载芳馨 越动枫华",
     "venue": "Ottawa, Canada",
     "date": "2026年7月11日",
@@ -371,7 +371,7 @@
   },
   "appreciationPage": {
     "pageHead": {
-      "meta": "Yuespiration · 2016 – 2026",
+      "meta": "2016 – 2026",
       "titleZh": "导赏",
       "titleEn": "Guided Appreciation",
       "crumb": "十载芳馨 越动枫华"
@@ -379,7 +379,7 @@
     "posterImage": "/assets/booklet/mw-backdrop-upscaled.webp",
     "presents": "加拿大孟伟越剧艺术传习所 呈献",
     "wordmark": "导赏",
-    "scriptEn": "Guided Appreciation · Yuespiration",
+    "scriptEn": "Guided Appreciation",
     "tagline": "十载芳馨 越动枫华",
     "venue": "Ottawa, Canada",
     "date": "2026年7月11日",

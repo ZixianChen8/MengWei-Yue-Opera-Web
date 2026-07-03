@@ -4,7 +4,7 @@ import Reveal from '@/components/Reveal/Reveal'
 import Silk from '@/components/Silk/Silk'
 import styles from './Anniversary.module.css'
 
-// The 10th Anniversary Special hub: a masthead for Yuespiration plus a small
+// The 10th Anniversary Special hub: a masthead plus a small
 // menu of sub-pages. Only `ready` tiles link out.
 export default function Anniversary() {
   const { pageHead, menu } = anniversary

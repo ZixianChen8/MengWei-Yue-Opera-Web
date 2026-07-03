@@ -6,14 +6,14 @@ import Booklet from '@/components/Booklet/Booklet'
 export const metadata: Metadata = {
   title: '场刊 · Program Book — 孟伟越剧',
   description:
-    'Yuespiration: 10 Years in the Making — 孟伟越剧十周年专场场刊：序言、贺信、节目单与演职人员。',
+    '孟伟越剧十周年专场场刊：序言、贺信、节目单与演职人员。',
 }
 
 export default function BookletPage() {
   return (
     <>
       <div style={{ position: 'relative' }}>
-        <Nav variant="horizontal" />
+        <Nav variant="horizontal" brand="anniversary" />
         <Booklet />
       </div>
       <Footer />

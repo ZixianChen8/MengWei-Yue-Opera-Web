@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { gsap } from 'gsap'
 import { nav } from '@/content/home'
+import { NAV_BRANDS, brandForPath } from '@/components/Nav/brandConfig'
 import styles from './BubbleMenu.module.css'
 
 // Floating "bubble" mobile navigation (≤1023px), rendered site-wide. A persistent
@@ -107,21 +108,30 @@ export default function BubbleMenu() {
   // Not part of the password-gated admin chrome.
   if (pathname?.startsWith('/admin')) return null
 
+  const brand = brandForPath(pathname)
+  const brandConfig = NAV_BRANDS[brand]
+  const logoBubbleClass = brand === 'anniversary'
+    ? `${styles.bubble} ${styles.logoBubble} ${styles.anniversaryLogoBubble}`
+    : `${styles.bubble} ${styles.logoBubble}`
+  const logoImgClass = brand === 'anniversary'
+    ? `${styles.logoImg} ${styles.anniversaryLogoImg}`
+    : styles.logoImg
+
   return (
     <div className={styles.root}>
       <nav className={styles.bar} aria-label="移动导航 · Mobile navigation">
         <Link
-          href="/"
-          className={`${styles.bubble} ${styles.logoBubble}`}
-          aria-label="Meng Wei Yue Opera Studio home"
+          href={brandConfig.href}
+          className={logoBubbleClass}
+          aria-label={brandConfig.ariaLabel}
           onClick={close}
         >
           <Image
-            src="/assets/Logo-1.PNG"
+            src={brandConfig.src}
             alt="加拿大孟伟越剧艺术传习所"
-            width={262}
-            height={267}
-            className={styles.logoImg}
+            width={brandConfig.width}
+            height={brandConfig.height}
+            className={logoImgClass}
             priority
           />
         </Link>

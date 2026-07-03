@@ -229,6 +229,7 @@
 
 @media (max-width: 720px) {
   .hub {
+    min-height: 100vh;
     min-height: 100svh;
     padding: clamp(92px, 14svh, 118px) clamp(18px, 6vw, 28px) 48px;
   }

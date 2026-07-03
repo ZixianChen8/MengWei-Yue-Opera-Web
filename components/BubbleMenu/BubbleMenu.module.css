@@ -65,6 +65,16 @@
   object-fit: contain;
 }
 
+/* Wide horizontal anniversary mark — cap width so the hamburger stays visible. */
+.anniversaryLogoBubble {
+  height: 44px;
+  max-width: min(11.5rem, 58vw);
+}
+
+.anniversaryLogoImg {
+  max-width: 100%;
+}
+
 .toggleBubble {
   width: 52px;
   height: 52px;

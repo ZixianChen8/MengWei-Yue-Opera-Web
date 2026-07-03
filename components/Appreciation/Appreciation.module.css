@@ -21,7 +21,8 @@
 .cover {
   position: relative;
   overflow: hidden;
-  /* Match the booklet cover: nav + hero together fill the first stable mobile viewport. */
+  /* Match the booklet cover by default; mobile overrides make the cover itself
+     fill the stable viewport. */
   min-height: calc(100vh - 5.75rem);
   min-height: calc(100svh - 5.75rem);
   display: flex;
@@ -558,6 +559,12 @@
 /* ── Responsive ─────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+  .cover {
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-block: clamp(56px, 10svh, 86px);
+  }
+
   .entryBody {
     padding-left: clamp(16px, 6vw, 40px);
   }

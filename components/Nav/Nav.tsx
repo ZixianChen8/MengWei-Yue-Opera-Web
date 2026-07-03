@@ -4,13 +4,15 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { nav } from '@/content/home'
+import { NAV_BRANDS, type NavBrand } from '@/components/Nav/brandConfig'
 import styles from './Nav.module.css'
 
 type NavProps = {
   variant?: 'overlay' | 'horizontal'
+  brand?: NavBrand
 }
 
-export default function Nav({ variant = 'overlay' }: NavProps) {
+export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps) {
   const [open, setOpen] = useState(false)
 
   // Lock body scroll while the overlay menu is open; restore on close/unmount.
@@ -27,6 +29,10 @@ export default function Nav({ variant = 'overlay' }: NavProps) {
   }, [open])
 
   const close = () => setOpen(false)
+  const brandConfig = NAV_BRANDS[brand]
+  const logoClass = brand === 'anniversary'
+    ? `${styles.logo} ${styles.anniversaryLogo}`
+    : styles.logo
 
   const navClassName = variant === 'horizontal'
     ? `${styles.nav} ${styles.horizontal}`
@@ -34,13 +40,13 @@ export default function Nav({ variant = 'overlay' }: NavProps) {
 
   return (
     <nav className={navClassName}>
-      <Link href="/" className={styles.brand} aria-label="Meng Wei Yue Opera Studio home">
+      <Link href={brandConfig.href} className={styles.brand} aria-label={brandConfig.ariaLabel}>
         <Image
-          src="/assets/Logo-1.PNG"
+          src={brandConfig.src}
           alt="加拿大孟伟越剧艺术传习所"
-          width={262}
-          height={267}
-          className={styles.logo}
+          width={brandConfig.width}
+          height={brandConfig.height}
+          className={logoClass}
           priority
         />
       </Link>

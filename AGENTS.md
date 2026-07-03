@@ -64,7 +64,7 @@ Static sub-pages (events, gallery, about) share the same shell as the home page:
 
 `globals.css` sets `scroll-behavior: smooth` on `html, body`. The nav is not fixed, so sections do not need `scroll-margin-top` to clear a persistent header. Any existing `scroll-margin-top` declarations in section module CSS are legacy and can be removed.
 
-**Scroll/animation pattern:** `components/SmoothScroll/SmoothScroll.tsx` intercepts wheel events and drives eased scrolling with `requestAnimationFrame`. `useScrollParallax` (`components/hooks/useScrollParallax.ts`) drives the Hero's multi-layer cloud system via `requestAnimationFrame` + direct DOM style mutation (no state updates). Components that need their own scroll effects (e.g. CloudBreak) implement the same RAF + passive scroll listener pattern inline rather than extending the hook.
+**Scroll/animation pattern:** `components/SmoothScroll/SmoothScroll.tsx` provides site-wide Lenis eased scrolling. `useScrollParallax` (`components/hooks/useScrollParallax.ts`) drives the Hero's multi-layer cloud transition with GSAP + ScrollTrigger, animating only transforms/opacity and respecting `prefers-reduced-motion`. Components that need small independent scroll effects (e.g. CloudBreak) may still use a local RAF + passive scroll listener pattern when GSAP orchestration is unnecessary.
 
 ## Content
 

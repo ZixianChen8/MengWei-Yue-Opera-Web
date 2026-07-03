@@ -18,13 +18,14 @@ needed. The reference implementation lives in:
 
 Stacked, ultra-wide PNG cloud strips with transparent backgrounds are layered
 back-to-front along the bottom of a full-height hero. Each layer sits at a
-different vertical offset and base opacity. As the user scrolls, every layer
-drifts **upward** and **scales up** at a rate set by its "depth," and fades
-toward a per-layer target opacity — producing a slow parallax of clouds parting
-and rising as you descend the page. Blend modes (`lighten` for bright puffs,
-`multiply` for ink washes) fuse the strips with the cream background so they read
-as painted mist, not pasted PNGs. A soft sun glow and three blurred CSS "wisps"
-add atmosphere. The `CloudBreak` band reuses the same strips as a shorter
+different vertical offset and base opacity. As the user scrolls, a GSAP
+ScrollTrigger timeline drives every layer **upward** and **scales it up** at a
+rate set by its "depth," while a short paper-colored mist veil peaks mid-scroll.
+The front layers grow and pass faster than the rear layers, giving the first
+scroll a "diving under the clouds" transition. Blend modes (`lighten` for bright
+puffs, `multiply` for ink washes) fuse the strips with the cream background so
+they read as painted mist, not pasted PNGs. A soft sun glow and three blurred CSS
+"wisps" add atmosphere. The `CloudBreak` band reuses the same strips as a shorter
 decorative divider with a gentler scroll-progress parallax.
 
 ---
@@ -37,13 +38,14 @@ decorative divider with a gentler scroll-progress parallax.
    parallax.
 2. **Motion is upward + scale-up.** On scroll, clouds translate up (negative Y)
    and grow. They never move down or shrink.
-3. **Opacity eases toward a target.** Each layer starts at a CSS base opacity and
-   eases (smoothstep) toward a per-layer `fade` value as scroll progresses.
+3. **Opacity travels toward a target.** Each layer starts at a CSS base opacity
+   and the GSAP timeline drives it toward a per-layer `fade` value as scroll
+   progresses.
 4. **Blend modes do the compositing**, not hard edges. `mix-blend-mode: lighten`
    for luminous foreground puffs; `multiply` for receding ink washes.
-5. **Animation runs off the main thread budget**: a single `requestAnimationFrame`
-   loop writes `transform`/`opacity` directly to DOM nodes — **no per-frame
-   state/React re-render**. Only `transform` and `opacity` are animated (both
+5. **Animation runs outside React render**: GSAP + ScrollTrigger writes
+   `transform`/`opacity` directly to DOM nodes — **no per-frame state/React
+   re-render**. Only `transform` and `opacity` are animated (both
    GPU-compositable). `will-change: transform, opacity` is set on each layer.
 6. **Overflow is hidden** on the container so oversized, translated strips are
    clipped cleanly. Strips are intentionally wider than the viewport
@@ -56,23 +58,26 @@ decorative divider with a gentler scroll-progress parallax.
 
 ### Hero cloud layers
 
-Six layers, each defined by `{ depth, scale, fade }` plus a CSS base position +
+Six layers, each defined by `{ depth, scale, fade, drift }` plus a CSS base position +
 base opacity. From the reference (`Hero.tsx`):
 
-| # | depth | scale (max add) | fade (target opacity) | CSS class | bottom | base opacity | blend |
-|---|-------|-----------------|-----------------------|-----------|--------|--------------|-------|
-| 1 | 0.15  | 0.35 | 1.0 | `cloudL1` | 34% | .55 | lighten |
-| 2 | 0.22  | 0.50 | 0.5 | `cloudLw` | 18% | .70 | multiply (wash) |
-| 3 | 0.30  | 0.70 | 0.7 | `cloudL2` | 22% | .70 | lighten |
-| 4 | 0.50  | 1.00 | 0.5 | `cloudL3` | 10% | .90 | lighten |
-| 5 | 0.80  | 1.50 | 0.3 | `cloudL4` | -2% | 1.0 | lighten |
-| 6 | 1.10  | 2.40 | 0.1 | `cloudL5` | -12% | 1.0 | lighten (mirrored) |
+| # | depth | scale (max add) | fade (target opacity) | drift | CSS class | bottom | base opacity | blend |
+|---|-------|-----------------|-----------------------|-------|-----------|--------|--------------|-------|
+| 1 | 0.14  | 0.28 | 0.82 | -2 | `cloudL1` | 34% | .55 | lighten |
+| 2 | 0.24  | 0.46 | 0.56 | 3 | `cloudLw` | 18% | .70 | multiply (wash) |
+| 3 | 0.38  | 0.75 | 0.62 | -4 | `cloudL2` | 22% | .70 | lighten |
+| 4 | 0.66  | 1.25 | 0.42 | 5 | `cloudL3` | 10% | .90 | lighten |
+| 5 | 1.02  | 2.05 | 0.18 | -7 | `cloudL4` | -2% | 1.0 | lighten |
+| 6 | 1.34  | 2.95 | 0.06 | 8 | `cloudL5` | -12% | 1.0 | lighten (mirrored) |
 
 - `depth` — how far the layer translates up: `translateY = -p * depth * viewportHeight`.
 - `scale` — additive scale at full scroll: `scale = 1 + p * scale`.
 - `fade` — opacity the layer eases **toward** as you scroll (front layers fade
   most, so the foreground dissolves and reveals the page).
-- `p` — scroll progress `0…1`, computed as `clamp(scrollY / (viewportHeight * 0.9), 0, 1)`.
+- `drift` — subtle `xPercent` travel at full scroll; alternate directions to
+  avoid a flat zoom.
+- scroll progress — handled by ScrollTrigger from `start: "top top"` to
+  `end: "bottom top"` with `scrub: 1`.
 
 ### Three CSS wisps (atmosphere, not images)
 
@@ -89,31 +94,34 @@ tablet/mobile), `overflow: hidden`, white background.
 
 ---
 
-## 4. The scroll math (reference)
+## 4. The scroll driver (reference)
 
 ```js
-// p: global scroll progress for the hero
-const h = window.innerHeight;
-const y = window.scrollY;
-const p = Math.max(0, Math.min(1, y / (h * 0.9)));
+const timeline = gsap.timeline({
+  defaults: { ease: "none" },
+  scrollTrigger: {
+    trigger: hero,
+    start: "top top",
+    end: "bottom top",
+    scrub: 1,
+    invalidateOnRefresh: true,
+  },
+});
 
-// per cloud layer i with config {depth, scale: scaleMax, fade}
-const translateY = -p * depth * h;
-const scale      = 1 + p * scaleMax;
-const ease       = p * p * (3 - 2 * p);          // smoothstep
-// base = the layer's CSS opacity, read once via getComputedStyle and cached
-layer.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
-layer.style.opacity   = String(base * (1 - ease) + fade * ease);
-```
+cloudLayers.forEach((layer, i) => {
+  const config = configs[i];
+  timeline.to(layer, {
+    xPercent: config.drift ?? 0,
+    y: () => -window.innerHeight * config.depth,
+    scale: 1 + config.scale,
+    autoAlpha: config.fade,
+    duration: 1,
+  }, 0);
+});
 
-Driver loop (coalesce scroll events into one rAF):
-
-```js
-let raf = null;
-function onScroll() { if (!raf) raf = requestAnimationFrame(update); }
-window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', update);
-update(); // initial paint
+timeline
+  .to(mist, { autoAlpha: 0.86, duration: 0.34 }, 0.24)
+  .to(mist, { autoAlpha: 0, duration: 0.36 }, 0.68);
 ```
 
 `CloudBreak` differs only in how `p` is derived (element rect vs. window scroll):
@@ -235,7 +243,8 @@ than a front puff — that inverts the parallax and looks wrong.
 - Keep strips wider than the viewport (`width: 110–120%`, negative `left/right`).
 - Animate only `transform` + `opacity`; keep `will-change` set.
 - Keep `pointer-events: none` on the cloud container.
-- Keep the single shared rAF loop; do not animate via per-frame framework state.
+- Keep scroll animation outside React state; use GSAP/ScrollTrigger or a local
+  RAF loop for small independent effects.
 - Respect the palette: no saturated cloud colors; background stays cream, clouds
   stay white/grey.
 
@@ -244,14 +253,11 @@ than a front puff — that inverts the parallax and looks wrong.
 ## 7. Accessibility & performance notes
 
 - Cloud containers are decorative: `aria-hidden="true"`, `pointer-events: none`.
-- Consider honoring `prefers-reduced-motion`: skip the scroll transforms (render
-  layers at their base position/opacity) for users who request reduced motion.
-  The reference does not yet do this — add it on the new site.
-- The rAF loop must be idempotent (one frame queued at a time) and cleaned up on
-  unmount/page-leave. Reads (`getComputedStyle` for base opacity) are cached once
-  per element to avoid layout thrash.
+- Honor `prefers-reduced-motion`: skip the scroll transforms (render layers at
+  their base position/opacity) for users who request reduced motion.
+- GSAP timelines and ScrollTriggers must be reverted on unmount/page-leave.
 - Provide intrinsic `width`/`height` to avoid CLS; mark the hero background image
-  `priority`/eager, but cloud strips can lazy-load.
+  and any cloud strip reported as LCP with eager loading.
 
 ---
 
@@ -262,13 +268,14 @@ than a front puff — that inverts the parallax and looks wrong.
 2. Add N absolutely-positioned cloud <div>s along the bottom, back→front,
    each holding one wide transparent PNG strip (width ~110%).
 3. Give each a base bottom%, base opacity, and blend mode (lighten=puff / multiply=wash).
-4. Assign each {depth, scaleMax, fade} following the monotonic depth gradient.
-5. One rAF loop: compute p = clamp(scrollY / (vh*0.9), 0..1); for each layer set
-   transform = translate3d(0, -p*depth*vh, 0) scale(1 + p*scaleMax) and
-   opacity = base*(1-ease) + fade*ease, ease = smoothstep(p).
-6. Add a bottom-edge gradient mask (transparent → background) over the strips.
-7. Optional: a sun-glow radial gradient + 2–3 blurred CSS wisp blobs for depth.
-8. Clip everything with overflow:hidden; animate only transform/opacity.
+4. Assign each {depth, scaleMax, fade, drift} following the monotonic depth gradient.
+5. One GSAP ScrollTrigger timeline from hero top to hero bottom; for each layer
+   animate xPercent, y: -depth*vh, scale: 1 + scaleMax, and autoAlpha.
+6. Add a paper-colored mist veil that fades in around mid-scroll and clears by
+   the time the hero leaves the viewport.
+7. Add a bottom-edge gradient mask (transparent → background) over the strips.
+8. Optional: a sun-glow radial gradient + 2–3 blurred CSS wisp blobs for depth.
+9. Clip everything with overflow:hidden; animate only transform/opacity.
 ```
 
 That reproduces the current cloud style and behavior, and §6 keeps it looking

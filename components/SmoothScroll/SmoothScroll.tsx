@@ -4,6 +4,8 @@ import { ReactLenis, useLenis } from 'lenis/react'
 import type { LenisOptions } from 'lenis'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState, type ReactNode } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const MOBILE_QUERY = '(max-width: 767px)'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
@@ -56,6 +58,26 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 // Behaviors Lenis doesn't cover natively, driven off the active instance.
 function LenisExtras() {
   const lenis = useLenis()
+
+  // Bridge Lenis and GSAP ScrollTrigger: feed Lenis scroll events into
+  // ScrollTrigger.update so pins/scrubs track the eased position, and resize
+  // Lenis whenever ScrollTrigger refreshes (fonts/images/layout settle). When
+  // Lenis is off (mobile / reduced-motion / /admin) this component never
+  // mounts, so ScrollTrigger falls back to native scroll — which is fine.
+  useEffect(() => {
+    if (!lenis) return
+
+    gsap.registerPlugin(ScrollTrigger)
+    lenis.on('scroll', ScrollTrigger.update)
+    const onRefresh = () => lenis.resize()
+    ScrollTrigger.addEventListener('refresh', onRefresh)
+    ScrollTrigger.refresh()
+
+    return () => {
+      lenis.off('scroll', ScrollTrigger.update)
+      ScrollTrigger.removeEventListener('refresh', onRefresh)
+    }
+  }, [lenis])
 
   // Route the common keyboard-scroll keys through Lenis so they ease like the
   // wheel. Relative keys accumulate against `targetScroll` (Lenis clamps to

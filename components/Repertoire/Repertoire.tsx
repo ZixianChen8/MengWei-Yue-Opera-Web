@@ -2,9 +2,11 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { repertoire } from '@/content/home'
 import { galleryPage } from '@/content/gallery'
-import Reveal from '@/components/Reveal/Reveal'
+import { MM_DESKTOP, MM_MOBILE, MM_REDUCED, revealBatch } from '@/components/hooks/scrollStory'
 import styles from './Repertoire.module.css'
 
 const SCROLL_STEP = 320
@@ -17,7 +19,10 @@ const works = galleryPage.photos.filter((p) => p.home && p.image)
 export default function Repertoire() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [activeWork, setActiveWork] = useState(works[0])
-  const stripRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const stripRef = useRef<HTMLDivElement>(null)      // .filmstripWrap (scroller)
+  const stripInnerRef = useRef<HTMLDivElement>(null) // .filmstrip (translated on desktop)
+  const controlsRef = useRef<HTMLDivElement>(null)
   const scrollTarget = useRef(0)
   const rafId = useRef<number | null>(null)
 
@@ -30,6 +35,83 @@ export default function Repertoire() {
 
   useEffect(() => {
     return () => { if (rafId.current !== null) cancelAnimationFrame(rafId.current) }
+  }, [])
+
+  // GSAP scroll storytelling: reveal the head, and on desktop turn the
+  // filmstrip into a classic pinned horizontal-scroll chapter driven by the
+  // page's vertical scroll. On mobile/reduced-motion the strip stays a normal
+  // native horizontal scroller with the RAF arrow buttons.
+  useEffect(() => {
+    const scope = sectionRef.current
+    if (!scope) return
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    const wrap = stripRef.current
+    const inner = stripInnerRef.current
+    const controls = controlsRef.current
+
+    const media = gsap.matchMedia()
+    const ctx = gsap.context(() => {
+      media.add(MM_REDUCED, () => undefined)
+
+      media.add(MM_DESKTOP, () => {
+        revealBatch(scope, '[data-reveal]', { stagger: 0.1 })
+
+        if (!wrap || !inner) return
+
+        // Distance the strip must travel horizontally = content overflow past
+        // the visible wrap. Recomputed on refresh via invalidateOnRefresh.
+        const getDistance = () => Math.max(0, inner.scrollWidth - wrap.clientWidth)
+
+        // The pinned horizontal timeline owns scrollLeft, so stand the native
+        // scroller down: no overflow scrolling, let Lenis drive the pin (drop
+        // data-lenis-prevent), and hide the now-misleading arrow controls.
+        const prevOverflow = wrap.style.overflowX
+        const hadLenisPrevent = wrap.hasAttribute('data-lenis-prevent')
+        wrap.style.overflowX = 'hidden'
+        wrap.removeAttribute('data-lenis-prevent')
+        if (controls) controls.style.display = 'none'
+
+        gsap.set(inner, { willChange: 'transform' })
+        const tween = gsap.fromTo(
+          inner,
+          { x: 0 },
+          {
+            x: () => -getDistance(),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: scope,
+              start: 'top top',
+              end: () => '+=' + getDistance(),
+              pin: true,
+              anticipatePin: 1,
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          },
+        )
+
+        return () => {
+          tween.kill()
+          wrap.style.overflowX = prevOverflow
+          if (hadLenisPrevent) wrap.setAttribute('data-lenis-prevent', '')
+          if (controls) controls.style.display = ''
+          gsap.set(inner, { clearProps: 'transform,willChange' })
+        }
+      })
+
+      // Mobile: just reveal the head; the strip stays a native scroller and the
+      // RAF arrow handlers below remain in charge.
+      media.add(MM_MOBILE, () => {
+        revealBatch(scope, '[data-reveal]', { stagger: 0.1 })
+      })
+    }, scope)
+
+    return () => {
+      media.revert()
+      ctx.revert()
+    }
   }, [])
 
   const animateScroll = () => {
@@ -65,17 +147,17 @@ export default function Repertoire() {
   }
 
   return (
-    <section id="repertoire" className={styles.section}>
-      <Reveal className={styles.head}>
+    <section id="repertoire" className={styles.section} ref={sectionRef}>
+      <div className={styles.head} data-reveal>
         <h2 className={styles.title}>
           {titleBody}<span className={styles.titleRed}>{titleLast}</span>
         </h2>
         <p className={styles.titleEn}>{repertoire.title.en}</p>
-      </Reveal>
+      </div>
 
       <div className={styles.filmstripOuter}>
         <div ref={stripRef} className={styles.filmstripWrap} data-lenis-prevent>
-          <div className={styles.filmstrip}>
+          <div ref={stripInnerRef} className={styles.filmstrip}>
             {works.map((work, i) => (
               <div
                 key={`${work.image}-${i}`}
@@ -108,7 +190,7 @@ export default function Repertoire() {
         </div>
       </div>
 
-      <div className={styles.controls}>
+      <div className={styles.controls} ref={controlsRef}>
         <p className={styles.scrollHint}>{repertoire.hint}</p>
         <div className={styles.arrowGroup}>
           <button

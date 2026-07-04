@@ -1,6 +1,11 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { season, type SeasonEvent } from '@/content/home'
-import Reveal from '@/components/Reveal/Reveal'
+import { MM_DESKTOP, MM_MOBILE, MM_REDUCED, revealBatch } from '@/components/hooks/scrollStory'
 import EventCard from './EventCard'
 import styles from './Season.module.css'
 
@@ -17,9 +22,34 @@ function selectHomeEvents(events: SeasonEvent[], max = MAX_HOME_EVENTS): SeasonE
 }
 
 export default function Season() {
+  const scopeRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const scope = scopeRef.current
+    if (!scope) return
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    const media = gsap.matchMedia()
+    const ctx = gsap.context(() => {
+      media.add(MM_REDUCED, () => undefined)
+
+      // Header + event cards fade/rise in a stagger as each batch enters view.
+      const addReveals = () => revealBatch(scope, '[data-reveal]', { stagger: 0.1 })
+
+      media.add(MM_DESKTOP, () => { addReveals() })
+      media.add(MM_MOBILE, () => { addReveals() })
+    }, scope)
+
+    return () => {
+      media.revert()
+      ctx.revert()
+    }
+  }, [])
+
   return (
-    <section id="season" className={styles.section}>
-      <Reveal className={styles.head}>
+    <section id="season" className={styles.section} ref={scopeRef}>
+      <div className={styles.head} data-reveal>
         <div>
           <h2 className={styles.title}>
             {season.title.zh}<small>{season.title.en}</small>
@@ -30,13 +60,13 @@ export default function Season() {
           <span className={styles.viewAllEn}>· View all events</span>
           <span className={styles.viewAllArrow}>→</span>
         </Link>
-      </Reveal>
+      </div>
 
       <div className={styles.events}>
-        {selectHomeEvents(season.events).map((ev, i) => (
-          <Reveal key={ev.id} delay={0.08 * i}>
+        {selectHomeEvents(season.events).map((ev) => (
+          <div key={ev.id} data-reveal>
             <EventCard ev={ev} />
-          </Reveal>
+          </div>
         ))}
       </div>
 

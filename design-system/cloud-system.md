@@ -258,6 +258,14 @@ than a front puff — that inverts the parallax and looks wrong.
 - GSAP timelines and ScrollTriggers must be reverted on unmount/page-leave.
 - Provide intrinsic `width`/`height` to avoid CLS; mark the hero background image
   and any cloud strip reported as LCP with eager loading.
+- When smooth scrolling is active (Lenis, desktop only here), bridge it to
+  ScrollTrigger so scrub/pin progress tracks the *eased* position rather than
+  the raw native scroll: `lenis.on('scroll', ScrollTrigger.update)` plus a
+  `ScrollTrigger` `refresh` handler that calls `lenis.resize()`. In this repo
+  that wiring lives in `SmoothScroll`'s `LenisExtras`; the cloud timeline and the
+  landing scroll-storytelling layer (`components/hooks/scrollStory.ts`) both rely
+  on it. With Lenis off (mobile / reduced-motion), ScrollTrigger falls back to
+  native scroll automatically.
 
 ---
 

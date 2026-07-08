@@ -41,7 +41,7 @@
       "scriptEn": "Program Booklet",
       "tagline": "十载芳馨 越动枫华",
       "organizer": "加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio",
-      "venue": "Ottawa, Canada",
+      "venue": "Bronson Centre Music Theatre, Ottawa",
       "date": "2026年7月11日"
     },
     "preface": {
@@ -66,34 +66,29 @@
       "intro": "We are deeply honoured to receive the following messages of congratulations.",
       "items": [
         {
-          "name": "The Prime Minister of Canada",
-          "role": "Office of the Prime Minister",
-          "image": ""
+          "name": "The Right Honourable Mark Carney",
+          "role": "Prime Minister of Canada",
+          "image": "/assets/booklet/letters/prime-minister-carney.jpg"
         },
         {
           "name": "The Honourable Yuen Pau Woo",
           "role": "Senator, British Columbia",
-          "image": "/assets/booklet/letters/yuen-pau-woo.jpg"
+          "image": "/assets/booklet/letters/senator-yuen-pau-woo.jpg"
         },
         {
           "name": "The Honourable Victor Oh",
-          "role": "Senator",
-          "image": ""
-        },
-        {
-          "name": "Embassy of the People's Republic of China",
-          "role": "中国驻加拿大大使馆",
-          "image": ""
+          "role": "Former Senator of Canada",
+          "image": "/assets/booklet/letters/senator-victor-oh.jpg"
         },
         {
           "name": "Michael Ma, M.P.",
           "role": "Markham — Unionville",
-          "image": "/assets/booklet/letters/michael-ma.jpg"
+          "image": "/assets/booklet/letters/mp-michael-ma.jpg"
         },
         {
-          "name": "Mayor of Ottawa",
-          "role": "City of Ottawa",
-          "image": ""
+          "name": "Mark Sutcliffe",
+          "role": "Mayor of Ottawa",
+          "image": "/assets/booklet/letters/mayor-mark-sutcliffe.jpg"
         }
       ]
     },
@@ -113,7 +108,9 @@
           "name": "Mr. Xuefeng Gu",
           "role": "Director",
           "image": "/assets/booklet/team/xuefeng-gu.png",
-          "bio": ["Renowned Planner & Stage Director"],
+          "bio": [
+            "Renowned Planner & Stage Director"
+          ],
           "credits": [
             "Chairman, Fengyi Cultural Communication / Leshang Cultural Media",
             "Artistic Director, Gu Xuefeng Culture and Art Studio",
@@ -163,8 +160,8 @@
         },
         {
           "titleEn": "Guest Performer",
-          "titleZh": "",
-          "performers": "Xuefeng Gu",
+          "titleZh": "嘉宾助演",
+          "performers": "顾学风",
           "note": "TBD"
         },
         {
@@ -252,11 +249,13 @@
       "organizer": "Mengwei Yue Opera Studio",
       "supportingTitleEn": "In Partnership With",
       "supporting": [
-        "Gu Xuefeng Culture and Art Studio",
         "Jingju Quebec Art Centre",
         "Zixian Chen",
         "Shanghai One Fine Dining",
-        "北京协会（待定）"
+        "赵氏工坊加拿大基地",
+        "杭州越剧艺术研究会",
+        "渥太华北京协会",
+        "顾学风文化工作室"
       ]
     }
   },
@@ -272,7 +271,7 @@
     "wordmark": "节目单",
     "scriptEn": "Programme",
     "tagline": "十载芳馨 越动枫华",
-    "venue": "Ottawa, Canada",
+    "venue": "Bronson Centre Music Theatre, Ottawa",
     "date": "2026年7月11日",
     "emceeLabel": "主持",
     "emcee": "姜漪 Yi Jiang",
@@ -325,7 +324,7 @@
       },
       {
         "no": "06",
-        "category": "嘉宾演出",
+        "category": "嘉宾助演",
         "titleZh": "特邀嘉宾 顾学风",
         "titleEn": "Guest Performer — Xuefeng Gu",
         "performers": "顾学风",
@@ -381,7 +380,7 @@
     "wordmark": "导赏",
     "scriptEn": "Guided Appreciation",
     "tagline": "十载芳馨 越动枫华",
-    "venue": "Ottawa, Canada",
+    "venue": "Bronson Centre Music Theatre, Ottawa",
     "date": "2026年7月11日",
     "intro": "本系列是“孟伟越剧艺术传习所十周年折子戏专场”的节目导赏，旨在为观众提供一把进入舞台的钥匙。下文按演出顺序，为每一折简要介绍剧目的源流、故事、艺术特点与欣赏要点，帮助您在聆听与观赏时更从容地理解细节、感受情绪。无论是否熟悉戏曲，都可以从这里开始，从容走进舞台。",
     "keywordsLabel": "看点关键词",
@@ -434,6 +433,24 @@
             "body": [
               "《十载芳馨》不只是一次表演，更是一次深情的回溯与昂扬的宣告。它让我们看到，戏曲的生命力不仅存在于聚光灯下的经典剧场，也流淌在每一个热爱者的血脉中，生长在每一片有心灵共鸣的土地上。",
               "今夜，让我们共同聆听这封来自枫叶之国的“时光情书”，感受那跨越山海、历经十载却愈发醇厚的——梨园情缘。"
+            ]
+          }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "Scenario Yue Opera Song “Ten Years of Maple Grace”",
+            "body": [
+              "A tribute to Yue Opera’s journey in Canada",
+              "“Ten Years of Maple Grace” is a scenic Yue Opera piece created for the 10th anniversary of Mengwei Yue Opera Studio. Blending narration, stylized movement, and Yue Opera singing, it paints an emotional portrait of how Yue Opera took root and flourished overseas.",
+              "The work begins with personal memories of discovering Yue Opera in childhood—moments that planted the first cultural seed. Mengwei’s monologue traces that seed’s journey to Canada, where shared passion brought together a community and gave rise to the Studio.",
+              "The performance features expressive narration, selected movement sequences inspired by classic characters, and original lyrics that convey sincere affection for the art. Together, they form a poetic reflection on devotion, cultural transmission, and the beauty of Yue Opera blossoming in a new land.",
+              "Tonight, “Ten Years of Maple Grace” invites audiences to listen, observe, and feel the heartfelt connection between tradition and its inheritors across oceans."
+            ]
+          },
+          {
+            "heading": "Performers:",
+            "body": [
+              "Wei Meng, Dongmei Shi, Chunhui Qian, Yan Chen, Qizhi Hu, Hua Zhu, Wen Wang, Lihong Zhang, Xiaolin Niu, Yuyi Shen, Yuchuan Xu, Zhongliang Liu, Yuqian Lu"
             ]
           }
         ]
@@ -501,6 +518,19 @@
               "陈燕 饰 王湘君 孟伟越剧艺术传习所花旦学员"
             ]
           }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "Yue Opera \"Mao Sui's Self-Recommendation\" - \"Sending Off \"",
+            "body": [
+              "The Yue Opera Mao Sui’s Self-Recommendation: Sending Off tells a historical story from the Warring States period of ancient China.",
+              "At the gates of Handan, as the Qin army advances, Mao Sui prepares to escort Lord Pingyuan through the enemy camp on a dangerous mission to the State of Chu. His beloved, Wang Xiangjun, comes to the city gate to bid him farewell. Mao Sui understands the danger that lies ahead, yet as a man of integrity, he remains committed to serving the people and the state. Xiangjun, though filled with deep personal emotion, temporarily sets aside her tenderness and places the needs of the country above her own sorrow.",
+              "The entire play revolves around \"farewell\" and \"entrustment\", creating a moving balance between heroism and tenderness, public responsibility and personal affection.  The music is both lyrical and noble: melodious in tone yet carrying a heroic spirit.",
+              "Xiangjun’s lyrical style is gentle yet resolute, expressing not only the sorrow of parting, but also her deep trust and quiet, unspoken support. Mao Sui’s lyrical style is rich, steady and powerful. Through his measured delivery, he gradually reveals the patriotic passion and calm confidence of a loyal retainer.  When their two voices come together, Xiangjun’s softness and Mao Sui’s strength complement one another. One voice is tender and lingering; the other is firm and expansive. Together, they create a deeply moving duet set against the smoke and fire of war.",
+              "Through these moments of farewell and devotion, we hope you will experience the enduring beauty and timeless charm of this story.",
+              "Please enjoy Sending Off from Mao Sui’s Self-Recommendation."
+            ]
+          }
         ]
       },
       {
@@ -560,6 +590,17 @@
             "body": [
               "胡奇志 饰 申息  孟伟越剧艺术传习所小生学员",
               "许玉川 饰 季娣  孟伟越剧艺术传习所花旦学员"
+            ]
+          }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "Shanhe Lian  – Delivering the Letter",
+            "body": [
+              "Delivering the letter is a famous scene from the Yue Opera Shanhe Lian, set in ancient China during the Spring and Autumn Period.",
+              "The story follows Shen Xi, a young general, who falls in love with Ji Di, a palace lady. Unable to express his feelings directly, he uses the excuse of delivering a message to speak with her. As their conversation continues, the \"message\" gradually becomes a heartfelt confession.",
+              "At first, Ji Di remains cautious and reserved, but she slowly realizes the true meaning behind Shen Xi’s words. Through gentle dialogue, meaningful pauses, and subtle glances, the two begin to share their feelings.",
+              "Known for its delicate emotions and elegant music, this scene is a classic example of Yue Opera’s unique charm: expressing deep love through restraint, subtlety, and poetic beauty."
             ]
           }
         ]
@@ -632,6 +673,20 @@
               "赵芳   饰 祝英台：孟伟越剧艺术传习所花旦学员"
             ]
           }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "Yue Opera: The Butterfly Lovers · Eighteen Miles of Send-off",
+            "body": [
+              "The Yue Opera The Butterfly Lovers: Eighteen Miles of Send-off tells one of China's most celebrated romantic folk legends, often hailed as the \"Romeo and Juliet of the East.\"",
+              "Upon completing three years of study together, Zhu Yingtai (a young woman disguised as a man) must return home, and her classmate Liang Shanbo accompanies her on the journey. This \"send-off\" is a deep trial of affection. Along the road, Yingtai constantly uses the surrounding scenery and pairs of objects as metaphors to hint at her love. However, Shanbo, due to his honest and simple nature, fails to realize her true identity and takes her words literally, creating a highly subtle yet dramatic interaction.",
+              "The entire scene revolves around \"testing\" and \"misunderstanding,\" creating a beautiful balance between unspoken love and innocent oblivion. The music is exceptionally gentle, water-like, and lyrical:",
+              "Yingtai’s style is sweet, delicate, and full of double entendres, hiding her surging affection within a subtle tone.",
+              "Shanbo’s style is characterized by plain sincerity and rich warmth, showing deep devotion through straightforward, clueless responses.",
+              "When their voices come together in a question-and-answer dialogue, Yingtai’s clever prompting and Shanbo’s honest answers complement each other perfectly. One voice is tender and testing; the other is sincere and grounded. Together, they weave a beautiful undercurrent of emotion that leaves a lingering charm, setting up the ultimate tragic climax of the story.",
+              "Through this poignant journey of farewell, we hope you will experience the unique restraint and profound depth of Eastern romance."
+            ]
+          }
         ]
       },
       {
@@ -656,19 +711,50 @@
               "伴舞：孟伟越剧艺术传习所学员: 钮晓琳、钱春晖、许玉川（赵芳）、朱华、周凌、胡奇志（王雯）、沈渝懿、刘仲良"
             ]
           }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "",
+            "body": [
+              "Liang Shanbo’s Descent from the Mountain is a delightful scene from a contemporary Yue Opera adaptation of The Butterfly Lovers, often described as China’s Romeo and Juliet.",
+              "Having just discovered that his beloved classmate, Zhu Yingtai—who had disguised herself as a young man during their three years of study—is actually a young woman, and that she secretly returns his love, Liang Shanbo joyfully sets off for her home to ask for her hand in marriage.",
+              "As he descends the mountain, treasured memories of their time together come rushing back: reading over tea, waking each other on chilly mornings, making rice dumplings for the Dragon Boat Festival, sharing playful moments, and talking beneath the moonlight. Filled with warmth, humor, and youthful innocence, this scene captures the excitement of first love and offers audiences a touching glimpse into one of China’s greatest romantic legends.",
+              "As you watch, you’ll notice that this is more than a journey down a mountain—it’s a journey through Liang Shanbo’s heart. Joined by his playful young attendants, Liang relives treasured memories, laughs over youthful adventures, dreams of the future, and savors the happiness of knowing his love is returned. The attendants do more than accompany him; through lively interactions, expressive movement, and moments of gentle comedy, they help bring his memories and emotions vividly to life.",
+              "Watch how a simple walk becomes a richly theatrical journey. Graceful movement, lyrical singing, and dynamic stage interactions blend seamlessly to tell the story. Rather than portraying a distant, larger-than-life hero, Yue Opera invites us to share the thoughts, hopes, and excitement of a young man in love. The singing flows naturally, almost like conversation set to music, allowing the emotions to feel immediate and authentic. Even without understanding every word, you’ll be able to follow the story through the performers’ expressions, movement, and the emotional rhythm of the music.",
+              "One of the special features of the performance is that it brings teacher and students together on the same stage. They perform together as fellow artists, sharing the joy of storytelling through music, movement, and song. Their collaboration reflects the vibrant community that has grown at Meng Wei Yue Opera Studio, where a shared passion for Yue Opera connects generations and keeps this beautiful tradition alive.",
+              "We hope these moments of joy, tenderness, humor, and youthful optimism will allow you to discover the timeless charm of The Butterfly Lovers.",
+              "Please enjoy Liang Shanbo’s Descent from the Mountain."
+            ]
+          }
         ]
       },
       {
         "no": "06",
-        "category": "嘉宾演出",
-        "titleZh": "特邀嘉宾 顾雪峰",
+        "category": "嘉宾助演",
+        "titleZh": "特邀嘉宾 顾学风",
         "titleEn": "Guest Performer — Xuefeng Gu",
-        "performers": "顾雪峰",
-        "lead": "特邀名家顾雪峰登台献艺，为十周年专场增辉。",
+        "performers": "顾学风",
+        "lead": "特邀名家顾学风登台献艺，为十周年专场增辉。",
         "sections": [
           {
             "heading": "看点",
-            "body": ["难得一见的客席演出，静候名家风采。"]
+            "body": [
+              "难得一见的客席演出，静候名家风采。"
+            ]
+          }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "",
+            "body": [
+              "Renowned guest artist Gu Xuefeng takes the stage to present his artistry, lending splendour to our tenth-anniversary gala."
+            ]
+          },
+          {
+            "heading": "Highlights",
+            "body": [
+              "A rare guest performance — we await the master's brilliance."
+            ]
           }
         ]
       },
@@ -726,13 +812,26 @@
           },
           {
             "heading": "演员介绍",
-            "body": ["（暂空）"]
+            "body": [
+              "（暂空）"
+            ]
           },
           {
             "heading": "",
             "body": [
               "在《扇影袖韵》中，没有跌宕的情节，却有流动的诗意；没有对白的铺陈，却有无声的表达。",
               "一扇一袖之间，尽是风雅。"
+            ]
+          }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "Yue Opera Dance — Grace of the Fan and Rhythms of the Sleeves",
+            "body": [
+              "Grace of the Fan and Rhythms of the Sleeves is a movement piece inspired by the graceful performance techniques of Yue Opera, one of China's most celebrated regional opera traditions.",
+              "Unlike a traditional opera scene with a storyline and dialogue, this performance highlights two iconic elements of Yue Opera: the folding fan and the water sleeves—long, flowing silk extensions attached to the costume sleeves. These expressive props are an essential part of Chinese opera movement, allowing performers to convey emotion, rhythm, and elegance through gesture alone.",
+              "Accompanied by classic Yue Opera melodies, the performers do not sing; instead, they respond to the music with stylized movements. Every turn, extension, and sweep of the sleeves is carefully choreographed, transforming music into a visual expression of poetry and grace.",
+              "Rather than following a narrative, this piece invites you to appreciate the beauty of movement itself. As the fans open and close, and the flowing sleeves ripple like water, Grace of the Fan and Rhythms of the Sleeves offers a glimpse into the refined aesthetics and timeless artistry of Yue Opera."
             ]
           }
         ]
@@ -806,6 +905,18 @@
               "史冬梅 饰 红娘 京剧魁北克艺术中心核心成员"
             ]
           }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "Introduction to “Delivering the Letter,” an Excerpt from Yue Opera The Romance of the Western Chamber",
+            "body": [
+              "The Romance of the Western Chamber is a celebrated Chinese classical drama written around the late thirteenth century. Over the centuries, it has been adapted into many forms of Chinese opera. In Yue Opera, known for its graceful singing, refined movement, and delicate emotional expression, this story is presented with particular tenderness and charm.",
+              "The drama tells of Zhang Gong, a young scholar, and Cui Yingying, the daughter of a noble family, who meet at a Buddhist temple. Their affection grows through poetry and shared feeling. When the temple is surrounded by a rebel general who wishes to seize Yingying by force, Yingying’s mother publicly promises to marry her daughter to whoever can rescue them. Zhang sends for military help from his sworn friend and the danger is lifted. Yet afterwards Yingying’s mother breaks her promise claiming that Zhang is not of equal social standing.",
+              "The scene presented here, Delivering the Letter, unfolds around one small but powerful object: a letter. Yingying appears to refuse Zhang’s affection and sends Hongniang, her maid, to deliver what seems to be a message of separation. Yet within this letter lies a more subtle current of feeling. Hongniang, lively, sharp-witted, and generous at heart, becomes both messenger and matchmaker. Zhang, sincere and lovesick, meets each word and gesture with trembling hope.",
+              "Though only two characters appear on stage, the scene contains a whole world of emotion. Its charm lies in suggestion rather than spectacle: a glance, a pause, the turn of a sleeve, the hesitation before opening a letter. Yue Opera’s gentle melodies and elegant stage language allow humour, longing, embarrassment, and tenderness to flow naturally together.",
+              "In this scene, a single letter becomes more than a message. It becomes a bridge between two hearts, a test of sincerity, and a quiet act of courage against the boundaries of social custom."
+            ]
+          }
         ]
       },
       {
@@ -876,6 +987,22 @@
               "钱春晖 饰 杜丽娘：孟伟越剧艺术传习所花旦学员"
             ]
           }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "English Guide | Yue Opera “The Peony Pavilion · The Secret Tryst”",
+            "body": [
+              "“The Secret Tryst” is a signature excerpt from The Peony Pavilion, where Du Liniang’s spirit returns at midnight to meet scholar Liu Mengmei. Their reunion—born from longing, courage, and sincerity—captures the timeless idea that true love can cross the boundary between life and death.",
+              "In this Yue Opera adaptation, gentle singing, poetic dialogue, and graceful movement create a dreamlike atmosphere. Liniang’s ethereal presence contrasts with Mengmei’s heartfelt devotion, turning a supernatural encounter into a tender and emotionally rich moment on stage.",
+              "This scene invites audiences to listen to the lyrical voices, observe the refined gestures, and feel the romantic beauty of one of Chinese theatre’s most beloved stories."
+            ]
+          },
+          {
+            "heading": "Performers:",
+            "body": [
+              "Xiaolin Niu (Liu Mengmei), Chunhui Qian (Du Liniang)"
+            ]
+          }
         ]
       },
       {
@@ -937,6 +1064,14 @@
               "吕琰饰李廷普  京剧魁北克艺术中心艺术顾问、理事会成员",
               "张立虹饰李夫人 孟伟越剧艺术传习所小生学员",
               "沈渝懿饰春香 孟伟越剧艺术传习所花旦学员"
+            ]
+          }
+        ],
+        "sectionsEn": [
+          {
+            "heading": "",
+            "body": [
+              "Li Xiuying and Wang Yulin，a married couple is torn apart by a false accusation on their wedding night when a jealous rejected suitor frames the wife with planted evidence. The husband believes she has been unfaithful, and their relationship breaks down. Later, the truth is revealed, and after a period of regret and separation, the husband returns to seek forgiveness. They are ultimately reconciled."
             ]
           }
         ]

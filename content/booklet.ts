@@ -83,6 +83,8 @@ export type AppreciationEntry = {
   keywords?: string
   lead?: string
   sections: AppreciationSection[]
+  /** English guided-appreciation text; when present the entry gets a 中文/EN toggle. */
+  sectionsEn?: AppreciationSection[]
   lyrics?: { title?: string; lines: AppreciationLyricLine[] }
 }
 

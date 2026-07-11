@@ -295,25 +295,26 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
         </div>
       </div>
 
-      {/* Mobile/tablet trigger (≤1023px) — Nav itself is hidden; BubbleMenu owns mobile */}
+      {/* Legacy mobile overlay markup retained but inert: Nav is display:none
+          ≤1023px and BubbleMenu owns mobile. Hidden from AT on desktop. */}
       <button
         type="button"
         className={styles.menuTrigger}
         onClick={() => setOpen(true)}
         aria-label="打开菜单 · Open menu"
         aria-expanded={open}
+        tabIndex={-1}
+        aria-hidden="true"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M3 6h18M3 12h18M3 18h18" />
         </svg>
       </button>
 
-      {/* Mobile/tablet overlay menu (≤1023px) — inert while Nav is display:none */}
       <div
         className={`${styles.overlay}${open ? ` ${styles.overlayOpen}` : ''}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="导航菜单 · Navigation"
+        role="presentation"
+        aria-hidden="true"
       >
         <div className={styles.overlayBackdrop} onClick={close} />
         <div className={styles.panel}>

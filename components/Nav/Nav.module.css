@@ -585,10 +585,12 @@
     width: 100vw;
     height: 100dvh;
     z-index: 200;
+    visibility: hidden;
     pointer-events: none;
   }
 
   .desktopOverlay.isOpen {
+    visibility: visible;
     pointer-events: auto;
   }
 
@@ -597,6 +599,8 @@
     inset: 0;
     background: var(--paper);
     will-change: clip-path;
+    /* Closed by default — GSAP animates clip-path open */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
   }
 
   .desktopGrid {
@@ -711,7 +715,8 @@
   .activeMark {
     position: absolute;
     left: 0;
-    right: 0;
+    width: 100%;
+    max-width: 6em;
     bottom: 0.1em;
     height: 2px;
     background: var(--seal);

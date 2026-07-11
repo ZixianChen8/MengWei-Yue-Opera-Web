@@ -98,7 +98,7 @@
         "venueAddress": "Bronson Centre Music Theatre, 211 Bronson Ave, Ottawa, ON K1R 5H6",
         "home": true,
         "statusType": "open",
-        "statusLabel": "票务开放 · Tickets open",
+        "statusLabel": "已截止",
         "listNum": "02 · Apr",
         "venueEn": "Bronson Centre Music Theatre",
         "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLScElg85Pgb1V-S-8rlSt8SH2DvaaOwhrpMXVv6lwIMj125zUA/viewform",

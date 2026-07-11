@@ -368,10 +368,10 @@
 }
 
 /* ── Tablet & below (≤1023px): the floating BubbleMenu takes over ──
-   The whole horizontal/overlay Nav is hidden below 1024px; mobile navigation
-   is provided site-wide by components/BubbleMenu. Desktop (≥1024px) keeps the
-   inline Nav untouched. The legacy overlay rules below are retained but inert
-   (the Nav no longer renders at this width). */
+   The whole Nav chrome is hidden below 1024px; mobile navigation is provided
+   site-wide by components/BubbleMenu (do not modify BubbleMenu). Desktop
+   (≥1024px) uses the right-side toggle + full-screen overlay below.
+   Legacy mobile overlay rules are retained but inert. */
 @media (max-width: 1023px) {
   .nav {
     display: none;
@@ -478,4 +478,267 @@
   .olList { padding: 16px 24px 32px; }
 
   .olZh { font-size: 30px; }
+}
+
+/* =========================================================
+   DESKTOP FULL-SCREEN MENU (≥1024px)
+   Logo left · toggle right · cinematic overlay. BubbleMenu
+   is untouched and remains the ≤1023px navigation.
+   ========================================================= */
+
+.desktopToggle {
+  display: none;
+}
+
+.desktopOverlay {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .menu {
+    display: none;
+  }
+
+  .nav {
+    z-index: 50;
+  }
+
+  .nav.menuActive {
+    z-index: 220;
+  }
+
+  .brand {
+    z-index: 220;
+  }
+
+  .desktopToggle {
+    display: inline-flex;
+    position: absolute;
+    right: 3.5rem;
+    top: 1.625rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 220;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .compact .desktopToggle {
+    right: 2.5rem;
+    top: 1.125rem;
+  }
+
+  .horizontal .desktopToggle {
+    position: static;
+    margin-left: auto;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .desktopToggle:focus-visible {
+    outline: 1px solid var(--seal);
+    outline-offset: 4px;
+  }
+
+  .desktopToggleIcon {
+    width: 18px;
+    height: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+
+  .desktopToggleIcon span {
+    display: block;
+    height: 1.6px;
+    width: 100%;
+    background: currentColor;
+    border-radius: 1px;
+    transition: transform 280ms ease, opacity 200ms ease;
+    transform-origin: center;
+  }
+
+  .desktopToggleOpen .line1 {
+    transform: translateY(6.2px) rotate(45deg);
+  }
+
+  .desktopToggleOpen .line2 {
+    opacity: 0;
+  }
+
+  .desktopToggleOpen .line3 {
+    transform: translateY(-6.2px) rotate(-45deg);
+  }
+
+  .desktopOverlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  .desktopOverlay.isOpen {
+    pointer-events: auto;
+  }
+
+  .desktopPanel {
+    position: absolute;
+    inset: 0;
+    background: var(--paper);
+    will-change: clip-path;
+  }
+
+  .desktopGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    height: 100%;
+    padding: clamp(6rem, 12vh, 8rem) clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vh, 3rem);
+    box-sizing: border-box;
+  }
+
+  .desktopMedia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.75rem;
+    min-height: 0;
+  }
+
+  .desktopMedia[data-count='0'] {
+    display: none;
+  }
+
+  .desktopMedia[data-count='1'] {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .desktopMedia[data-count='2'] {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .desktopMedia[data-count='3'] {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .desktopMedia[data-count='3'] .mediaCell:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .mediaCell,
+  .mediaMask {
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .mediaImg {
+    object-fit: cover;
+  }
+
+  .desktopNavCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .desktopLinkList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .linkMask {
+    overflow: hidden;
+  }
+
+  .desktopLink {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1.25rem;
+    text-decoration: none;
+    color: var(--ink);
+    position: relative;
+    padding-bottom: 0.35em;
+  }
+
+  .desktopLink:focus-visible {
+    outline: 1px solid var(--seal);
+    outline-offset: 8px;
+  }
+
+  .desktopLinkZh {
+    font-family: var(--font-chinese-display);
+    font-size: clamp(2rem, 4.2vw, 3.5rem);
+    line-height: 1.15;
+    letter-spacing: 0.06em;
+    transition: color 180ms ease;
+  }
+
+  .desktopLinkEn {
+    font-family: var(--font-latin-display);
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .desktopLink:hover .desktopLinkZh,
+  .desktopLink:focus-visible .desktopLinkZh {
+    color: var(--seal);
+  }
+
+  .activeMark {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.1em;
+    height: 2px;
+    background: var(--seal);
+    transform-origin: left center;
+  }
+
+  .desktopSupport {
+    margin-top: clamp(2rem, 4vh, 3rem);
+  }
+
+  .contactLink {
+    font-family: var(--font-chinese-body);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .contactLink:hover,
+  .contactLink:focus-visible {
+    color: var(--seal);
+  }
+
+  .contactLink:focus-visible {
+    outline: 1px solid var(--seal);
+    outline-offset: 6px;
+  }
 }

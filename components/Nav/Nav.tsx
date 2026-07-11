@@ -1,10 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { nav } from '@/content/home'
+import { usePathname } from 'next/navigation'
+import { nav, footer } from '@/content/home'
+import { galleryPage } from '@/content/gallery'
 import { NAV_BRANDS, type NavBrand } from '@/components/Nav/brandConfig'
+import { selectMenuPhotos } from '@/components/Nav/selectMenuPhotos'
+import {
+  useDesktopMenuMotion,
+  type MenuMotionState,
+} from '@/components/Nav/useDesktopMenuMotion'
 import styles from './Nav.module.css'
 
 type NavProps = {
@@ -12,15 +19,78 @@ type NavProps = {
   brand?: NavBrand
 }
 
+const photos = selectMenuPhotos(galleryPage.photos)
+
+const contactLink =
+  footer.columns
+    .flatMap((c) => c.links)
+    .find((l) => l.href.startsWith('mailto:')) ?? {
+    zh: 'mwyueos@gmail.com',
+    en: 'Contact',
+    href: 'mailto:mwyueos@gmail.com',
+  }
+
+function isActivePath(pathname: string, href: string): boolean {
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
+
 export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps) {
+  // Legacy mobile overlay state (Nav is display:none ≤1023; BubbleMenu owns mobile).
   const [open, setOpen] = useState(false)
 
-  // Lock body scroll while the overlay menu is open; restore on close/unmount.
+  const [menuState, setMenuState] = useState<MenuMotionState>('closed')
+  const [desktopEnabled, setDesktopEnabled] = useState(false)
+
+  const pathname = usePathname() ?? '/'
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const desktopToggleRef = useRef<HTMLButtonElement>(null)
+  const restoreFocusRef = useRef(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const sync = () => {
+      const matches = mq.matches
+      setDesktopEnabled(matches)
+      if (!matches) {
+        setMenuState('closed')
+        const overlay = overlayRef.current
+        if (overlay) {
+          overlay.hidden = true
+          overlay.classList.remove(styles.isOpen)
+        }
+        document.body.style.overflow = ''
+      }
+    }
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+
+  useDesktopMenuMotion({
+    overlayRef,
+    panelRef,
+    state: menuState,
+    setState: setMenuState,
+    enabled: desktopEnabled,
+    isOpenClass: styles.isOpen,
+    onClosed: () => {
+      if (restoreFocusRef.current) {
+        restoreFocusRef.current = false
+        desktopToggleRef.current?.focus()
+      }
+    },
+  })
+
+  // Legacy mobile overlay scroll lock (inert on desktop; kept for markup parity).
   useEffect(() => {
     if (!open) return
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
     document.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = prev
@@ -28,20 +98,101 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
     }
   }, [open])
 
+  // Desktop menu scroll lock + Escape.
+  useEffect(() => {
+    if (!desktopEnabled) return
+    if (menuState === 'closed') return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        if (menuState === 'open' || menuState === 'opening') {
+          restoreFocusRef.current = true
+          setMenuState('closing')
+        }
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [menuState, desktopEnabled])
+
+  // Focus trap while desktop menu is open/opening.
+  useEffect(() => {
+    if (!desktopEnabled) return
+    if (menuState !== 'open' && menuState !== 'opening') return
+    const overlay = overlayRef.current
+    const toggle = desktopToggleRef.current
+    if (!overlay || !toggle) return
+
+    const getFocusable = () => {
+      const nodes = overlay.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )
+      return [toggle, ...Array.from(nodes)]
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+      const focusable = getFocusable()
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement as HTMLElement | null
+      if (e.shiftKey) {
+        if (active === first || !overlay.contains(active) && active !== toggle) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else if (active === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [menuState, desktopEnabled])
+
+  const handleDesktopToggle = useCallback(() => {
+    if (!desktopEnabled) return
+    if (menuState === 'opening' || menuState === 'closing') return
+    if (menuState === 'open') {
+      restoreFocusRef.current = true
+      setMenuState('closing')
+    } else {
+      setMenuState('opening')
+    }
+  }, [desktopEnabled, menuState])
+
+  const closeDesktopMenu = useCallback(() => {
+    if (menuState === 'open' || menuState === 'opening') {
+      restoreFocusRef.current = true
+      setMenuState('closing')
+    }
+  }, [menuState])
+
   const close = () => setOpen(false)
   const brandConfig = NAV_BRANDS[brand]
-  const logoClass = brand === 'anniversary'
-    ? `${styles.logo} ${styles.anniversaryLogo}`
-    : styles.logo
+  const logoClass =
+    brand === 'anniversary' ? `${styles.logo} ${styles.anniversaryLogo}` : styles.logo
 
   const navClassName = [
     styles.nav,
     variant === 'horizontal' ? styles.horizontal : '',
     brand !== 'anniversary' ? styles.compact : '',
-  ].filter(Boolean).join(' ')
+    menuState !== 'closed' ? styles.menuActive : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  const toggleOpen = menuState === 'open' || menuState === 'opening' || menuState === 'closing'
 
   return (
-    <nav className={navClassName}>
+    <header className={navClassName}>
       <Link href={brandConfig.href} className={styles.brand} aria-label={brandConfig.ariaLabel}>
         <Image
           src={brandConfig.src}
@@ -53,16 +204,98 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
         />
       </Link>
 
-      {/* Desktop inline menu (≥1024px) */}
-      <div className={styles.menu}>
-        {nav.links.map((item) => (
-          <Link key={item.en} href={item.href} className={styles.menuItem}>
-            {item.zh}<span className={styles.en}>{item.en}</span>
-          </Link>
-        ))}
+      {/* Desktop toggle — visible ≥1024px */}
+      <button
+        ref={desktopToggleRef}
+        type="button"
+        id="desktop-nav-toggle"
+        className={`${styles.desktopToggle}${toggleOpen ? ` ${styles.desktopToggleOpen}` : ''}`}
+        aria-label={toggleOpen ? '关闭菜单 · Close menu' : '打开菜单 · Open menu'}
+        aria-expanded={menuState === 'open' || menuState === 'opening'}
+        aria-controls="desktop-nav-overlay"
+        onClick={handleDesktopToggle}
+      >
+        <span className={styles.desktopToggleIcon} aria-hidden="true">
+          <span className={styles.line1} />
+          <span className={styles.line2} />
+          <span className={styles.line3} />
+        </span>
+      </button>
+
+      {/* Desktop full-screen overlay — ≥1024px only via CSS + matchMedia */}
+      <div
+        id="desktop-nav-overlay"
+        ref={overlayRef}
+        className={styles.desktopOverlay}
+        role="dialog"
+        aria-modal="true"
+        aria-label="导航菜单 · Navigation"
+        hidden
+      >
+        <div ref={panelRef} className={styles.desktopPanel}>
+          <div className={styles.desktopGrid}>
+            <div
+              className={styles.desktopMedia}
+              data-count={photos.length}
+              aria-hidden={photos.length === 0}
+            >
+              {photos.map((photo) => (
+                <div key={photo.image} className={styles.mediaCell}>
+                  <div className={styles.mediaMask} data-menu-media-mask>
+                    <Image
+                      src={photo.image}
+                      alt={photo.title || photo.description || '剧照'}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, 0px"
+                      className={styles.mediaImg}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.desktopNavCol}>
+              <nav aria-label="主导航 · Primary">
+                <ul className={styles.desktopLinkList}>
+                  {nav.links.map((item) => {
+                    const active = isActivePath(pathname, item.href)
+                    return (
+                      <li key={item.en} className={styles.desktopLinkItem}>
+                        <div className={styles.linkMask} data-menu-link-mask>
+                          <Link
+                            href={item.href}
+                            className={styles.desktopLink}
+                            aria-current={active ? 'page' : undefined}
+                            onClick={closeDesktopMenu}
+                          >
+                            <span className={styles.desktopLinkZh}>{item.zh}</span>
+                            <span className={styles.desktopLinkEn}>{item.en}</span>
+                            {active ? (
+                              <span
+                                className={styles.activeMark}
+                                data-menu-active-mark
+                                aria-hidden="true"
+                              />
+                            ) : null}
+                          </Link>
+                        </div>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </nav>
+              <div className={styles.desktopSupport} data-menu-support>
+                <a href={contactLink.href} className={styles.contactLink}>
+                  <span>留书 · Contact</span>
+                  <span>{contactLink.zh}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile/tablet trigger (≤1023px) */}
+      {/* Mobile/tablet trigger (≤1023px) — Nav itself is hidden; BubbleMenu owns mobile */}
       <button
         type="button"
         className={styles.menuTrigger}
@@ -75,7 +308,7 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
         </svg>
       </button>
 
-      {/* Mobile/tablet overlay menu (≤1023px) */}
+      {/* Mobile/tablet overlay menu (≤1023px) — inert while Nav is display:none */}
       <div
         className={`${styles.overlay}${open ? ` ${styles.overlayOpen}` : ''}`}
         role="dialog"
@@ -114,6 +347,6 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
           </ul>
         </div>
       </div>
-    </nav>
+    </header>
   )
 }

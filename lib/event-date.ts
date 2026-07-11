@@ -28,6 +28,14 @@ export function parseEventDate(iso: string): ParsedEventDate | null {
 // Render an ISO date as the Chinese display string, e.g.
 // "2026-04-06" -> "2026年4月6日", or "4月6日" with { withYear: false }.
 // Falls back to the raw input if it doesn't parse.
+// Four-year window for the /events month ribbon, always anchored to the
+// current calendar year (e.g. 2028 → 2028–2031).
+export const RIBBON_YEAR_COUNT = 4
+
+export function ribbonYears(startYear: number, count = RIBBON_YEAR_COUNT): string[] {
+  return Array.from({ length: count }, (_, i) => String(startYear + i))
+}
+
 export function formatEventDateZh(iso: string, opts?: { withYear?: boolean }): string {
   const parsed = parseEventDate(iso)
   if (!parsed) return iso

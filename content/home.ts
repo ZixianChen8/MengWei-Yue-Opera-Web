@@ -99,7 +99,6 @@ type Footer = {
 
 type EventsListingPage = {
   header: { titleZh: string; titleEn: string; quote: { zh: string; en: string } }
-  years: string[]
   months: { cn: string; en: string }[]
   archive: { year: string; shows: { num: string; cn: string }[] }[]
 }

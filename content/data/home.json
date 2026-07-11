@@ -109,7 +109,7 @@
         "venueAddress": "Bronson Centre Music Theatre, 211 Bronson Ave, Ottawa, ON K1R 5H6",
         "home": true,
         "statusType": "open",
-        "statusLabel": "免票入场 · Free",
+        "statusLabel": "票务开放 · Tickets open",
         "listNum": "02 · Apr",
         "venueEn": "Bronson Centre Music Theatre",
         "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLScElg85Pgb1V-S-8rlSt8SH2DvaaOwhrpMXVv6lwIMj125zUA/viewform",
@@ -226,11 +226,6 @@
             "zh": "mwyueos@gmail.com",
             "en": "By letter",
             "href": "mailto:mwyueos@gmail.com"
-          },
-          {
-            "zh": "+1 (613) — · — · —",
-            "en": "By telephone",
-            "href": "#"
           }
         ]
       }
@@ -247,12 +242,6 @@
         "en": "Join us throughout the year for a thoughtfully programmed season of performances and cultural events."
       }
     },
-    "years": [
-      "2024",
-      "2025",
-      "2026",
-      "2027"
-    ],
     "months": [
       {
         "cn": "一月",

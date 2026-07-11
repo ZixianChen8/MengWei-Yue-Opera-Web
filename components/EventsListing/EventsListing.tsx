@@ -14,7 +14,7 @@ function statusClass(type: SeasonEvent['statusType']) {
 }
 
 export default function EventsListing() {
-  const { header, years, months, archive } = eventsListingPage
+  const { header, months, archive } = eventsListingPage
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function EventsListing() {
 
           {/* Year + months ribbon — highlight tracks the live date,
               pips are generated from season.events (see MonthRibbon). */}
-          <MonthRibbon years={years} months={months} events={season.events} />
+          <MonthRibbon months={months} events={season.events} />
         </div>
       </section>
 

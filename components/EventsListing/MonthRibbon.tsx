@@ -1,13 +1,12 @@
 'use client'
 
 import { useMemo, useSyncExternalStore } from 'react'
-import { parseEventDate } from '@/lib/event-date'
+import { parseEventDate, ribbonYears } from '@/lib/event-date'
 import styles from './EventsListing.module.css'
 
 type MonthLabel = { cn: string; en: string }
 
 type Props = {
-  years: string[]
   months: MonthLabel[]
   // Only the ISO `date` of each event is needed to drive the ribbon.
   events: { date: string }[]
@@ -30,11 +29,15 @@ const getClientToday = (): Today => {
 }
 const getServerToday = (): Today | null => null
 
-export default function MonthRibbon({ years, months, events }: Props) {
+export default function MonthRibbon({ months, events }: Props) {
   const today = useSyncExternalStore(emptySubscribe, getClientToday, getServerToday)
 
   const currentYear = today ? String(today.year) : null
   const currentMonthIdx = today ? today.monthIdx : null
+  const years = useMemo(
+    () => ribbonYears(today?.year ?? new Date().getFullYear()),
+    [today],
+  )
 
   // Events per calendar month (index 0-11) for the highlighted year.
   const countsByMonth = useMemo(() => {

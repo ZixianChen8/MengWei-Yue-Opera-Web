@@ -2,7 +2,9 @@
 
 **Date:** 2026-07-11  
 **Status:** Approved for planning  
-**Scope:** Desktop (≥1024px) full-screen cinematic nav overlay, site-wide. Mobile/tablet BubbleMenu unchanged.
+**Scope:** Desktop (≥1024px) full-screen cinematic nav overlay, site-wide.
+
+**Hard constraint — do not touch mobile:** `components/BubbleMenu/` (TSX, CSS, and any BubbleMenu wiring in `app/layout.tsx`) must not be modified. Do not restyle, refactor, animate, or “align” BubbleMenu with the desktop overlay. Mobile/tablet (≤1023px) navigation stays exactly as it is today; this feature is desktop-only.
 
 ## Goal
 
@@ -14,7 +16,7 @@ When the user clicks the desktop menu button, open a bold, full-viewport navigat
 |---|---|
 | Architecture | Extend existing `Nav` (Approach 1) |
 | Desktop chrome | Logo left, menu toggle **right**; replace inline link row |
-| Mobile (≤1023px) | Unchanged — site-wide `BubbleMenu` |
+| Mobile (≤1023px) | **Do not touch** — existing `BubbleMenu` only; zero edits to BubbleMenu files |
 | Left media | Up to 4 photos from `galleryPage.photos` |
 | Supporting content | Footer contact mailto only |
 | Animation | GSAP (already in project), single coordinated timeline |
@@ -57,9 +59,9 @@ Do **not** introduce a parallel `FullScreenMenu` route or a second site-wide des
 | Width | Navigation |
 |---|---|
 | ≥1024px | `Nav`: logo + right toggle + full-screen overlay |
-| ≤1023px | `BubbleMenu` only; `Nav` stays hidden |
+| ≤1023px | Existing `BubbleMenu` only — **no BubbleMenu code changes**; `Nav` stays hidden as today |
 
-If the desktop menu is open and the viewport crosses below 1024px, force-close the overlay, clear scroll lock / focus trap, and leave mobile to BubbleMenu. Never show both menus.
+If the desktop menu is open and the viewport crosses below 1024px, force-close the overlay, clear scroll lock / focus trap, and leave mobile to BubbleMenu. Never show both menus. Do not edit BubbleMenu to “cooperate”; only the desktop `Nav` overlay tears itself down.
 
 ## Desktop header chrome
 
@@ -158,11 +160,13 @@ No curved panel motion (or instantaneous panel); short fades; minimal/no stagger
 
 ## Out of scope
 
-- Redesigning or replacing `BubbleMenu` / mobile navigation  
+- **Any change to `BubbleMenu` or mobile/tablet navigation** (files under `components/BubbleMenu/`, BubbleMenu usage in `app/layout.tsx`, mobile menu copy/motion/a11y)  
 - New color system, fonts, or icon libraries  
 - Character-by-character text animation  
 - Social link rows or reference-site decorative graphics  
 - Admin dashboard navigation  
+
+Desktop overlay CSS/JS must be gated to ≥1024px (or equivalent matchMedia). Below that breakpoint, desktop overlay code must not render, run timelines, lock scroll, or trap focus. 
 
 ## Verification checklist
 
@@ -173,7 +177,8 @@ No curved panel motion (or instantaneous panel); short fades; minimal/no stagger
 - [ ] Gallery media (including &lt;4 photos)  
 - [ ] Resize desktop ↔ mobile while open  
 - [ ] `prefers-reduced-motion`  
-- [ ] Mobile BubbleMenu unchanged  
+- [ ] `components/BubbleMenu/**` and BubbleMenu mount in `app/layout.tsx` have **zero** diffs in the implementation PR  
+- [ ] ≤1023px: no desktop overlay DOM/timeline/scroll-lock activity  
 - [ ] Home no longer mounts `LandingMenu` stub  
 
 ## Implementation notes (non-binding)

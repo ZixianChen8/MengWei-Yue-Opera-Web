@@ -248,7 +248,7 @@
     font-size: clamp(1.75rem, 9vw, 2.5rem);
     letter-spacing: 0.06em;
     line-height: 1.15;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .nameEn {

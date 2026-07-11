@@ -60,9 +60,14 @@ export const HERO_BG = {
    * Leave empty `{}` to use desktop placement on mobile.
    */
   placementMobile: {
-    scale: 1.75,
+    objectFit: 'contain',
+    positionX: 'center',
     positionY: 'bottom',
-    offsetY: '0%',
+    scale: 2.35,
+    originX: 'center',
+    originY: 'bottom',
+    offsetX: '0%',
+    offsetY: '-8%',
   } satisfies Partial<HeroBgPlacement>,
 
   tint: {

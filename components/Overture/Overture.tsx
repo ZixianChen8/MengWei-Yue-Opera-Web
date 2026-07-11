@@ -67,15 +67,6 @@ export default function Overture() {
 
         <div className={styles.body} ref={colRRef}>
           {overture.body.map((p, i) => <p key={i} data-reveal>{p}</p>)}
-
-          <div className={styles.meta}>
-            {overture.stats.map((s) => (
-              <div key={s.value} data-reveal>
-                <div className={styles.k}>{s.value}</div>
-                <div className={styles.v}>{s.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

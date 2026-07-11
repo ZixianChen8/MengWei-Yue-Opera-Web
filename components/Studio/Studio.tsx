@@ -10,7 +10,6 @@ import {
   MM_DESKTOP,
   MM_MOBILE,
   MM_REDUCED,
-  STORY_EASE,
   revealBatch,
 } from '@/components/hooks/scrollStory'
 import styles from './Studio.module.css'
@@ -30,45 +29,30 @@ export default function Studio() {
     const ctx = gsap.context(() => {
       media.add(MM_REDUCED, () => undefined)
 
-      // Desktop: pin the section and scrub a chapter timeline — background
-      // parallax, then title, body, the three program rows one-by-one, then CTA.
+      // Desktop: play content reveals once as the section enters so title,
+      // rows, and CTA are fully visible while the section is on screen.
+      // Background keeps a light scrubbed parallax — no pin, no hijacking.
       media.add(MM_DESKTOP, () => {
-        const title = scope.querySelector('[data-title]')
-        const bodyPs = gsap.utils.toArray<HTMLElement>(scope.querySelectorAll('[data-bodyp]'))
-        const rows = gsap.utils.toArray<HTMLElement>(scope.querySelectorAll('[data-row]'))
-        const cta = scope.querySelector('[data-cta]')
-
-        gsap.set(title, { autoAlpha: 0, y: 44, willChange: 'transform, opacity' })
-        gsap.set(bodyPs, { autoAlpha: 0, y: 30, willChange: 'transform, opacity' })
-        gsap.set(rows, { autoAlpha: 0, y: 28, willChange: 'transform, opacity' })
-        gsap.set(cta, { autoAlpha: 0, y: 20, willChange: 'transform, opacity' })
-        if (bg) gsap.set(bg, { transformOrigin: 'right center' })
-
-        const tl = gsap.timeline({
-          defaults: { ease: STORY_EASE },
-          scrollTrigger: {
-            trigger: scope,
-            start: 'top top',
-            end: '+=120%',
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        })
-
+        revealBatch(scope, '[data-reveal]', { stagger: 0.08, start: 'top 82%' })
         if (bg) {
-          tl.fromTo(
+          gsap.set(bg, { transformOrigin: 'right center' })
+          gsap.fromTo(
             bg,
-            { scale: 1.34, yPercent: 0 },
-            { scale: 1.18, yPercent: -6, ease: 'none', duration: 1 },
-            0,
+            { scale: 1.32, yPercent: 2 },
+            {
+              scale: 1.18,
+              yPercent: -4,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: scope,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 0.5,
+                invalidateOnRefresh: true,
+              },
+            },
           )
         }
-        tl.to(title, { autoAlpha: 1, y: 0, duration: 0.4 }, 0.05)
-        tl.to(bodyPs, { autoAlpha: 1, y: 0, stagger: 0.08, duration: 0.4 }, 0.22)
-        tl.to(rows, { autoAlpha: 1, y: 0, stagger: 0.16, duration: 0.5 }, 0.46)
-        tl.to(cta, { autoAlpha: 1, y: 0, duration: 0.4 }, 0.86)
       })
 
       // Mobile: no pin — plain staggered reveal + light background parallax.

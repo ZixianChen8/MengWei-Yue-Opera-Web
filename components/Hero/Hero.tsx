@@ -35,7 +35,6 @@ const MOBILE_QUERY = `(max-width: ${HERO_MOTION_MIN_WIDTH - 1}px)`
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null)
-  const veilRef = useRef<HTMLDivElement>(null)
   const wordmarkRef = useRef<HTMLHeadingElement>(null)
   const cutoutRef = useRef<HTMLDivElement>(null)
   const [showClouds, setShowClouds] = useState(true)
@@ -48,7 +47,7 @@ export default function Hero() {
     return () => mobile.removeEventListener('change', sync)
   }, [])
 
-  const { entranceDone } = useHeroMotion({ heroRef, veilRef, wordmarkRef, cutoutRef })
+  const { entranceDone } = useHeroMotion({ heroRef, wordmarkRef, cutoutRef })
 
   const { mistRef, setCloudRef, setWispRef } = useScrollParallax(
     heroRef,
@@ -121,8 +120,6 @@ export default function Hero() {
       {showClouds && (
         <div className={styles.cloudDiveMist} ref={mistRef} aria-hidden="true" />
       )}
-
-      <div className={styles.veil} ref={veilRef} aria-hidden="true" />
 
     </section>
   )

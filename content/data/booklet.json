@@ -14,8 +14,8 @@
         "ready": true
       },
       {
-        "zh": "中文节目单",
-        "en": "Programme (中文)",
+        "zh": "节目单",
+        "en": "Programme",
         "href": "/anniversary/programme",
         "ready": true
       },
@@ -162,7 +162,7 @@
           "titleEn": "Guest Performer",
           "titleZh": "嘉宾助演",
           "performers": "顾学风",
-          "note": "TBD"
+          "note": ""
         },
         {
           "titleEn": "Yue Opera Dance — Grace of the Fan and Rhythms of the Sleeves",
@@ -328,7 +328,7 @@
         "titleZh": "特邀嘉宾 顾学风",
         "titleEn": "Guest Performer — Xuefeng Gu",
         "performers": "顾学风",
-        "note": "节目待定 · TBD"
+        "note": ""
       },
       {
         "no": "07",

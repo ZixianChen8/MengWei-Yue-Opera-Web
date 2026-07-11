@@ -107,6 +107,7 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault()
+        // Close from open or mid-open; reverse() picks up from current progress.
         if (menuState === 'open' || menuState === 'opening') {
           restoreFocusRef.current = true
           setMenuState('closing')
@@ -159,8 +160,8 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
 
   const handleDesktopToggle = useCallback(() => {
     if (!desktopEnabled) return
-    if (menuState === 'opening' || menuState === 'closing') return
-    if (menuState === 'open') {
+    // Allow interrupt mid-transition — motion hook reverses from current progress.
+    if (menuState === 'open' || menuState === 'opening') {
       restoreFocusRef.current = true
       setMenuState('closing')
     } else {
@@ -169,7 +170,8 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
   }, [desktopEnabled, menuState])
 
   const closeDesktopMenu = useCallback(() => {
-    if (menuState === 'open' || menuState === 'opening') {
+    // Links only dismiss once fully open so a mid-open click cannot abort the curtain.
+    if (menuState === 'open') {
       restoreFocusRef.current = true
       setMenuState('closing')
     }

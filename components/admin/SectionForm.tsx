@@ -175,6 +175,12 @@ const ARRAY_LIMITS: Record<string, { key: string; max: number; hint: string; mes
     hint: '最多可在 3 个活动上勾选"首页展示"，决定哪些显示在首页板块。',
     message: '首页最多显示 3 个活动，请先取消勾选其他活动。',
   },
+  photos: {
+    key: 'home',
+    max: 10,
+    hint: '最多可在 10 张照片上勾选"首页展示"，决定哪些显示在首页往年活动板块。',
+    message: '首页往年活动最多显示 10 张照片，请先取消勾选其他照片。',
+  },
 }
 
 // Shape used when adding the first item to an otherwise-empty array.

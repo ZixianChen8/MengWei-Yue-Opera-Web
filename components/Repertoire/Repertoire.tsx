@@ -13,16 +13,14 @@ const SCROLL_STEP = 320
 const EASE = 0.12
 
 // The home filmstrip is a curated view of the shared gallery photos
-// (single source of truth) — those flagged `home: true`.
-const works = galleryPage.photos.filter((p) => p.home && p.image)
+// (single source of truth) — those flagged `home: true`, capped at 10.
+const MAX_HOME_PHOTOS = 10
+const works = galleryPage.photos.filter((p) => p.home && p.image).slice(0, MAX_HOME_PHOTOS)
 
 export default function Repertoire() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const [activeWork, setActiveWork] = useState(works[0])
   const sectionRef = useRef<HTMLElement>(null)
-  const stripRef = useRef<HTMLDivElement>(null)      // .filmstripWrap (scroller)
-  const stripInnerRef = useRef<HTMLDivElement>(null) // .filmstrip (translated on desktop)
-  const controlsRef = useRef<HTMLDivElement>(null)
+  const stripRef = useRef<HTMLDivElement>(null)
   const scrollTarget = useRef(0)
   const rafId = useRef<number | null>(null)
 
@@ -37,19 +35,14 @@ export default function Repertoire() {
     return () => { if (rafId.current !== null) cancelAnimationFrame(rafId.current) }
   }, [])
 
-  // GSAP scroll storytelling: reveal the head, and on desktop turn the
-  // filmstrip into a classic pinned horizontal-scroll chapter driven by the
-  // page's vertical scroll. On mobile/reduced-motion the strip stays a normal
-  // native horizontal scroller with the RAF arrow buttons.
+  // GSAP scroll storytelling: reveal the head. The filmstrip stays a normal
+  // native horizontal scroller (arrow buttons + RAF) on every breakpoint —
+  // no pin, no vertical-scroll hijacking for horizontal travel.
   useEffect(() => {
     const scope = sectionRef.current
     if (!scope) return
 
     gsap.registerPlugin(ScrollTrigger)
-
-    const wrap = stripRef.current
-    const inner = stripInnerRef.current
-    const controls = controlsRef.current
 
     const media = gsap.matchMedia()
     const ctx = gsap.context(() => {
@@ -57,52 +50,8 @@ export default function Repertoire() {
 
       media.add(MM_DESKTOP, () => {
         revealBatch(scope, '[data-reveal]', { stagger: 0.1 })
-
-        if (!wrap || !inner) return
-
-        // Distance the strip must travel horizontally = content overflow past
-        // the visible wrap. Recomputed on refresh via invalidateOnRefresh.
-        const getDistance = () => Math.max(0, inner.scrollWidth - wrap.clientWidth)
-
-        // The pinned horizontal timeline owns scrollLeft, so stand the native
-        // scroller down: no overflow scrolling, let Lenis drive the pin (drop
-        // data-lenis-prevent), and hide the now-misleading arrow controls.
-        const prevOverflow = wrap.style.overflowX
-        const hadLenisPrevent = wrap.hasAttribute('data-lenis-prevent')
-        wrap.style.overflowX = 'hidden'
-        wrap.removeAttribute('data-lenis-prevent')
-        if (controls) controls.style.display = 'none'
-
-        gsap.set(inner, { willChange: 'transform' })
-        const tween = gsap.fromTo(
-          inner,
-          { x: 0 },
-          {
-            x: () => -getDistance(),
-            ease: 'none',
-            scrollTrigger: {
-              trigger: scope,
-              start: 'top top',
-              end: () => '+=' + getDistance(),
-              pin: true,
-              anticipatePin: 1,
-              scrub: 1,
-              invalidateOnRefresh: true,
-            },
-          },
-        )
-
-        return () => {
-          tween.kill()
-          wrap.style.overflowX = prevOverflow
-          if (hadLenisPrevent) wrap.setAttribute('data-lenis-prevent', '')
-          if (controls) controls.style.display = ''
-          gsap.set(inner, { clearProps: 'transform,willChange' })
-        }
       })
 
-      // Mobile: just reveal the head; the strip stays a native scroller and the
-      // RAF arrow handlers below remain in charge.
       media.add(MM_MOBILE, () => {
         revealBatch(scope, '[data-reveal]', { stagger: 0.1 })
       })
@@ -139,12 +88,9 @@ export default function Repertoire() {
   const titleBody = repertoire.title.zh.slice(0, -1)
   const titleLast = repertoire.title.zh.slice(-1)
 
-  const openWork = activeWork
-
-  const openLightbox = (index: number) => {
-    setActiveWork(works[index])
-    setOpenIndex(index)
-  }
+  // Derive from openIndex only — do not keep a stale activeWork after close,
+  // or the next open flashes the previous image while the new src loads.
+  const openWork = openIndex !== null ? works[openIndex] : null
 
   return (
     <section id="repertoire" className={styles.section} ref={sectionRef}>
@@ -157,12 +103,12 @@ export default function Repertoire() {
 
       <div className={styles.filmstripOuter}>
         <div ref={stripRef} className={styles.filmstripWrap} data-lenis-prevent>
-          <div ref={stripInnerRef} className={styles.filmstrip}>
+          <div className={styles.filmstrip}>
             {works.map((work, i) => (
               <div
                 key={`${work.image}-${i}`}
                 className={styles.filmCard}
-                onClick={() => openLightbox(i)}
+                onClick={() => setOpenIndex(i)}
               >
                 <Image
                   src={work.image}
@@ -190,7 +136,7 @@ export default function Repertoire() {
         </div>
       </div>
 
-      <div className={styles.controls} ref={controlsRef}>
+      <div className={styles.controls}>
         <p className={styles.scrollHint}>{repertoire.hint}</p>
         <div className={styles.arrowGroup}>
           <button
@@ -224,12 +170,14 @@ export default function Repertoire() {
           <div className={styles.lbImgWrap}>
             {openWork?.image && (
               <Image
+                key={openWork.image}
                 src={openWork.image}
                 alt={openWork.title || ''}
                 width={1200}
                 height={1200}
                 className={styles.lbImg}
                 sizes="(max-width: 1023px) 90vw, 980px"
+                priority
               />
             )}
           </div>

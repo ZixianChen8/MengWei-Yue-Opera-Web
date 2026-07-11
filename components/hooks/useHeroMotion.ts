@@ -13,29 +13,26 @@ const STATIC_QUERY =
 
 type UseHeroMotionArgs = {
   heroRef: RefObject<HTMLElement | null>
-  veilRef: RefObject<HTMLElement | null>
   wordmarkRef: RefObject<HTMLElement | null>
   cutoutRef: RefObject<HTMLElement | null>
 }
 
-export function useHeroMotion({ heroRef, veilRef, wordmarkRef, cutoutRef }: UseHeroMotionArgs) {
+export function useHeroMotion({ heroRef, wordmarkRef, cutoutRef }: UseHeroMotionArgs) {
   const [entranceDone, setEntranceDone] = useState(false)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
     const hero = heroRef.current
-    const veil = veilRef.current
     const wordmark = wordmarkRef.current
     const cutout = cutoutRef.current
-    if (!hero || !veil || !wordmark || !cutout) return
+    if (!hero || !wordmark || !cutout) return
 
     const media = gsap.matchMedia()
     const ctx = gsap.context(() => {
       media.add(MOTION_QUERY, () => {
         setEntranceDone(false)
 
-        gsap.set(veil, { autoAlpha: 1 })
         gsap.set(wordmark, { autoAlpha: 0, y: 16 })
         gsap.set(cutout, { autoAlpha: 0, y: 28 })
 
@@ -44,8 +41,7 @@ export function useHeroMotion({ heroRef, veilRef, wordmarkRef, cutoutRef }: UseH
         })
 
         entrance
-          .to(veil, { autoAlpha: 0, duration: 0.85, ease: 'power2.inOut' })
-          .to(wordmark, { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.2')
+          .to(wordmark, { autoAlpha: 1, y: 0, duration: 0.7 })
           .to(cutout, { autoAlpha: 1, y: 0, duration: 0.75 }, '-=0.25')
 
         let exitTween: gsap.core.Tween | undefined
@@ -75,13 +71,12 @@ export function useHeroMotion({ heroRef, veilRef, wordmarkRef, cutoutRef }: UseH
           entrance.kill()
           exitTween?.scrollTrigger?.kill()
           exitTween?.kill()
-          gsap.set([veil, wordmark, cutout], { clearProps: 'opacity,visibility,transform' })
+          gsap.set([wordmark, cutout], { clearProps: 'opacity,visibility,transform' })
           setEntranceDone(false)
         }
       })
 
       media.add(STATIC_QUERY, () => {
-        gsap.set(veil, { autoAlpha: 0 })
         gsap.set([wordmark, cutout], { autoAlpha: 1, y: 0 })
         setEntranceDone(true)
         return () => undefined
@@ -92,7 +87,7 @@ export function useHeroMotion({ heroRef, veilRef, wordmarkRef, cutoutRef }: UseH
       media.revert()
       ctx.revert()
     }
-  }, [heroRef, veilRef, wordmarkRef, cutoutRef])
+  }, [heroRef, wordmarkRef, cutoutRef])
 
   return { entranceDone }
 }

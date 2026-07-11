@@ -119,7 +119,12 @@ export default function Gallery() {
             <div className={styles.lbImg}>
               {current && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={current.image} alt={current.title || ''} className={styles.lbImgEl} />
+                <img
+                  key={current.image}
+                  src={current.image}
+                  alt={current.title || ''}
+                  className={styles.lbImgEl}
+                />
               )}
             </div>
             {current && (current.title || current.description || current.date) && (

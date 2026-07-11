@@ -578,6 +578,11 @@
     transform: translateY(-6.2px) rotate(-45deg);
   }
 
+  .menuActive .desktopToggle {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
   .desktopOverlay {
     display: block;
     position: fixed;
@@ -587,6 +592,7 @@
     z-index: 200;
     visibility: hidden;
     pointer-events: none;
+    overflow: hidden;
   }
 
   .desktopOverlay.isOpen {
@@ -597,10 +603,28 @@
   .desktopPanel {
     position: absolute;
     inset: 0;
-    background: var(--paper);
+    width: 100%;
+    height: 100%;
+    /* Ink surface — same family as horizontal nav chrome; clearly distinct from --paper */
+    background: var(--ink);
     will-change: clip-path;
-    /* Closed by default — GSAP animates clip-path open */
-    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+    /* Closed by default — 13 vertices matching curtainClip(0,0) */
+    clip-path: polygon(
+      0.00% 0.00%,
+      100.00% 0.00%,
+      100.00% 0.00%,
+      90.00% 0.00%,
+      80.00% 0.00%,
+      70.00% 0.00%,
+      60.00% 0.00%,
+      50.00% 0.00%,
+      40.00% 0.00%,
+      30.00% 0.00%,
+      20.00% 0.00%,
+      10.00% 0.00%,
+      0.00% 0.00%
+    );
+    overflow: hidden;
   }
 
   .desktopGrid {
@@ -671,17 +695,13 @@
     gap: 0.35rem;
   }
 
-  .linkMask {
-    overflow: hidden;
-  }
-
   .desktopLink {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.75rem 1.25rem;
     text-decoration: none;
-    color: var(--ink);
+    color: var(--paper);
     position: relative;
     padding-bottom: 0.35em;
   }
@@ -704,7 +724,7 @@
     font-size: clamp(0.7rem, 1vw, 0.85rem);
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: rgba(248, 244, 238, 0.68);
   }
 
   .desktopLink:hover .desktopLinkZh,
@@ -730,7 +750,7 @@
   .contactLink {
     font-family: var(--font-chinese-body);
     font-size: 0.95rem;
-    color: var(--ink-soft);
+    color: rgba(248, 244, 238, 0.68);
     text-decoration: none;
     display: inline-flex;
     flex-direction: column;

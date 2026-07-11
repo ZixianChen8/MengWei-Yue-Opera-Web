@@ -1,6 +1,12 @@
 .section {
   position: relative;
-  padding: 160px 80px 200px;
+  /* Fill the viewport on tall screens; on short ones, grow with content so
+     title → CTA stay fully visible without relying on pin. */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(64px, 8vh, 100px) 80px clamp(56px, 7vh, 88px);
   z-index: 4;
   isolation: isolate;
   scroll-margin-top: 100px;
@@ -81,18 +87,18 @@
 .body {
   font-family: var(--font-chinese-body);
   font-size: 1.0625rem;
-  line-height: 2;
+  line-height: 1.85;
   color: var(--ink-soft);
   font-weight: 300;
-  margin-top: 36px;
+  margin-top: 28px;
 }
 
 .body p+p {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .program {
-  margin-top: 42px;
+  margin-top: 28px;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -103,7 +109,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 24px;
-  padding: 18px 0;
+  padding: 14px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -138,7 +144,7 @@
 }
 
 .cta {
-  margin-top: 44px;
+  margin-top: 28px;
   display: inline-flex;
   align-items: center;
   gap: 14px;
@@ -180,7 +186,11 @@
    RESPONSIVE (desktop ≥1024px untouched)
    ========================================================= */
 @media (max-width: 1023px) {
-  .section { padding: 120px 48px 160px; }
+  .section {
+    min-height: 0;
+    justify-content: flex-start;
+    padding: 120px 48px 160px;
+  }
 
   .section::before {
     top: -220px;

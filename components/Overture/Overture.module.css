@@ -31,7 +31,9 @@
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   gap: 90px;
-  align-items: start;
+  /* The body column is shorter than title + quote now that the stats
+     row is gone; centering keeps the two columns visually balanced. */
+  align-items: center;
 }
 
 .title {
@@ -64,31 +66,6 @@
 
 .body p+p {
   margin-top: 18px;
-}
-
-.meta {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 56px;
-  border-top: 1px solid var(--border);
-  padding-top: 28px;
-}
-
-.k {
-  font-family: var(--font-chinese-display);
-  font-size: 2rem;
-  color: var(--ink);
-  letter-spacing: 2px;
-}
-
-.v {
-  font-family: var(--font-latin-display);
-  font-size: 0.8125rem;
-  letter-spacing: .32em;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-  margin-top: 6px;
 }
 
 .quote {
@@ -145,23 +122,4 @@
     font-size: 16px;
   }
 
-  /* 2 columns with shrinkable tracks: the uppercase, non-breaking EN
-     labels (e.g. "PRODUCTIONS") overflow a 3-up grid at 360px. */
-  .meta {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 16px;
-    row-gap: 24px;
-    margin-top: 40px;
-  }
-
-  .meta > div:last-child {
-    display: none;
-  }
-
-  .k { font-size: 24px; }
-
-  .v {
-    font-size: 11px;
-    letter-spacing: .18em;
-  }
 }

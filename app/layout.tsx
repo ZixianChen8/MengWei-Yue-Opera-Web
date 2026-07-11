@@ -65,6 +65,12 @@ const sanJiXingKaiJianTiCu = localFont({
   display: 'swap',
 })
 
+const huangKaiHuaLawyer = localFont({
+  src: '../fonts/huangkaihuaLawyerfont-2.ttf',
+  variable: '--font-huang-kai-hua-lawyer',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: '加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio',
   description:
@@ -95,7 +101,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-Hant-CA"
-      className={`${maShanZheng.variable} ${notoSerifSC.variable} ${cormorantGaramond.variable} ${jetBrainsMono.variable} ${playfairDisplay.variable} ${beiShiDaShuoWenXiaoZhuan.variable} ${sanJiXingKaiJianTiCu.variable}`}
+      className={`${maShanZheng.variable} ${notoSerifSC.variable} ${cormorantGaramond.variable} ${jetBrainsMono.variable} ${playfairDisplay.variable} ${beiShiDaShuoWenXiaoZhuan.variable} ${sanJiXingKaiJianTiCu.variable} ${huangKaiHuaLawyer.variable}`}
     >
       <body>
         <SmoothScroll>{children}</SmoothScroll>

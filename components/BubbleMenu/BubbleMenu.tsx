@@ -110,6 +110,10 @@ export default function BubbleMenu() {
 
   const brand = brandForPath(pathname)
   const brandConfig = NAV_BRANDS[brand]
+  const barClass = brand === 'anniversary'
+    ? styles.bar
+    : `${styles.bar} ${styles.compactBar}`
+
   const logoBubbleClass = brand === 'anniversary'
     ? `${styles.bubble} ${styles.logoBubble} ${styles.anniversaryLogoBubble}`
     : `${styles.bubble} ${styles.logoBubble}`
@@ -119,7 +123,7 @@ export default function BubbleMenu() {
 
   return (
     <div className={styles.root}>
-      <nav className={styles.bar} aria-label="移动导航 · Mobile navigation">
+      <nav className={barClass} aria-label="移动导航 · Mobile navigation">
         <Link
           href={brandConfig.href}
           className={logoBubbleClass}

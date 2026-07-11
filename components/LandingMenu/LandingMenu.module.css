@@ -1,0 +1,20 @@
+/* Only positions the trigger on the left over the hero. The open menu is unstyled. */
+.root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  padding: 1.125rem 1.5rem;
+}
+
+.trigger {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}

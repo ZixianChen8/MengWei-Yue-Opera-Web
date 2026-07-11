@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav/Nav'
+import LandingMenu from '@/components/LandingMenu/LandingMenu'
 import Hero from '@/components/Hero/Hero'
 import Overture from '@/components/Overture/Overture'
 import About from '@/components/About/About'
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <div style={{ position: 'relative' }}>
-        <Nav />
+        <LandingMenu />
         <Hero />
       </div>
       <main>

@@ -21,6 +21,57 @@
   box-shadow: 0 10px 30px rgba(26, 18, 10, 0.18);
 }
 
+/* Non-anniversary pages — tighter bar than the anniversary treatment. */
+.compact.nav {
+  padding: 1.125rem 2.5rem;
+}
+
+.compact .brand {
+  left: 2.5rem;
+  top: 1.125rem;
+}
+
+.compact .logo {
+  height: 3.25rem;
+}
+
+.compact .menu {
+  gap: 2rem;
+}
+
+.compact .menuItem {
+  font-size: 0.875rem;
+  letter-spacing: 5px;
+}
+
+.compact .menuItem .en {
+  font-size: 0.6875rem;
+}
+
+.compact.horizontal {
+  min-height: 4.5rem;
+  padding: 0.625rem clamp(1rem, 3vw, 2.5rem);
+}
+
+.compact.horizontal .logo {
+  height: 2.75rem;
+}
+
+.compact.horizontal .menu {
+  gap: clamp(0.875rem, 2.5vw, 1.75rem);
+}
+
+.compact.horizontal .menuItem {
+  font-size: 0.8125rem;
+  letter-spacing: 0.16em;
+  gap: 4px;
+}
+
+.compact.horizontal .menuItem .en {
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+}
+
 .brand {
   position: absolute;
   left: 3.5rem;
@@ -174,6 +225,10 @@
 
   .horizontal .logo {
     height: 3.25rem;
+  }
+
+  .compact.horizontal .logo {
+    height: 2.5rem;
   }
 
   .horizontal .menu {

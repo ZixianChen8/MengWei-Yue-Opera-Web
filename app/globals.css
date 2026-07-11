@@ -19,6 +19,7 @@
   /* Font family aliases — values injected by next/font/google as CSS variables on <html> */
   --font-chinese-display: var(--font-ma-shan), serif;
   --font-chinese-body:    var(--font-noto-serif-sc), serif;
+  --font-hero-title:      var(--font-huang-kai-hua-lawyer), var(--font-chinese-display);
   --font-seal:            var(--font-bei-shi-da-shuo-wen-xiao-zhuan), var(--font-chinese-display);
   --font-anniversary-title: var(--font-san-ji-xing-kai-jian-ti-cu), var(--font-chinese-display);
   --font-latin-display:   var(--font-cormorant), serif;

@@ -9,6 +9,12 @@ import {
   WISP_BASE_OPACITIES,
   getCloudLayerStyle,
 } from './cloudLayerConfig'
+import {
+  HERO_BG,
+  getHeroBgContainerStyle,
+  getHeroBgFadeStyle,
+  getHeroBgImageStyle,
+} from './heroBgConfig'
 import { useScrollParallax } from '@/components/hooks/useScrollParallax'
 import { hero } from '@/content/home'
 import styles from './Hero.module.css'
@@ -37,7 +43,7 @@ export default function Hero() {
     return () => mobile.removeEventListener('change', sync)
   }, [])
 
-  const { heroRef, titleBlockRef, titlePoemRef, mistRef, setCloudRef, setWispRef } =
+  const { heroRef, mistRef, setCloudRef, setWispRef } =
     useScrollParallax(CLOUD_LAYER_ANIMATIONS, WISP_BASE_OPACITIES, showClouds)
 
   return (
@@ -45,40 +51,25 @@ export default function Hero() {
 
       <div className={styles.sun} />
 
+      <h1 className={styles.wordmark}>
+        <span className={styles.nameBlock}>
+          <span className={styles.nameZh}>{hero.nameZh}</span>
+          <span className={styles.nameEn}>{hero.nameEn}</span>
+        </span>
+      </h1>
+
       {/* Hero background */}
-      <div className={styles.heroBg}>
+      <div className={styles.heroBg} style={getHeroBgContainerStyle()}>
+        <div className={styles.heroBgFade} style={getHeroBgFadeStyle()} aria-hidden="true" />
         <Image
-          src="/assets/bg1-exp.webp"
+          src={HERO_BG.src}
           alt=""
           fill
           className={styles.heroBgImg}
-          sizes="100vw"
-          priority
+          style={getHeroBgImageStyle(!showClouds)}
+          sizes={HERO_BG.sizes}
+          priority={HERO_BG.priority}
         />
-      </div>
-
-      {/* Title */}
-      <div className={styles.titleBlock} ref={titleBlockRef}>
-        <div className={styles.titleMeta}>{hero.meta}</div>
-        <div className={styles.titleChars}>
-          {hero.titleChars.map((char, i) => (
-            <span key={i}>
-              {i === hero.titleRedIndex
-                ? <span className={styles.red}>{char}</span>
-                : char}
-              {i < hero.titleChars.length - 1 && <br />}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Poem */}
-      <div className={styles.titlePoem} ref={titlePoemRef}>
-        {hero.poem.zh}<br />
-        <span className={styles.poemSmall}>{hero.poem.en}</span>
-        <span className={styles.stamp}>
-          <span className={styles.stampGlyph}>{hero.poem.stamp}</span>
-        </span>
       </div>
 
       {/* Cloud wisps */}

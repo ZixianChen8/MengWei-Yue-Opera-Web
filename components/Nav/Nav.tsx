@@ -34,9 +34,11 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
     ? `${styles.logo} ${styles.anniversaryLogo}`
     : styles.logo
 
-  const navClassName = variant === 'horizontal'
-    ? `${styles.nav} ${styles.horizontal}`
-    : styles.nav
+  const navClassName = [
+    styles.nav,
+    variant === 'horizontal' ? styles.horizontal : '',
+    brand !== 'anniversary' ? styles.compact : '',
+  ].filter(Boolean).join(' ')
 
   return (
     <nav className={navClassName}>

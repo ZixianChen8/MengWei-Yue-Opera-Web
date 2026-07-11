@@ -1,0 +1,3 @@
+# Finish Load Entrance before scroll-driven hero motion
+
+The hero combines a ceremonial Load Entrance (~2.2s+) with scroll-scrubbed Cloud Parallax and Wordmark Scroll Exit. We decided that if the visitor scrolls during Load Entrance, the entrance timeline still plays to completion; Cloud Parallax and Scroll Exit only become active afterward (via ScrollTrigger created or enabled on entrance `onComplete`). We rejected snap-to-end-on-scroll and scroll-locking: snap fights the intentional dark-to-light beat, and locking scroll is hostile with Lenis. The trade-off is brief scroll friction during the entrance, accepted because the duration can be shortened later without changing the control model.

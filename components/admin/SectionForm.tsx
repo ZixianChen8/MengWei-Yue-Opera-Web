@@ -50,10 +50,10 @@ const FIELD_LABELS: Record<string, string> = {
   sub: '副标题',
   links: '菜单链接',
   // Hero
+  nameZh: '机构中文名',
+  nameEn: '机构英文名',
+  // Shared / other sections
   meta: '小标题',
-  titleChars: '标题文字',
-  titleRedIndex: '红色字位置',
-  poem: '诗句',
   stamp: '印章',
   // Overture
   title: '标题',

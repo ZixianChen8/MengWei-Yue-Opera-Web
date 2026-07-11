@@ -20,10 +20,8 @@ type Nav = {
 }
 
 type Hero = {
-  meta: string
-  titleChars: string[]
-  titleRedIndex: number
-  poem: { zh: string; en: string; stamp: string }
+  nameZh: string
+  nameEn: string
 }
 
 type Overture = {

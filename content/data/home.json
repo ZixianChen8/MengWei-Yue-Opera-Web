@@ -36,19 +36,8 @@
     ]
   },
   "hero": {
-    "meta": "Ottawa · Yue Opera · Est. 2016",
-    "titleChars": [
-      "秀",
-      "灵",
-      "南",
-      "江"
-    ],
-    "titleRedIndex": 2,
-    "poem": {
-      "zh": "加拿大孟伟越剧艺术传习所",
-      "en": "Meng Wei Yue Opera Studio Canada",
-      "stamp": "越"
-    }
+    "nameZh": "加拿大孟伟越剧艺术传习所",
+    "nameEn": "Meng Wei Yue Opera Studio Canada"
   },
   "overture": {
     "title": {

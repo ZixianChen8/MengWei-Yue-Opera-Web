@@ -39,7 +39,7 @@ export const SECTIONS: SectionDef[] = [
   { target: 'home', section: 'repertoire', label: '往年活动', blurb: '首页影像条的标题与滚动提示（其照片来自"画廊"）。', group: 'Programme' },
   { target: 'gallery', section: 'galleryPage', label: '画廊', blurb: '上传照片（数量不限），每张可填写标题、说明与日期。用 ▲▼ 箭头调整顺序；勾选"首页展示"可同时显示在首页影像条。', group: 'Programme' },
 
-  { target: 'home', section: 'hero', label: '首屏', blurb: '首屏标题文字与工作室副标题。', group: 'Site text' },
+  { target: 'home', section: 'hero', label: '首屏', blurb: '首屏机构中英文名称（显示在人物剪影后方）。', group: 'Site text' },
   { target: 'home', section: 'overture', label: '序章', blurb: '开篇板块文案、引言以及三项数据。', group: 'Site text' },
   { target: 'home', section: 'studio', label: '教学 / 课程', blurb: '课程介绍与班级列表。', group: 'Site text' },
   { target: 'home', section: 'about', label: '关于（首页板块）', blurb: '首页上显示的竖排诗句与宗旨。', group: 'Site text' },

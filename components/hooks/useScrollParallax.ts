@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, type RefObject } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -14,15 +14,14 @@ export interface CloudLayerConfig {
 }
 
 export function useScrollParallax(
+  heroRef: RefObject<HTMLElement | null>,
   configs: CloudLayerConfig[],
   wispBaseOpacities: number[],
   enableClouds = true,
+  active = true,
 ) {
-  const heroRef      = useRef<HTMLElement>(null)
   const cloudRefs    = useRef<(HTMLDivElement | null)[]>([])
   const wispRefs     = useRef<(HTMLDivElement | null)[]>([])
-  const titleBlockRef = useRef<HTMLDivElement>(null)
-  const titlePoemRef  = useRef<HTMLDivElement>(null)
   const mistRef       = useRef<HTMLDivElement>(null)
 
   const setCloudRef = useCallback((index: number, element: HTMLDivElement | null) => {
@@ -43,7 +42,6 @@ export function useScrollParallax(
     const ctx = gsap.context(() => {
       const cloudLayers = cloudRefs.current.filter(Boolean) as HTMLDivElement[]
       const wisps = wispRefs.current.filter(Boolean) as HTMLDivElement[]
-      const titleTargets = [titleBlockRef.current, titlePoemRef.current].filter(Boolean) as HTMLDivElement[]
       const mist = mistRef.current
 
       media.add('(prefers-reduced-motion: reduce)', () => {
@@ -52,6 +50,8 @@ export function useScrollParallax(
       })
 
       media.add('(prefers-reduced-motion: no-preference)', () => {
+        if (!active) return () => undefined
+
         if (enableClouds) {
           gsap.set(cloudLayers, {
             force3D: true,
@@ -77,14 +77,6 @@ export function useScrollParallax(
             scrub: 1,
             invalidateOnRefresh: true,
           },
-        })
-
-        titleTargets.forEach((target, i) => {
-          timeline.to(target, {
-            y: i === 0 ? -150 : -110,
-            autoAlpha: 0,
-            duration: 0.45,
-          }, 0)
         })
 
         wisps.forEach((wisp, i) => {
@@ -141,14 +133,11 @@ export function useScrollParallax(
       media.revert()
       ctx.revert()
     }
-  }, [configs, wispBaseOpacities, enableClouds])
+  }, [heroRef, configs, wispBaseOpacities, enableClouds, active])
 
   return {
-    heroRef,
     cloudRefs,
     wispRefs,
-    titleBlockRef,
-    titlePoemRef,
     mistRef,
     setCloudRef,
     setWispRef,

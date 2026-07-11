@@ -85,23 +85,6 @@
   white-space: nowrap;
 }
 
-@keyframes wordmarkIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .wordmark {
-    animation: wordmarkIn 0.6s ease-out both;
-  }
-}
-
 /* Hero background image */
 .heroBg {
   position: absolute;
@@ -215,6 +198,16 @@
       var(--paper) 100%);
 }
 
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  background: #1a1510;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* =========================================================
    RESPONSIVE — tablet & mobile (desktop ≥1024px untouched).
    ========================================================= */
@@ -235,6 +228,7 @@
   }
 }
 
+/* Mobile hero: 767px max — keep aligned with HERO_MOTION_MIN_WIDTH (768) in useHeroMotion.ts */
 @media (max-width: 767px) {
   .wordmark {
     top: 14%;

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   CLOUD_LAYER_ANIMATIONS,
   CLOUD_LAYERS,
@@ -16,6 +16,7 @@ import {
   getHeroBgImageStyle,
 } from './heroBgConfig'
 import { useScrollParallax } from '@/components/hooks/useScrollParallax'
+import { HERO_MOTION_MIN_WIDTH, useHeroMotion } from '@/components/hooks/useHeroMotion'
 import { hero } from '@/content/home'
 import styles from './Hero.module.css'
 
@@ -30,9 +31,13 @@ const WISP_CLASSES = [
   styles.wispC,
 ]
 
-const MOBILE_QUERY = '(max-width: 767px)'
+const MOBILE_QUERY = `(max-width: ${HERO_MOTION_MIN_WIDTH - 1}px)`
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null)
+  const veilRef = useRef<HTMLDivElement>(null)
+  const wordmarkRef = useRef<HTMLHeadingElement>(null)
+  const cutoutRef = useRef<HTMLDivElement>(null)
   const [showClouds, setShowClouds] = useState(true)
 
   useEffect(() => {
@@ -43,15 +48,22 @@ export default function Hero() {
     return () => mobile.removeEventListener('change', sync)
   }, [])
 
-  const { heroRef, mistRef, setCloudRef, setWispRef } =
-    useScrollParallax(CLOUD_LAYER_ANIMATIONS, WISP_BASE_OPACITIES, showClouds)
+  const { entranceDone } = useHeroMotion({ heroRef, veilRef, wordmarkRef, cutoutRef })
+
+  const { mistRef, setCloudRef, setWispRef } = useScrollParallax(
+    heroRef,
+    CLOUD_LAYER_ANIMATIONS,
+    WISP_BASE_OPACITIES,
+    showClouds,
+    entranceDone && showClouds,
+  )
 
   return (
     <section className={styles.hero} ref={heroRef}>
 
       <div className={styles.sun} />
 
-      <h1 className={styles.wordmark}>
+      <h1 className={styles.wordmark} ref={wordmarkRef}>
         <span className={styles.nameBlock}>
           <span className={styles.nameZh}>{hero.nameZh}</span>
           <span className={styles.nameEn}>{hero.nameEn}</span>
@@ -59,7 +71,7 @@ export default function Hero() {
       </h1>
 
       {/* Hero background */}
-      <div className={styles.heroBg} style={getHeroBgContainerStyle()}>
+      <div className={styles.heroBg} style={getHeroBgContainerStyle()} ref={cutoutRef}>
         <div className={styles.heroBgFade} style={getHeroBgFadeStyle()} aria-hidden="true" />
         <Image
           src={HERO_BG.src}
@@ -109,6 +121,8 @@ export default function Hero() {
       {showClouds && (
         <div className={styles.cloudDiveMist} ref={mistRef} aria-hidden="true" />
       )}
+
+      <div className={styles.veil} ref={veilRef} aria-hidden="true" />
 
     </section>
   )

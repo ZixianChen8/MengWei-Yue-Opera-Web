@@ -231,25 +231,36 @@
 /* Mobile hero: 767px max — keep aligned with HERO_MOTION_MIN_WIDTH (768) in useHeroMotion.ts */
 @media (max-width: 767px) {
   .wordmark {
-    top: 14%;
-    left: 0;
+    top: 16%;
+    left: auto;
     right: 0;
-    padding: 0 24px;
+    padding: 0 22px;
+    text-align: right;
+    z-index: 4; /* above .heroBg (z-index: 3) so type stays readable over the figure */
+  }
+
+  .nameBlock {
+    display: inline-block;
+    max-width: calc(100vw - 44px);
   }
 
   .nameZh {
-    font-size: clamp(1.25rem, 5vw, 38px);
-    letter-spacing: 0.04em;
-    line-height: 1.1;
+    font-size: clamp(1.75rem, 9vw, 2.5rem);
+    letter-spacing: 0.06em;
+    line-height: 1.15;
+    white-space: nowrap;
   }
 
   .nameEn {
-    margin-top: 0.25rem;
+    position: static;
+    display: block;
+    margin-top: 0.4rem;
     font-size: 11px;
     letter-spacing: 0.36em;
     line-height: 1.45;
+    text-align: right;
     white-space: normal;
-    max-width: min(100%, 18rem);
+    max-width: none;
   }
 
   .cloudWisp,

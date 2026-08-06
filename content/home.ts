@@ -35,7 +35,6 @@ export type EventStatus = 'open' | 'free' | 'soon' | 'waitlist' | 'members' | 'c
 
 export type SeasonEvent = {
   id: string
-  num: string
   tag: string
   titleZh: string[]
   titleEn: string
@@ -47,9 +46,9 @@ export type SeasonEvent = {
   venue: string
   venueAddress: string
   home: boolean
-  statusType: EventStatus
-  statusLabel: string
-  listNum: string
+  /** Admin force-retire; also auto-retires the calendar day after `date`. */
+  past: boolean
+  status: EventStatus
   venueEn: string
   formUrl: string
   imageUrl: string
@@ -66,7 +65,12 @@ type Studio = {
   title: { zh: string; en: string }
   body: string[]
   program: { level: string; en: string; duration: string }[]
-  cta: { zh: string; en: string; href: string }
+  /** CTA link is derived from `contact.email` at render time. */
+  cta: { zh: string; en: string }
+}
+
+type Contact = {
+  email: string
 }
 
 // The home filmstrip now draws its cards from the shared gallery photos
@@ -98,7 +102,6 @@ type Footer = {
 type EventsListingPage = {
   header: { titleZh: string; titleEn: string; quote: { zh: string; en: string } }
   months: { cn: string; en: string }[]
-  archive: { year: string; shows: { num: string; cn: string }[] }[]
 }
 
 type EventPage = {
@@ -157,6 +160,7 @@ type HomeContent = {
   overture: Overture
   season: Season
   studio: Studio
+  contact: Contact
   repertoire: Repertoire
   about: About
   footer: Footer
@@ -172,6 +176,7 @@ export const hero = data.hero
 export const overture = data.overture
 export const season = data.season
 export const studio = data.studio
+export const contact = data.contact
 export const repertoire = data.repertoire
 export const about = data.about
 export const footer = data.footer

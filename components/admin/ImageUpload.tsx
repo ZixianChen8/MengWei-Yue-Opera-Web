@@ -109,9 +109,10 @@ export default function ImageUpload({ value, onChange }: Props) {
           onChange={(e) => onChange(e.target.value)}
         />
         <span className={styles.uploadHint}>
+          单张图片不得超过 {MAX_MB} MB，请先压缩后再上传。
           {isLocal
-            ? '已上传的图片 — 重新部署后（约 1–2 分钟）显示在网站上。'
-            : '或粘贴图片地址。'}
+            ? ' 已上传的图片 — 重新部署后（约 1–2 分钟）显示在网站上。'
+            : ' 或粘贴图片地址。'}
         </span>
         {error && <span className={styles.statusErr}>{error}</span>}
       </div>

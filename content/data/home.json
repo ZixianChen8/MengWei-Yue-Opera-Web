@@ -96,13 +96,237 @@
         "venue": "Bronson Centre Music Theatre，渥太华",
         "venueAddress": "Bronson Centre Music Theatre, 211 Bronson Ave, Ottawa, ON K1R 5H6",
         "home": true,
+        "past": false,
+        "status": "closed",
         "venueEn": "Bronson Centre Music Theatre",
         "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLScElg85Pgb1V-S-8rlSt8SH2DvaaOwhrpMXVv6lwIMj125zUA/viewform",
         "imageUrl": "/assets/yuespiration-banner.png",
-        "cardImageUrl": "/assets/uploads/image-20260527225454-122-188-1780891106680.webp",
-        "status": "closed"
+        "cardImageUrl": "/assets/uploads/image-20260527225454-122-188-1780891106680.webp"
+      },
+      {
+        "id": "wu-nu-bai-shou",
+        "tag": "演出",
+        "titleZh": [
+          "五女拜寿"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2025-01-01",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "qiu-men-huan-zhu",
+        "tag": "演出",
+        "titleZh": [
+          "秋门 · 还珠"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2025-01-02",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "yueju-jiangtai-1",
+        "tag": "讲座",
+        "titleZh": [
+          "越剧讲台 · 第一讲"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2025-01-03",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "bi-yu-zan",
+        "tag": "演出",
+        "titleZh": [
+          "碧玉簪"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2025-01-04",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "he-wen-xiu",
+        "tag": "演出",
+        "titleZh": [
+          "何文秀"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2024-01-01",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "shui-xiu-gongfang",
+        "tag": "工坊",
+        "titleZh": [
+          "水袖工坊"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2024-01-02",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "xueyuan-zhezi-chun",
+        "tag": "演出",
+        "titleZh": [
+          "学员折子 · 春"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2024-01-03",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "xi-xiang-ji-xuanduan",
+        "tag": "演出",
+        "titleZh": [
+          "西厢记 · 选段"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2023-01-01",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "pao-tai-dao-sui",
+        "tag": "演出",
+        "titleZh": [
+          "跑台稻穗"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2023-01-02",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
+      },
+      {
+        "id": "early-performances",
+        "tag": "演出",
+        "titleZh": [
+          "早期演出若干"
+        ],
+        "titleEn": "",
+        "blurb": "",
+        "description": "",
+        "date": "2018-01-01",
+        "time": "",
+        "duration": "",
+        "venue": "",
+        "venueAddress": "",
+        "home": false,
+        "past": true,
+        "status": "closed",
+        "venueEn": "",
+        "formUrl": "",
+        "imageUrl": "",
+        "cardImageUrl": ""
       }
     ]
+  },
+  "contact": {
+    "email": "mwyueos@gmail.com"
   },
   "studio": {
     "title": {
@@ -132,8 +356,7 @@
     ],
     "cta": {
       "zh": "咨询课程",
-      "en": "Inquire about classes",
-      "href": "mailto:hello@mengweiyue.ca"
+      "en": "Inquire about classes"
     }
   },
   "repertoire": {
@@ -207,13 +430,7 @@
       },
       {
         "heading": "To Reach Us · 留书",
-        "links": [
-          {
-            "zh": "mwyueos@gmail.com",
-            "en": "By letter",
-            "href": "mailto:mwyueos@gmail.com"
-          }
-        ]
+        "links": []
       }
     ],
     "copyright": "© 2026 Meng Wei Yue Opera Studio · 加拿大孟伟越剧艺术传习所",
@@ -276,68 +493,6 @@
       {
         "cn": "十二",
         "en": "Dec"
-      }
-    ],
-    "archive": [
-      {
-        "year": "2025",
-        "shows": [
-          {
-            "num": "01",
-            "cn": "五女拜寿"
-          },
-          {
-            "num": "02",
-            "cn": "秋门 · 还珠"
-          },
-          {
-            "num": "03",
-            "cn": "越剧讲台 · 第一讲"
-          },
-          {
-            "num": "04",
-            "cn": "碧玉簪"
-          }
-        ]
-      },
-      {
-        "year": "2024",
-        "shows": [
-          {
-            "num": "01",
-            "cn": "何文秀"
-          },
-          {
-            "num": "02",
-            "cn": "水袖工坊"
-          },
-          {
-            "num": "03",
-            "cn": "学员折子 · 春"
-          }
-        ]
-      },
-      {
-        "year": "2023",
-        "shows": [
-          {
-            "num": "01",
-            "cn": "西厢记 · 选段"
-          },
-          {
-            "num": "02",
-            "cn": "跑台稻穗"
-          }
-        ]
-      },
-      {
-        "year": "2018 — 22",
-        "shows": [
-          {
-            "num": "—",
-            "cn": "早期演出若干"
-          }
-        ]
       }
     ]
   },

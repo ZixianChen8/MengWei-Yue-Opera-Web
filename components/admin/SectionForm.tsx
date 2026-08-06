@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from 'react'
 import ImageUpload from './ImageUpload'
+import { EVENT_STATUS_META, EVENT_STATUS_VALUES } from '@/lib/event-status'
 import styles from './admin.module.css'
 
 // A JSON-ish value tree. Mirrors what lives in content/data/*.json.
@@ -16,20 +17,15 @@ export type JsonValue =
 // Constrained-choice fields get a dropdown instead of free text so an
 // admin can't accidentally break styling that keys off these values.
 const ENUM_OPTIONS: Record<string, string[]> = {
-  statusType: ['open', 'free', 'soon', 'waitlist', 'members', 'closed'],
+  status: [...EVENT_STATUS_VALUES],
 }
 
 // Chinese display text for enum values. The stored value stays the English
 // identifier (styling keys off it); only the dropdown label is translated.
 const ENUM_LABELS: Record<string, Record<string, string>> = {
-  statusType: {
-    open: '票务开放',
-    free: '免费入场',
-    soon: '即将开票',
-    waitlist: '候补名单',
-    members: '会员优先',
-    closed: '已截止 / 未公布',
-  },
+  status: Object.fromEntries(
+    EVENT_STATUS_VALUES.map((key) => [key, EVENT_STATUS_META[key].label]),
+  ),
 }
 
 // Chinese labels for JSON field keys. Keys not listed fall back to humanize().
@@ -68,8 +64,6 @@ const FIELD_LABELS: Record<string, string> = {
   eyebrow: '眉标',
   aside: '旁注',
   events: '活动',
-  id: '编号 (ID)',
-  num: '序号',
   tag: '类别标签',
   titleZh: '中文标题',
   titleEn: '英文标题',
@@ -82,9 +76,8 @@ const FIELD_LABELS: Record<string, string> = {
   venueAddress: '详细地址',
   venueEn: '地点（英文）',
   home: '首页展示',
-  statusType: '状态类型',
-  statusLabel: '状态文字',
-  listNum: '列表序号',
+  past: '往迹 / 已结束',
+  status: '状态',
   formUrl: '报名链接',
   imageUrl: '横幅图片',
   cardImageUrl: '卡片图片',
@@ -92,8 +85,6 @@ const FIELD_LABELS: Record<string, string> = {
   level: '班级',
   program: '课程',
   cta: '行动按钮',
-  // Repertoire
-  hint: '提示文字',
   // About (home block)
   verse: '诗句',
   verseEn: '诗句（英文）',
@@ -103,27 +94,6 @@ const FIELD_LABELS: Record<string, string> = {
   red: '红色字',
   after: '后段',
   mission: '宗旨',
-  // Footer
-  ornament: '装饰文字',
-  legal: '版权说明',
-  columns: '栏目',
-  heading: '栏目标题',
-  copyright: '版权',
-  sealLine: '落款',
-  // Events listing page
-  header: '页头',
-  years: '年份',
-  months: '月份',
-  archive: '往年存档',
-  year: '年份',
-  shows: '剧目',
-  // Event detail page
-  backLink: '返回链接',
-  signup: '报名',
-  qrLabel: '二维码说明',
-  formLink: '表单链接',
-  labels: '字段标签',
-  address: '地址',
   // Gallery page
   charsTop: '大字',
   charsRed: '大字（红）',
@@ -132,9 +102,10 @@ const FIELD_LABELS: Record<string, string> = {
   bold: '加粗文字',
   enTitle: '英文标题',
   crumbsBottom: '面包屑（下）',
-  lightbox: '灯箱',
   photos: '照片',
   image: '图片',
+  // Contact (single source)
+  email: '邮箱',
   // About page + contact form
   pageHead: '页头',
   charsZh: '中文大字',
@@ -153,7 +124,6 @@ const FIELD_LABELS: Record<string, string> = {
   subjects: '主题选项',
   fields: '表单字段',
   name: '姓名',
-  email: '邮箱',
   subject: '主题',
   phone: '电话',
   message: '留言',
@@ -189,6 +159,25 @@ const ARRAY_LIMITS: Record<string, { key: string; max: number; hint: string; mes
 // instead of the image-upload + caption fields. Keyed by the array's key.
 const NEW_ITEM_TEMPLATES: Record<string, JsonValue> = {
   photos: { image: '', title: '', description: '', date: '', home: false },
+  events: {
+    tag: '演出',
+    titleZh: [''],
+    titleEn: '',
+    blurb: '',
+    description: '',
+    date: '',
+    time: '',
+    duration: '',
+    venue: '',
+    venueAddress: '',
+    home: false,
+    past: false,
+    status: 'soon',
+    venueEn: '',
+    formUrl: '',
+    imageUrl: '',
+    cardImageUrl: '',
+  },
 }
 
 function isImageKey(key: string): boolean {
@@ -203,6 +192,10 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
 function isIsoDateKey(key: string, value: string): boolean {
   return key === 'date' && (value === '' || ISO_DATE.test(value))
 }
+
+// Keys kept in JSON for the site but not exposed in the admin form.
+const HIDDEN_ADMIN_KEYS = new Set(['lightbox'])
+const HIDDEN_EVENT_KEYS = new Set(['id', 'num', 'listNum', 'statusType', 'statusLabel'])
 
 function humanize(key: string): string {
   return key
@@ -220,7 +213,7 @@ function fieldLabel(key: string): string {
 function labelFromValue(value: JsonValue): string | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
   const record = value as { [key: string]: JsonValue }
-  const keys = ['titleEn', 'title', 'label', 'name', 'date', 'zh', 'en', 'id']
+  const keys = ['titleEn', 'title', 'label', 'name', 'date', 'zh', 'en']
 
   for (const key of keys) {
     const candidate = record[key]
@@ -377,7 +370,11 @@ function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
               {primitive ? (
                 <ValueNode value={item} keyName={keyName} onChange={(next) => update(i, next)} />
               ) : (
-                <ObjectNode value={item as { [k: string]: JsonValue }} onChange={(next) => update(i, next)} />
+                <ObjectNode
+                  value={item as { [k: string]: JsonValue }}
+                  onChange={(next) => update(i, next)}
+                  hiddenKeys={keyName === 'events' ? HIDDEN_EVENT_KEYS : HIDDEN_ADMIN_KEYS}
+                />
               )}
             </Collapsible>
           </div>
@@ -477,12 +474,14 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
 type ObjectNodeProps = {
   value: { [key: string]: JsonValue }
   onChange: (next: { [key: string]: JsonValue }) => void
+  hiddenKeys?: Set<string>
 }
 
-function ObjectNode({ value, onChange }: ObjectNodeProps) {
+function ObjectNode({ value, onChange, hiddenKeys = HIDDEN_ADMIN_KEYS }: ObjectNodeProps) {
   return (
     <>
       {Object.entries(value).map(([k, v]) => {
+        if (hiddenKeys.has(k)) return null
         const nested = v !== null && typeof v === 'object'
         const update = (next: JsonValue) => onChange({ ...value, [k]: next })
 

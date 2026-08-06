@@ -1,10 +1,11 @@
 import Link from 'next/link'
-import { footer, nav } from '@/content/home'
+import { contact, footer, nav } from '@/content/home'
 import Reveal from '@/components/Reveal/Reveal'
 import styles from './Footer.module.css'
 
 export default function Footer() {
-  const contactColumn = footer.columns[1]
+  const contactHeading = footer.columns[1]?.heading ?? 'To Reach Us · 留书'
+  const mailto = `mailto:${contact.email}`
 
   return (
     <footer className={styles.footer}>
@@ -34,16 +35,12 @@ export default function Footer() {
           ))}
         </Reveal>
 
-        {contactColumn ? (
-          <Reveal className={styles.col} delay={0.2}>
-            <h4>{contactColumn.heading}</h4>
-            {contactColumn.links.map((item) => (
-              <a key={`${item.en}-${item.href}`} href={item.href}>
-                {item.zh}<span className={styles.en}>{item.en}</span>
-              </a>
-            ))}
-          </Reveal>
-        ) : null}
+        <Reveal className={styles.col} delay={0.2}>
+          <h4>{contactHeading}</h4>
+          <a href={mailto}>
+            {contact.email}<span className={styles.en}>By letter</span>
+          </a>
+        </Reveal>
       </div>
 
       <div className={styles.bottom}>

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { isAdmin } from '@/lib/admin-guard'
 import { getJsonFile, putFile, utf8ToBase64 } from '@/lib/github'
 import { DATA_FILES, findSection, type ContentTarget } from '@/lib/content-config'
+import { blankEventsError, findBlankEventIndexes, normalizeSeasonEvents } from '@/lib/event-slug'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,7 +25,11 @@ export async function GET(request: Request) {
     if (!file) {
       return NextResponse.json({ error: '未找到数据文件' }, { status: 404 })
     }
-    return NextResponse.json({ data: file.data[section] })
+    let data = file.data[section]
+    if (target === 'home' && section === 'season' && isSeasonSection(data)) {
+      data = { ...data, events: normalizeSeasonEvents(data.events) }
+    }
+    return NextResponse.json({ data })
   } catch (err) {
     return NextResponse.json({ error: errorMessage(err) }, { status: 502 })
   }
@@ -59,7 +64,19 @@ export async function POST(request: Request) {
     if (!file) {
       return NextResponse.json({ error: '未找到数据文件' }, { status: 404 })
     }
-    const next = { ...file.data, [section]: body.data }
+    let sectionData = body.data
+    if (target === 'home' && section === 'season' && isSeasonSection(sectionData)) {
+      const events = normalizeSeasonEvents(sectionData.events)
+      const blank = findBlankEventIndexes(events)
+      if (blank.length > 0) {
+        return NextResponse.json({ error: blankEventsError(blank) }, { status: 400 })
+      }
+      sectionData = {
+        ...sectionData,
+        events,
+      }
+    }
+    const next = { ...file.data, [section]: sectionData }
     const content = JSON.stringify(next, null, 2) + '\n'
     const result = await putFile({
       path,
@@ -75,4 +92,10 @@ export async function POST(request: Request) {
 
 function errorMessage(err: unknown): string {
   return err instanceof Error ? err.message : '发生未知错误'
+}
+
+function isSeasonSection(
+  data: unknown,
+): data is { events: Parameters<typeof normalizeSeasonEvents>[0]; [key: string]: unknown } {
+  return !!data && typeof data === 'object' && Array.isArray((data as { events?: unknown }).events)
 }

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { nav, footer } from '@/content/home'
+import { nav, contact } from '@/content/home'
 import { galleryPage } from '@/content/gallery'
 import { NAV_BRANDS, type NavBrand } from '@/components/Nav/brandConfig'
 import { selectMenuPhotos } from '@/components/Nav/selectMenuPhotos'
@@ -21,14 +21,11 @@ type NavProps = {
 
 const photos = selectMenuPhotos(galleryPage.photos)
 
-const contactLink =
-  footer.columns
-    .flatMap((c) => c.links)
-    .find((l) => l.href.startsWith('mailto:')) ?? {
-    zh: 'mwyueos@gmail.com',
-    en: 'Contact',
-    href: 'mailto:mwyueos@gmail.com',
-  }
+const contactLink = {
+  zh: contact.email,
+  en: 'Contact',
+  href: `mailto:${contact.email}`,
+}
 
 function isActivePath(pathname: string, href: string): boolean {
   if (href === '/') return pathname === '/'

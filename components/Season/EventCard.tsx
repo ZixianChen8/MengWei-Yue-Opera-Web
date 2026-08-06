@@ -15,7 +15,6 @@ import styles from './Season.module.css'
 
 type SeasonEvent = {
   id: string
-  num: string
   tag: string
   titleZh: string[]
   titleEn: string

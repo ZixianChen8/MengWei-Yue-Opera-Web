@@ -3,6 +3,9 @@ import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
 import EventsListing from '@/components/EventsListing/EventsListing'
 
+// Re-evaluate event retirement (day after event date) at least daily.
+export const revalidate = 86400
+
 export const metadata: Metadata = {
   title: '演出 · Season — 孟伟越剧',
   description: '加拿大孟伟越剧艺术传习所年度演出计划，涵盖大戏、折子戏、讲座与工坊。',

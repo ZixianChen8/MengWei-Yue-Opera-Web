@@ -379,6 +379,14 @@
   background: var(--gold);
 }
 
+.statusGray {
+  color: var(--ink-faint);
+}
+
+.statusGray::before {
+  background: var(--ink-faint);
+}
+
 .evArrow {
   font-family: var(--font-latin-display);
   font-size: 18px;
@@ -487,10 +495,17 @@
   align-items: baseline;
   padding: 18px 0;
   border-bottom: 1px solid var(--border-mid);
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.25s;
 }
 
 .archRow:last-child {
   border-bottom: none;
+}
+
+.archRow:hover {
+  opacity: 0.7;
 }
 
 .archCn {

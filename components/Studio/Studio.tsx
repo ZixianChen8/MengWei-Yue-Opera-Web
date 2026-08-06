@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { studio } from '@/content/home'
+import { contact, studio } from '@/content/home'
 import {
   MM_DESKTOP,
   MM_MOBILE,
@@ -115,7 +115,7 @@ export default function Studio() {
             ))}
           </div>
 
-          <Link href={studio.cta.href} className={styles.cta} data-cta data-reveal>
+          <Link href={`mailto:${contact.email}`} className={styles.cta} data-cta data-reveal>
             {studio.cta.zh}
             <span className={styles.ctaEn}>{studio.cta.en}</span>
           </Link>

@@ -8,6 +8,9 @@ import Studio from '@/components/Studio/Studio'
 import Repertoire from '@/components/Repertoire/Repertoire'
 import Footer from '@/components/Footer/Footer'
 
+// Re-evaluate event retirement (day after event date) at least daily.
+export const revalidate = 86400
+
 export default function Home() {
   return (
     <>

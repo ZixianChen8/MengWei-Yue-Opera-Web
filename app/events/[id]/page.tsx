@@ -6,6 +6,9 @@ import EventBanner from '@/components/EventPage/EventBanner'
 import EventBody from '@/components/EventPage/EventBody'
 import { season } from '@/content/home'
 
+// Re-evaluate retirement (hide QR the day after the event) at least daily.
+export const revalidate = 86400
+
 export function generateStaticParams() {
   return season.events.map((event) => ({ id: event.id }))
 }

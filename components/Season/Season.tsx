@@ -5,19 +5,21 @@ import Link from 'next/link'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { season, type SeasonEvent } from '@/content/home'
+import { upcomingEvents } from '@/lib/event-lifecycle'
 import { MM_DESKTOP, MM_MOBILE, MM_REDUCED, revealBatch } from '@/components/hooks/scrollStory'
 import EventCard from './EventCard'
 import styles from './Season.module.css'
 
 const MAX_HOME_EVENTS = 3
 
-// Pick the events shown in the home Season section: those flagged `home`
-// come first (in list order), then the earliest unflagged events fill the
-// remaining slots up to MAX_HOME_EVENTS. Fewer than the cap simply shows all.
+// Pick the events shown in the home Season section: retired events are
+// excluded first; those flagged `home` come next (in list order), then
+// the earliest unflagged upcoming events fill the remaining slots.
 function selectHomeEvents(events: SeasonEvent[], max = MAX_HOME_EVENTS): SeasonEvent[] {
-  const checked = events.filter((e) => e.home).slice(0, max)
+  const live = upcomingEvents(events)
+  const checked = live.filter((e) => e.home).slice(0, max)
   if (checked.length >= max) return checked
-  const fill = events.filter((e) => !e.home)
+  const fill = live.filter((e) => !e.home)
   return [...checked, ...fill].slice(0, max)
 }
 

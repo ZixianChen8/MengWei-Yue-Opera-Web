@@ -33,27 +33,55 @@ export type SectionDef = {
   group: SectionGroup
 }
 
-// Order here is the order shown on the dashboard.
+// Only the CMS-scoped sections. Everything else stays in JSON for the site
+// but is not editable via /admin.
 export const SECTIONS: SectionDef[] = [
-  { target: 'home', section: 'season', label: '活动', blurb: '近期演出、日期、地点与横幅图片。最多可在 3 个活动上勾选"首页展示"，决定哪些显示在首页板块。', group: 'Programme' },
-  { target: 'home', section: 'repertoire', label: '往年活动', blurb: '首页影像条的标题与滚动提示（其照片来自"画廊"）。', group: 'Programme' },
-  { target: 'gallery', section: 'galleryPage', label: '画廊', blurb: '上传照片（数量不限），每张可填写标题、说明与日期。用 ▲▼ 箭头调整顺序；勾选"首页展示"可同时显示在首页影像条。', group: 'Programme' },
+  {
+    target: 'home',
+    section: 'season',
+    label: '活动',
+    blurb:
+      '演出信息、图片与横幅（单张不超过 4 MB）。勾选"首页展示"（最多 3 个）显示在首页；勾选"往迹 / 已结束"或活动日期过后，会出现在 /events 往迹区并自动关闭报名。',
+    group: 'Programme',
+  },
+  {
+    target: 'gallery',
+    section: 'galleryPage',
+    label: '画廊',
+    blurb:
+      '上传照片（数量不限，单张不超过 4 MB），每张可填写标题、说明与日期。用 ▲▼ 箭头调整顺序；勾选"首页展示"可同时显示在首页影像条。',
+    group: 'Programme',
+  },
 
-  { target: 'home', section: 'hero', label: '首屏', blurb: '首屏机构中英文名称（显示在人物剪影后方）。', group: 'Site text' },
-  { target: 'home', section: 'overture', label: '序章', blurb: '开篇板块文案、引言以及三项数据。', group: 'Site text' },
-  { target: 'home', section: 'studio', label: '教学 / 课程', blurb: '课程介绍与班级列表。', group: 'Site text' },
-  { target: 'home', section: 'about', label: '关于（首页板块）', blurb: '首页上显示的竖排诗句与宗旨。', group: 'Site text' },
-  { target: 'home', section: 'nav', label: '导航菜单', blurb: '菜单文字与链接，以及品牌标识。', group: 'Site text' },
-  { target: 'home', section: 'footer', label: '页脚', blurb: '页脚栏目、联系方式与版权文字。', group: 'Site text' },
+  {
+    target: 'home',
+    section: 'studio',
+    label: '教学 / 课程',
+    blurb: '课程介绍与班级列表。咨询按钮的邮箱来自「联络方式」。',
+    group: 'Site text',
+  },
+  {
+    target: 'home',
+    section: 'contact',
+    label: '联络方式',
+    blurb: '唯一邮箱来源：页脚、导航联系入口与课程咨询按钮共用此地址。',
+    group: 'Site text',
+  },
+  {
+    target: 'home',
+    section: 'about',
+    label: '关于（首页板块）',
+    blurb: '首页上显示的竖排诗句与宗旨。',
+    group: 'Site text',
+  },
 
-  { target: 'booklet', section: 'anniversary', label: '十周年专场（入口）', blurb: '/anniversary 页面的标题、副标题与子菜单卡片。', group: 'Pages' },
-  { target: 'booklet', section: 'booklet', label: '场刊', blurb: '十周年专场场刊：封面、序言、贺信、演职人员、节目单、委员会与支持单位。', group: 'Pages' },
-  { target: 'booklet', section: 'programmePage', label: '节目单', blurb: '/anniversary/programme 页面：抬头、主持人，以及演出曲目（类别、中英文剧名、演职人员）。', group: 'Pages' },
-  { target: 'booklet', section: 'appreciationPage', label: '导赏', blurb: '/anniversary/appreciation 页面：抬头、引言，以及每一折的剧情梗概与观赏看点。', group: 'Pages' },
-
-  { target: 'home', section: 'aboutPage', label: '关于页面', blurb: '完整的 /about 页面：简介、联系方式与表单标签。', group: 'Pages' },
-  { target: 'home', section: 'eventsListingPage', label: '活动页面', blurb: '/events 列表页头、月份条与往年存档。', group: 'Pages' },
-  { target: 'home', section: 'eventPage', label: '活动详情标签', blurb: '每个 /events/[id] 详情页上显示的标签文字。', group: 'Pages' },
+  {
+    target: 'home',
+    section: 'aboutPage',
+    label: '关于页面',
+    blurb: '完整的 /about 页面：简介与联系表单文案。',
+    group: 'Pages',
+  },
 ]
 
 export function findSection(target: string, section: string): SectionDef | undefined {

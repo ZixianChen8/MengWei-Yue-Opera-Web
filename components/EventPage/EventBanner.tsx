@@ -9,22 +9,28 @@ interface EventBannerProps {
 }
 
 export default function EventBanner({ event }: EventBannerProps) {
+  const hasImage = Boolean(event.imageUrl)
+
   return (
     <section className={styles.banner}>
-      <Image
-        src={event.imageUrl}
-        alt={event.titleZh.join('')}
-        fill
-        className={styles.bannerImg}
-        sizes="100vw"
-        priority
-      />
+      {hasImage ? (
+        <Image
+          src={event.imageUrl}
+          alt={event.titleZh.join('')}
+          fill
+          className={styles.bannerImg}
+          sizes="100vw"
+          priority
+        />
+      ) : null}
       <div className={styles.bannerOverlay} />
       <div className={styles.bannerText}>
         <h1 className={styles.bannerTitle}>
           {event.titleZh.join('')}
         </h1>
-        <span className={styles.bannerEn}>{event.titleEn}</span>
+        {event.titleEn ? (
+          <span className={styles.bannerEn}>{event.titleEn}</span>
+        ) : null}
       </div>
     </section>
   )

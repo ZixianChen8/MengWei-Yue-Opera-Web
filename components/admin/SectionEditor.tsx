@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import SectionForm, { type JsonValue } from './SectionForm'
+import { assertNoBlankEvents, normalizeSeasonEvents } from '@/lib/event-slug'
 import styles from './admin.module.css'
 
 type Props = {
@@ -35,7 +36,11 @@ export default function SectionEditor({ target, section, label }: Props) {
     setError(null)
     setSavedMsg(null)
     try {
-      setData(await fetchContent())
+      let nextData = await fetchContent()
+      if (section === 'season' && isSeasonData(nextData)) {
+        nextData = { ...nextData, events: normalizeSeasonEvents(nextData.events) }
+      }
+      setData(nextData)
       setLoadState('ready')
     } catch (err) {
       setError(err instanceof Error ? err.message : '加载内容失败')
@@ -50,6 +55,9 @@ export default function SectionEditor({ target, section, label }: Props) {
     fetchContent(controller.signal)
       .then(nextData => {
         if (cancelled) return
+        if (section === 'season' && isSeasonData(nextData)) {
+          nextData = { ...nextData, events: normalizeSeasonEvents(nextData.events) }
+        }
         setData(nextData)
         setLoadState('ready')
       })
@@ -70,10 +78,21 @@ export default function SectionEditor({ target, section, label }: Props) {
     setError(null)
     setSavedMsg(null)
     try {
+      let payload = data
+      if (section === 'season' && isSeasonData(data)) {
+        const events = normalizeSeasonEvents(data.events)
+        assertNoBlankEvents(events)
+        payload = {
+          ...data,
+          events,
+        }
+        setData(payload)
+      }
+
       const res = await fetch('/api/admin/content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ target, section, data }),
+        body: JSON.stringify({ target, section, data: payload }),
       })
       const json = await res.json()
       if (!res.ok) throw new Error(json.error || '保存失败')
@@ -112,4 +131,10 @@ export default function SectionEditor({ target, section, label }: Props) {
       {loadState === 'ready' && <SectionForm value={data} onChange={setData} />}
     </div>
   )
+}
+
+function isSeasonData(
+  data: JsonValue,
+): data is { events: Parameters<typeof normalizeSeasonEvents>[0]; [key: string]: JsonValue } {
+  return !!data && typeof data === 'object' && !Array.isArray(data) && Array.isArray((data as { events?: unknown }).events)
 }

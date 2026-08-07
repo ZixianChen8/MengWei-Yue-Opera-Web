@@ -97,55 +97,11 @@
         "venueAddress": "Bronson Centre Music Theatre, 211 Bronson Ave, Ottawa, ON K1R 5H6",
         "home": true,
         "past": false,
-        "status": "closed",
         "venueEn": "Bronson Centre Music Theatre",
         "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLScElg85Pgb1V-S-8rlSt8SH2DvaaOwhrpMXVv6lwIMj125zUA/viewform",
         "imageUrl": "/assets/yuespiration-banner.png",
-        "cardImageUrl": "/assets/uploads/image-20260527225454-122-188-1780891106680.webp"
-      },
-      {
-        "id": "wu-nu-bai-shou",
-        "tag": "演出",
-        "titleZh": [
-          "五女拜寿"
-        ],
-        "titleEn": "",
-        "blurb": "",
-        "description": "",
-        "date": "2025-01-01",
-        "time": "",
-        "duration": "",
-        "venue": "",
-        "venueAddress": "",
-        "home": false,
-        "past": true,
-        "status": "closed",
-        "venueEn": "",
-        "formUrl": "",
-        "imageUrl": "",
-        "cardImageUrl": ""
-      },
-      {
-        "id": "qiu-men-huan-zhu",
-        "tag": "演出",
-        "titleZh": [
-          "秋门 · 还珠"
-        ],
-        "titleEn": "",
-        "blurb": "",
-        "description": "",
-        "date": "2025-01-02",
-        "time": "",
-        "duration": "",
-        "venue": "",
-        "venueAddress": "",
-        "home": false,
-        "past": true,
-        "status": "closed",
-        "venueEn": "",
-        "formUrl": "",
-        "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "/assets/uploads/image-20260527225454-122-188-1780891106680.webp",
+        "status": "closed"
       },
       {
         "id": "yueju-jiangtai-1",
@@ -163,11 +119,11 @@
         "venueAddress": "",
         "home": false,
         "past": true,
-        "status": "closed",
         "venueEn": "",
         "formUrl": "",
         "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "",
+        "status": "closed"
       },
       {
         "id": "bi-yu-zan",
@@ -185,11 +141,11 @@
         "venueAddress": "",
         "home": false,
         "past": true,
-        "status": "closed",
         "venueEn": "",
         "formUrl": "",
         "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "",
+        "status": "closed"
       },
       {
         "id": "he-wen-xiu",
@@ -207,11 +163,11 @@
         "venueAddress": "",
         "home": false,
         "past": true,
-        "status": "closed",
         "venueEn": "",
         "formUrl": "",
         "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "",
+        "status": "closed"
       },
       {
         "id": "shui-xiu-gongfang",
@@ -229,11 +185,11 @@
         "venueAddress": "",
         "home": false,
         "past": true,
-        "status": "closed",
         "venueEn": "",
         "formUrl": "",
         "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "",
+        "status": "closed"
       },
       {
         "id": "xueyuan-zhezi-chun",
@@ -251,11 +207,11 @@
         "venueAddress": "",
         "home": false,
         "past": true,
-        "status": "closed",
         "venueEn": "",
         "formUrl": "",
         "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "",
+        "status": "closed"
       },
       {
         "id": "xi-xiang-ji-xuanduan",
@@ -273,11 +229,11 @@
         "venueAddress": "",
         "home": false,
         "past": true,
-        "status": "closed",
         "venueEn": "",
         "formUrl": "",
         "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "",
+        "status": "closed"
       },
       {
         "id": "pao-tai-dao-sui",
@@ -295,11 +251,11 @@
         "venueAddress": "",
         "home": false,
         "past": true,
-        "status": "closed",
         "venueEn": "",
         "formUrl": "",
         "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "",
+        "status": "closed"
       },
       {
         "id": "early-performances",
@@ -317,11 +273,11 @@
         "venueAddress": "",
         "home": false,
         "past": true,
-        "status": "closed",
         "venueEn": "",
         "formUrl": "",
         "imageUrl": "",
-        "cardImageUrl": ""
+        "cardImageUrl": "",
+        "status": "closed"
       }
     ]
   },

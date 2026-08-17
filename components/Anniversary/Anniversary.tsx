@@ -1,13 +1,16 @@
 import Link from 'next/link'
-import { anniversary } from '@/content/booklet'
+import type { SpecialMenuItem, SpecialPageHead } from '@/content/specials'
 import Reveal from '@/components/Reveal/Reveal'
 import Silk from '@/components/Silk/Silk'
 import styles from './Anniversary.module.css'
 
-// The 10th Anniversary Special hub: a masthead plus a small
-// menu of sub-pages. Only `ready` tiles link out.
-export default function Anniversary() {
-  const { pageHead, menu } = anniversary
+type Props = {
+  pageHead: SpecialPageHead
+  menu: SpecialMenuItem[]
+}
+
+// Special-event hub: a masthead plus a menu of enabled sub-pages.
+export default function Anniversary({ pageHead, menu }: Props) {
   const titleLines = pageHead.titleZh.split(' ')
 
   return (
@@ -41,24 +44,14 @@ export default function Anniversary() {
                   <span className={styles.rowZh}>{item.zh}</span>
                   <span className={styles.rowEn}>{item.en}</span>
                 </span>
-                {item.ready ? (
-                  <span className={styles.rowArrow} aria-hidden="true" />
-                ) : (
-                  <span className={styles.rowCue}>即将上线 · Coming soon</span>
-                )}
+                <span className={styles.rowArrow} aria-hidden="true" />
               </>
             )
             return (
-              <Reveal as="li" key={item.en} className={styles.row} delay={0.06 * i}>
-                {item.ready ? (
-                  <Link href={item.href} className={styles.rowLink}>
-                    {inner}
-                  </Link>
-                ) : (
-                  <div className={`${styles.rowLink} ${styles.rowDisabled}`} aria-disabled="true">
-                    {inner}
-                  </div>
-                )}
+              <Reveal as="li" key={item.href} className={styles.row} delay={0.06 * i}>
+                <Link href={item.href} className={styles.rowLink}>
+                  {inner}
+                </Link>
               </Reveal>
             )
           })}

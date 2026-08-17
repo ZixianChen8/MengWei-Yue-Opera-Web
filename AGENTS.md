@@ -52,6 +52,13 @@ There are also static event pages:
 - Next.js 16 passes route `params` as a Promise in this codebase; follow the existing `async` pattern in `app/events/[id]/page.tsx`
 - `app/gallery/page.tsx` renders the photo gallery (剧照) via `components/Gallery/Gallery.tsx`
 
+Special-event hubs (the 10th-anniversary template) live under `/special/[slug]`:
+
+- `app/special/[slug]/page.tsx` — hub
+- `app/special/[slug]/booklet|programme|appreciation/page.tsx` — optional sub-pages
+- `generateStaticParams()` maps `specials.items[].slug` (sub-pages only emit enabled tabs)
+- Disabled tabs 404; `/anniversary` and `/anniversary/:path*` permanently redirect to `/special/10th-anniversary`
+
 Static sub-pages (events, gallery, about) share the same shell as the home page: `<SmoothScroll />`, then a `position: relative` wrapper containing `<Nav />` and the page content, then `<Footer />`.
 
 `app/layout.tsx` loads four Google Fonts via `next/font/google` and one local font via `next/font/local`, attaching CSS variables (`--font-ma-shan`, `--font-noto-serif-sc`, `--font-cormorant`, `--font-jetbrains`, `--font-bei-shi-da-shuo-wen-xiao-zhuan`) on `<html>`. `globals.css` maps these to semantic aliases (`--font-chinese-display`, `--font-chinese-body`, etc.) and defines all design tokens.
@@ -60,7 +67,7 @@ Static sub-pages (events, gallery, about) share the same shell as the home page:
 
 **Client boundary:** Components that use scroll/resize listeners or refs must have `'use client'` at the top. The landing sections `Overture`, `About`, `Season`, `Studio`, and `Repertoire` are `'use client'` because each mounts a GSAP scroll-storytelling context (see **Scroll/animation pattern**); they are imported **only** by `app/page.tsx`, so this does not affect the static sub-pages. Shared chrome (`Nav`, `Footer`) and other content components (`EventBanner`, `EventBody`, `Eyebrow`) remain server components with no `'use client'` directive.
 
-**Nav state:** Nav imports `nav.links` from `content/home.ts` and renders them with `next/link`. Current links are Home (`/`), Events (`/events`), Gallery (`/gallery`), Learn (`/#studio`), and About (`/about`). The logo also links to `/`. The logo is pinned to the left via `position: absolute`; menu items are centered.
+**Nav state:** Nav, BubbleMenu, and Footer render `siteNavLinks` from `lib/nav-links.ts`. That helper starts from `nav.links` (admin → **导航**), strips leftover `/anniversary` or `/special/*` entries, and inserts specials with `showInNav` **before** `/about`. Special-event nav titles are edited on each special (admin → **特别活动**), not in `nav.links`. The logo is pinned to the left via `position: absolute`; menu items are centered. On `/special/[slug]` the logo/href come from that event (`logo` or the studio mark).
 
 `globals.css` sets `scroll-behavior: smooth` on `html, body`. The nav is not fixed, so sections do not need `scroll-margin-top` to clear a persistent header. Any existing `scroll-margin-top` declarations in section module CSS are legacy and can be removed.
 
@@ -70,7 +77,7 @@ Static sub-pages (events, gallery, about) share the same shell as the home page:
 
 ## Content
 
-**Data lives in JSON; the `.ts` modules are typed re-exports.** The editable values live in `content/data/home.json` and `content/data/gallery.json`. `content/home.ts` imports `./data/home.json` and re-exports each section (`nav`, `hero`, `season`, …) with the project's TypeScript types; `content/gallery.ts` does the same for `galleryPage`. Components import the named exports from `content/home.ts` / `content/gallery.ts` (never the JSON directly, never hardcoded strings). The `/admin` dashboard edits the JSON files (see **Admin dashboard**), so when adding a field, add it to the JSON **and** widen the matching type in the `.ts` module.
+**Data lives in JSON; the `.ts` modules are typed re-exports.** The editable values live in `content/data/home.json`, `content/data/gallery.json`, and `content/data/specials.json`. `content/home.ts` imports `./data/home.json` and re-exports each section (`nav`, `hero`, `season`, …) with the project's TypeScript types; `content/gallery.ts` does the same for `galleryPage`; `content/specials.ts` exports `specials` plus helpers (`getSpecial`, `enabledTabs`, `specialHref`). Components import the named exports from those modules (never the JSON directly, never hardcoded strings). The `/admin` dashboard edits the JSON files (see **Admin dashboard**), so when adding a field, add it to the JSON **and** widen the matching type in the `.ts` module.
 
 | Export | Used by | Shape notes |
 |---|---|---|
@@ -84,8 +91,9 @@ Static sub-pages (events, gallery, about) share the same shell as the home page:
 | `eventsListingPage` | EventsListing | listing page header, years, months, archive |
 | `eventPage` | EventBody | event detail labels and signup/back-link text |
 | `galleryPage` (in `content/gallery.ts`) | Gallery | header, filter chips, lightbox labels, and `photos[]` |
+| `specials` (in `content/specials.ts`) | `/special/[slug]` | `items[]` of anniversary-style hubs; each has slug, nav titles, tab toggles, hub / booklet / programme / appreciation |
 
-When adding a new section or page copy, export its content from `content/home.ts` and import it into the relevant component. When adding or changing top-level navigation, update `nav.links` and verify the corresponding route or section anchor exists.
+When adding a new section or page copy, export its content from `content/home.ts` and import it into the relevant component. When adding or changing top-level navigation, edit `nav.links` (admin → **导航**) and/or a special's `showInNav` + `navZh`/`navEn`.
 
 **Events:** Upcoming/current events live in `season.events[]`. The same array powers homepage cards, `/events`, and `/events/[id]`. Required fields include `id`, display titles, description/blurb, date/time/venue, `statusType`, `statusLabel`, `formUrl`, and two images: `imageUrl` (the `/events/[id]` hero banner, via `EventBanner`) and `cardImageUrl` (the `/events` listing card; falls back to the CSS `evImg` placeholder when empty). Both image keys surface the admin upload widget automatically (their names match `isImageKey` in `SectionForm`). The event-detail **QR code is generated at build time** by `EventBody` (an async server component) from `event.formUrl` using the `qrcode` package — there is no QR image field; editing `formUrl` updates the QR. A placeholder `formUrl` of `#` (or empty) renders the decorative CSS QR placeholder instead.
 
@@ -104,11 +112,12 @@ A password-gated content editor is implemented (it replaces hand-editing the dat
 - `app/admin/login/` — login screen (`LoginForm` posts to `/api/admin/login`).
 - `app/admin/(protected)/page.tsx` — dashboard listing the editable sections.
 - `app/admin/(protected)/edit/[target]/[section]/page.tsx` — the per-section editor (`components/admin/SectionEditor` + `SectionForm` + `ImageUpload`, `LogoutButton`).
-- API route handlers under `app/api/admin/`: `login`, `logout`, `content` (GET/POST a section), `upload` (image upload). Plus `app/api/contact/` for the contact form.
+- `app/admin/(protected)/specials/` — list / create / settings / per-part editors for special-event hubs.
+- API route handlers under `app/api/admin/`: `login`, `logout`, `content` (GET/POST a section), `specials` (list/create/reorder/update/delete), `upload` (image upload). Plus `app/api/contact/` for the contact form.
 
 **Auth:** `proxy.ts` (Next 16's renamed `middleware`) gates `/admin/:path*` and `/api/admin/:path*` — it verifies an HMAC-signed session cookie, redirecting unauthenticated page requests to `/admin/login` and returning 401 for API requests; `/admin/login` and `/api/admin/login` are public. `lib/auth.ts` holds the cookie/session logic (Web Crypto HMAC, no session store, 8h TTL, `verifyPassword` against `ADMIN_PASSWORD`). `lib/admin-guard.ts` exports `isAdmin()` for defense-in-depth re-checks inside route handlers and server components — **always call `isAdmin()` at the top of any new `/api/admin/*` handler.**
 
-**What is editable:** `lib/content-config.ts` is the registry — `SECTIONS[]` maps each `(target, section)` pair to its data file (`DATA_FILES`) and dashboard label/group. The content API only writes sections found via `findSection`, so **a new editable section must be added to `SECTIONS` before it can be saved.** `SectionForm` auto-renders the section's JSON tree: string keys matching `/image|imageurl|imgurl/i` (`isImageKey`) get the `ImageUpload` widget; keys in `ENUM_OPTIONS` (e.g. `statusType`, `cat`) get a dropdown; everything else is a text/number/checkbox/array editor.
+**What is editable:** `lib/content-config.ts` is the registry — `SECTIONS[]` maps each `(target, section)` pair to its data file (`DATA_FILES`) and dashboard label/group. The content API only writes sections found via `findSection`, so **a new editable section must be added to `SECTIONS` before it can be saved.** Special events are a dedicated flow (`/admin/specials` + `/api/admin/specials`) rather than a generic `SECTIONS` tree, because each item is a large hub + booklet + programme + appreciation document. `SectionForm` auto-renders JSON trees: string keys matching `/image|imageurl|imgurl/i` (`isImageKey`) get the `ImageUpload` widget; keys in `ENUM_OPTIONS` (e.g. `statusType`, `cat`) get a dropdown; everything else is a text/number/checkbox/array editor.
 
 **Persistence:** `lib/github.ts` is the persistence layer (GitHub Contents API). `getJsonFile`/`putFile` read and commit `content/data/*.json`; `/api/admin/upload` commits images to `public/assets/uploads/` and returns the path. Requires env vars `AUTH_SECRET`, `ADMIN_PASSWORD`, `GITHUB_TOKEN`, `GITHUB_OWNER`, `GITHUB_REPO` (and optional `GITHUB_BRANCH`, default `main`). Because the runtime filesystem on Vercel is read-only/ephemeral, edits are **not** written to disk — they are committed to the repo, and the live site updates only after the resulting redeploy (≈1–2 min). Uploads are capped at ~4 MB (Vercel body limit) and limited to jpeg/png/webp/gif/avif.
 

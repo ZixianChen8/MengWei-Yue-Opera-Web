@@ -5,8 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { gsap } from 'gsap'
-import { nav } from '@/content/home'
-import { NAV_BRANDS, brandForPath } from '@/components/Nav/brandConfig'
+import { siteNavLinks } from '@/lib/nav-links'
+import { resolveNavBrand } from '@/components/Nav/brandConfig'
 import styles from './BubbleMenu.module.css'
 
 // Floating "bubble" mobile navigation (≤1023px), rendered site-wide. A persistent
@@ -24,7 +24,7 @@ export default function BubbleMenu() {
   // Skip the close animation on the initial mount (the menu starts closed).
   const hasOpened = useRef(false)
 
-  const items = nav.links
+  const items = siteNavLinks
 
   const handleToggle = useCallback(() => setOpen((prev) => !prev), [])
   const close = useCallback(() => setOpen(false), [])
@@ -108,16 +108,15 @@ export default function BubbleMenu() {
   // Not part of the password-gated admin chrome.
   if (pathname?.startsWith('/admin')) return null
 
-  const brand = brandForPath(pathname)
-  const brandConfig = NAV_BRANDS[brand]
-  const barClass = brand === 'anniversary'
+  const { config: brandConfig, wideLogo } = resolveNavBrand(pathname)
+  const barClass = wideLogo
     ? styles.bar
     : `${styles.bar} ${styles.compactBar}`
 
-  const logoBubbleClass = brand === 'anniversary'
+  const logoBubbleClass = wideLogo
     ? `${styles.bubble} ${styles.logoBubble} ${styles.anniversaryLogoBubble}`
     : `${styles.bubble} ${styles.logoBubble}`
-  const logoImgClass = brand === 'anniversary'
+  const logoImgClass = wideLogo
     ? `${styles.logoImg} ${styles.anniversaryLogoImg}`
     : styles.logoImg
 

@@ -6,7 +6,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { nav, contact } from '@/content/home'
 import { galleryPage } from '@/content/gallery'
-import { NAV_BRANDS, type NavBrand } from '@/components/Nav/brandConfig'
+import { siteNavLinks } from '@/lib/nav-links'
+import { NAV_BRANDS, resolveNavBrand, type NavBrand } from '@/components/Nav/brandConfig'
 import { selectMenuPhotos } from '@/components/Nav/selectMenuPhotos'
 import {
   useDesktopMenuMotion,
@@ -175,14 +176,15 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
   }, [menuState])
 
   const close = () => setOpen(false)
-  const brandConfig = NAV_BRANDS[brand]
-  const logoClass =
-    brand === 'anniversary' ? `${styles.logo} ${styles.anniversaryLogo}` : styles.logo
+  const resolved = resolveNavBrand(pathname)
+  const brandConfig = resolved.brand === 'special' ? resolved.config : NAV_BRANDS[brand]
+  const wideLogo = resolved.wideLogo
+  const logoClass = wideLogo ? `${styles.logo} ${styles.anniversaryLogo}` : styles.logo
 
   const navClassName = [
     styles.nav,
     variant === 'horizontal' ? styles.horizontal : '',
-    brand !== 'anniversary' ? styles.compact : '',
+    wideLogo ? '' : styles.compact,
     menuState !== 'closed' ? styles.menuActive : '',
   ]
     .filter(Boolean)
@@ -256,7 +258,7 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
             <div className={styles.desktopNavCol}>
               <nav aria-label="主导航 · Primary">
                 <ul className={styles.desktopLinkList}>
-                  {nav.links.map((item) => {
+                  {siteNavLinks.map((item) => {
                     const active = isActivePath(pathname, item.href)
                     return (
                       <li key={item.en} className={styles.desktopLinkItem}>
@@ -332,7 +334,7 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
           </div>
 
           <ul className={styles.olList}>
-            {nav.links.map((item, i) => (
+            {siteNavLinks.map((item, i) => (
               <li key={item.en}>
                 <Link
                   href={item.href}

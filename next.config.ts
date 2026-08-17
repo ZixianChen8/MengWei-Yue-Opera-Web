@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'picsum.photos' },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/anniversary', destination: '/special/10th-anniversary', permanent: true },
+      { source: '/anniversary/:path*', destination: '/special/10th-anniversary/:path*', permanent: true },
+    ]
+  },
 };
 
 export default nextConfig;

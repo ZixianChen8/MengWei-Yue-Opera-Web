@@ -1,0 +1,1097 @@
+{
+  "items": [
+    {
+      "slug": "10th-anniversary",
+      "showInNav": true,
+      "navZh": "十载芳馨 越动枫华",
+      "navEn": "10th Anniversary",
+      "hubTab": {
+        "zh": "专场",
+        "en": "Gala"
+      },
+      "logo": "/assets/anniversary-logo-white.jpg",
+      "tabs": {
+        "booklet": {
+          "enabled": true,
+          "navZh": "场刊",
+          "navEn": "Book",
+          "menuZh": "场刊",
+          "menuEn": "Program Booklet"
+        },
+        "programme": {
+          "enabled": true,
+          "navZh": "节目单",
+          "navEn": "Acts",
+          "menuZh": "节目单",
+          "menuEn": "Programme"
+        },
+        "appreciation": {
+          "enabled": true,
+          "navZh": "导赏",
+          "navEn": "Guide",
+          "menuZh": "导赏",
+          "menuEn": "Guided Appreciation"
+        }
+      },
+      "hub": {
+        "pageHead": {
+          "meta": "Est. 2016 · Ottawa",
+          "titleZh": "十载芳馨 越动枫华",
+          "titleEn": "10th Anniversary Special",
+          "tagline": "10 Years in the Making"
+        }
+      },
+      "booklet": {
+        "pageHead": {
+          "meta": "2016 – 2026",
+          "titleZh": "场刊",
+          "titleEn": "Program Book",
+          "crumb": "10th Anniversary Gala"
+        },
+        "cover": {
+          "posterImage": "/assets/booklet/mw-backdrop-upscaled.webp",
+          "presents": "加拿大孟伟越剧艺术传习所 呈献",
+          "wordmark": "场刊",
+          "scriptEn": "Program Booklet",
+          "tagline": "十载芳馨 越动枫华",
+          "organizer": "加拿大孟伟越剧艺术传习所 · Meng Wei Yue Opera Studio",
+          "venue": "Bronson Centre Music Theatre, Ottawa",
+          "date": "2026年7月11日"
+        },
+        "preface": {
+          "titleEn": "Preface",
+          "paragraphs": [
+            "Welcome to 10 Years in the Making.",
+            "Tonight's performance marks an important milestone for Meng Wei Yue Opera Studio as we celebrate ten years of preserving, practicing, and sharing the art of Yue Opera in Canada.",
+            "What began as a small group united by a love of traditional Chinese opera has grown into a vibrant artistic community. Over the past decade, our members, volunteers, supporters, and audiences have helped transform a shared passion into a lasting cultural presence within Canada's diverse multicultural landscape. Together, we have sought not only to preserve a treasured art form, but also to build bridges of understanding through the universal language of the performing arts.",
+            "Known for its lyrical melodies, poetic storytelling, graceful movement, and refined aesthetics, Yue Opera occupies a special place in Chinese cultural heritage. Distinguished by its celebrated tradition of all-female casts — including women portraying both male and female characters — Yue Opera offers a theatrical experience unlike any other. Through elegant performance, expressive music, and richly layered storytelling, it brings timeless human emotions to life in a way that transcends language and cultural boundaries.",
+            "This anniversary gala is both a celebration of the past and a vision for the future. Through a selection of beloved classics, artistic collaborations, and performances by dedicated artists, we honor the journey that has brought us here while reaffirming our commitment to sharing Yue Opera with new audiences for years to come.",
+            "We extend our heartfelt gratitude to our sponsors, partners, volunteers, families, and friends whose encouragement and support have made this evening possible. Most importantly, we thank you, our audience, for joining us in this celebration.",
+            "Whether you are a lifelong admirer of Yue Opera or experiencing it for the very first time, we hope tonight's performance inspires, moves, and connects you.",
+            "Thank you for being part of our story."
+          ],
+          "signoff": {
+            "org": "Meng Wei Yue Opera Studio",
+            "date": "July 11, 2026"
+          }
+        },
+        "letters": {
+          "titleEn": "Greetings",
+          "intro": "We are deeply honoured to receive the following messages of congratulations.",
+          "items": [
+            {
+              "name": "The Right Honourable Mark Carney",
+              "role": "Prime Minister of Canada",
+              "image": "/assets/booklet/letters/prime-minister-carney.jpg"
+            },
+            {
+              "name": "The Honourable Yuen Pau Woo",
+              "role": "Senator, British Columbia",
+              "image": "/assets/booklet/letters/senator-yuen-pau-woo.jpg"
+            },
+            {
+              "name": "The Honourable Victor Oh",
+              "role": "Former Senator of Canada",
+              "image": "/assets/booklet/letters/senator-victor-oh.jpg"
+            },
+            {
+              "name": "Michael Ma, M.P.",
+              "role": "Markham — Unionville",
+              "image": "/assets/booklet/letters/mp-michael-ma.jpg"
+            },
+            {
+              "name": "Mark Sutcliffe",
+              "role": "Mayor of Ottawa",
+              "image": "/assets/booklet/letters/mayor-mark-sutcliffe.jpg"
+            }
+          ]
+        },
+        "team": {
+          "titleEn": "Producer & Director",
+          "members": [
+            {
+              "name": "Ms. Wei Meng",
+              "role": "Producer",
+              "image": "/assets/booklet/team/wei-meng.jpg",
+              "bio": [
+                "Maggie is dedicated to promoting Chinese cultural heritage in Canada by founding the Meng Wei Yue Opera Studio in Ottawa in 2016. As organizer of the Palette of Cultures Showcase, she passionately fosters Canada-China cultural exchange, engaging diverse audiences through events like Asian Heritage Month and the Tulip Festival. Committed to advancing cultural diversity, Maggie earned the 2023 Queen Elizabeth II Platinum Jubilee Medallion and 2024 Legacy Award for her meaningful contributions to the communities."
+              ],
+              "credits": []
+            },
+            {
+              "name": "Mr. Xuefeng Gu",
+              "role": "Director",
+              "image": "/assets/booklet/team/xuefeng-gu.png",
+              "bio": [
+                "Renowned Planner & Stage Director"
+              ],
+              "credits": [
+                "Chairman, Fengyi Cultural Communication / Leshang Cultural Media",
+                "Artistic Director, Gu Xuefeng Culture and Art Studio",
+                "President, Zhejiang Yin School Yue Opera Association",
+                "Vice President, Hangzhou Yue Opera Research Association",
+                "Vice Chairman, Suzhou Wujiang District Dramatists Association",
+                "Artistic Advisor, Beijing Yue Opera Research Association",
+                "Artistic Director, Mengwei Yue Opera Studio"
+              ]
+            }
+          ]
+        },
+        "programme": {
+          "titleEn": "Programme",
+          "emcee": "姜漪 Yi Jiang",
+          "emceeLabel": "Emcee",
+          "acts": [
+            {
+              "titleEn": "A Scenic Yue Opera Song — “Ten Years of Grace”",
+              "titleZh": "情景越歌《十载芳馨》",
+              "performers": "Wei Meng, Dongmei Shi, Chunhui Qian, Yan Chen, Qizhi Hu, Hua Zhu, Wen Wang, Lihong Zhang, Xiaolin Niu, Yuyi Shen, Yuchuan Xu, Zhongliang Liu, Yuqian Lu",
+              "note": ""
+            },
+            {
+              "titleEn": "Farewell Before Expedition — Excerpt from Mao Sui Recommends Himself",
+              "titleZh": "折子戏《毛遂自荐·送征》",
+              "performers": "Hua Zhu, Yan Chen",
+              "note": ""
+            },
+            {
+              "titleEn": "Delivering the Letter — Excerpt from Love Beyond Distance",
+              "titleZh": "折子戏《山河恋·送信》",
+              "performers": "Qizhi Hu, Yuchuan Xu",
+              "note": ""
+            },
+            {
+              "titleEn": "The Eighteen Farewells — Excerpt from The Butterfly Lovers",
+              "titleZh": "折子戏《梁山伯与祝英台·十八相送》",
+              "performers": "Lihong Zhang, Yan Chen",
+              "note": ""
+            },
+            {
+              "titleEn": "Liang Shanbo's Descent from the Mountain — Excerpt from The Butterfly Lovers",
+              "titleZh": "折子戏《梁山伯与祝英台·思祝下山》",
+              "performers": "Wei Meng",
+              "note": "Accompanying Dancers: Xiaolin Niu, Chunhui Qian, Yuchuan Xu, Hua Zhu, Ling Zhou, Qizhi Hu, Yuyi Shen, Zhongliang Liu"
+            },
+            {
+              "titleEn": "Guest Performer",
+              "titleZh": "嘉宾助演",
+              "performers": "顾学风",
+              "note": ""
+            },
+            {
+              "titleEn": "Yue Opera Dance — Grace of the Fan and Rhythms of the Sleeves",
+              "titleZh": "越剧身段《扇影袖韵》",
+              "performers": "Hua Zhu, Xiaolin Niu, Qizhi Hu, Yuqian Lu, Chunhui Qian, Yuchuan Xu, Ling Zhou, Yuyi Shen",
+              "note": ""
+            },
+            {
+              "titleEn": "Delivering the Letter — Excerpt from Romance of the Western Chamber",
+              "titleZh": "折子戏《西厢记·传简》",
+              "performers": "Wei Meng, Dongmei Shi",
+              "note": ""
+            },
+            {
+              "titleEn": "A Secret Lovers' Tryst — Excerpt from The Peony Pavilion",
+              "titleZh": "折子戏《牡丹亭·幽媾》",
+              "performers": "Xiaolin Niu, Chunhui Qian",
+              "note": ""
+            },
+            {
+              "titleEn": "The Phoenix Coronet Presented — Excerpt from The Jade Hairpin",
+              "titleZh": "折子戏《碧玉簪·送凤冠》",
+              "performers": "Wei Meng, Dongmei Shi, Xiangyan Huang, Hua Zhu, Yan Lv, Lihong Zhang, Yuyi Shen",
+              "note": ""
+            }
+          ]
+        },
+        "committee": {
+          "titleEn": "Organizing Committee",
+          "groups": [
+            {
+              "role": "Producer",
+              "names": "Wei Meng"
+            },
+            {
+              "role": "Planning Director",
+              "names": "Xuefeng Gu, Dongmei Shi, Wei Meng"
+            },
+            {
+              "role": "General Coordinator",
+              "names": "Chunhui Qian, Xiaolin Niu, Yuqian Lu"
+            },
+            {
+              "role": "Executive Committee",
+              "names": "Ruolong Tang, Ping Lin, Zheng Xing, Xiangdong Xi"
+            }
+          ]
+        },
+        "crew": {
+          "titleEn": "Production Crew",
+          "groups": [
+            {
+              "role": "Chief Director",
+              "names": "Xuefeng Gu"
+            },
+            {
+              "role": "Assistant Director",
+              "names": "Max Ma"
+            },
+            {
+              "role": "Stage Manager",
+              "names": "Jian Guan"
+            },
+            {
+              "role": "Assistant Stage Manager",
+              "names": "Ruby Han"
+            },
+            {
+              "role": "Videographer",
+              "names": "Weimin Mao, Jian Chen, Song Wang"
+            },
+            {
+              "role": "Photographer",
+              "names": "Yang Bai, Jing Zhang, Ming Cheng"
+            },
+            {
+              "role": "Media Promotion",
+              "names": "Zixian Chen"
+            }
+          ]
+        },
+        "closing": {
+          "organizerTitleEn": "Organizer",
+          "organizer": "Mengwei Yue Opera Studio",
+          "supportingTitleEn": "In Partnership With",
+          "supporting": [
+            "Jingju Quebec Art Centre",
+            "Zixian Chen",
+            "Shanghai One Fine Dining",
+            "赵氏工坊加拿大基地",
+            "杭州越剧艺术研究会",
+            "渥太华北京协会",
+            "顾学风文化工作室"
+          ]
+        }
+      },
+      "programmePage": {
+        "pageHead": {
+          "meta": "2016 – 2026",
+          "titleZh": "节目单",
+          "titleEn": "Programme",
+          "crumb": "十载芳馨 越动枫华"
+        },
+        "posterImage": "/assets/booklet/mw-backdrop-upscaled.webp",
+        "presents": "加拿大孟伟越剧艺术传习所 呈献",
+        "wordmark": "节目单",
+        "scriptEn": "Programme",
+        "tagline": "十载芳馨 越动枫华",
+        "venue": "Bronson Centre Music Theatre, Ottawa",
+        "date": "2026年7月11日",
+        "emceeLabel": "主持",
+        "emcee": "姜漪 Yi Jiang",
+        "acts": [
+          {
+            "no": "01",
+            "category": "情景越歌",
+            "titleZh": "《十载芳馨》",
+            "titleEn": "A Scenic Yue Opera Song — “Ten Years of Grace”",
+            "performers": "孟伟、史冬梅、钱春晖、陈燕、胡奇志、朱华、王雯、张立虹、钮晓琳、沈渝懿、许玉川、刘仲良、陆宇倩",
+            "performersEn": "Wei Meng, Dongmei Shi, Chunhui Qian, Yan Chen, Qizhi Hu, Hua Zhu, Wen Wang, Lihong Zhang, Xiaolin Niu, Yuyi Shen, Yuchuan Xu, Zhongliang Liu, Yuqian Lu",
+            "note": ""
+          },
+          {
+            "no": "02",
+            "category": "折子戏",
+            "titleZh": "《毛遂自荐·送征》",
+            "titleEn": "Farewell Before Expedition — from Mao Sui Recommends Himself",
+            "performers": "朱华 饰 毛遂、陈燕 饰 王湘君",
+            "performersEn": "Hua Zhu, Yan Chen",
+            "note": ""
+          },
+          {
+            "no": "03",
+            "category": "折子戏",
+            "titleZh": "《山河恋·送信》",
+            "titleEn": "Delivering the Letter — from Love Beyond Distance",
+            "performers": "胡奇志 饰 申息、许玉川 饰 季娣",
+            "performersEn": "Qizhi Hu, Yuchuan Xu",
+            "note": ""
+          },
+          {
+            "no": "04",
+            "category": "折子戏",
+            "titleZh": "《梁山伯与祝英台·十八相送》",
+            "titleEn": "The Eighteen Farewells — from The Butterfly Lovers",
+            "performers": "张立虹 饰 梁山伯、陈燕 饰 祝英台",
+            "performersEn": "Lihong Zhang, Yan Chen",
+            "note": ""
+          },
+          {
+            "no": "05",
+            "category": "折子戏",
+            "titleZh": "《梁山伯与祝英台·思祝下山》",
+            "titleEn": "Liang Shanbo's Descent from the Mountain — from The Butterfly Lovers",
+            "performers": "孟伟 饰 梁山伯",
+            "performersEn": "Wei Meng",
+            "note": "伴舞：钮晓琳、钱春晖、许玉川、朱华、周凌、胡奇志、沈渝懿、刘仲良",
+            "noteEn": "Accompanying Dancer: Xiaolin Niu, Chunhui Qian, Yuchuan Xu, Hua Zhu, Ling Zhou, Qizhi Hu, Yuyi Shen, Zhongliang Liu"
+          },
+          {
+            "no": "06",
+            "category": "嘉宾助演",
+            "titleZh": "特邀嘉宾 顾学风",
+            "titleEn": "Guest Performer — Xuefeng Gu",
+            "performers": "顾学风",
+            "note": ""
+          },
+          {
+            "no": "07",
+            "category": "越剧身段",
+            "titleZh": "《扇影袖韵》",
+            "titleEn": "Yue Opera Dance — Grace of the Fan and Rhythms of the Sleeves",
+            "performers": "朱华、钮晓琳、胡奇志、陆宇倩、钱春晖、许玉川、周凌、沈渝懿",
+            "performersEn": "Hua Zhu, Xiaolin Niu, Qizhi Hu, Yuqian Lu, Chunhui Qian, Yuchuan Xu, Ling Zhou, Yuyi Shen",
+            "note": ""
+          },
+          {
+            "no": "08",
+            "category": "折子戏",
+            "titleZh": "《西厢记·传简》",
+            "titleEn": "Delivering the Letter — from Romance of the Western Chamber",
+            "performers": "孟伟 饰 张生 、史冬梅 饰 红娘",
+            "performersEn": "Wei Meng, Dongmei Shi",
+            "note": ""
+          },
+          {
+            "no": "09",
+            "category": "折子戏",
+            "titleZh": "《牡丹亭·幽媾》",
+            "titleEn": "A Secret Lovers' Tryst — from The Peony Pavilion",
+            "performers": "钮晓琳 饰 柳梦梅、钱春晖 饰 杜丽娘",
+            "performersEn": "Xiaolin Niu, Chunhui Qian",
+            "note": ""
+          },
+          {
+            "no": "10",
+            "category": "折子戏",
+            "titleZh": "《碧玉簪·送凤冠》",
+            "titleEn": "The Phoenix Coronet Presented — from The Jade Hairpin",
+            "performers": "孟伟 饰 王玉林  史冬梅 饰 李秀英\n黄湘燕 饰 陆氏     朱华 饰 王裕\n吕琰 饰 李廷普     张立虹 饰 李夫人\n沈渝懿 饰 春香",
+            "performersEn": "Wei Meng, Dongmei Shi, Xiangyan Huang, Hua Zhu, Yan Lv, Lihong Zhang, Yuyi Shen",
+            "note": ""
+          }
+        ]
+      },
+      "appreciationPage": {
+        "pageHead": {
+          "meta": "2016 – 2026",
+          "titleZh": "导赏",
+          "titleEn": "Guided Appreciation",
+          "crumb": "十载芳馨 越动枫华"
+        },
+        "posterImage": "/assets/booklet/mw-backdrop-upscaled.webp",
+        "presents": "加拿大孟伟越剧艺术传习所 呈献",
+        "wordmark": "导赏",
+        "scriptEn": "Guided Appreciation",
+        "tagline": "十载芳馨 越动枫华",
+        "venue": "Bronson Centre Music Theatre, Ottawa",
+        "date": "2026年7月11日",
+        "intro": "本系列是“孟伟越剧艺术传习所十周年折子戏专场”的节目导赏，旨在为观众提供一把进入舞台的钥匙。下文按演出顺序，为每一折简要介绍剧目的源流、故事、艺术特点与欣赏要点，帮助您在聆听与观赏时更从容地理解细节、感受情绪。无论是否熟悉戏曲，都可以从这里开始，从容走进舞台。",
+        "keywordsLabel": "看点关键词",
+        "lyricsLabel": "唱词 · Libretto",
+        "entries": [
+          {
+            "no": "01",
+            "category": "情景越歌",
+            "titleZh": "《十载芳馨》",
+            "titleEn": "A Scenic Yue Opera Song — “Ten Years of Grace”",
+            "performers": "孟伟、史冬梅、钱春晖、陈燕、胡奇志、朱华、王雯、张立虹、钮晓琳、沈渝懿、许玉川、刘仲良、陆宇倩",
+            "keywords": "一封写给越剧的时光情书",
+            "lead": "在孟伟越剧十周年专场演出的舞台上，我们将迎来一个特别的作品——情景越歌《十载芳馨》。这不是一出传统意义上的折子戏，而是一幅用情感、身段与歌声共同织就的音画，是海外越剧人用十年光阴写成的一封献给越剧的深情“家书”。",
+            "sections": [
+              {
+                "heading": "缘起：一颗种子的远行与生根",
+                "body": [
+                  "节目始于一段深情的叙述。四位学员的回忆，从“家乡舞台的丝竹悠扬”到“撩拨心弦的江南越音”，瞬间将我们带回那个被戏曲启蒙的童年。舞台上的悲喜嗔笑，穿古越今的梨园世界，不仅是艺术的初印象，更是一颗深埋心底的文化种子。",
+                  "而核心人物孟伟老师的独白，则道出了这颗种子在异国他乡的奇妙旅程。“孑身来到枫叶之国”，一个“孑”字，道出了最初的孤寂与文化乡愁。然而，幸运的是，她“遇到了她、她，还有她——”。这不仅是人与人的相遇，更是灵魂与灵魂的共鸣，是乡音与知音的邂逅。于是，“孟伟越剧艺术传习所应缘而生”。“应缘”二字，巧妙点出了这一切并非刻意谋划，而是因共同的挚爱、在恰当的时机，如水到渠成般自然发生。这，便是海外越剧传承最美的开端。"
+                ]
+              },
+              {
+                "heading": "形式：情景交融的崭新诗篇",
+                "body": [
+                  "《十载芳馨》在艺术形式上大胆融合，创造了独特的观赏体验。",
+                  "“情景越歌”的叙事结构：节目打破了传统戏曲的线性叙事，采用“回忆叙述+身段展示+情感咏唱”的板块式结构。叙述是“根”，交代缘由与心声；身段是“形”，展示越剧独特的肢体美学；越歌是“魂”，将澎湃的情感升华为旋律。三者层层递进，共同构建了一个从现实到情怀、从个体到群体的立体情感空间。",
+                  "“戏中戏”的身段表演：节目中穿插的【越剧人物身段表演】，是点睛之笔。它并非完整剧目，而是精选的程式化身段与水袖组合。这好比书法中的“飞白”，戏剧里的“潜台词”，让观众在抽象的韵律美中，自行联想那些经典的才子佳人形象，感受“无声胜有声”的戏曲意象之美。",
+                  "“心声”化的越歌演唱：歌词并非古典诗词，而是参与者们发自肺腑的原创心声。从“越韵低吟，诉一怀心语衷肠”的细腻，到“晶莹的汗水湿透衣裳”的纪实，再到“舞台小天地，演不完古往今来情无限”的升华，它唱的是具体的故事，抒的是普遍的情感。旋律在保持越剧基本韵味的基础上，更显抒情与磅礴，宛如一曲所有爱越人的“主题交响”。"
+                ]
+              },
+              {
+                "heading": "内核：十年耕耘的“情、传、美”",
+                "body": [
+                  "节目的核心，是海外传承越剧的三种精神力量：",
+                  "“梨园情梦”的执着：这是贯穿始终的情感主线。对故乡文化的眷恋（乡情），对越剧艺术的痴迷（痴情），以及在异国因戏结缘的珍贵友谊（友情），三者交织，化作了“尽情绽放”的内在动力。这份“情梦”，让他们在远离故土的地方，建造了一座精神的“原乡”。",
+                  "“传习守望”的担当：“艺术传习所”之名，点明了其核心功能不仅是“自娱”，更是“传承”。节目通过众多学员的集体呈现，生动展示了从一个人到一群人、从一个念头到一个蓬勃集体的过程。这是一场自觉的文化守望，让越剧在跨文化的土壤中吐露新芽。",
+                  "“越动枫华”的绽放：“十载芳馨，越动枫华”是主题，也是成果报告。“枫华”谐音“风华”，既指加拿大的枫叶之国，也喻指越剧艺术在此地焕发的独特风姿与华彩。这是两种文明的美学对话，是中华传统文化在海外生根后，结出的动人果实。"
+                ]
+              },
+              {
+                "heading": "观赏指南：如何沉浸其中",
+                "body": [
+                  "听其“声”：请留意叙述部分语言的感染力，那是故事的开端；更需沉浸于越歌部分的旋律，感受传统板腔体如何与现代抒情歌唱性结合，体会歌词中每一份真挚的情感。",
+                  "观其“形”：关注身段表演的韵律与造型之美。即使不了解具体剧情，也能从演员的一举手、一投足、一拂袖中，感受到越剧表演的写意、含蓄与优雅。",
+                  "会其“意”：尝试超越具体的表演形式，去捕捉和共鸣那份共同的情感——无论我们身在何方，对心中所爱的那份文化、那份艺术的坚持与深情，是相通的。节目最动人的，正是这份“此心安处是吾乡”的文化自信与情感归宿。"
+                ]
+              },
+              {
+                "heading": "结语",
+                "body": [
+                  "《十载芳馨》不只是一次表演，更是一次深情的回溯与昂扬的宣告。它让我们看到，戏曲的生命力不仅存在于聚光灯下的经典剧场，也流淌在每一个热爱者的血脉中，生长在每一片有心灵共鸣的土地上。",
+                  "今夜，让我们共同聆听这封来自枫叶之国的“时光情书”，感受那跨越山海、历经十载却愈发醇厚的——梨园情缘。"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "Scenario Yue Opera Song “Ten Years of Maple Grace”",
+                "body": [
+                  "A tribute to Yue Opera’s journey in Canada",
+                  "“Ten Years of Maple Grace” is a scenic Yue Opera piece created for the 10th anniversary of Mengwei Yue Opera Studio. Blending narration, stylized movement, and Yue Opera singing, it paints an emotional portrait of how Yue Opera took root and flourished overseas.",
+                  "The work begins with personal memories of discovering Yue Opera in childhood—moments that planted the first cultural seed. Mengwei’s monologue traces that seed’s journey to Canada, where shared passion brought together a community and gave rise to the Studio.",
+                  "The performance features expressive narration, selected movement sequences inspired by classic characters, and original lyrics that convey sincere affection for the art. Together, they form a poetic reflection on devotion, cultural transmission, and the beauty of Yue Opera blossoming in a new land.",
+                  "Tonight, “Ten Years of Maple Grace” invites audiences to listen, observe, and feel the heartfelt connection between tradition and its inheritors across oceans."
+                ]
+              },
+              {
+                "heading": "Performers:",
+                "body": [
+                  "Wei Meng, Dongmei Shi, Chunhui Qian, Yan Chen, Qizhi Hu, Hua Zhu, Wen Wang, Lihong Zhang, Xiaolin Niu, Yuyi Shen, Yuchuan Xu, Zhongliang Liu, Yuqian Lu"
+                ]
+              }
+            ]
+          },
+          {
+            "no": "02",
+            "category": "折子戏",
+            "titleZh": "《毛遂自荐·送征》",
+            "titleEn": "Farewell Before Expedition — from Mao Sui Recommends Himself",
+            "performers": "朱华 饰 毛遂、陈燕 饰 王湘君",
+            "sections": [
+              {
+                "heading": "剧目源流｜从史书传奇到越剧舞台的慷慨壮歌",
+                "body": [
+                  "《毛遂自荐》的故事源于西汉司马迁所著《史记·平原君虞卿列传》，记载了战国时期赵国门客毛遂自请随平原君出使楚国、以过人胆识促成合纵抗秦的史实。“毛遂自荐”由此成为千古传颂的成语，象征挺身而出、勇于担当的精神。这一题材自宋元以来便常见于话本、杂剧及民间说唱，至近现代，更被京剧、豫剧、河北梆子等多个剧种搬演，成为展现士人风骨与家国情怀的经典剧目。",
+                  "在众多演绎之中，越剧《毛遂自荐》以细腻的唱做与鲜明的人物塑造独树一帜。该剧由越剧尹派名家尹小芳于上世纪80年代领衔创排并首演，她与李金凤等艺术家共同打磨，将尹派的深沉儒雅、柔中有刚融入毛遂这一智勇兼备的人物形象之中。剧中《送征》一折，更以尹派醇厚的唱腔和极具感染力的情感表达，成为广为流传的经典选段，使这一源自史笔的慷慨故事，在越剧舞台上绽放出别样的动人光彩。"
+                ]
+              },
+              {
+                "heading": "故事背景｜一封求援信如何激荡英雄肝胆",
+                "body": [
+                  "越剧《毛遂自荐》讲述的是战国时期，秦国大军围攻赵国都城邯郸，赵相平原君赵胜奉赵王之名，欲选二十名门客同赴楚国求援，合纵抗秦。门下三千客中，名列十九，尚缺一人。正当众人面面相觑、无人敢应之际，平日里名不见经传的门客毛遂，慨然自荐，请求同行。平原君半信半疑，终为其言辞所动，携其赴楚。",
+                  "《送征》讲的则是邯郸城下、秦军压境之时，毛遂即将护送平原君穿越敌营、奔赴楚国。城内人心惶惶，而他的爱人王湘君深明大义，于城门前设酒壮行。一方是明知前路艰险、仍以天下苍生为念的义士；另一方是将万般柔情暂且深藏、以国事为重的好女子。整场戏围绕“送别”与“托付”展开，在慷慨悲歌与儿女情长之间，交织出铁血与柔情并重的动人篇章。"
+                ]
+              },
+              {
+                "heading": "越剧特色｜吴侬软语如何唱尽家国襟怀",
+                "body": [
+                  "《送征》一折虽为对子戏，却充分展现了越剧音乐与表演的独特魅力：",
+                  "唱腔之美：旋律婉转中见慷慨，抒情中蕴风骨。王湘君的唱段以傅派或吕派为基，柔美中带着坚毅，唱出“酒一盅，送君行”时，既有儿女离愁，更有深明大义的托付；毛遂的唱段则以尹派为主，醇厚深沉，“身如箭发飞楚郢”一句，以稳健而有力的行腔，将一介门客的报国热血与从容自信层层递进。两人对唱时，一柔一刚、一缠一放，交织成战火硝烟中最为动人的二重唱。",
+                  "表演之细：越剧表演以“细腻”著称，在这折戏中尤为突出。王湘君斟酒时微微颤抖的手、递杯时欲言又止的眼神、转身时轻拭泪痕的水袖，无一不在诉说压抑的离愁；毛遂接杯时坚定的目光、饮尽后重重顿杯的动作、上马前回身一望的定格，将“壮士一去”的决绝与对人世的眷恋同时凝聚于方寸舞台。两人无需大张大合，仅凭眉眼传情、身段呼应，便将一场生死离别前的家国大义与儿女情深，刻画得淋漓尽致。"
+                ]
+              },
+              {
+                "heading": "戏曲行当｜生旦各司其美，共成一出好戏",
+                "body": [
+                  "毛遂｜小生",
+                  "小生是越剧最具代表性的行当之一，常演绎风度翩翩、才情出众的男士。本场《送征》以尹（桂芳）派小生应工，尹派小生的深沉儒雅、柔中有刚，极好地表现了毛遂从“门下默默无闻”到“按剑登阶”的智勇兼备与家国担当。毛遂这一角色不同于传统文弱书生，他既有谋士的沉稳与韬略，又有侠士的果敢与血性。尹派特有的醇厚唱腔与内敛表演，将这份“静如处子，动如脱兔”的双重气质拿捏得恰到好处——吟唱“酒一盅”时深情款款，念及“赴楚郢”时则字字铿锵，一静一动之间，尽显壮士襟怀。",
+                  "王湘君｜花旦",
+                  "花旦是与小生相配的最重要行当之一，涵盖了大家闺秀、小家碧玉等青春年少、貌美如花的形象。本场王湘君以傅（全香）派或吕（瑞英）派花旦应工。傅派唱腔跌宕起伏、声情并茂，擅演外柔内刚、深明大义的女性形象，与王湘君“战火中送君出征”的复杂心绪高度契合；吕派则明快俏丽中不失沉稳大气，同样能充分展现这位女子在离愁别绪中仍以国事为重的坚韧与清醒。她不是被动等待的深闺弱质，而是在危城中斟酒壮行、以“凯旋相见”相托的知己红颜。花旦行当的细腻做功——斟酒时轻颤的指尖、目送时强忍泪水的转身——将这份“柔情掩于刚毅之下”的深情，刻画得丝丝入扣。"
+                ]
+              },
+              {
+                "heading": "表演精髓｜“一杯壮行酒”的万千气象",
+                "body": [
+                  "这折戏的精彩，全在于毛遂与王湘君之间深沉而克制的对手戏，堪称“无硝烟的战场，有真情的天地”。虽无两军对垒的宏大场面，却以一杯薄酒、数语叮咛，在极简的人物关系中铺展开舍小我、成大我的壮阔胸襟——这既是毛遂从默默无闻到名扬天下的起点，也是王湘君这一女性形象坚韧与担当的集中展现，堪称中国戏曲“小场景写大情怀”的佳作。方寸城门前，传递的是勇气，是担当，更是穿透战火硝烟、历千年而不灭的那份热血与光亮。",
+                  "王湘君之“忍”与“托”：王湘君虽为女流，却是这折戏的情感支柱与精神明灯。她明知此去九死一生，却将万般不舍深藏心底，以一杯薄酒、数句叮咛，将“儿女情长”升华为“家国大义”。表演上，需通过微颤的手指、欲语还休的眼神、强作镇定的笑容，演出其内心的撕裂与坚忍。斟酒时手不可大抖，偏在杯沿将满未满之际轻轻一顿，满腹离愁尽在这一瞬；转身拭泪时水袖一拂，不可拖泥带水，须干脆利落中暗藏柔情。她送出的不是一碗酒，而是一颗“盼君凯旋”的赤诚之心。",
+                  "毛遂之“慨”与“愧”：毛遂是“舍小我为大我”的英雄形象。从接过酒杯时的沉默，到饮尽后重重一顿的决绝；从“身如箭发飞楚郢”的慷慨高唱，到回望湘君时那一瞬的低眉——这一人物在短短的送别场景中，经历了从“义无反顾”到“心有挂碍”的微妙转变。表演上，需以大起大落见真章：慷慨时声震屋瓦，似有拔山之力；动情处又骤然收束，喉头微哽，双目含潮。对王湘君的每一句嘱托，他都以“嗯”、“晓得”等极简应答，越是惜字如金，越见胸中激荡。这份“大丈夫有泪不轻弹”的克制，恰是毛遂最动人的底色。"
+                ]
+              },
+              {
+                "heading": "欣赏要点｜捕捉壮行酒中的深情与风骨",
+                "body": [
+                  "欣赏此折，请您沉浸于这场战火中的“深情托付”与“慷慨壮歌”：",
+                  "看“交流”：注意毛遂与王湘君之间一来一往的眼神与反应。从相见时四目相对的瞬间沉默，到斟酒时欲言又止的凝望，再到饮尽后空杯相递时指尖的一触——每一处交流都藏着千言万语。看王湘君如何以克制的叮嘱传递深藏的牵挂，看毛遂如何以简短的应答与坚定的目光，回报那份沉甸甸的信任。",
+                  "听“潜台词”：王湘君的许多话看似平常叮咛，实则句句是生死离别的不舍与“盼君归来”的深情；毛遂的“晓得”、“放心”看似轻描淡写，背后却是“此去若不成功，便不再回来”的铁血誓言。品味这些朴素台词背后的真意，方知越朴素，越动人。",
+                  "品“细节”：关注演员如何处理那杯壮行酒——这个全折情感的焦点。王湘君斟酒时手指微微的颤抖、毛遂接杯时双手的郑重、饮酒前那一瞬的对视、饮尽后空杯示人的决绝、交还酒杯时两人指尖若有若无的触碰……每一处细节都是情感最浓烈的爆发点，值得细细品味。",
+                  "赏“韵味”：放松身心，享受越剧尹派唱腔的醇厚深沉与傅派（或吕派）的婉转清丽在战火硝烟中的交织共鸣。感受这段发生在危城之下的家国故事，在越剧独特的“吴侬软语”中焕发出的别样魅力——那是一种柔中带刚、于缠绵中见风骨的独特审美体验。"
+                ]
+              },
+              {
+                "heading": "演员介绍",
+                "body": [
+                  "朱华 饰 毛遂 孟伟越剧艺术传习所小生学员",
+                  "陈燕 饰 王湘君 孟伟越剧艺术传习所花旦学员"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "Yue Opera \"Mao Sui's Self-Recommendation\" - \"Sending Off \"",
+                "body": [
+                  "The Yue Opera Mao Sui’s Self-Recommendation: Sending Off tells a historical story from the Warring States period of ancient China.",
+                  "At the gates of Handan, as the Qin army advances, Mao Sui prepares to escort Lord Pingyuan through the enemy camp on a dangerous mission to the State of Chu. His beloved, Wang Xiangjun, comes to the city gate to bid him farewell. Mao Sui understands the danger that lies ahead, yet as a man of integrity, he remains committed to serving the people and the state. Xiangjun, though filled with deep personal emotion, temporarily sets aside her tenderness and places the needs of the country above her own sorrow.",
+                  "The entire play revolves around \"farewell\" and \"entrustment\", creating a moving balance between heroism and tenderness, public responsibility and personal affection.  The music is both lyrical and noble: melodious in tone yet carrying a heroic spirit.",
+                  "Xiangjun’s lyrical style is gentle yet resolute, expressing not only the sorrow of parting, but also her deep trust and quiet, unspoken support. Mao Sui’s lyrical style is rich, steady and powerful. Through his measured delivery, he gradually reveals the patriotic passion and calm confidence of a loyal retainer.  When their two voices come together, Xiangjun’s softness and Mao Sui’s strength complement one another. One voice is tender and lingering; the other is firm and expansive. Together, they create a deeply moving duet set against the smoke and fire of war.",
+                  "Through these moments of farewell and devotion, we hope you will experience the enduring beauty and timeless charm of this story.",
+                  "Please enjoy Sending Off from Mao Sui’s Self-Recommendation."
+                ]
+              }
+            ]
+          },
+          {
+            "no": "03",
+            "category": "折子戏",
+            "titleZh": "《山河恋·送信》",
+            "titleEn": "Delivering the Letter — from Love Beyond Distance",
+            "performers": "胡奇志 饰 申息、许玉川 饰 季娣",
+            "sections": [
+              {
+                "heading": "剧目源流｜从春秋故事到一折“借信传情”的经典折子",
+                "body": [
+                  "越剧《山河恋·送信》取材于春秋时期的历史传奇，在宫廷权谋与人物命运交织的背景下发展出的情感线索。其中《送信》一折最具代表性，它并非以战争或政治冲突为核心，而是以“送信”为媒介，展开一段含蓄而逐渐明朗的情感表白。"
+                ]
+              },
+              {
+                "heading": "故事背景｜一封“口信”引出的情感试探",
+                "body": [
+                  "申息，是宫中将领，身份稳重、性格内敛，行事谨慎克制。他在“吴寿书信之事”与季娣相遇时，一见钟情。剧情很快转向更深一层的情感表达。他表面以公事“送信”为由，实际借机试探并表达对季娣的情意。他假借“口信”之名，将内心情意包裹在看似正当的托付之中，实则是一次含蓄而大胆的情感试探。",
+                  "季娣，则是宫中女官（宫女），聪慧敏感，处事谨慎。她起初只是按规行事，但在与申息的交谈中逐渐察觉对方的弦外之音。随着“书信转口信”“口信要当心”等情节推进，两人的关系从陌生、试探，逐步进入心意相通的微妙阶段。整折戏的重点，不在事件本身，而在“情感如何从遮掩走向显露”。"
+                ]
+              },
+              {
+                "heading": "越剧特色｜从“口信”到“心声”的层层递进",
+                "body": [
+                  "《送信》最精彩之处，在于它用极简情节推动极细腻的情感变化。",
+                  "唱腔之美：申息的尹派唱腔由克制渐趋深情，尤其在“出我口入你心”“如同见面”等唱句中，情感逐步外放，从理性托付转向直白倾诉；季娣的袁派唱腔则始终保留一份矜持，在回应“我是一见就钟情你”时由迟疑转为轻声应和，使情感关系完成关键转折。",
+                  "表演之细：整折戏大量依赖眼神与停顿。申息在递出“口信”时的停顿、突然转折的语气，是情感试探的关键；季娣由警觉到低头、由回避到短暂回应的细微变化，则构成情感被触动的全过程。越剧的魅力就在于：不靠强烈冲突，而靠“慢慢说破”。"
+                ]
+              },
+              {
+                "heading": "戏曲行当｜小生与花旦的情感递进",
+                "body": [
+                  "申息｜小生申息属越剧小生行当，多以尹派应工。尹派强调“含蓄深沉、以情入腔”，非常适合这一段从试探到表白的情感变化。他表面以“口信”为名，实际步步推进情感表达，从克制到直白，是人物心理逐渐失控的过程。",
+                  "季娣｜花旦季娣属花旦行当，多以袁派为主。她的情感不是瞬间爆发，而是在反复试探中逐渐松动。她既要保持身份矜持，又无法忽视申息的情意，因此形成“听懂但不说破”的表演层次，使人物更具真实感与女性心理深度。"
+                ]
+              },
+              {
+                "heading": "表演精髓｜一折戏的核心是“说破”",
+                "body": [
+                  "《送信》的戏剧核心，其实不是“送信”，而是“说破”。",
+                  "申息之“由借转真”：从一开始借“口信”掩饰情感，到逐渐直接表达“我是一见钟情”，情绪逐步升级，完成从遮掩到坦白的转变。",
+                  "季娣之“由静到动”：她从礼貌应对，到察觉弦外之音，再到轻声回应“我亦心动”，情感变化是渐进式的，而不是突然转折，这正是越剧细腻之处。"
+                ]
+              },
+              {
+                "heading": "欣赏要点｜听懂“假口信里的真心话”",
+                "body": [
+                  "看“转折”：注意从“送信”到“口信”，这是全折戏的关键结构变化。",
+                  "听“递进”：申息唱腔从含蓄到直白，是情感逐步失控的过程。",
+                  "看“眼神”：两人的交流大量发生在未说出口的停顿与对视中。",
+                  "品“越剧味道”：柔婉唱腔之下，其实是非常大胆直接的情感表达，这种“以柔写烈”，正是越剧独特之处。"
+                ]
+              },
+              {
+                "heading": "演员介绍",
+                "body": [
+                  "胡奇志 饰 申息  孟伟越剧艺术传习所小生学员",
+                  "许玉川 饰 季娣  孟伟越剧艺术传习所花旦学员"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "Shanhe Lian  – Delivering the Letter",
+                "body": [
+                  "Delivering the letter is a famous scene from the Yue Opera Shanhe Lian, set in ancient China during the Spring and Autumn Period.",
+                  "The story follows Shen Xi, a young general, who falls in love with Ji Di, a palace lady. Unable to express his feelings directly, he uses the excuse of delivering a message to speak with her. As their conversation continues, the \"message\" gradually becomes a heartfelt confession.",
+                  "At first, Ji Di remains cautious and reserved, but she slowly realizes the true meaning behind Shen Xi’s words. Through gentle dialogue, meaningful pauses, and subtle glances, the two begin to share their feelings.",
+                  "Known for its delicate emotions and elegant music, this scene is a classic example of Yue Opera’s unique charm: expressing deep love through restraint, subtlety, and poetic beauty."
+                ]
+              }
+            ]
+          },
+          {
+            "no": "04",
+            "category": "折子戏",
+            "titleZh": "《梁山伯与祝英台·十八相送》",
+            "titleEn": "The Eighteen Farewells — from The Butterfly Lovers",
+            "performers": "张立虹 饰 梁山伯、赵芳 饰 祝英台",
+            "sections": [
+              {
+                "heading": "剧目源流｜从民间传说到越剧舞台的含蓄深情",
+                "body": [
+                  "《梁山伯与祝英台》是中国最广为流传的民间爱情传说之一，被誉为“东方的罗密欧与朱丽叶”。其故事源远流长，早在东晋时期即有雏形，历经唐宋话本、元明戏曲的不断演绎，最终成为中国传统文化中最具代表性的爱情母题之一。",
+                  "越剧《梁祝》则在20世纪得到高度艺术化的发展，尤其以其柔美细腻的唱腔、抒情见长的表现方式，使这一古老传说焕发出新的舞台生命力。“十八相送”作为全剧中最为经典的折子戏之一，集中展现了人物情感由含蓄试探走向暗潮涌动的关键阶段，是越剧舞台上长演不衰的抒情精品。"
+                ]
+              },
+              {
+                "heading": "故事背景｜一段“送别”中的爱情试探",
+                "body": [
+                  "故事讲述了女扮男装求学的祝英台，与书生梁山伯同窗三载，情谊深厚。",
+                  "学成之日，英台不得不返家。山伯相送，两人一路同行。这“十八相送”，既是现实中的送别之行，更是一场情感上的试探与表达。英台借景抒情、反复设喻，以鸳鸯、夫妻、成双之物暗示心意；而山伯却因性情淳朴、未解情意，往往只作字面理解，形成既含蓄又富戏剧性的互动。",
+                  "整场戏在行路途中展开，虽无复杂布景，却以“路”为线索，通过一程又一程的停留与对话，层层递进人物关系，将“未说出口的爱情”表现得曲折动人。"
+                ]
+              },
+              {
+                "heading": "越剧特色｜水磨柔情中的言外之意",
+                "body": [
+                  "“十八相送”一折充分体现了越剧以情动人的艺术本质：",
+                  "唱腔之韵：旋律轻柔婉转，节奏舒缓流动。祝英台的唱腔多带试探与含蓄，语气中藏情；梁山伯则以质朴真挚见长，唱腔平实中见深情。二人一问一答，构成富有层次的音乐对话。",
+                  "念白之妙：对白充满机锋与双关。英台“话中有话”，借比兴寄情；山伯“答非所问”，却在无意间强化了戏剧张力。这种“说者有心，听者无意”的语言结构，是本折最具魅力之处。",
+                  "表演之趣：表演强调生活化与节奏感。演员通过步伐的进退、手势的指引与眼神的交流，表现人物关系的微妙变化。看似轻松的行走与闲谈之中，暗藏情感的波澜起伏。"
+                ]
+              },
+              {
+                "heading": "戏曲行当｜同窗表象下的性别与情感张力",
+                "body": [
+                  "祝英台｜花旦（兼小生表演特点）",
+                  "祝英台虽为闺门旦角色，但在“女扮男装”的设定下，需兼具小生的行止气度。演员既要表现书生的清朗俊秀，又要在细节中流露女性柔情与内心波动，形成“双重身份”的表演张力。",
+                  "梁山伯｜小生",
+                  "梁山伯为典型书生形象，质朴敦厚、情感真挚。本折中，他的关键不在“表达”，而在“未觉”。演员需在不自知的状态中流露真情，使人物既显纯真可爱，又为后续悲剧埋下伏笔。"
+                ]
+              },
+              {
+                "heading": "表演精髓｜“说”与“不说”之间的情感博弈",
+                "body": [
+                  "这折戏的核心，在于“情在言外”，其表演精髓可概括为“试、探、藏、误”四层推进：",
+                  "祝英台之“试”与“藏”：英台是情感的主动者。她不断借景设喻，将内心情意转化为外在言辞——看似谈景，实则表情。演员需把握“欲言又止”的分寸，在含蓄中见深情。",
+                  "梁山伯之“误”与“真”：山伯虽未领会情意，却始终以真诚相待。他的“误解”并非迟钝，而是一种单纯与正直。表演需避免刻意滑稽，而应呈现自然的“未觉之情”。",
+                  "核心意象——成双与分离：鸳鸯、蝴蝶、并蒂花等意象反复出现，象征“成双成对”；而“送别之路”本身，则象征分离。两种意象的交织，使整折戏在温柔中隐含惆怅，为后续悲剧埋下深远回响。"
+                ]
+              },
+              {
+                "heading": "欣赏要点｜在轻描淡写中体会深情暗涌",
+                "body": [
+                  "欣赏此折，请您放慢节奏，细细体会其中的“未尽之意”：",
+                  "品“言外”：留意祝英台的每一句比喻与暗示，那些看似闲谈的话语，往往承载着最真实的情感。",
+                  "听“对答”：关注两人一问一答的节奏变化。梁山伯的“听不懂”，正是戏剧趣味与情感张力的来源。",
+                  "观“距离”：舞台上的“同行”与“渐行渐远”，不仅是空间变化，更象征两人情感认知的差异。",
+                  "悟“未说之情”：这是一段没有告白的爱情。正因为未曾说破，才更显动人，也为之后的“化蝶”悲剧留下无限余韵。"
+                ]
+              },
+              {
+                "heading": "演出团体与寄语",
+                "body": [
+                  "本次《梁山伯与祝英台·十八相送》由孟伟越剧艺术研习所精心呈现。研习所成立十年来，始终致力于越剧艺术的传承与传播，在海外延续这一古老剧种的生命力。值此十周年之际，我们以这段含蓄而深情的“相送”，献给每一位观众。愿您在这段看似轻柔的旅途中，听见未曾说出口的心声，感受到东方爱情独有的克制与深远。",
+                  "主演介绍：",
+                  "张立虹 饰 梁山伯：孟伟越剧艺术传习所小生学员",
+                  "赵芳   饰 祝英台：孟伟越剧艺术传习所花旦学员"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "Yue Opera: The Butterfly Lovers · Eighteen Miles of Send-off",
+                "body": [
+                  "The Yue Opera The Butterfly Lovers: Eighteen Miles of Send-off tells one of China's most celebrated romantic folk legends, often hailed as the \"Romeo and Juliet of the East.\"",
+                  "Upon completing three years of study together, Zhu Yingtai (a young woman disguised as a man) must return home, and her classmate Liang Shanbo accompanies her on the journey. This \"send-off\" is a deep trial of affection. Along the road, Yingtai constantly uses the surrounding scenery and pairs of objects as metaphors to hint at her love. However, Shanbo, due to his honest and simple nature, fails to realize her true identity and takes her words literally, creating a highly subtle yet dramatic interaction.",
+                  "The entire scene revolves around \"testing\" and \"misunderstanding,\" creating a beautiful balance between unspoken love and innocent oblivion. The music is exceptionally gentle, water-like, and lyrical:",
+                  "Yingtai’s style is sweet, delicate, and full of double entendres, hiding her surging affection within a subtle tone.",
+                  "Shanbo’s style is characterized by plain sincerity and rich warmth, showing deep devotion through straightforward, clueless responses.",
+                  "When their voices come together in a question-and-answer dialogue, Yingtai’s clever prompting and Shanbo’s honest answers complement each other perfectly. One voice is tender and testing; the other is sincere and grounded. Together, they weave a beautiful undercurrent of emotion that leaves a lingering charm, setting up the ultimate tragic climax of the story.",
+                  "Through this poignant journey of farewell, we hope you will experience the unique restraint and profound depth of Eastern romance."
+                ]
+              }
+            ]
+          },
+          {
+            "no": "05",
+            "category": "折子戏",
+            "titleZh": "《梁山伯与祝英台·思祝下山》",
+            "titleEn": "Liang Shanbo's Descent from the Mountain — from The Butterfly Lovers",
+            "performers": "孟伟 饰 梁山伯",
+            "lead": "《思祝下山》选自茅威涛版新编越剧《梁山伯与祝英台》，是全剧中极具诗意与生活气息的一折。此时的梁山伯得知英台原是女儿身，并已对自己暗许终身，怀着满心欢喜赶往祝家庄提亲。一路下山，他边走边想，往日三年同窗的点滴回忆如画卷般缓缓展开。",
+            "sections": [
+              {
+                "heading": "",
+                "body": [
+                  "唱词以“一边走，一边……”层层递进，将山伯从惊讶、懊悔到欣喜若狂的情绪细腻铺陈。随后以一年四季的生活片段串联两人同窗岁月：烧茶温书、掀被催晨、端午裹粽、偷豆挨打、月下谈心……充满烟火气与青春气息，也让“梁祝”不再只是一个悲剧传说，而成为有温度、有生活感的少年情谊。观众将在这段充满春风与少年意气的下山路上，感受到越剧独有的温柔与浪漫。",
+                  "这一折最大的特色，在于它淡化了传统戏曲中浓重的程式感，更强调人物真实自然的情感表达。还有一个特别珍贵的地方。台上不仅有老师，还有孟伟越剧的学员们共同参与演出。平时正式演出机会有限，老师与学员能够一起登台，更是难得。观众将要看到的，不仅是一折经典越剧，也是一种艺术薪火相传的过程。"
+                ]
+              },
+              {
+                "heading": "演员介绍",
+                "body": [
+                  "孟伟 饰 梁山伯",
+                  "伴舞：孟伟越剧艺术传习所学员: 钮晓琳、钱春晖、许玉川（赵芳）、朱华、周凌、胡奇志（王雯）、沈渝懿、刘仲良"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "",
+                "body": [
+                  "Liang Shanbo’s Descent from the Mountain is a delightful scene from a contemporary Yue Opera adaptation of The Butterfly Lovers, often described as China’s Romeo and Juliet.",
+                  "Having just discovered that his beloved classmate, Zhu Yingtai—who had disguised herself as a young man during their three years of study—is actually a young woman, and that she secretly returns his love, Liang Shanbo joyfully sets off for her home to ask for her hand in marriage.",
+                  "As he descends the mountain, treasured memories of their time together come rushing back: reading over tea, waking each other on chilly mornings, making rice dumplings for the Dragon Boat Festival, sharing playful moments, and talking beneath the moonlight. Filled with warmth, humor, and youthful innocence, this scene captures the excitement of first love and offers audiences a touching glimpse into one of China’s greatest romantic legends.",
+                  "As you watch, you’ll notice that this is more than a journey down a mountain—it’s a journey through Liang Shanbo’s heart. Joined by his playful young attendants, Liang relives treasured memories, laughs over youthful adventures, dreams of the future, and savors the happiness of knowing his love is returned. The attendants do more than accompany him; through lively interactions, expressive movement, and moments of gentle comedy, they help bring his memories and emotions vividly to life.",
+                  "Watch how a simple walk becomes a richly theatrical journey. Graceful movement, lyrical singing, and dynamic stage interactions blend seamlessly to tell the story. Rather than portraying a distant, larger-than-life hero, Yue Opera invites us to share the thoughts, hopes, and excitement of a young man in love. The singing flows naturally, almost like conversation set to music, allowing the emotions to feel immediate and authentic. Even without understanding every word, you’ll be able to follow the story through the performers’ expressions, movement, and the emotional rhythm of the music.",
+                  "One of the special features of the performance is that it brings teacher and students together on the same stage. They perform together as fellow artists, sharing the joy of storytelling through music, movement, and song. Their collaboration reflects the vibrant community that has grown at Meng Wei Yue Opera Studio, where a shared passion for Yue Opera connects generations and keeps this beautiful tradition alive.",
+                  "We hope these moments of joy, tenderness, humor, and youthful optimism will allow you to discover the timeless charm of The Butterfly Lovers.",
+                  "Please enjoy Liang Shanbo’s Descent from the Mountain."
+                ]
+              }
+            ]
+          },
+          {
+            "no": "06",
+            "category": "嘉宾助演",
+            "titleZh": "特邀嘉宾 顾学风",
+            "titleEn": "Guest Performer — Xuefeng Gu",
+            "performers": "顾学风",
+            "lead": "特邀名家顾学风登台献艺，为十周年专场增辉。",
+            "sections": [
+              {
+                "heading": "看点",
+                "body": [
+                  "难得一见的客席演出，静候名家风采。"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "",
+                "body": [
+                  "Renowned guest artist Gu Xuefeng takes the stage to present his artistry, lending splendour to our tenth-anniversary gala."
+                ]
+              },
+              {
+                "heading": "Highlights",
+                "body": [
+                  "A rare guest performance — we await the master's brilliance."
+                ]
+              }
+            ]
+          },
+          {
+            "no": "07",
+            "category": "越剧身段",
+            "titleZh": "《扇影袖韵》",
+            "titleEn": "Yue Opera Dance — Grace of the Fan and Rhythms of the Sleeves",
+            "performers": "朱华、钮晓琳、胡奇志、陆宇倩、钱春晖、许玉川、周玲、沈渝懿",
+            "sections": [
+              {
+                "heading": "节目形式｜从“唱念做打”中走出的身段之美",
+                "body": [
+                  "《扇影袖韵》是一段以越剧身段表演为核心的艺术呈现。不同于完整剧情的折子戏，它不以叙事为主，而是从越剧传统表演体系中提炼出最具代表性的动作语言——以形写意，以动传情。",
+                  "节目以扇子功与水袖功为主要表现手段，将原本服务于人物塑造与剧情发展的动作，独立出来加以编排，使观众得以专注欣赏越剧表演中最精致、最富韵律感的一面。"
+                ]
+              },
+              {
+                "heading": "艺术意象｜一扇一袖，写尽东方风雅",
+                "body": [
+                  "“扇影”与“水韵”，既是道具与动作的结合，也是意境的凝练表达。",
+                  "扇之影：开合之间，或含蓄、或舒展，既可传情达意，也可营造空间层次；一柄折扇，在方寸之间见风度。",
+                  "袖之水：水袖轻扬，如波如练，柔中见力，动中有静，是越剧最具标志性的美学符号之一。",
+                  "当扇影与水袖交织，舞台仿佛流动起来——不是实在的水，而是一种“可见的韵律”，一种东方审美中含蓄、流转、留白的诗意表达。"
+                ]
+              },
+              {
+                "heading": "音乐与身段｜“有声”与“无声”的交相辉映",
+                "body": [
+                  "本节目采用越剧唱段作为背景音乐，在有唱词的旋律中展开身段表演。",
+                  "舞台上演员以身段“听见”音乐，以动作“延展”情绪。",
+                  "唱词所承载的情感，通过水袖的起伏、扇影的流转，被进一步放大与具象化；而身段的节奏，又与音乐的板式呼应，使视觉与听觉形成统一的审美体验。"
+                ]
+              },
+              {
+                "heading": "表演精髓｜动静之间的分寸与呼吸",
+                "body": [
+                  "越剧之美，贵在“分寸”。身段表演尤为如此。",
+                  "看“起落”：每一次抬手、转身、收势，都有来有去，讲究圆融连贯；",
+                  "看“轻重”：水袖虽柔，却非无力，轻重之间体现内在气息；",
+                  "看“停顿”：恰到好处的“停”，往往比动作本身更耐人寻味；",
+                  "看“呼吸”：动作并非机械连接，而是随音乐、随情绪自然流动。",
+                  "所谓“行云流水”，不仅是形态，更是一种内在节奏。"
+                ]
+              },
+              {
+                "heading": "欣赏要点｜如何看懂一段“没有故事”的表演",
+                "body": [
+                  "面对没有明确情节的身段节目，不妨换一种观看方式：",
+                  "不必寻找具体人物与故事，而是感受情绪的流动；",
+                  "不必执着“演了什么”，而是体会如何去表现“美”；",
+                  "留意动作之间的连接与呼应，欣赏那种不言而喻的表达。",
+                  "当您开始注意到袖子的轨迹、扇子的开合、以及动作与音乐的呼应时，便已经走进了越剧的审美世界。"
+                ]
+              },
+              {
+                "heading": "演员介绍",
+                "body": [
+                  "（暂空）"
+                ]
+              },
+              {
+                "heading": "",
+                "body": [
+                  "在《扇影袖韵》中，没有跌宕的情节，却有流动的诗意；没有对白的铺陈，却有无声的表达。",
+                  "一扇一袖之间，尽是风雅。"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "Yue Opera Dance — Grace of the Fan and Rhythms of the Sleeves",
+                "body": [
+                  "Grace of the Fan and Rhythms of the Sleeves is a movement piece inspired by the graceful performance techniques of Yue Opera, one of China's most celebrated regional opera traditions.",
+                  "Unlike a traditional opera scene with a storyline and dialogue, this performance highlights two iconic elements of Yue Opera: the folding fan and the water sleeves—long, flowing silk extensions attached to the costume sleeves. These expressive props are an essential part of Chinese opera movement, allowing performers to convey emotion, rhythm, and elegance through gesture alone.",
+                  "Accompanied by classic Yue Opera melodies, the performers do not sing; instead, they respond to the music with stylized movements. Every turn, extension, and sweep of the sleeves is carefully choreographed, transforming music into a visual expression of poetry and grace.",
+                  "Rather than following a narrative, this piece invites you to appreciate the beauty of movement itself. As the fans open and close, and the flowing sleeves ripple like water, Grace of the Fan and Rhythms of the Sleeves offers a glimpse into the refined aesthetics and timeless artistry of Yue Opera."
+                ]
+              }
+            ]
+          },
+          {
+            "no": "08",
+            "category": "折子戏",
+            "titleZh": "《西厢记·传简》",
+            "titleEn": "Delivering the Letter — from Romance of the Western Chamber",
+            "performers": "孟伟 饰 张生、史冬梅 饰 红娘",
+            "keywords": "尺素传情 · 雅趣妙对 · 人性微光 · 越韵风流",
+            "sections": [
+              {
+                "heading": "剧目源流｜从元杂剧到越剧舞台的经典再造",
+                "body": [
+                  "《西厢记》（又名《崔莺莺待月西厢记》《王西厢》）是元代剧作家王实甫创作的杂剧经典，约成书于十三世纪末的元贞、大德年间。这部作品不仅开创了中国古典爱情戏剧的高峰，更穿越时代，不断被赋予新的生命——明代李日华将其改编为南曲《西厢》，至清代以降，昆曲、京剧及众多地方剧种纷纷搬演，成为中国传统戏曲题材的一大来源。",
+                  "在众多演绎之中，越剧《西厢记》如同细腻婉约的江南工笔，被誉为越剧“四大经典”之一，从上世纪30年代起，就有越剧先贤们根据原著扮演的剧目面世。袁雪芬、范瑞娟、尹桂芳等前辈所塑造的莺莺和张珙的形象更是深入人心，成为越剧史上的璀璨明珠。"
+                ]
+              },
+              {
+                "heading": "故事背景｜一封信如何搅动深闺心池",
+                "body": [
+                  "越剧《西厢记》讲述的是书生张珙（字君瑞）在山西普救寺借宿期间，结识了暂居寺中西厢的相国之女崔莺莺。二人以诗词唱和，情愫暗生。不久，叛将孙飞虎率兵围困普救寺，欲强夺莺莺。危急关头，莺莺之母郑老夫人当众许诺：凡能解围者，便将女儿许配于他。张生遂修书结拜兄弟蒲州太守杜确求援，杜太守随即发兵解围，化险为夷。",
+                  "事后，郑老夫人以门第不当为由反悔婚约，张生因此相思成疾，莺莺亦忧思难解。在丫鬟红娘的巧妙周旋下，二人暗中通信，终得西厢幽会，私定终身。",
+                  "此事终被老夫人察觉，原欲严加责罚，却在红娘据理力争之下无从发作。无奈之余，老夫人提出条件，命张生进京应试，若能金榜题名，方允婚事。莺莺在长亭挥泪送别张珙。",
+                  "《传简》讲的是莺莺假意回绝张珙的“情书”，命红娘去送“绝交信”。一方是机敏伶俐、有意成全却又暗自观察的婢女；另一方是情深难抑、见字如晤的痴心书生。整场戏围绕书信的传递、试探与心迹的流露展开，在红娘的直率热忱与张生的文弱痴情之间，碰撞出诙谐而温馨的火花。越剧特有的吴侬软语、婉转唱腔，更赋予这出仅有两人的戏码以生动韵味与缠绵情致。",
+                  "虽无宏大场面，却以一纸书信穿针引线，在极简的人物关系中织就丰富的情感张力——这既是崔张恋情的关键转折，也是红娘人格魅力的集中展现，堪称中国戏曲“以小见大”的典范。方寸尺素之间，传递的是勇气，是真心，也是人性深处那份跨越礼教束缚的温热与光亮。"
+                ]
+              },
+              {
+                "heading": "越剧特色｜吴侬软语如何唱尽儿女情长",
+                "body": [
+                  "《传简》一折虽为对子戏，却充分展现了越剧音乐与语言的独特魅力：",
+                  "唱腔之美：旋律婉转柔美，抒情性极强。红娘的吕派明快流畅，张生的尹派唱腔则深情跌宕，两者交织，悦耳动听。",
+                  "念白之趣：同样是真性情的展现，红娘的刀子嘴豆腐心，张生的忠诚酸腐，相映成趣，生活气息浓厚，使人物跃然台上。",
+                  "表演之细： 越剧表演以“细腻”著称，在这折戏中，两位演员通过眉眼传情、水袖轻拂、步态转换等细微之处，将人物内心活动外化得淋漓尽致。"
+                ]
+              },
+              {
+                "heading": "戏曲行当｜生旦各司其美，共成一出好戏",
+                "body": [
+                  "张生｜小生",
+                  "小生是越剧最具代表性的行当之一，常演绎风度翩翩的佳公子。本场《传简》以尹（桂芳）派小生应工，尹派小生的俊逸洒脱风流儒雅极好地表现了张珙“酸秀才”的狂放和深情。",
+                  "红娘｜花旦",
+                  "花旦是与小生相配的最重要的行当，涵盖了大家闺秀、小家碧玉等青春年少、貌美如花的形象。本场红娘是以吕（瑞英）派花旦应工，吕派善于塑造英姿飒爽、明快俏丽、大气沉稳的年轻女性形象，因此能够充分展示红娘的简捷爽快、侠骨柔肠。"
+                ]
+              },
+              {
+                "heading": "表演精髓｜“两人一台戏”的无限妙趣",
+                "body": [
+                  "这折戏的精彩，全在于红娘与张生之间妙趣横生的对手戏，堪称“无花的舞台，有戏的天地”。",
+                  "红娘之“直”与“曲”： 红娘虽身份是婢女，却是这折戏实际的主导者与观察者。她言辞爽利，行动伶俐，对张生的“痴”既有同情揶揄，也有成人之美的心。表演上，需通过灵动的眼神、清脆的念白和轻盈的身段，演出其热心、机警与几分可爱的“狡黠”。她传递的不仅是信，更是对爱情的信心与勇气。",
+                  "张生之“痴”与“诚”： 张生是典型的“情痴”书生形象。从焦急等待回信到见信后精神陡振，情绪大起大落，表演极具反差与喜感。他解读“药方”时的狂喜、对红娘反复的恳求与道谢，将读书人的真挚与迂腐融为一体，可笑又可爱。",
+                  "核心道具——书简： 这封书信是全场焦点。但直到事情似乎发展到穷途末路才由红娘在不经意间想起，红娘的一触，一取，一送，一丢，张生的一顿，一踌躇，一跺脚，一捡，每个环节都设计巧妙。当张生忍着心头的狂跳，偷眼看向书简的时候，观众的心也会随之狂跳起来。"
+                ]
+              },
+              {
+                "heading": "欣赏要点｜捕捉尺素之间的情感电波",
+                "body": [
+                  "欣赏此折，请您沉浸于这场精妙的“心理游戏”与“语言艺术”：",
+                  "看“交流”： 注意红娘与张生之间一来一往的对话与反应，如何从试探到信任，从客套到恳切。",
+                  "听“潜台词”： 红娘的许多话看似打趣或抱怨，实则充满关怀与鼓励；张生的许多话看似痴傻，却是一片赤诚。品味台词背后的真意。",
+                  "品“细节”： 关注演员如何处理那封信——这个情感的核心载体。张生展信、读信、藏信时的神态与动作，是情感最浓烈的爆发点。",
+                  "赏“韵味”： 放松身心，享受越剧唱腔如江南流水般的温润婉转，感受古典爱情故事在越剧独特语汇下焕发的清新魅力。"
+                ]
+              },
+              {
+                "heading": "主演介绍",
+                "body": [
+                  "孟伟 饰 张生 孟伟越剧艺术传习所创始人",
+                  "史冬梅 饰 红娘 京剧魁北克艺术中心核心成员"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "Introduction to “Delivering the Letter,” an Excerpt from Yue Opera The Romance of the Western Chamber",
+                "body": [
+                  "The Romance of the Western Chamber is a celebrated Chinese classical drama written around the late thirteenth century. Over the centuries, it has been adapted into many forms of Chinese opera. In Yue Opera, known for its graceful singing, refined movement, and delicate emotional expression, this story is presented with particular tenderness and charm.",
+                  "The drama tells of Zhang Gong, a young scholar, and Cui Yingying, the daughter of a noble family, who meet at a Buddhist temple. Their affection grows through poetry and shared feeling. When the temple is surrounded by a rebel general who wishes to seize Yingying by force, Yingying’s mother publicly promises to marry her daughter to whoever can rescue them. Zhang sends for military help from his sworn friend and the danger is lifted. Yet afterwards Yingying’s mother breaks her promise claiming that Zhang is not of equal social standing.",
+                  "The scene presented here, Delivering the Letter, unfolds around one small but powerful object: a letter. Yingying appears to refuse Zhang’s affection and sends Hongniang, her maid, to deliver what seems to be a message of separation. Yet within this letter lies a more subtle current of feeling. Hongniang, lively, sharp-witted, and generous at heart, becomes both messenger and matchmaker. Zhang, sincere and lovesick, meets each word and gesture with trembling hope.",
+                  "Though only two characters appear on stage, the scene contains a whole world of emotion. Its charm lies in suggestion rather than spectacle: a glance, a pause, the turn of a sleeve, the hesitation before opening a letter. Yue Opera’s gentle melodies and elegant stage language allow humour, longing, embarrassment, and tenderness to flow naturally together.",
+                  "In this scene, a single letter becomes more than a message. It becomes a bridge between two hearts, a test of sincerity, and a quiet act of courage against the boundaries of social custom."
+                ]
+              }
+            ]
+          },
+          {
+            "no": "09",
+            "category": "折子戏",
+            "titleZh": "《牡丹亭·幽媾》",
+            "titleEn": "A Secret Lovers' Tryst — from The Peony Pavilion",
+            "performers": "钮晓琳 饰 柳梦梅、钱春晖 饰 杜丽娘",
+            "sections": [
+              {
+                "heading": "剧目源流｜从“临川四梦”到越剧舞台的至情幻梦",
+                "body": [
+                  "《牡丹亭》（全名《牡丹亭还魂记》）是明代剧作家汤显祖的“临川四梦”之首，被誉为中国浪漫主义文学的巅峰之作，成书于万历二十六年（1598年）。这部“情不知所起，一往而深”的传奇，以其超越生死的至情主题，数百年来震撼了无数心灵。从昆曲的典雅传承，到各地方剧种的精彩演绎，《牡丹亭》始终是戏曲舞台上长盛不衰的经典题材。",
+                  "越剧版的《牡丹亭》承袭了原著的瑰丽想象与深情内核，并以其特有的温婉细腻、唱腔柔美进行诠释，成为越剧舞台上一朵梦幻奇葩。本次上演的《幽媾》一折，正是全剧情感与戏剧张力的高潮段落，将“人鬼相恋”的奇绝想象与“情能还魂”的坚定信念展现得淋漓尽致。"
+                ]
+              },
+              {
+                "heading": "故事背景｜一场跨越生死的书房幽会",
+                "body": [
+                  "《牡丹亭》讲述了南宋时，南安太守杜宝之女杜丽娘，于春日游园后，在梦中与书生柳梦梅相会，醒后因情成疾，伤春而逝。临终前，她自画真容，藏于后花园太湖石下。三年后，岭南书生柳梦梅赴京应试，途经南安，借住杜家旧园，恰巧拾得丽娘画像，对画中人日夜思念，声声呼唤。",
+                  "《幽媾》一折，便始于这深情的呼唤。杜丽娘的魂魄被柳梦梅的至诚感动，深夜前来书房相会。一方是痴情不改、不惧鬼神的书生；另一方是感其诚挚、为情还魂的幽魂。整场戏在深夜书斋的特定情境中展开，充满了神秘、缠绵而又勇敢的气息。越剧的吴侬软语与婉转唱腔，将这段超越阴阳的恋情演绎得既凄美动人，又热烈真挚。",
+                  "虽无繁杂场景，却以“一画一梦一魂”为线索，在亦真亦幻的时空中，铺陈出人性深处对自由与真爱最极致的追求——这既是杜柳爱情得以实现的关键，也是《牡丹亭》“至情”主题的集中爆发，堪称中国戏曲“因情成梦，因梦成戏”的哲学与诗意的完美呈现。"
+                ]
+              },
+              {
+                "heading": "越剧特色｜水磨雅韵如何诉说生死奇恋",
+                "body": [
+                  "《幽媾》一折作为经典的对子戏，充分融合了越剧的抒情特质与《牡丹亭》的古典诗意：",
+                  "唱腔之韵：旋律在深情中蕴含幽怨，在缱绻间透出空灵。柳梦梅的唱段充满书卷气与惊喜交织的激情，杜丽娘的唱段则如泣如诉，在鬼魂的飘渺与少女的炽热间取得精妙平衡，两者的唱腔交织，营造出梦幻般的听觉享受。",
+                  "念白之雅：念白文雅而富有情致，既符合书生与大家闺秀的身份，又在诗词唱和中传递澎湃的情感。柳梦梅的痴语与丽娘的哀诉，构成了极具文学美感的对话。",
+                  "表演之幻： 本折表演重在“虚实相生”。杜丽娘的出场与身段，需兼具鬼魂的轻盈飘忽和见到情人时的实体感；柳梦梅则需从惊疑到确信，再到狂喜，情感跨度极大。演员通过水袖、台步、眼神的细腻控制，在方寸舞台上构建出一个真实可感的“幽冥情园”。"
+                ]
+              },
+              {
+                "heading": "戏曲行当｜生死相隔，行当各展其美",
+                "body": [
+                  "柳梦梅｜小生",
+                  "柳梦梅是典型的巾生（年轻书生）形象。本场演出即为尹（桂芳）派经典应工，其俊逸深情、儒雅洒脱的艺术风格，能完美诠释柳梦梅身为文人的痴情、浪漫与面对超自然现象时，从惊惧到坦然接纳的勇气与真诚。",
+                  "杜丽娘（魂）｜闺门旦",
+                  "杜丽娘的魂灵属于闺门旦，但需带有“鬼魂旦”的表演特点。这要求演员在保持闺门旦端庄优雅的基础上，融入身形飘忽、气息幽怨的特质。演唱需空灵婉转，身段需如风中弱柳，以此区分于生前实体的丽娘，展现一种超凡脱俗的凄美。"
+                ]
+              },
+              {
+                "heading": "表演精髓｜“人鬼情未了”的舞台炼成",
+                "body": [
+                  "这折戏的精彩，在于将一段不可能之恋演绎得令人信服且动容，关键在于演员对“惊、疑、痴、信”四个层次的精准把握。",
+                  "柳梦梅之“痴”与“勇”： 柳梦梅是全剧“情”的主动追寻者。面对夜访的“女鬼”，他的反应层次极为丰富：初时的惊骇，辨认后的疑虑，确认身份后的狂喜与怜惜，以及最终超越生死界限的坚定接纳。表演需在书生的文弱外表下，展现出“情至”所带来的巨大勇气。",
+                  "杜丽娘（魂）之“幽”与“挚”： 杜丽娘的魂魄，是“情”的化身与归宿。她既有鬼魂的幽怨与冷凝，更有被真情唤回的炽热与主动。表演上，需要通过虚浮的步态、哀婉的眼神和骤然迸发的情感热度，形成鲜明对比，展现其为爱穿越生死的执着。",
+                  "核心意象——画像与梦境：这折戏的情感基石，是那幅画像和曾经的梦境。柳梦梅对画的呼唤是引子，而两人相见后对梦中情景的印证，则是情感升温的催化剂。演员如何通过眼神和身段，在“看 画”、“认人”、“忆梦”几个环节中建立牢不可破的情感联系，是打动观众的关键。当二人双手相触，阴阳相隔的冰冷被真情融化时，便是全折最动人心魄的时刻。"
+                ]
+              },
+              {
+                "heading": "欣赏要点｜沉浸于至情至幻的古典浪漫",
+                "body": [
+                  "欣赏此折，请您暂时忘却现实的逻辑，全心沉浸于这段被情感法则重新定义的古典浪漫之中：",
+                  "品“情境”： 感受舞台如何通过灯光、音乐和表演，营造出夜深人静、月色朦胧、人鬼相遇的独特氛围。",
+                  "听“情语”： 重点品味柳梦梅与杜丽娘的大段对唱与念白。那些文辞优美的曲词，字字句句都是真情的直接剖白，是理解两人内心世界的钥匙。",
+                  "观“情动”： 关注演员细微的身段与表情。柳梦梅从震惊到怜爱的眼神变化，杜丽娘从幽怨到欣喜的情感流转，每一个停顿、每一次水袖的挥动，都可能暗含汹涌的情感波澜。",
+                  "悟“情理”： 尝试理解汤显祖笔下“生者可以死，死可以生”的“至情”观。这场幽媾不仅是剧情的需要，更是对“爱情拥有超越一切现实束缚力量”的极致歌颂。"
+                ]
+              },
+              {
+                "heading": "演出团体与寄语",
+                "body": [
+                  "本次《牡丹亭·幽媾》由孟伟越剧艺术研习所精心呈现。研习所成立十年来，始终以传承与弘扬越剧艺术为宗旨，致力于在海外播撒中国传统戏曲的种子。值此十周年庆典之际，我们以这场穿越生死的至情幻梦，献给所有热爱艺术、相信美好的您。愿您能在这场“幽媾”中，感受到超越舞台的、永恒的情感光芒。",
+                  "主演介绍：",
+                  "钮晓琳 饰 柳梦梅：孟伟越剧艺术传习所小生学员",
+                  "钱春晖 饰 杜丽娘：孟伟越剧艺术传习所花旦学员"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "English Guide | Yue Opera “The Peony Pavilion · The Secret Tryst”",
+                "body": [
+                  "“The Secret Tryst” is a signature excerpt from The Peony Pavilion, where Du Liniang’s spirit returns at midnight to meet scholar Liu Mengmei. Their reunion—born from longing, courage, and sincerity—captures the timeless idea that true love can cross the boundary between life and death.",
+                  "In this Yue Opera adaptation, gentle singing, poetic dialogue, and graceful movement create a dreamlike atmosphere. Liniang’s ethereal presence contrasts with Mengmei’s heartfelt devotion, turning a supernatural encounter into a tender and emotionally rich moment on stage.",
+                  "This scene invites audiences to listen to the lyrical voices, observe the refined gestures, and feel the romantic beauty of one of Chinese theatre’s most beloved stories."
+                ]
+              },
+              {
+                "heading": "Performers:",
+                "body": [
+                  "Xiaolin Niu (Liu Mengmei), Chunhui Qian (Du Liniang)"
+                ]
+              }
+            ]
+          },
+          {
+            "no": "10",
+            "category": "折子戏",
+            "titleZh": "《碧玉簪·送凤冠》",
+            "titleEn": "The Phoenix Coronet Presented — from The Jade Hairpin",
+            "performers": "孟伟 饰 王玉林、史冬梅 饰 李秀英、黄湘燕 饰 陆氏、朱华 饰 王裕、吕琰 饰 李廷普、张立虹 饰 李夫人、沈渝懿 饰 春香",
+            "sections": [
+              {
+                "heading": "流派经典——金派与陆派的艺术交辉",
+                "body": [
+                  "《碧玉簪》是越剧舞台上非常重要的一部传统剧目，也是越剧表演艺术家金采风的代表作之一。全剧以细腻真挚的情感表达和典雅清丽的舞台风格见长，是金派艺术最具代表性的作品之一。",
+                  "金派以闺门旦见长，兼擅花旦，唱腔婉转流畅、秀丽中见力度，重视字音清晰与行腔圆润，讲究“情随腔走、声为情设”。整体风格柔中带刚、甜而不腻，既有江南水乡的温婉气质，也能在情绪转折处体现出内在的力量感。李秀英这一角色的隐忍、委屈与克制，都通过细腻的唱腔层层推进，是金派艺术的典型体现。",
+                  "本次演出中，王玉林由陆派小生应工。陆派由陆锦花创立，唱腔清丽俊逸、流畅自然，讲究气息舒展与行腔明快，音色明亮而不浮，韵味清雅而不弱。其特点在于“以气带声、以声传情”，唱法干净利落，同时富有生活气息与人物感。在舞台处理上，常在儒雅书卷气之外加入轻巧灵动的节奏，使人物更具亲和力与喜剧色彩。",
+                  "陆派与金派一柔一润、一秀一雅，在同一舞台上形成自然对照，使人物情感更为丰富，也让整折戏的听觉层次更加分明。"
+                ]
+              },
+              {
+                "heading": "故事梗概——一场因误会而起的婚姻风波",
+                "body": [
+                  "《碧玉簪》讲的是一段由误会引发、最终解开的夫妻故事。",
+                  "李秀英与王玉林奉父母之命成婚。新婚之夜，秀英表兄顾文友因求亲不成心生怨意，将伪造情书与碧玉簪暗中放入新房。王玉林因此误会李秀英婚前不贞，从此心生隔阂。",
+                  "李秀英不知缘由，只能默默承受冷落。多年之后真相大白，王玉林悔恨不已。随后他高中状元，携凤冠霞帔登门赔礼，希望修复夫妻关系。"
+                ]
+              },
+              {
+                "heading": "《送凤冠》——戏剧冲突的高潮与化解",
+                "body": [
+                  "误会已经澄清，但情感并没有立刻回到原点。王玉林带着凤冠前来，是想弥补、是想重修旧好；李秀英面对多年委屈，却并不能轻易释怀。因此，这一折的矛盾很集中，也很克制：",
+                  "一边是“送”的诚意，一边是“接不接”的犹疑；一边是想重新开始，一边是过往伤痕还在。戏剧冲突并不复杂，但通过不断的波折——送，拒，又送，又拒，再送，再拒……使观众的心也跟着起起伏伏。"
+                ]
+              },
+              {
+                "heading": "行当丰富——人物各有分寸，各有性格",
+                "body": [
+                  "《送凤冠》人物丰富，行当齐全，性格都很鲜明。",
+                  "李秀英为闺门旦，重在情绪的层层递进与内心起伏；",
+                  "王玉林为小官生，在儒雅俊秀之外，也带有轻松生动的喜剧气息，使人物更贴近生活，不显沉重。",
+                  "配角方面：",
+                  "双方父亲均由老生应工，性格端方持重，重礼法、讲分寸；",
+                  "秀英之母为正旦，端庄贤惠、温婉克制；",
+                  "玉林之母为老旦，她既慈爱宽厚，又带有鲜明的亲和力与烟火气，情感表达直接而不失分寸，尤其擅长在劝和、调停中展现人物的幽默与人情味，通过极具生活感的念白与唱腔处理，把“婆婆”这一形象从单一的长辈角色，塑造成一个真实、可信、甚至带点俏皮感的家庭核心人物。她不只是推动剧情的人物，更是情绪的“缓冲点”，让原本紧张的关系在她的出现中得以松动，也让整折戏更有人情温度与观赏趣味。"
+                ]
+              },
+              {
+                "heading": "唱念做表——细节里见功力",
+                "body": [
+                  "在“送凤冠”一折中，唱腔几乎覆盖了整场演出，除金派花旦和陆派小生外，还有刚健质朴的老生，端庄温柔的正旦，以及极具特色的周（宝奎）派老旦的唱念表演，可谓花团锦簇目不暇给，每个人物都活灵活现地体现在每一段唱腔当中。"
+                ]
+              },
+              {
+                "heading": "主演介绍",
+                "body": [
+                  "孟伟饰王玉林 孟伟越剧艺术传习所创始人",
+                  "史冬梅饰李秀英 京剧魁北克艺术中心创始人，董事会主席",
+                  "黄湘燕饰陆氏   孟伟越剧艺术传习所老生老旦学员",
+                  "朱华饰王裕  孟伟越剧艺术传习所小生学员",
+                  "吕琰饰李廷普  京剧魁北克艺术中心艺术顾问、理事会成员",
+                  "张立虹饰李夫人 孟伟越剧艺术传习所小生学员",
+                  "沈渝懿饰春香 孟伟越剧艺术传习所花旦学员"
+                ]
+              }
+            ],
+            "sectionsEn": [
+              {
+                "heading": "",
+                "body": [
+                  "Li Xiuying and Wang Yulin，a married couple is torn apart by a false accusation on their wedding night when a jealous rejected suitor frames the wife with planted evidence. The husband believes she has been unfaithful, and their relationship breaks down. Later, the truth is revealed, and after a period of regret and separation, the husband returns to seek forgiveness. They are ultimately reconciled."
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 import type { CSSProperties } from 'react'
-import { programmePage } from '@/content/booklet'
+import type { ProgrammePage } from '@/content/specials'
 import Reveal from '@/components/Reveal/Reveal'
 import Silk from '@/components/Silk/Silk'
 import styles from './Programme.module.css'
 
-// 中文节目单 — the Chinese-language run-of-show for the 10th-anniversary gala.
+// 中文节目单 — the Chinese-language run-of-show for a special event.
 // A compact crimson masthead (echoing the program book cover) followed by an
 // ivory ink-wash "sheet" that lists the acts in order, Chinese title first.
-export default function Programme() {
+export default function Programme({ programmePage }: { programmePage: ProgrammePage }) {
   const {
     pageHead,
     posterImage,

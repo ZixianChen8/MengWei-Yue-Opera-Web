@@ -1,23 +1,36 @@
 {
   "galleryPage": {
     "header": {
-      "meta": "Stage Photographs · 2018 — 2026",
-      "charsTop": "剧",
-      "charsRed": "照",
-      "crumbsTop": {
-        "plain": "Home · Performances · ",
-        "bold": "Gallery"
-      },
-      "enTitle": "A sleeve held mid-air; a glance that lasts a hundred years — gathered here, frame by frame.",
-      "crumbsBottom": "Stage Photographs · 影像志"
+      "titleZh": "剧照",
+      "titleEn": "Gallery",
+      "quote": {
+        "zh": "水袖停在半空，一瞥便是百年——帧帧收在此处。",
+        "en": "A sleeve held mid-air; a glance that lasts a hundred years — gathered here, frame by frame."
+      }
     },
     "lightbox": {
       "stamp": "孟"
     },
+    "albums": {
+      "all": {
+        "zh": "全部",
+        "en": "All"
+      },
+      "uncategorized": {
+        "zh": "未分类",
+        "en": "Uncategorized"
+      },
+      "back": {
+        "zh": "全部册页",
+        "en": "All albums"
+      },
+      "frames": "张"
+    },
     "photos": [
       {
         "image": "/assets/uploads/b013ef85af3f-1783800190049.jpg",
-        "home": true
+        "home": true,
+        "eventId": "yuespiration"
       },
       {
         "image": "/assets/uploads/d780042d1fbb-1783800190050.jpg",

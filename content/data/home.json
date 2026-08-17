@@ -469,6 +469,17 @@
       "zh": "或点此在线报名",
       "en": "Or click to register online"
     },
+    "album": {
+      "label": {
+        "zh": "剧照",
+        "en": "Stage photographs"
+      },
+      "view": {
+        "zh": "查看影集",
+        "en": "View album"
+      },
+      "frames": "张"
+    },
     "labels": {
       "date": {
         "zh": "日期",

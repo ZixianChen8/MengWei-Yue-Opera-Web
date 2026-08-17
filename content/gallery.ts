@@ -17,18 +17,23 @@ export type GalleryPhoto = {
   date?: string
   // When true, the photo also appears in the home page Repertoire filmstrip.
   home?: boolean
+  // Season event id this photo belongs to. Empty / omitted = 未分类.
+  eventId?: string
 }
 
 export type GalleryPage = {
   header: {
-    meta: string
-    charsTop: string
-    charsRed: string
-    crumbsTop: { plain: string; bold: string }
-    enTitle: string
-    crumbsBottom: string
+    titleZh: string
+    titleEn: string
+    quote: { zh: string; en: string }
   }
   lightbox: { stamp: string }
+  albums: {
+    all: { zh: string; en: string }
+    uncategorized: { zh: string; en: string }
+    back: { zh: string; en: string }
+    frames: string
+  }
   photos: GalleryPhoto[]
 }
 

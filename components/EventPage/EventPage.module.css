@@ -141,6 +141,108 @@
   line-height: 1.6;
 }
 
+/* ── Gallery album row ──────────────────────────────────── */
+
+.albumRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 44px;
+  margin: 0 0 80px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.albumRow:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.albumCover {
+  flex-shrink: 0;
+  width: 120px;
+  height: 150px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(234, 222, 204, 0.5), rgba(218, 204, 180, 0.4));
+}
+
+.albumCoverImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.albumCopy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.albumLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 300;
+}
+
+.albumLabelEn {
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  text-transform: none;
+}
+
+.albumTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 14px;
+  font-family: var(--font-chinese-display);
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: var(--ink);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.albumCount {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.albumView {
+  flex-shrink: 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color 0.3s;
+}
+
+.albumRow:hover .albumView {
+  color: var(--seal);
+}
+
 /* ── Sign-up card ───────────────────────────────────────── */
 
 .signupCard {
@@ -319,5 +421,19 @@
 
   .signupCard {
     padding: 40px 24px;
+  }
+
+  .albumRow {
+    flex-wrap: wrap;
+    gap: 16px 20px;
+  }
+
+  .albumView {
+    flex: 1 0 100%;
+  }
+
+  .albumTitle {
+    font-size: 20px;
+    letter-spacing: 3px;
   }
 }

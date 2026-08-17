@@ -3,6 +3,7 @@ import QRCode from 'qrcode'
 import { eventPage } from '@/content/home'
 import { formatEventDateZh } from '@/lib/event-date'
 import { isRetired } from '@/lib/event-lifecycle'
+import { photosForEvent } from '@/lib/gallery-albums'
 import Reveal from '@/components/Reveal/Reveal'
 import styles from './EventPage.module.css'
 import type { season } from '@/content/home'
@@ -14,8 +15,10 @@ interface EventBodyProps {
 }
 
 export default async function EventBody({ event }: EventBodyProps) {
-  const { labels } = eventPage
+  const { labels, album: albumCopy } = eventPage
   const retired = isRetired(event)
+  const albumPhotos = photosForEvent(event.id)
+  const albumCover = albumPhotos[0]?.image || event.cardImageUrl || event.imageUrl || ''
 
   // Encode the sign-up link as a real QR. Seed data uses "#" placeholders,
   // which aren't real destinations — fall back to the CSS placeholder then.
@@ -59,6 +62,37 @@ export default async function EventBody({ event }: EventBodyProps) {
                 <dd className={styles.infoDesc}>{value}</dd>
               </div>
             ))}
+          </Reveal>
+        ) : null}
+
+        {albumPhotos.length > 0 ? (
+          <Reveal delay={0.12}>
+            <Link
+              href={`/gallery?event=${encodeURIComponent(event.id)}`}
+              className={styles.albumRow}
+            >
+              <span className={styles.albumCover}>
+                {albumCover ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={albumCover} alt="" className={styles.albumCoverImg} />
+                ) : null}
+              </span>
+              <span className={styles.albumCopy}>
+                <span className={styles.albumLabel}>
+                  {albumCopy.label.zh}
+                  <span className={styles.albumLabelEn}>{albumCopy.label.en}</span>
+                </span>
+                <span className={styles.albumTitle}>
+                  {event.titleZh.join('')}
+                  <span className={styles.albumCount}>
+                    {albumPhotos.length} {albumCopy.frames}
+                  </span>
+                </span>
+              </span>
+              <span className={styles.albumView}>
+                {albumCopy.view.zh} · {albumCopy.view.en} →
+              </span>
+            </Link>
           </Reveal>
         ) : null}
 

@@ -1,86 +1,77 @@
-/* ── Page Header ─────────────────────────────────────────── */
+/* ── Page Header (same split as EventsListing) ───────────── */
 
 .pageHead {
   position: relative;
-  padding: 160px 80px 90px;
+  padding: 80px 80px 60px;
   background: var(--paper);
-  border-bottom: 1px solid var(--border);
   z-index: 5;
 }
 
 .phInner {
   max-width: 1480px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 80px;
-  align-items: end;
+}
+
+.phTop {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 60px;
 }
 
 .phTitle {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-}
-
-.phChars {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
   font-family: var(--font-chinese-display);
-  font-size: 84px;
+  font-size: clamp(80px, 9vw, 120px);
+  letter-spacing: 14px;
   line-height: 0.95;
   color: var(--ink);
-  letter-spacing: 14px;
+  margin: 0;
+  font-weight: 400;
 }
 
-.phChars .red {
-  color: inherit;
-}
-
-.phMeta {
-  writing-mode: vertical-rl;
+.phTitle small {
+  display: block;
   font-family: var(--font-latin-display);
-  font-size: 11px;
+  font-size: clamp(12px, 1vw, 16px);
   letter-spacing: 0.42em;
   color: var(--ink-faint);
   text-transform: uppercase;
-  border-right: 1px solid var(--border-mid);
-  padding-right: 14px;
-  height: 280px;
-  display: flex;
-  align-items: center;
+  margin-top: 18px;
+  font-weight: 400;
+}
+
+.pageHeadInterior .phTitle {
+  font-size: clamp(40px, 5vw, 72px);
+  letter-spacing: 8px;
+  line-height: 1.1;
+  max-width: 12ch;
+  text-wrap: balance;
 }
 
 .phAside {
+  width: 340px;
+  flex-shrink: 0;
+  text-align: right;
   padding-bottom: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  max-width: 480px;
-  justify-self: end;
 }
 
-.enTitle {
+.phQuote {
+  font-family: var(--font-chinese-body);
+  font-size: 14px;
+  line-height: 2;
+  color: var(--ink-soft);
+  font-weight: 300;
+  margin: 0;
+}
+
+.phQuoteEn {
+  display: block;
   font-family: var(--font-latin-display);
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 1.15;
-  color: var(--ink);
   font-style: italic;
-  letter-spacing: 0.02em;
-}
-
-.crumbs {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.32em;
+  font-size: 12.5px;
   color: var(--ink-faint);
-  text-transform: uppercase;
-}
-
-.crumbs b {
-  color: var(--ink);
-  font-weight: 400;
+  margin-top: 14px;
+  line-height: 1.7;
 }
 
 /* ── Gallery (masonry columns) ───────────────────────────── */
@@ -88,6 +79,164 @@
 .galleryWrap {
   padding: 64px 80px 40px;
   background: var(--paper);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-latin-display);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-decoration: none;
+  margin: 0 0 36px;
+  transition: color 0.3s;
+}
+
+.backLink:hover {
+  color: var(--seal);
+}
+
+.backLink:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* ── Album index (册页) ──────────────────────────────────── */
+
+.albumIndex {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.album {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  min-height: 44px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.album:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .album:hover {
+    transform: translateY(-2%);
+    opacity: 0.92;
+  }
+}
+
+.plate {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(234, 222, 204, 0.5), rgba(218, 204, 180, 0.4));
+}
+
+.plateImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  gap: 1px;
+  background: var(--border);
+}
+
+.mosaicCell {
+  overflow: hidden;
+  min-height: 0;
+  background: linear-gradient(180deg, rgba(234, 222, 204, 0.45), rgba(218, 204, 180, 0.35));
+}
+
+.mosaicCell img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plateShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26, 22, 18, 0.78) 0%,
+    rgba(26, 22, 18, 0.18) 42%,
+    transparent 64%
+  );
+  pointer-events: none;
+}
+
+.overlayCount {
+  position: absolute;
+  left: 14px;
+  bottom: 16px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.albumTitleVert {
+  position: absolute;
+  top: 16px;
+  right: 14px;
+  bottom: 72px;
+  z-index: 2;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: var(--font-chinese-display);
+  font-size: 28px;
+  letter-spacing: 0.18em;
+  color: var(--paper);
+  line-height: 1.15;
+  overflow: hidden;
+  text-shadow: 0 1px 10px rgba(26, 22, 18, 0.45);
+}
+
+.albumMeta {
+  padding: 12px 2px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.albumTitleMobile {
+  display: none;
+  font-family: var(--font-chinese-display);
+  font-size: 30px;
+  letter-spacing: 6px;
+  color: var(--ink);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.albumEn {
+  font-family: var(--font-latin-display);
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+  line-height: 1.3;
 }
 
 .gallery {
@@ -316,8 +465,12 @@
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media (min-width: 1400px) {
-  .gallery {
+  .gallery,
+  .albumIndex {
     max-width: 1560px;
+  }
+
+  .gallery {
     column-count: 3;
   }
 }
@@ -326,28 +479,48 @@
   .gallery {
     column-count: 2;
   }
+
+  .albumIndex {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .pageHead,
+  .galleryWrap {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .phAside {
+    width: 280px;
+  }
 }
 
 @media (max-width: 760px) {
   .pageHead {
-    padding: 120px 24px 60px;
+    padding: 48px 24px 40px;
   }
 
-  .phInner {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .phTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
   }
 
   .phAside {
-    justify-self: start;
+    width: 100%;
+    text-align: left;
+    padding-bottom: 0;
   }
 
-  .phChars {
-    font-size: 64px;
+  .phTitle {
+    font-size: clamp(56px, 18vw, 80px);
   }
 
-  .phMeta {
-    display: none;
+  .pageHeadInterior .phTitle {
+    font-size: clamp(32px, 10vw, 48px);
+    max-width: none;
   }
 
   .galleryWrap {
@@ -358,6 +531,19 @@
     column-count: 1;
   }
 
+  .albumIndex {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .albumTitleVert {
+    display: none;
+  }
+
+  .albumTitleMobile {
+    display: block;
+  }
+
   .lbStage {
     padding: 0 14px 14px;
     gap: 10px;
@@ -366,5 +552,17 @@
   .lbNav {
     width: 42px;
     height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .album,
+  .photo {
+    transition: none;
+  }
+
+  .album:hover {
+    transform: none;
+    opacity: 1;
   }
 }

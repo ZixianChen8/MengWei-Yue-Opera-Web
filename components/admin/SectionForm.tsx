@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import ImageUpload from './ImageUpload'
 import { EVENT_STATUS_META, EVENT_STATUS_VALUES } from '@/lib/event-status'
 import styles from './admin.module.css'
@@ -95,6 +95,9 @@ const FIELD_LABELS: Record<string, string> = {
   after: '后段',
   mission: '宗旨',
   // Gallery page
+  titleZh: '中文标题',
+  titleEn: '英文标题',
+  quote: '引言',
   charsTop: '大字',
   charsRed: '大字（红）',
   crumbsTop: '面包屑（上）',
@@ -104,6 +107,7 @@ const FIELD_LABELS: Record<string, string> = {
   crumbsBottom: '面包屑（下）',
   photos: '照片',
   image: '图片',
+  eventId: '所属活动',
   // Contact (single source)
   email: '邮箱',
   // About page + contact form
@@ -158,7 +162,7 @@ const ARRAY_LIMITS: Record<string, { key: string; max: number; hint: string; mes
 // string, so e.g. an emptied gallery would offer only a plain textbox
 // instead of the image-upload + caption fields. Keyed by the array's key.
 const NEW_ITEM_TEMPLATES: Record<string, JsonValue> = {
-  photos: { image: '', title: '', description: '', date: '', home: false },
+  photos: { image: '', title: '', description: '', date: '', home: false, eventId: '' },
   events: {
     tag: '演出',
     titleZh: [''],
@@ -194,7 +198,7 @@ function isIsoDateKey(key: string, value: string): boolean {
 }
 
 // Keys kept in JSON for the site but not exposed in the admin form.
-const HIDDEN_ADMIN_KEYS = new Set(['lightbox'])
+const HIDDEN_ADMIN_KEYS = new Set(['lightbox', 'albums'])
 const HIDDEN_EVENT_KEYS = new Set(['id', 'num', 'listNum', 'statusType', 'statusLabel'])
 
 function humanize(key: string): string {
@@ -208,6 +212,40 @@ function humanize(key: string): string {
 // not yet translated in FIELD_LABELS.
 function fieldLabel(key: string): string {
   return FIELD_LABELS[key] ?? humanize(key)
+}
+
+type EventOption = { id: string; label: string }
+
+const EventOptionsContext = createContext<EventOption[]>([])
+
+function eventLabel(event: { id?: unknown; titleZh?: unknown; titleEn?: unknown }): EventOption | null {
+  if (typeof event.id !== 'string' || !event.id) return null
+  const zh = Array.isArray(event.titleZh)
+    ? event.titleZh.filter((part): part is string => typeof part === 'string').join('')
+    : typeof event.titleZh === 'string'
+      ? event.titleZh
+      : ''
+  const en = typeof event.titleEn === 'string' ? event.titleEn.trim() : ''
+  const label = [zh, en].filter(Boolean).join(' · ') || event.id
+  return { id: event.id, label }
+}
+
+function EventIdSelect({ value, onChange }: { value: string; onChange: (next: JsonValue) => void }) {
+  const options = useContext(EventOptionsContext)
+  const list = value && !options.some((opt) => opt.id === value)
+    ? [{ id: value, label: value }, ...options]
+    : options
+
+  return (
+    <select className={styles.select} value={value} onChange={(e) => onChange(e.target.value)}>
+      <option value="">未分类</option>
+      {list.map((opt) => (
+        <option key={opt.id} value={opt.id}>
+          {opt.label}
+        </option>
+      ))}
+    </select>
+  )
 }
 
 function labelFromValue(value: JsonValue): string | null {
@@ -374,6 +412,7 @@ function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
                   value={item as { [k: string]: JsonValue }}
                   onChange={(next) => update(i, next)}
                   hiddenKeys={keyName === 'events' ? HIDDEN_EVENT_KEYS : HIDDEN_ADMIN_KEYS}
+                  ensureFields={keyName === 'photos' ? { eventId: '' } : undefined}
                 />
               )}
             </Collapsible>
@@ -407,6 +446,10 @@ function ValueNode({ value, keyName, onChange }: NodeProps) {
         onChange={(e) => onChange(e.target.value)}
       />
     )
+  }
+
+  if (typeof value === 'string' && keyName === 'eventId') {
+    return <EventIdSelect value={value} onChange={onChange} />
   }
 
   if (typeof value === 'string' && ENUM_OPTIONS[keyName]) {
@@ -475,12 +518,25 @@ type ObjectNodeProps = {
   value: { [key: string]: JsonValue }
   onChange: (next: { [key: string]: JsonValue }) => void
   hiddenKeys?: Set<string>
+  ensureFields?: { [key: string]: JsonValue }
 }
 
-function ObjectNode({ value, onChange, hiddenKeys = HIDDEN_ADMIN_KEYS }: ObjectNodeProps) {
+function ObjectNode({
+  value,
+  onChange,
+  hiddenKeys = HIDDEN_ADMIN_KEYS,
+  ensureFields,
+}: ObjectNodeProps) {
+  const entries = Object.entries(value)
+  if (ensureFields) {
+    for (const [key, fallback] of Object.entries(ensureFields)) {
+      if (!(key in value)) entries.push([key, fallback])
+    }
+  }
+
   return (
     <>
-      {Object.entries(value).map(([k, v]) => {
+      {entries.map(([k, v]) => {
         if (hiddenKeys.has(k)) return null
         const nested = v !== null && typeof v === 'object'
         const update = (next: JsonValue) => onChange({ ...value, [k]: next })
@@ -513,9 +569,39 @@ type Props = {
 
 // Top-level section values are always objects in this content model.
 export default function SectionForm({ value, onChange }: Props) {
+  const [eventOptions, setEventOptions] = useState<EventOption[]>([])
+  const hasPhotos = isPlainObject(value) && Array.isArray(value.photos)
+
+  useEffect(() => {
+    if (!hasPhotos) return
+    const controller = new AbortController()
+    fetch('/api/admin/content?target=home&section=season', {
+      cache: 'no-store',
+      signal: controller.signal,
+    })
+      .then((res) => res.json())
+      .then((json: { data?: { events?: unknown } }) => {
+        const events = json.data?.events
+        if (!Array.isArray(events)) return
+        setEventOptions(
+          events
+            .map((event) => eventLabel(event as { id?: unknown; titleZh?: unknown; titleEn?: unknown }))
+            .filter((opt): opt is EventOption => opt !== null),
+        )
+      })
+      .catch(() => {
+        // Dropdown still works with 未分类 alone if the season list fails to load.
+      })
+    return () => controller.abort()
+  }, [hasPhotos])
+
   if (value === null || typeof value !== 'object' || Array.isArray(value)) {
     return <ValueNode value={value} keyName="value" onChange={onChange} />
   }
 
-  return <ObjectNode value={value as { [k: string]: JsonValue }} onChange={(next) => onChange(next)} />
+  return (
+    <EventOptionsContext.Provider value={eventOptions}>
+      <ObjectNode value={value as { [k: string]: JsonValue }} onChange={(next) => onChange(next)} />
+    </EventOptionsContext.Provider>
+  )
 }

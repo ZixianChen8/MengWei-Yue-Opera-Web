@@ -1,7 +1,8 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import Nav from '@/components/Nav/Nav'
 import Footer from '@/components/Footer/Footer'
-import Gallery from '@/components/Gallery/Gallery'
+import Gallery, { GalleryFallback } from '@/components/Gallery/Gallery'
 
 export const metadata: Metadata = {
   title: '剧照 · Gallery — 孟伟越剧',
@@ -13,7 +14,9 @@ export default function GalleryPage() {
     <>
       <div style={{ position: 'relative' }}>
         <Nav variant="horizontal" />
-        <Gallery />
+        <Suspense fallback={<GalleryFallback />}>
+          <Gallery />
+        </Suspense>
       </div>
       <Footer />
     </>

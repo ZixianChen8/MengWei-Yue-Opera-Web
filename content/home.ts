@@ -109,6 +109,11 @@ type EventPage = {
   signup: LabeledField
   qrLabel: LabeledField
   formLink: LabeledField
+  album: {
+    label: LabeledField
+    view: LabeledField
+    frames: string
+  }
   labels: {
     date: LabeledField
     time: LabeledField

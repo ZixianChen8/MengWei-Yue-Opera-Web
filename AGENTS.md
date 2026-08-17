@@ -144,3 +144,12 @@ Local gallery media currently lives in `public/assets/gallery/`. `next.config.ts
 - App Router only — no `pages/` directory
 - `allowedDevOrigins` in `next.config.ts` permits LAN preview from `192.168.2.159`
 - Check `node_modules/next/dist/docs/01-app/` for App Router API reference before using any Next.js APIs
+
+## Cursor Cloud specific instructions
+
+Node 22 and npm are preinstalled; the startup update script runs `npm install`. Standard commands live in the **Commands** section above (`npm run dev` on port 3000, `npm run build`, `npm run lint`).
+
+- **Public site needs no secrets.** The marketing site and all static pages (`/`, `/about`, `/events`, `/events/[id]`, `/gallery`, `/anniversary/*`) render with `npm run dev` alone — no env vars, database, or external services. This is the primary product to test.
+- **Admin + contact features are gated behind env vars.** `/admin`, `/api/admin/*`, and `/api/contact` require secrets (`AUTH_SECRET`, `ADMIN_PASSWORD`, `GITHUB_TOKEN`, `GITHUB_OWNER`, `GITHUB_REPO`; contact form uses Resend). Without them the pages/route handlers still render but login, GitHub-commit persistence, and contact submissions won't function. Set these as Cloud Agent secrets when working on those flows.
+- **`npm run lint` exits non-zero on a clean checkout** due to pre-existing lint errors (e.g. `lib/event-slug.ts`, `components/Booklet/LetterLightbox.tsx`) unrelated to environment setup. Lint itself is correctly configured; don't treat a non-zero exit as a broken environment.
+- No test suite is configured (Playwright is installed but has no configured tests).

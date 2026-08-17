@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import type { AppreciationSection } from '@/content/booklet'
+import type { AppreciationSection } from '@/content/specials'
 import MoreNote from './MoreNote'
 import styles from './Appreciation.module.css'
 

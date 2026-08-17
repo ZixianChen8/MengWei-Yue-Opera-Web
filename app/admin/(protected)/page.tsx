@@ -4,7 +4,7 @@ import styles from '@/components/admin/admin.module.css'
 
 export const dynamic = 'force-dynamic'
 
-const GROUP_ORDER: SectionGroup[] = ['Programme', 'Site text', 'Pages']
+const GROUP_ORDER: SectionGroup[] = ['Programme', 'Specials', 'Site text', 'Pages']
 
 export default function AdminDashboard() {
   return (
@@ -18,11 +18,20 @@ export default function AdminDashboard() {
 
       {GROUP_ORDER.map((group) => {
         const items = SECTIONS.filter((s) => s.group === group)
-        if (items.length === 0) return null
+        const showSpecialsCard = group === 'Specials'
+        if (items.length === 0 && !showSpecialsCard) return null
         return (
           <section key={group} className={styles.dashGroup}>
             <h2 className={styles.groupTitle}>{GROUP_LABELS[group]}</h2>
             <div className={styles.cards}>
+              {showSpecialsCard && (
+                <Link href="/admin/specials" className={styles.card}>
+                  <div className={styles.cardLabel}>特别活动</div>
+                  <div className={styles.cardBlurb}>
+                    以十周年场刊 / 节目单 / 导赏为模板，新建或编辑大型专场页面，并设置导航标题。
+                  </div>
+                </Link>
+              )}
               {items.map((s) => (
                 <Link key={`${s.target}/${s.section}`} href={`/admin/edit/${s.target}/${s.section}`} className={styles.card}>
                   <div className={styles.cardLabel}>{s.label}</div>

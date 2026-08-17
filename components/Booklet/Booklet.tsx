@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import Image from 'next/image'
-import { booklet } from '@/content/booklet'
+import type { Booklet as BookletData } from '@/content/specials'
 import Reveal from '@/components/Reveal/Reveal'
 import Silk from '@/components/Silk/Silk'
 import LetterLightbox from './LetterLightbox'
@@ -9,7 +9,7 @@ import styles from './Booklet.module.css'
 // The printed gala program book, rendered as a single long page: the poster
 // hero followed by ivory "interior pages" carrying the ink-wash watermark and a
 // faint blurred echo of the poster behind the content.
-export default function Booklet() {
+export default function Booklet({ booklet }: { booklet: BookletData }) {
   const { cover, preface, letters, team, programme, committee, crew, closing } = booklet
 
   // Only dignitaries whose scanned letter is available render a card; the

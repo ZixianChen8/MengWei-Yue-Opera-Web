@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
-import type { BookletLetter } from '@/content/booklet'
+import type { BookletLetter } from '@/content/specials'
 import styles from './Booklet.module.css'
 
 // Scanned greeting letters as white drop-shadow cards; click to open a

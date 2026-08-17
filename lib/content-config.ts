@@ -7,20 +7,21 @@
 // may be written).
 // ============================================================
 
-export type ContentTarget = 'home' | 'gallery' | 'booklet'
+export type ContentTarget = 'home' | 'gallery' | 'specials'
 
 export const DATA_FILES: Record<ContentTarget, string> = {
   home: 'content/data/home.json',
   gallery: 'content/data/gallery.json',
-  booklet: 'content/data/booklet.json',
+  specials: 'content/data/specials.json',
 }
 
-export type SectionGroup = 'Programme' | 'Site text' | 'Pages'
+export type SectionGroup = 'Programme' | 'Specials' | 'Site text' | 'Pages'
 
 // Chinese display labels for the dashboard group headings. Keys stay as stable
 // English identifiers (used for ordering/filtering); the operator sees Chinese.
 export const GROUP_LABELS: Record<SectionGroup, string> = {
   Programme: '节目内容',
+  Specials: '特别活动',
   'Site text': '网站文字',
   Pages: '页面',
 }
@@ -80,6 +81,14 @@ export const SECTIONS: SectionDef[] = [
     section: 'aboutPage',
     label: '关于页面',
     blurb: '完整的 /about 页面：简介与联系表单文案。',
+    group: 'Pages',
+  },
+  {
+    target: 'home',
+    section: 'nav',
+    label: '导航',
+    blurb:
+      '网站主导航的核心链接（首页、活动、画廊、关于等）。特别活动的导航标题与是否显示，请在「特别活动」里设置；保存后会自动插在「关于」之前。',
     group: 'Pages',
   },
 ]

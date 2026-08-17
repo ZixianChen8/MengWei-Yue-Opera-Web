@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { contact, footer, nav } from '@/content/home'
+import { siteNavLinks } from '@/lib/nav-links'
 import Reveal from '@/components/Reveal/Reveal'
 import styles from './Footer.module.css'
 
@@ -28,7 +29,7 @@ export default function Footer() {
 
         <Reveal className={styles.col} delay={0.1}>
           <h4>{footer.columns[0]?.heading}</h4>
-          {nav.links.map((item) => (
+          {siteNavLinks.map((item) => (
             <Link key={item.en} href={item.href}>
               {item.zh}<span className={styles.en}>{item.en}</span>
             </Link>

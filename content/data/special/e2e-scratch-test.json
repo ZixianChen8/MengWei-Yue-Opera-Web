@@ -1,0 +1,30 @@
+{
+  "slug": "e2e-scratch-test",
+  "titleZh": "???????",
+  "titleEn": "E2E Scratch Test",
+  "published": false,
+  "inNav": false,
+  "seo": {
+    "title": "??????? · E2E Scratch Test — 孟伟越剧",
+    "description": ""
+  },
+  "brand": {
+    "logoUrl": "",
+    "logoWidth": 0,
+    "logoHeight": 0,
+    "logoAlt": "E2E Scratch Test"
+  },
+  "hub": {
+    "pageHead": {
+      "meta": "",
+      "titleZh": "???????",
+      "titleEn": "E2E Scratch Test",
+      "tagline": ""
+    },
+    "hubTab": {
+      "zh": "专场",
+      "en": "Gala"
+    }
+  },
+  "pages": []
+}

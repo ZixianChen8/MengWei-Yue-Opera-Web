@@ -9,5 +9,16 @@
     "logoWidth": 359,
     "logoHeight": 139,
     "logoAlt": "10th Anniversary Special"
+  },
+  {
+    "slug": "e2e-scratch-test",
+    "titleZh": "???????",
+    "titleEn": "E2E Scratch Test",
+    "published": false,
+    "inNav": false,
+    "logoUrl": "",
+    "logoWidth": 0,
+    "logoHeight": 0,
+    "logoAlt": "E2E Scratch Test"
   }
 ]

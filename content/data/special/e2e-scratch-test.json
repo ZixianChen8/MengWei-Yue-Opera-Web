@@ -2,7 +2,7 @@
   "slug": "e2e-scratch-test",
   "titleZh": "???????",
   "titleEn": "E2E Scratch Test",
-  "published": false,
+  "published": true,
   "inNav": false,
   "seo": {
     "title": "??????? · E2E Scratch Test — 孟伟越剧",
@@ -30,10 +30,10 @@
     {
       "id": "programme",
       "type": "programme",
-      "zh": "节目单",
+      "zh": "???",
       "en": "Programme",
       "tabEn": "Acts",
-      "ready": false,
+      "ready": true,
       "content": {
         "pageHead": {
           "meta": "",

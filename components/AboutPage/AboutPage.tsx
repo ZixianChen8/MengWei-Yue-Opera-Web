@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { aboutPage } from '@/content/home'
 import Reveal from '@/components/Reveal/Reveal'
 import styles from './AboutPage.module.css'
 
-const { bio, contact } = aboutPage
+const { bio, founder, contact } = aboutPage
 
 export default function AboutPage() {
   const [isSent, setIsSent] = useState(false)
@@ -78,6 +79,59 @@ export default function AboutPage() {
             </div>
           </Reveal>
         </div>
+        <Reveal className={styles.bioPhotoWrap} delay={0.2}>
+          {bio.imageUrl ? (
+            <div className={styles.bioPhoto}>
+              <Image
+                src={bio.imageUrl}
+                alt=""
+                width={1180}
+                height={520}
+                className={styles.bioPhotoImg}
+              />
+            </div>
+          ) : (
+            <div className={styles.bioPhotoPlaceholder} aria-hidden="true" />
+          )}
+        </Reveal>
+      </section>
+
+      {/* FOUNDER */}
+      <section className={styles.founder}>
+        <div className={styles.founderInner}>
+          <Reveal className={styles.founderIntro}>
+            <h2 className={styles.founderHeading}>
+              {founder.heading.zh}
+              <small>{founder.heading.en}</small>
+            </h2>
+          </Reveal>
+          <div className={styles.founderGrid}>
+            <Reveal className={styles.founderPortrait} delay={0.05}>
+              {founder.imageUrl ? (
+                <Image
+                  src={founder.imageUrl}
+                  alt={founder.imageAlt}
+                  width={320}
+                  height={400}
+                  className={styles.founderImg}
+                />
+              ) : (
+                <div className={styles.founderImgPlaceholder} aria-hidden="true" />
+              )}
+            </Reveal>
+            <Reveal className={styles.founderBio} delay={0.1}>
+              <h3 className={styles.founderName}>{founder.name}</h3>
+              <div className={styles.founderBody}>
+                {founder.paragraphs.map((p, i) => (
+                  <p key={i}>
+                    {p.zh}
+                    <span className={styles.founderBodyEn}>{p.en}</span>
+                  </p>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </section>
 
       {/* CONTACT */}
@@ -120,15 +174,12 @@ export default function AboutPage() {
               </div>
               <div className={styles.field}>
                 <label className={styles.fieldLabel} htmlFor="ap-email">
-                  <span className={styles.fieldCn}>
-                    {contact.form.fields.email.zh}<span className={styles.req}>·</span>
-                  </span>
+                  <span className={styles.fieldCn}>{contact.form.fields.email.zh}</span>
                   <span className={styles.fieldEn}>{contact.form.fields.email.en}</span>
                 </label>
                 <input
                   id="ap-email" name="email" type="email"
                   placeholder={contact.form.fields.email.ph}
-                  required
                 />
               </div>
             </div>
@@ -147,12 +198,15 @@ export default function AboutPage() {
               </div>
               <div className={styles.field}>
                 <label className={styles.fieldLabel} htmlFor="ap-phone">
-                  <span className={styles.fieldCn}>{contact.form.fields.phone.zh}</span>
+                  <span className={styles.fieldCn}>
+                    {contact.form.fields.phone.zh}<span className={styles.req}>·</span>
+                  </span>
                   <span className={styles.fieldEn}>{contact.form.fields.phone.en}</span>
                 </label>
                 <input
                   id="ap-phone" name="phone" type="tel"
                   placeholder={contact.form.fields.phone.ph}
+                  required
                 />
               </div>
             </div>
@@ -204,7 +258,6 @@ export default function AboutPage() {
             ) : null}
 
             <div className={styles.sentMsg}>
-              <span className={styles.stamp}>{contact.form.sent.stamp}</span>
               {contact.form.sent.zh}
               <span className={styles.sentEn}>{contact.form.sent.en}</span>
             </div>

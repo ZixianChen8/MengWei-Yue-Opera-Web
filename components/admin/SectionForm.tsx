@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import ImageUpload from './ImageUpload'
+import EventsForm from './EventsForm'
 import { EVENT_STATUS_META, EVENT_STATUS_VALUES } from '@/lib/event-status'
 import styles from './admin.module.css'
 
@@ -95,9 +96,6 @@ const FIELD_LABELS: Record<string, string> = {
   after: '后段',
   mission: '宗旨',
   // Gallery page
-  titleZh: '中文标题',
-  titleEn: '英文标题',
-  quote: '引言',
   charsTop: '大字',
   charsRed: '大字（红）',
   crumbsTop: '面包屑（上）',
@@ -116,6 +114,8 @@ const FIELD_LABELS: Record<string, string> = {
   subtitle: '副标题',
   crumb: '面包屑',
   bio: '简介',
+  founder: '创始人',
+  imageAlt: '图片说明',
   vertZh: '竖排中文',
   paragraphs: '段落',
   contact: '联络',
@@ -137,6 +137,53 @@ const FIELD_LABELS: Record<string, string> = {
   sending: '提交中文字',
   error: '错误提示',
   sent: '提交成功提示',
+  // Special-event pages — shared masthead
+  tagline: '标语',
+  posterImage: '海报图片',
+  presents: '呈献单位',
+  wordmark: '大字标题',
+  scriptEn: '英文副题',
+  organizer: '主办单位',
+  cover: '封面',
+  // Special-event pages — booklet
+  preface: '序言',
+  signoff: '落款',
+  org: '单位',
+  letters: '贺信',
+  items: '条目',
+  role: '职务',
+  team: '主创',
+  members: '成员',
+  credits: '代表作 / 履历',
+  programme: '节目表',
+  emcee: '主持人',
+  emceeLabel: '主持人标签',
+  acts: '节目',
+  committee: '组委会',
+  crew: '演职人员',
+  groups: '分组',
+  names: '名单',
+  closing: '主办与鸣谢',
+  organizerTitleEn: '主办标题（英文）',
+  supportingTitleEn: '鸣谢标题（英文）',
+  supporting: '鸣谢单位',
+  // Special-event pages — programme / appreciation
+  no: '序号',
+  category: '类别',
+  performers: '演员',
+  performersEn: '演员（英文）',
+  note: '备注',
+  noteEn: '备注（英文）',
+  entries: '导赏条目',
+  keywords: '看点关键词',
+  keywordsLabel: '看点关键词标签',
+  lead: '导语',
+  sections: '正文段落',
+  sectionsEn: '正文段落（英文）',
+  heading: '小标题',
+  lyrics: '唱词',
+  lyricsLabel: '唱词标签',
+  lines: '唱词行',
 }
 
 // Cross-item caps: at most `max` items in this array may have `key` truthy.
@@ -182,6 +229,34 @@ const NEW_ITEM_TEMPLATES: Record<string, JsonValue> = {
     imageUrl: '',
     cardImageUrl: '',
   },
+  links: { zh: '', en: '', href: '' },
+  // Special-event page templates
+  items: { name: '', role: '', image: '' },
+  members: { name: '', role: '', image: '', bio: [''], credits: [] },
+  groups: { role: '', names: '' },
+  acts: {
+    no: '',
+    category: '',
+    titleZh: '',
+    titleEn: '',
+    performers: '',
+    performersEn: '',
+    note: '',
+    noteEn: '',
+  },
+  entries: {
+    no: '',
+    category: '',
+    titleZh: '',
+    titleEn: '',
+    performers: '',
+    keywords: '',
+    lead: '',
+    sections: [{ heading: '', body: [''] }],
+  },
+  sections: { heading: '', body: [''] },
+  sectionsEn: { heading: '', body: [''] },
+  lines: { role: '', zh: '', en: '' },
 }
 
 function isImageKey(key: string): boolean {
@@ -412,7 +487,13 @@ function ArrayNode({ items, keyName, onChange }: ArrayNodeProps) {
                   value={item as { [k: string]: JsonValue }}
                   onChange={(next) => update(i, next)}
                   hiddenKeys={keyName === 'events' ? HIDDEN_EVENT_KEYS : HIDDEN_ADMIN_KEYS}
-                  ensureFields={keyName === 'photos' ? { eventId: '' } : undefined}
+                  ensureFields={
+                    keyName === 'photos'
+                      ? { eventId: '' }
+                      : keyName === 'menu'
+                        ? { tabEn: '' }
+                        : undefined
+                  }
                 />
               )}
             </Collapsible>
@@ -432,7 +513,36 @@ type NodeProps = {
   onChange: (next: JsonValue) => void
 }
 
+function titleZhText(value: JsonValue): string {
+  if (Array.isArray(value)) {
+    return value.filter((part): part is string => typeof part === 'string').join('')
+  }
+  return typeof value === 'string' ? value : ''
+}
+
+function TitleZhField({
+  value,
+  onChange,
+}: {
+  value: JsonValue
+  onChange: (next: JsonValue) => void
+}) {
+  const text = titleZhText(value)
+  return (
+    <input
+      className={styles.input}
+      type="text"
+      value={text}
+      onChange={(e) => onChange([e.target.value])}
+    />
+  )
+}
+
 function ValueNode({ value, keyName, onChange }: NodeProps) {
+  if (keyName === 'titleZh') {
+    return <TitleZhField value={value} onChange={onChange} />
+  }
+
   if (typeof value === 'string' && isImageKey(keyName)) {
     return <ImageUpload value={value} onChange={onChange} />
   }
@@ -597,6 +707,10 @@ export default function SectionForm({ value, onChange }: Props) {
 
   if (value === null || typeof value !== 'object' || Array.isArray(value)) {
     return <ValueNode value={value} keyName="value" onChange={onChange} />
+  }
+
+  if (Array.isArray(value.events)) {
+    return <EventsForm value={value as { [k: string]: JsonValue }} onChange={onChange} />
   }
 
   return (

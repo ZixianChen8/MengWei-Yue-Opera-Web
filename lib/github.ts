@@ -68,6 +68,28 @@ export async function getJsonFile<T = unknown>(
   return { sha: file.sha, data: JSON.parse(base64ToUtf8(file.contentBase64)) as T }
 }
 
+export type DirEntry = { name: string; path: string; sha: string; type: 'file' | 'dir' }
+
+// List a directory. Returns [] when the directory does not exist yet, which is
+// the normal state before the first special event is created.
+export async function listDir(path: string): Promise<DirEntry[]> {
+  const { token, owner, repo, branch } = config()
+  const url = `${API}/repos/${owner}/${repo}/contents/${encodeURIComponent(path).replace(/%2F/g, '/')}?ref=${encodeURIComponent(branch)}`
+  const res = await fetch(url, { headers: headers(token), cache: 'no-store' })
+  if (res.status === 404) return []
+  if (!res.ok) {
+    throw new Error(`GitHub listDir failed (${res.status}): ${await res.text()}`)
+  }
+  const json = await res.json()
+  if (!Array.isArray(json)) return []
+  return json.map((entry) => ({
+    name: entry.name as string,
+    path: entry.path as string,
+    sha: entry.sha as string,
+    type: entry.type as 'file' | 'dir',
+  }))
+}
+
 // Create or update a file. Pass the existing sha when updating.
 export async function putFile(args: {
   path: string
@@ -93,4 +115,25 @@ export async function putFile(args: {
   }
   const json = await res.json()
   return { commitSha: json.commit?.sha ?? '', contentSha: json.content?.sha ?? '' }
+}
+
+// Delete a file. No-op when it is already gone.
+export async function deleteFile(args: {
+  path: string
+  message: string
+}): Promise<void> {
+  const existing = await getFile(args.path)
+  if (!existing) return
+
+  const { token, owner, repo, branch } = config()
+  const url = `${API}/repos/${owner}/${repo}/contents/${encodeURIComponent(args.path).replace(/%2F/g, '/')}`
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: { ...headers(token), 'Content-Type': 'application/json' },
+    cache: 'no-store',
+    body: JSON.stringify({ message: args.message, branch, sha: existing.sha }),
+  })
+  if (!res.ok) {
+    throw new Error(`GitHub deleteFile failed (${res.status}): ${await res.text()}`)
+  }
 }

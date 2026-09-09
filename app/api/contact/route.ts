@@ -29,6 +29,10 @@ function textField(value: unknown, max = MAX_FIELD_LENGTH) {
   return value.trim().slice(0, max)
 }
 
+function isValidPhone(value: string) {
+  return value.replace(/\D/g, '').length >= 7
+}
+
 function getClientKey(request: Request) {
   const forwardedFor = request.headers.get('x-forwarded-for')
   return forwardedFor?.split(',')[0]?.trim() || 'unknown'
@@ -85,8 +89,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true })
   }
 
-  if (!name || !EMAIL_RE.test(email) || !message) {
+  if (!name || !isValidPhone(phone) || !message) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+  }
+
+  if (email && !EMAIL_RE.test(email)) {
+    return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
   }
 
   const subjectLabel = subjectLabels[subject] ?? subjectLabels.other
@@ -95,8 +103,8 @@ export async function POST(request: Request) {
     'New website contact form submission',
     '',
     `Name: ${name}`,
-    `Email: ${email}`,
-    `Phone: ${phone || 'Not provided'}`,
+    `Phone: ${phone}`,
+    `Email: ${email || 'Not provided'}`,
     `Subject: ${subjectLabel}`,
     `Submitted: ${submittedAt}`,
     '',
@@ -110,7 +118,7 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: process.env.CONTACT_FROM_EMAIL,
       to: process.env.CONTACT_TO_EMAIL,
-      replyTo: email,
+      ...(email ? { replyTo: email } : {}),
       subject: `Website inquiry: ${subjectLabel}`,
       text,
     })

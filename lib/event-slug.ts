@@ -68,12 +68,17 @@ export function eventIdFromTitle(event: EventLike, index: number): string {
   return fallbackId(event, index)
 }
 
+function singleTitleZh(titleZh: string[] | undefined): string[] {
+  const text = (titleZh ?? []).filter((part): part is string => typeof part === 'string').join('')
+  return [text]
+}
+
 /** Assign unique ids and drop legacy numbering fields before persisting. */
 export function normalizeSeasonEvents<T extends EventLike>(events: T[]): T[] {
   const used = new Set<string>()
 
   return events.map((event, index) => {
-    let id = eventIdFromTitle(event, index)
+    const id = eventIdFromTitle(event, index)
 
     let candidate = id
     let suffix = 2
@@ -86,6 +91,7 @@ export function normalizeSeasonEvents<T extends EventLike>(events: T[]): T[] {
       num?: string
       listNum?: string
     }
-    return migrateEventStatus({ ...rest, id: candidate }) as unknown as T
+    const titleZh = singleTitleZh(rest.titleZh)
+    return migrateEventStatus({ ...rest, id: candidate, titleZh }) as unknown as T
   })
 }

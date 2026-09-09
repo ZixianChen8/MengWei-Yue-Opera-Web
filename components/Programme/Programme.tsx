@@ -1,13 +1,13 @@
 import type { CSSProperties } from 'react'
-import { programmePage } from '@/content/booklet'
+import type { ProgrammePage } from '@/content/special'
 import Reveal from '@/components/Reveal/Reveal'
 import Silk from '@/components/Silk/Silk'
 import styles from './Programme.module.css'
 
-// 中文节目单 — the Chinese-language run-of-show for the 10th-anniversary gala.
-// A compact crimson masthead (echoing the program book cover) followed by an
-// ivory ink-wash "sheet" that lists the acts in order, Chinese title first.
-export default function Programme() {
+// 中文节目单 — the Chinese-language run-of-show for a special event. A compact
+// crimson masthead (echoing the program book cover) followed by an ivory
+// ink-wash "sheet" that lists the acts in order, Chinese title first.
+export default function Programme({ content }: { content: ProgrammePage }) {
   const {
     pageHead,
     posterImage,
@@ -20,7 +20,7 @@ export default function Programme() {
     emceeLabel,
     emcee,
     acts,
-  } = programmePage
+  } = content
 
   // One CSS variable drives both the masthead field and the faint interior
   // poster echo; when empty, CSS falls back to the crimson/ivory placeholders.

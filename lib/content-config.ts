@@ -7,12 +7,11 @@
 // may be written).
 // ============================================================
 
-export type ContentTarget = 'home' | 'gallery' | 'booklet'
+export type ContentTarget = 'home' | 'gallery'
 
 export const DATA_FILES: Record<ContentTarget, string> = {
   home: 'content/data/home.json',
   gallery: 'content/data/gallery.json',
-  booklet: 'content/data/booklet.json',
 }
 
 export type SectionGroup = 'Programme' | 'Site text' | 'Pages'
@@ -32,6 +31,26 @@ export type SectionDef = {
   blurb: string
   group: SectionGroup
 }
+
+// Dashboard cards that open a purpose-built editor instead of the generic
+// (target, section) JSON form — currently just special events, which live one
+// file per event and need create/delete, not only field editing.
+export type CustomEditorDef = {
+  href: string
+  label: string
+  blurb: string
+  group: SectionGroup
+}
+
+export const CUSTOM_EDITORS: CustomEditorDef[] = [
+  {
+    href: '/admin/special',
+    label: '专场',
+    blurb:
+      '大型专场（如十载芳馨）的独立页面。可新建专场、设置名称与网址，并逐页编辑场刊 / 节目单 / 导赏的全部内容。',
+    group: 'Pages',
+  },
+]
 
 // Only the CMS-scoped sections. Everything else stays in JSON for the site
 // but is not editable via /admin.
@@ -74,12 +93,20 @@ export const SECTIONS: SectionDef[] = [
     blurb: '首页上显示的竖排诗句与宗旨。',
     group: 'Site text',
   },
+  {
+    target: 'home',
+    section: 'nav',
+    label: '导航菜单',
+    blurb:
+      '站点主导航的品牌标识与菜单链接（桌面导航、移动气泡菜单、页脚共用）。可在此添加或改名大型专场入口，例如「十载芳馨」。',
+    group: 'Site text',
+  },
 
   {
     target: 'home',
     section: 'aboutPage',
     label: '关于页面',
-    blurb: '完整的 /about 页面：简介与联系表单文案。',
+    blurb: '完整的 /about 页面：简介、创始人、团队与联系表单文案。',
     group: 'Pages',
   },
 ]

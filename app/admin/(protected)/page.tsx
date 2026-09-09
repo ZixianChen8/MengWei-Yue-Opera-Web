@@ -1,5 +1,10 @@
 import Link from 'next/link'
-import { SECTIONS, GROUP_LABELS, type SectionGroup } from '@/lib/content-config'
+import {
+  CUSTOM_EDITORS,
+  GROUP_LABELS,
+  SECTIONS,
+  type SectionGroup,
+} from '@/lib/content-config'
 import styles from '@/components/admin/admin.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -17,16 +22,29 @@ export default function AdminDashboard() {
       </div>
 
       {GROUP_ORDER.map((group) => {
-        const items = SECTIONS.filter((s) => s.group === group)
+        const items = [
+          ...SECTIONS.filter((s) => s.group === group).map((s) => ({
+            key: `${s.target}/${s.section}`,
+            href: `/admin/edit/${s.target}/${s.section}`,
+            label: s.label,
+            blurb: s.blurb,
+          })),
+          ...CUSTOM_EDITORS.filter((e) => e.group === group).map((e) => ({
+            key: e.href,
+            href: e.href,
+            label: e.label,
+            blurb: e.blurb,
+          })),
+        ]
         if (items.length === 0) return null
         return (
           <section key={group} className={styles.dashGroup}>
             <h2 className={styles.groupTitle}>{GROUP_LABELS[group]}</h2>
             <div className={styles.cards}>
-              {items.map((s) => (
-                <Link key={`${s.target}/${s.section}`} href={`/admin/edit/${s.target}/${s.section}`} className={styles.card}>
-                  <div className={styles.cardLabel}>{s.label}</div>
-                  <div className={styles.cardBlurb}>{s.blurb}</div>
+              {items.map((item) => (
+                <Link key={item.key} href={item.href} className={styles.card}>
+                  <div className={styles.cardLabel}>{item.label}</div>
+                  <div className={styles.cardBlurb}>{item.blurb}</div>
                 </Link>
               ))}
             </div>

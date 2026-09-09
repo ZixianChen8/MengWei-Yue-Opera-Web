@@ -15,6 +15,23 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'picsum.photos' },
     ],
   },
+  // The 10th-anniversary pages moved under the generic /special/<slug> routes
+  // when special events became CMS-managed. Printed material and QR codes still
+  // point at the old paths.
+  async redirects() {
+    return [
+      {
+        source: '/anniversary',
+        destination: '/special/10th-anniversary',
+        permanent: false,
+      },
+      {
+        source: '/anniversary/:path*',
+        destination: '/special/10th-anniversary/:path*',
+        permanent: false,
+      },
+    ]
+  },
 };
 
 export default nextConfig;

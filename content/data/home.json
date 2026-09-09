@@ -26,7 +26,7 @@
       {
         "zh": "十载芳馨 越动枫华",
         "en": "10th Anniversary",
-        "href": "/anniversary"
+        "href": "/special/10th-anniversary"
       },
       {
         "zh": "关于我们",
@@ -533,6 +533,26 @@
           "zh": "秉持艺术卓越的理念，加拿大孟伟越剧艺术传习所通过高质量的演出，将传统艺术与当代表达相结合，吸引了来自不同文化背景的观众。工作室的多部作品曾在渥太华及其他城市的重要文化活动中上演，并因其艺术水准、文化真实性与感染力获得广泛好评。通过与国际艺术家、文化机构和社区的合作，工作室不断推动跨文化交流，增进相互理解，提升中国表演艺术在国际上的影响力。\n加拿大孟伟越剧艺术传习所不仅是一个表演团体，更是连接文化与社区的桥梁。工作室致力于促进包容与交流，创造跨越文化与国界的艺术体验，并期待与国际艺术节、文化机构及多元文化活动合作，共同呈现中国传统艺术的永恒之美与世界文化的交融。",
           "en": "Dedicated to artistic excellence, Meng Wei Yue Opera Studio delivers superior performances that captivate diverse audiences, blending traditional artistry with contemporary innovation. Our critically acclaimed productions have graced prestigious cultural events across communities in Ottawa and beyond, earning recognition for their authenticity, sophistication, and emotional resonance. By collaborating with global artists, cultural institutions, and communities, we strive to bridge cultures, inspire mutual understanding, and elevate the visibility of Chinese performing arts worldwide.\nMeng Wei Yue Opera Studio is more than a performing arts group. It is a cultural beacon, fostering community spirit, promoting inclusivity, and creating transformative experiences that resonate across borders. We invite partnerships with international festivals, cultural organizations, and events celebrating multiculturalism, offering performances that embody the timeless beauty of Chinese heritage while embracing a global vision of unity and creativity."
         }
+      ],
+      "imageUrl": ""
+    },
+    "founder": {
+      "heading": {
+        "zh": "创始人",
+        "en": "Founder"
+      },
+      "name": "Ms. Wei Meng",
+      "role": {
+        "zh": "制作人",
+        "en": "Producer"
+      },
+      "imageUrl": "/assets/booklet/team/wei-meng.jpg",
+      "imageAlt": "Ms. Wei Meng",
+      "paragraphs": [
+        {
+          "zh": "孟伟女士致力于通过在渥太华创办孟伟越剧艺术传习所（2016年），在加拿大推广中华文化遗产。作为「文化调色板」展演活动的组织者，她积极推动加中文化交流，通过亚裔传统月、郁金香节等活动与多元观众互动。孟伟女士因对社区的有意义贡献，荣获2023年伊丽莎白二世女王登基七十周年纪念章及2024年传承奖。",
+          "en": "Maggie is dedicated to promoting Chinese cultural heritage in Canada by founding the Meng Wei Yue Opera Studio in Ottawa in 2016. As organizer of the Palette of Cultures Showcase, she passionately fosters Canada-China cultural exchange, engaging diverse audiences through events like Asian Heritage Month and the Tulip Festival. Committed to advancing cultural diversity, Maggie earned the 2023 Queen Elizabeth II Platinum Jubilee Medallion and 2024 Legacy Award for her meaningful contributions to the communities."
+        }
       ]
     },
     "contact": {
@@ -599,8 +619,8 @@
             "ph": "姓名 / Name"
           },
           "email": {
-            "zh": "来邮",
-            "en": "Email Address",
+            "zh": "来邮（选填）",
+            "en": "Email (optional)",
             "ph": "you@example.com"
           },
           "subject": {
@@ -609,7 +629,7 @@
           },
           "phone": {
             "zh": "致电",
-            "en": "Phone (optional)",
+            "en": "Phone",
             "ph": "+1 (___) ___ — ____"
           },
           "message": {

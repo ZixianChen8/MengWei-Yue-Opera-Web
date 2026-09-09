@@ -3,21 +3,15 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import styles from './AnniversaryNav.module.css'
+import styles from './SpecialNav.module.css'
 
-// Floating bottom "pill" nav for the 10th-anniversary sub-pages (≤1023px only).
-// Lets readers jump between the hub + the three sibling pages without scrolling
-// back to the top hamburger menu. Labels are kept short (single line, ~2–3
-// glyphs) so four items fit comfortably at ~360px; hrefs match the anniversary
-// pages (the hub + the three `anniversary.menu` entries).
-const ITEMS = [
-  { zh: '专场', en: 'Gala', href: '/anniversary' },
-  { zh: '场刊', en: 'Book', href: '/anniversary/booklet' },
-  { zh: '节目单', en: 'Acts', href: '/anniversary/programme' },
-  { zh: '导赏', en: 'Guide', href: '/anniversary/appreciation' },
-]
+// Floating bottom "pill" nav for a special event's sub-pages (≤1023px only).
+// Lets readers jump between the hub + sibling pages without scrolling back to
+// the top hamburger menu. Labels stay short (single line, ~2–3 glyphs) so four
+// items fit at ~360px, so the English line uses each page's `tabEn`. Items are
+// built on the server from the event record (see app/special/[slug]/layout.tsx).
 
-const HUB = '/anniversary'
+export type SpecialNavItem = { zh: string; en: string; href: string }
 
 type Box = { left: number; width: number; ready: boolean }
 
@@ -25,7 +19,13 @@ type Box = { left: number; width: number; ready: boolean }
 // SSR warning while still measuring before paint on the client.
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
-export default function AnniversaryNav() {
+type Props = {
+  items: SpecialNavItem[]
+  /** The hub's own URL — the pill hides itself there (the hub *is* the menu). */
+  hubHref: string
+}
+
+export default function SpecialNav({ items, hubHref }: Props) {
   const pathname = usePathname()
 
   const navRef = useRef<HTMLElement>(null)
@@ -33,7 +33,7 @@ export default function AnniversaryNav() {
   const [box, setBox] = useState<Box>({ left: 0, width: 0, ready: false })
   const [transitionReady, setTransitionReady] = useState(false)
 
-  const activeIndex = ITEMS.findIndex((it) => it.href === pathname)
+  const activeIndex = items.findIndex((it) => it.href === pathname)
 
   // Position the gold token over the active tab. `left`/`width` are read from
   // the active link relative to the (fixed) nav, then padded a touch so the
@@ -85,9 +85,10 @@ export default function AnniversaryNav() {
     }
   }, [box.ready, transitionReady])
 
-  // The shared layout renders this on every /anniversary route; keep it off the
-  // hub itself (which *is* the menu), matching the original per-page behaviour.
-  if (pathname === HUB) return null
+  // The shared layout renders this on every sub-page; keep it off the hub
+  // itself, and off events that have no linkable pages yet.
+  if (pathname === hubHref) return null
+  if (items.length < 2) return null
 
   const indicatorStyle: React.CSSProperties = {
     transform: `translateX(${box.left}px)`,
@@ -97,13 +98,13 @@ export default function AnniversaryNav() {
 
   return (
     <>
-      <nav ref={navRef} className={styles.pill} aria-label="十周年专场导航 · Anniversary pages">
+      <nav ref={navRef} className={styles.pill} aria-label="专场导航 · Special event pages">
         <span
           className={`${styles.indicator}${box.ready ? '' : ` ${styles.inactive}`}`}
           style={indicatorStyle}
           aria-hidden="true"
         />
-        {ITEMS.map((item, i) => {
+        {items.map((item, i) => {
           const active = pathname === item.href
           return (
             <Fragment key={item.href}>

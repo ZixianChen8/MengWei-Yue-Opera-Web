@@ -455,6 +455,125 @@
   margin-bottom: 0.8rem;
 }
 
+.pageCopy {
+  margin-bottom: 1.6rem;
+}
+
+.pageCopy summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  margin-bottom: 0.85rem;
+}
+
+.pageCopy summary:hover {
+  color: var(--ink);
+}
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 0.9rem;
+}
+
+.eventRow {
+  border: 1px solid var(--border);
+  background: var(--cloud);
+  border-radius: 2px;
+}
+
+.eventRowOpen {
+  border-color: var(--border-deep);
+}
+
+.eventHead {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-right: 0.7rem;
+}
+
+.eventSummary {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 0.85rem 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.eventSummary:hover .eventName {
+  color: var(--seal);
+}
+
+.eventName {
+  font-family: var(--font-chinese-body);
+  font-size: 1rem;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.eventMeta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  flex: 0 0 auto;
+}
+
+.eventChipOn {
+  color: var(--seal);
+}
+
+.eventForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1rem;
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.eventSpan {
+  grid-column: 1 / -1;
+}
+
+.eventChecks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+@media (max-width: 720px) {
+  .eventForm {
+    grid-template-columns: 1fr;
+  }
+
+  .eventSummary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .eventMeta {
+    justify-content: flex-start;
+  }
+}
+
 /* ── Image upload ──────────────────────────────────────── */
 .imageUpload {
   display: flex;

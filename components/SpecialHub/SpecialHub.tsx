@@ -1,13 +1,14 @@
 import Link from 'next/link'
-import { anniversary } from '@/content/booklet'
+import type { SpecialEvent } from '@/content/special'
+import { specialPageHref } from '@/content/special'
 import Reveal from '@/components/Reveal/Reveal'
 import Silk from '@/components/Silk/Silk'
-import styles from './Anniversary.module.css'
+import styles from './SpecialHub.module.css'
 
-// The 10th Anniversary Special hub: a masthead plus a small
-// menu of sub-pages. Only `ready` tiles link out.
-export default function Anniversary() {
-  const { pageHead, menu } = anniversary
+// Hub page for a special event (专场): a masthead plus an index of its
+// sub-pages. Only `ready` rows link out; the rest read "即将上线".
+export default function SpecialHub({ event }: { event: SpecialEvent }) {
+  const { pageHead } = event.hub
   const titleLines = pageHead.titleZh.split(' ')
 
   return (
@@ -32,7 +33,7 @@ export default function Anniversary() {
         </Reveal>
 
         <ol className={styles.index}>
-          {menu.map((item, i) => {
+          {event.pages.map((item, i) => {
             const num = String(i + 1).padStart(2, '0')
             const inner = (
               <>
@@ -49,9 +50,9 @@ export default function Anniversary() {
               </>
             )
             return (
-              <Reveal as="li" key={item.en} className={styles.row} delay={0.06 * i}>
+              <Reveal as="li" key={item.id} className={styles.row} delay={0.06 * i}>
                 {item.ready ? (
-                  <Link href={item.href} className={styles.rowLink}>
+                  <Link href={specialPageHref(event.slug, item.id)} className={styles.rowLink}>
                     {inner}
                   </Link>
                 ) : (

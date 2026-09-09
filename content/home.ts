@@ -134,6 +134,15 @@ type AboutPage = {
     vertZh: { before: string; red: string; after: string }
     heading: { zh: string; en: string }
     paragraphs: { zh: string; en: string }[]
+    imageUrl: string
+  }
+  founder: {
+    heading: { zh: string; en: string }
+    name: string
+    role: { zh: string; en: string }
+    imageUrl: string
+    imageAlt: string
+    paragraphs: { zh: string; en: string }[]
   }
   contact: {
     heading: { zh1: string; zh2: string; en: string }

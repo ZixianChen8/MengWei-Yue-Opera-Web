@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { gsap } from 'gsap'
 import { nav } from '@/content/home'
-import { NAV_BRANDS, brandForPath } from '@/components/Nav/brandConfig'
+import { brandForPath } from '@/components/Nav/brandConfig'
 import styles from './BubbleMenu.module.css'
 
 // Floating "bubble" mobile navigation (≤1023px), rendered site-wide. A persistent
@@ -108,16 +108,15 @@ export default function BubbleMenu() {
   // Not part of the password-gated admin chrome.
   if (pathname?.startsWith('/admin')) return null
 
-  const brand = brandForPath(pathname)
-  const brandConfig = NAV_BRANDS[brand]
-  const barClass = brand === 'anniversary'
+  const brandConfig = brandForPath(pathname)
+  const barClass = brandConfig.wide
     ? styles.bar
     : `${styles.bar} ${styles.compactBar}`
 
-  const logoBubbleClass = brand === 'anniversary'
+  const logoBubbleClass = brandConfig.wide
     ? `${styles.bubble} ${styles.logoBubble} ${styles.anniversaryLogoBubble}`
     : `${styles.bubble} ${styles.logoBubble}`
-  const logoImgClass = brand === 'anniversary'
+  const logoImgClass = brandConfig.wide
     ? `${styles.logoImg} ${styles.anniversaryLogoImg}`
     : styles.logoImg
 

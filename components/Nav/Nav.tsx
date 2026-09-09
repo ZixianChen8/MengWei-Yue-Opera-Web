@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { nav, contact } from '@/content/home'
 import { galleryPage } from '@/content/gallery'
-import { NAV_BRANDS, type NavBrand } from '@/components/Nav/brandConfig'
+import { brandForPath } from '@/components/Nav/brandConfig'
 import { selectMenuPhotos } from '@/components/Nav/selectMenuPhotos'
 import {
   useDesktopMenuMotion,
@@ -16,7 +16,6 @@ import styles from './Nav.module.css'
 
 type NavProps = {
   variant?: 'overlay' | 'horizontal'
-  brand?: NavBrand
 }
 
 const photos = selectMenuPhotos(galleryPage.photos)
@@ -32,7 +31,7 @@ function isActivePath(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
-export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps) {
+export default function Nav({ variant = 'overlay' }: NavProps) {
   // Legacy mobile overlay state (Nav is display:none ≤1023; BubbleMenu owns mobile).
   const [open, setOpen] = useState(false)
 
@@ -175,14 +174,15 @@ export default function Nav({ variant = 'overlay', brand = 'default' }: NavProps
   }, [menuState])
 
   const close = () => setOpen(false)
-  const brandConfig = NAV_BRANDS[brand]
-  const logoClass =
-    brand === 'anniversary' ? `${styles.logo} ${styles.anniversaryLogo}` : styles.logo
+  // The mark follows the route: special events (/special/<slug>) can carry
+  // their own wide banner logo, everything else uses the studio mark.
+  const brandConfig = brandForPath(pathname)
+  const logoClass = brandConfig.wide ? `${styles.logo} ${styles.anniversaryLogo}` : styles.logo
 
   const navClassName = [
     styles.nav,
     variant === 'horizontal' ? styles.horizontal : '',
-    brand !== 'anniversary' ? styles.compact : '',
+    !brandConfig.wide ? styles.compact : '',
     menuState !== 'closed' ? styles.menuActive : '',
   ]
     .filter(Boolean)

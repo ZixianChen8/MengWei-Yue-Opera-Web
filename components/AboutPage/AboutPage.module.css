@@ -166,6 +166,126 @@
   margin-top: 8px;
 }
 
+.bioPhotoWrap {
+  max-width: 1180px;
+  margin: 60px auto 0;
+}
+
+.bioPhoto,
+.bioPhotoPlaceholder {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+}
+
+.bioPhotoPlaceholder {
+  background: var(--paper-deep);
+  border: 1px solid var(--border);
+}
+
+.bioPhotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Founder ─────────────────────────────────────────────── */
+.founder {
+  position: relative;
+  padding: 140px 80px;
+  background: var(--paper-deep);
+  border-top: 1px solid var(--border);
+}
+
+.founderInner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.founderHeading {
+  font-family: var(--font-chinese-display);
+  font-size: 72px;
+  line-height: 1.1;
+  letter-spacing: 8px;
+  color: var(--ink);
+  font-weight: 400;
+  margin-bottom: 60px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+}
+
+.founderHeading small {
+  display: block;
+  font-family: var(--font-latin-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  color: var(--ink-faint);
+  margin-top: 14px;
+  text-transform: uppercase;
+}
+
+.founderGrid {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.founderPortrait {
+  aspect-ratio: 4 / 5;
+  min-height: 420px;
+  background: var(--paper-deep);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.founderImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.founderImgPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: var(--paper-deep);
+}
+
+.founderName {
+  font-family: var(--font-latin-display);
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0;
+}
+
+.founderBody {
+  font-family: var(--font-chinese-body);
+  font-size: 22px;
+  line-height: 2;
+  color: var(--ink-soft);
+  font-weight: 300;
+  text-wrap: pretty;
+  margin-top: 30px;
+}
+
+.founderBody p + p {
+  margin-top: 22px;
+}
+
+.founderBodyEn {
+  display: block;
+  font-family: var(--font-latin-display);
+  font-size: 21px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 8px;
+}
+
 /* ── Contact ─────────────────────────────────────────────── */
 .contact {
   position: relative;
@@ -333,6 +453,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
+  flex-wrap: nowrap;
 }
 
 .fieldCn {
@@ -340,14 +461,19 @@
   font-size: 25px;
   letter-spacing: 3px;
   color: var(--ink);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .fieldEn {
   font-family: var(--font-latin-display);
   font-size: 16px;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.28em;
   color: var(--ink-faint);
   text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .req {
@@ -541,21 +667,6 @@
   display: block;
 }
 
-.stamp {
-  display: inline-flex;
-  width: 38px;
-  height: 38px;
-  background: var(--seal);
-  color: #fff;
-  font-family: var(--font-chinese-display);
-  font-size: 21px;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 0 0 1px var(--seal-dark);
-  margin-right: 10px;
-  vertical-align: -8px;
-}
-
 .sentEn {
   display: block;
   font-family: var(--font-latin-display);
@@ -594,6 +705,19 @@
 
   .bio { padding: 100px 40px; }
 
+  .founder { padding: 100px 40px; }
+
+  .founderGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .founderPortrait { min-height: 360px; }
+
+  .founderHeading { font-size: 50px; }
+
+  .bioPhotoWrap { margin-top: 48px; }
+
   .contact { padding: 100px 40px 80px; }
 
   .contactInner {
@@ -629,6 +753,23 @@
   .bioBody { font-size: 20px; }
 
   .bioBodyEn { font-size: 19px; }
+
+  .founder { padding: 80px 24px; }
+
+  .founderHeading { font-size: 44px; margin-bottom: 40px; }
+
+  .founderPortrait { min-height: 300px; }
+
+  .founderName { font-size: 30px; }
+
+  .founderBody { font-size: 20px; }
+
+  .founderBodyEn { font-size: 19px; }
+
+  .bioPhotoWrap { margin-top: 40px; }
+
+  .bioPhoto,
+  .bioPhotoPlaceholder { aspect-ratio: 16 / 9; }
 
   .contact { padding: 80px 24px 60px; }
 

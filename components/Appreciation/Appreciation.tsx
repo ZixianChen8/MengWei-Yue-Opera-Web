@@ -1,4 +1,4 @@
-import { appreciationPage } from '@/content/booklet'
+import type { AppreciationPage } from '@/content/special'
 import Reveal from '@/components/Reveal/Reveal'
 import Silk from '@/components/Silk/Silk'
 import EntryNote from './EntryNote'
@@ -12,7 +12,7 @@ import styles from './Appreciation.module.css'
 // page opens as a tidy index; inside, EntryNote renders the note — with a
 // 中文/English switch when a translation exists, and an inner "展开全文" fold
 // that keeps any single entry from running on.
-export default function Appreciation() {
+export default function Appreciation({ content }: { content: AppreciationPage }) {
   const {
     pageHead,
     posterImage,
@@ -24,7 +24,7 @@ export default function Appreciation() {
     date,
     intro,
     entries,
-  } = appreciationPage
+  } = content
 
   // One CSS variable drives both the masthead field and the faint interior
   // poster echo; when empty, CSS falls back to the crimson/ivory placeholders.

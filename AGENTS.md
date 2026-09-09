@@ -51,6 +51,7 @@ There are also static event pages:
 - `generateStaticParams()` maps `season.events[].id` to `/events/[id]`
 - Next.js 16 passes route `params` as a Promise in this codebase; follow the existing `async` pattern in `app/events/[id]/page.tsx`
 - `app/gallery/page.tsx` renders the photo gallery (剧照) via `components/Gallery/Gallery.tsx`
+- `app/special/[slug]/` renders CMS-managed special events (专场) — see **Special events** below
 
 Static sub-pages (events, gallery, about) share the same shell as the home page: `<SmoothScroll />`, then a `position: relative` wrapper containing `<Nav />` and the page content, then `<Footer />`.
 
@@ -95,6 +96,16 @@ The home page **Season** section shows exactly 3 events via `selectHomeEvents` i
 
 **Repertoire:** Past-event/repertoire items live in `repertoire.works[]`. Some images are local (`/assets/gallery/*.jpg`), while others are still external `https://picsum.photos/...` placeholders.
 
+## Special events (专场)
+
+Large standalone events (the 10th-anniversary gala being the first) are **created and edited entirely from `/admin/special`** — adding one is a content operation, not a code change. Each event is **one file**, `content/data/special/<slug>.json`, holding its titles, publish/nav flags, SEO, banner logo, hub masthead, and an ordered `pages[]` array where every page carries both its tab labels and its full content.
+
+- **Routes:** `app/special/[slug]/page.tsx` (hub) and `app/special/[slug]/[page]/page.tsx` (sub-pages). Both use `generateStaticParams` + `dynamicParams = false`, so every published page is prerendered and unknown slugs 404. `app/special/[slug]/layout.tsx` renders the bottom pill nav once for the whole event so its active indicator slides between sibling pages. `/anniversary*` redirects to `/special/10th-anniversary*` via `next.config.ts` (printed QR codes point at the old paths).
+- **Loading:** `lib/special-events.ts` reads the event files with `fs` (server-only — importing it from a client component pulls in `node:fs` and fails the build). Because the files are created at runtime by the admin they cannot be statically imported, and because every route is prerendered these reads only ever happen at build time. `content/data/special/index.json` mirrors the client-relevant fields (nav links, per-event logo) at a fixed path so client chrome *can* import it; `content/special.ts` re-exports it as `specialIndex` along with all the types and the href helpers. **URLs are always derived** via `specialHubHref`/`specialPageHref`, never stored.
+- **Page types:** `booklet` / `programme` / `appreciation`, defined in `lib/special-templates.ts` (`PAGE_TYPES` + `blankPageContent`) and rendered by `components/Booklet`, `components/Programme`, `components/Appreciation` — each takes its content as a `content` prop. Adding a *page* is a content operation; adding a new *type* means a template in `special-templates.ts`, a `SpecialPageType` union member, and a case in the `PageBody` switch.
+- **Shared chrome:** `Nav` and `BubbleMenu` derive the logo from the pathname via `brandForPath` (`components/Nav/brandConfig.ts`), which looks the slug up in `specialIndex`; an event with a `logoUrl` gets the wide banner treatment (`wide: true`), everything else the studio mark. Neither takes a `brand` prop.
+- **Hub + pill:** `components/SpecialHub` is the event index page (unready pages read 即将上线 instead of linking); `components/SpecialNav` is the ≤1023px bottom pill, built from `hub.hubTab` plus the `ready` pages and hidden on the hub itself. Pill labels must stay short — use each page's `tabEn` (Book / Acts / Guide), not `en`.
+
 ## Admin dashboard
 
 A password-gated content editor is implemented (it replaces hand-editing the data files). It commits edits straight back to GitHub, which is what triggers a redeploy on a Git-backed host.
@@ -104,11 +115,14 @@ A password-gated content editor is implemented (it replaces hand-editing the dat
 - `app/admin/login/` — login screen (`LoginForm` posts to `/api/admin/login`).
 - `app/admin/(protected)/page.tsx` — dashboard listing the editable sections.
 - `app/admin/(protected)/edit/[target]/[section]/page.tsx` — the per-section editor (`components/admin/SectionEditor` + `SectionForm` + `ImageUpload`, `LogoutButton`).
-- API route handlers under `app/api/admin/`: `login`, `logout`, `content` (GET/POST a section), `upload` (image upload). Plus `app/api/contact/` for the contact form.
+- `app/admin/(protected)/special/` — the special-event editors: list + create (`SpecialEventList`), event settings + page list (`SpecialEventEditor`), and per-page content (`SpecialPageEditor`, which reuses `SectionForm`).
+- API route handlers under `app/api/admin/`: `login`, `logout`, `content` (GET/POST a section), `special` (special events), `upload` (image upload). Plus `app/api/contact/` for the contact form.
 
 **Auth:** `proxy.ts` (Next 16's renamed `middleware`) gates `/admin/:path*` and `/api/admin/:path*` — it verifies an HMAC-signed session cookie, redirecting unauthenticated page requests to `/admin/login` and returning 401 for API requests; `/admin/login` and `/api/admin/login` are public. `lib/auth.ts` holds the cookie/session logic (Web Crypto HMAC, no session store, 8h TTL, `verifyPassword` against `ADMIN_PASSWORD`). `lib/admin-guard.ts` exports `isAdmin()` for defense-in-depth re-checks inside route handlers and server components — **always call `isAdmin()` at the top of any new `/api/admin/*` handler.**
 
-**What is editable:** `lib/content-config.ts` is the registry — `SECTIONS[]` maps each `(target, section)` pair to its data file (`DATA_FILES`) and dashboard label/group. The content API only writes sections found via `findSection`, so **a new editable section must be added to `SECTIONS` before it can be saved.** `SectionForm` auto-renders the section's JSON tree: string keys matching `/image|imageurl|imgurl/i` (`isImageKey`) get the `ImageUpload` widget; keys in `ENUM_OPTIONS` (e.g. `statusType`, `cat`) get a dropdown; everything else is a text/number/checkbox/array editor.
+**What is editable:** `lib/content-config.ts` is the registry — `SECTIONS[]` maps each `(target, section)` pair to its data file (`DATA_FILES`) and dashboard label/group. The content API only writes sections found via `findSection`, so **a new editable section must be added to `SECTIONS` before it can be saved.** `CUSTOM_EDITORS[]` in the same file lists dashboard cards that open a purpose-built screen instead of the generic form (currently just 专场, which needs create/delete rather than only field editing). `SectionForm` auto-renders a section's JSON tree: string keys matching `/image|imageurl|imgurl/i` (`isImageKey`) get the `ImageUpload` widget; keys in `ENUM_OPTIONS` (e.g. `statusType`, `cat`) get a dropdown; everything else is a text/number/checkbox/array editor. `FIELD_LABELS` supplies Chinese labels and `NEW_ITEM_TEMPLATES` the shape used when adding the first row to an empty array — **add both when introducing new content keys.**
+
+**Special-event API:** `/api/admin/special` takes `GET` (list all, or one full event with `?slug=`) and a `POST` with an `action` of `create` / `saveEvent` / `addPage` / `deletePage` / `savePage` / `deleteEvent`. Page *content* never round-trips through the settings screen — `saveEvent` carries only settings plus page metadata and re-attaches existing content by page id. Every mutation except `savePage` then rebuilds `index.json` from the actual event files (so a half-failed write self-heals) and syncs the event's `nav.links` entry in `home.json`, inserting new links before the last menu item so 关于我们 stays last.
 
 **Persistence:** `lib/github.ts` is the persistence layer (GitHub Contents API). `getJsonFile`/`putFile` read and commit `content/data/*.json`; `/api/admin/upload` commits images to `public/assets/uploads/` and returns the path. Requires env vars `AUTH_SECRET`, `ADMIN_PASSWORD`, `GITHUB_TOKEN`, `GITHUB_OWNER`, `GITHUB_REPO` (and optional `GITHUB_BRANCH`, default `main`). Because the runtime filesystem on Vercel is read-only/ephemeral, edits are **not** written to disk — they are committed to the repo, and the live site updates only after the resulting redeploy (≈1–2 min). Uploads are capped at ~4 MB (Vercel body limit) and limited to jpeg/png/webp/gif/avif.
 

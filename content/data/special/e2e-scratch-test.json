@@ -35,22 +35,32 @@
       "tabEn": "Acts",
       "ready": true,
       "content": {
-        "pageHead": {
-          "meta": "",
-          "titleZh": "节目单",
-          "titleEn": "Programme",
-          "crumb": "???????"
-        },
-        "posterImage": "",
-        "presents": "加拿大孟伟越剧艺术传习所 呈献",
-        "wordmark": "节目单",
+        "acts": [
+          {
+            "performers": "Tester",
+            "no": "01",
+            "note": "",
+            "titleEn": "Test Act",
+            "titleZh": "?????",
+            "category": "??",
+            "noteEn": ""
+          }
+        ],
+        "presents": "??",
+        "emceeLabel": "??",
         "scriptEn": "Programme",
-        "tagline": "???????",
-        "venue": "",
-        "date": "",
-        "emceeLabel": "主持",
-        "emcee": "",
-        "acts": []
+        "tagline": "E2E test",
+        "wordmark": "???",
+        "date": "2026-09-09",
+        "emcee": "Test Host",
+        "posterImage": "",
+        "pageHead": {
+          "crumb": "E2E",
+          "titleEn": "Programme",
+          "meta": "E2E",
+          "titleZh": "???"
+        },
+        "venue": "Ottawa"
       }
     }
   ]

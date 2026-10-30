@@ -29,20 +29,20 @@
     "photos": [
       {
         "image": "/assets/uploads/b013ef85af3f-1783800190049.jpg",
-        "home": true,
+        "home": false,
         "eventId": "yuespiration"
       },
       {
         "image": "/assets/uploads/d780042d1fbb-1783800190050.jpg",
-        "home": true
+        "home": false
       },
       {
         "image": "/assets/uploads/2-1783800190051.jpg",
-        "home": true
+        "home": false
       },
       {
         "image": "/assets/uploads/6f3d9e1af392-1783800190052.jpg",
-        "home": true
+        "home": false
       },
       {
         "image": "/assets/uploads/_20250922150843_97_14-1783800190054.jpg",
@@ -157,6 +157,10 @@
       {
         "image": "/assets/uploads/dsc-0978-sm-1793060616089.jpg",
         "eventId": "shui-xiu-gongfang"
+      },
+      {
+        "image": "",
+        "eventId": ""
       }
     ]
   }
